@@ -1,0 +1,55 @@
+[
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "Trabalho01.App.Interface",
+        "description": "Trabalho01.App.Interface",
+        "peekOfCode": "root = Tk()\n# Creating a label widget:\nmyLabel1 = Label(root, text=\"Hello, world 1!\")\nmyLabel2 = Label(root, text=\"My name is Bruno!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\nroot.mainloop()",
+        "detail": "Trabalho01.App.Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel1",
+        "kind": 5,
+        "importPath": "Trabalho01.App.Interface",
+        "description": "Trabalho01.App.Interface",
+        "peekOfCode": "myLabel1 = Label(root, text=\"Hello, world 1!\")\nmyLabel2 = Label(root, text=\"My name is Bruno!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\nroot.mainloop()",
+        "detail": "Trabalho01.App.Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel2",
+        "kind": 5,
+        "importPath": "Trabalho01.App.Interface",
+        "description": "Trabalho01.App.Interface",
+        "peekOfCode": "myLabel2 = Label(root, text=\"My name is Bruno!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\nroot.mainloop()",
+        "detail": "Trabalho01.App.Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel1.grid(row",
+        "kind": 5,
+        "importPath": "Trabalho01.App.Interface",
+        "description": "Trabalho01.App.Interface",
+        "peekOfCode": "myLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\nroot.mainloop()",
+        "detail": "Trabalho01.App.Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel2.grid(row",
+        "kind": 5,
+        "importPath": "Trabalho01.App.Interface",
+        "description": "Trabalho01.App.Interface",
+        "peekOfCode": "myLabel2.grid(row = 1, column = 5)\nroot.mainloop()",
+        "detail": "Trabalho01.App.Interface",
+        "documentation": {}
+    }
+]
