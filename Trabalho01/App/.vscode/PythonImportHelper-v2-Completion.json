@@ -58,6 +58,15 @@
         "documentation": {}
     },
     {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
         "label": "pandas",
         "kind": 6,
         "isExtraImport": true,
@@ -406,6 +415,24 @@
         "description": "SimpleCalculator",
         "peekOfCode": "div_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)\nbutton_5.grid(row=2, column=1)\nbutton_6.grid(row=2, column=2)\nbutton_7.grid(row=3, column=0)\nbutton_8.grid(row=3, column=1)",
         "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "conn",
+        "kind": 5,
+        "importPath": "UseSQL",
+        "description": "UseSQL",
+        "peekOfCode": "conn = psycopg2.connect(database=\"Mecânica de Veículos (para Funções)\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"SELECT * FROM mecanico where cods = %s\", (3,))\n# (4) Printando a primeira linha obtida da última query executada:",
+        "detail": "UseSQL",
+        "documentation": {}
+    },
+    {
+        "label": "cursor",
+        "kind": 5,
+        "importPath": "UseSQL",
+        "description": "UseSQL",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"SELECT * FROM mecanico where cods = %s\", (3,))\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():\n    print(line)\n# (6) Printando uma determinada quantidade de linhas da última query executada:\nfor line in cursor.fetchmany(size = 4):",
+        "detail": "UseSQL",
         "documentation": {}
     }
 ]
