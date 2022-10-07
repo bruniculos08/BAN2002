@@ -24,6 +24,15 @@
         "documentation": {}
     },
     {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
         "label": "re",
         "kind": 6,
         "isExtraImport": true,
@@ -422,7 +431,7 @@
         "kind": 5,
         "importPath": "UseSQL",
         "description": "UseSQL",
-        "peekOfCode": "conn = psycopg2.connect(database=\"Mecânica de Veículos (para Funções)\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"SELECT * FROM mecanico where cods = %s\", (3,))\n# (4) Printando a primeira linha obtida da última query executada:",
+        "peekOfCode": "conn = psycopg2.connect(database=\"Mecânica de Veículos (para Funções)\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '12943869996' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '12943869996', 'Python', 54, 'Bom Retiro', 'Joinville', 'desamassa', 3)\")",
         "detail": "UseSQL",
         "documentation": {}
     },
@@ -431,7 +440,7 @@
         "kind": 5,
         "importPath": "UseSQL",
         "description": "UseSQL",
-        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"SELECT * FROM mecanico where cods = %s\", (3,))\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():\n    print(line)\n# (6) Printando uma determinada quantidade de linhas da última query executada:\nfor line in cursor.fetchmany(size = 4):",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '12943869996' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '12943869996', 'Python', 54, 'Bom Retiro', 'Joinville', 'desamassa', 3)\")\ncursor.execute(\"SELECT * FROM mecanico\")\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\nprint(cursor.mogrify())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():",
         "detail": "UseSQL",
         "documentation": {}
     }

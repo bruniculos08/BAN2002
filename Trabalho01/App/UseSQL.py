@@ -14,10 +14,13 @@ conn = psycopg2.connect(database="Mecânica de Veículos (para Funções)",
 cursor = conn.cursor()
 
 # (3) Executando um comando SQL por meio do objeto cursor:
-cursor.execute("SELECT * FROM mecanico where cods = %s", (3,))
+cursor.execute("DELETE FROM mecanico where cpf = '12943869996' ")
+cursor.execute("INSERT INTO mecanico VALUES(7, '12943869996', 'Python', 54, 'Bom Retiro', 'Joinville', 'desamassa', 3)")
+cursor.execute("SELECT * FROM mecanico")
 
 # (4) Printando a primeira linha obtida da última query executada:
 print(cursor.fetchone())
+print(cursor.mogrify())
 
 # (5) Printando todas as linhas obtidas da última query executada:
 for line in cursor.fetchall():
