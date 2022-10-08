@@ -20,7 +20,6 @@ cursor.execute("SELECT * FROM mecanico")
 
 # (4) Printando a primeira linha obtida da última query executada:
 print(cursor.fetchone())
-print(cursor.mogrify())
 
 # (5) Printando todas as linhas obtidas da última query executada:
 for line in cursor.fetchall():
