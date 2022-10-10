@@ -1,0 +1,35 @@
+1. Identifique o problema clássico de concorrência em cada um dos cenários abaixo:
+
+a) Problema da atualização perdida
+
+b) Problema da atualização temporária
+
+c) Problema do sumário incorreto
+
+2. a) X1 = 'Spider-Man'
+       X2 = 'Spider-Man'
+
+2.b) X1 = 'Spider-Man' 	
+      X2 = 100		   	
+      X3 = 'Peter Parker' 
+      X4 = 100
+      X5 = 'Peter Parker'
+
+3.
+			 |   Leitura suja	|	Leitura não repetível	  |	Fantasma
+READ_UNCOMMITED|	sim		|	  sim			  |  	sim
+			 |			|				  |				
+READ_COMMITED	 |        não		|	  sim   		  	  |       sim
+			 |			|				  |
+REPEATABLE_READ	 |	não		|	  não			  |       sim
+			 |			|				  |
+SERIALIZABLE		 |	não		|	  não			  |       não
+
+4. C) Durabilidade
+
+5. A) Dirty Read (não é Phanton Read pois não houve inserção)
+
+6. A) O usuário B irá ler, como saldo em estoque do produto X,o valor que foi atualizado pela transação de A.
+
+
+
