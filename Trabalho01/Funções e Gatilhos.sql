@@ -150,7 +150,41 @@ language plpgsql;
 
 create trigger verificarNotaGatilho before insert or update on emissao_de_nota for each row execute procedure verificarNota();
 
-vb binsert into emissao_de_nota values('13181017921427000125650010000000309887251170', 1, 7);
+insert into emissao_de_nota values('13181017921427000125650010000000309887251170', 1, 7);
+
+-- Gatilho para não permitir que um departamento de compra produza veículo:
+update veiculo set cod_dept = 7;
+
+create or replace function verificaDepartamentoDeCompra() returns trigger as
+$$
+begin
+	if(select count(1) from emissao_de_nota e where e.cod_depto_compra = new.cod_dept) > 0 then
+		raise notice 'Um departamento de compras não pode produzir carros!';
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger verificaDepartamentoDeCompraGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
+
+-- Gatilho para não permitir que um departamento que produz veiculo atue como departamento de compra:
+update emissao_de_nota set cod_depto_compra = 2;
+
+create or replace function verificaDepartamentoDeProducao() returns trigger as
+$$
+begin
+	if(select count(1) from veiculo where cod_dept = new.cod_depto_compra) > 0 then
+		raise notice 'Um departamento de produção não pode atuar como departamento de compras!';
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger verificaDepartamentoDeProducaoGatilho before insert or update on emissao_de_nota for each row execute procedure verificaDepartamentoDeProducao();
 
 -- View para o número de veículos produzidos por departamento:
 
