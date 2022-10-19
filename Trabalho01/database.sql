@@ -4,8 +4,11 @@
     primary key(cod_dept)
 );
 
+drop view numpedidos;
+drop table emissao_de_nota;
+
 create table Emissao_de_nota(
-    cod_nota integer not null,
+    cod_nota varchar(44),
     cod_depto_comum integer not null,
     cod_depto_compra Integer not null,
     primary key(cod_nota),
