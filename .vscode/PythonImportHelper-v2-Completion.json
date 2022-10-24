@@ -24,29 +24,20 @@
         "documentation": {}
     },
     {
-        "label": "csv",
+        "label": "pandas",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "csv",
-        "description": "csv",
-        "detail": "csv",
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
         "documentation": {}
     },
     {
-        "label": "re",
-        "kind": 6,
+        "label": "as_completed",
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
         "isExtraImport": true,
-        "importPath": "re",
-        "description": "re",
-        "detail": "re",
-        "documentation": {}
-    },
-    {
-        "label": "mat",
-        "importPath": "numpy",
-        "description": "numpy",
-        "isExtraImport": true,
-        "detail": "numpy",
+        "detail": "concurrent.futures",
         "documentation": {}
     },
     {
@@ -55,6 +46,14 @@
         "isExtraImport": true,
         "importPath": "mysql.connector",
         "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
         "detail": "mysql.connector",
         "documentation": {}
     },
@@ -76,12 +75,20 @@
         "documentation": {}
     },
     {
-        "label": "pandas",
+        "label": "re",
         "kind": 6,
         "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "mat",
+        "importPath": "numpy",
+        "description": "numpy",
+        "isExtraImport": true,
+        "detail": "numpy",
         "documentation": {}
     },
     {
@@ -145,6 +152,51 @@
         "description": "Trabalho01.App.Buttons",
         "peekOfCode": "printButton = Button(root, text = \"Print text\", state = 'normal', command = printTextField)\n# (1) The state defines propreties of the button.\n# (2) The padx defines the size in relation to x-axis.\n# (3) The pady defines the size in relation to y-axis.\n# (4) The fg defines the button text color.\n# (5) The bg defines the button background color.\n# (6) The command defines the fuction that the button will run when clicked.\n# Putting Button in the screen:\nisAButton.grid(row=1, column=1)\nisNotAButton.grid(row=2, column=1)",
         "detail": "Trabalho01.App.Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "tsv_file",
+        "kind": 5,
+        "importPath": "Trabalho01.App.ConvertCSV",
+        "description": "Trabalho01.App.ConvertCSV",
+        "peekOfCode": "tsv_file = 'data.tsv'\n# reading given tsv file\ncsv_table=pd.read_table(tsv_file,sep='\\t')\n# converting tsv file into csv\ncsv_table.to_csv('data.csv',index=False)\n# output\nprint(\"Successfully made csv file\")",
+        "detail": "Trabalho01.App.ConvertCSV",
+        "documentation": {}
+    },
+    {
+        "label": "conn",
+        "kind": 5,
+        "importPath": "Trabalho01.App.DatabaseToCSV",
+        "description": "Trabalho01.App.DatabaseToCSV",
+        "peekOfCode": "conn = psycopg2.connect(database=\"IMDB Titles\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Abrindo e lendo o arquivo csv:\ncsv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:",
+        "detail": "Trabalho01.App.DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "cursor",
+        "kind": 5,
+        "importPath": "Trabalho01.App.DatabaseToCSV",
+        "description": "Trabalho01.App.DatabaseToCSV",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Abrindo e lendo o arquivo csv:\ncsv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:\ndataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), ",
+        "detail": "Trabalho01.App.DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "csv_file",
+        "kind": 5,
+        "importPath": "Trabalho01.App.DatabaseToCSV",
+        "description": "Trabalho01.App.DatabaseToCSV",
+        "peekOfCode": "csv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:\ndataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), \n                titleType varchar(50), \n                primaryTitle varchar(200), ",
+        "detail": "Trabalho01.App.DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "dataBase",
+        "kind": 5,
+        "importPath": "Trabalho01.App.DatabaseToCSV",
+        "description": "Trabalho01.App.DatabaseToCSV",
+        "peekOfCode": "dataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), \n                titleType varchar(50), \n                primaryTitle varchar(200), \n                originalTitle varchar(200), \n                isAdult integer,",
+        "detail": "Trabalho01.App.DatabaseToCSV",
         "documentation": {}
     },
     {
@@ -440,7 +492,7 @@
         "kind": 5,
         "importPath": "Trabalho01.App.UseSQL",
         "description": "Trabalho01.App.UseSQL",
-        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '12943869996' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '12943869996', 'Python', 54, 'Bom Retiro', 'Joinville', 'desamassa', 3)\")\ncursor.execute(\"SELECT * FROM mecanico\")\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\nprint(cursor.mogrify())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '12943869996' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '12943869996', 'Python', 54, 'Bom Retiro', 'Joinville', 'desamassa', 3)\")\ncursor.execute(\"SELECT * FROM mecanico\")\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():\n    print(line)",
         "detail": "Trabalho01.App.UseSQL",
         "documentation": {}
     }
