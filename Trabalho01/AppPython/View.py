@@ -79,14 +79,15 @@ class MenuPrincipal():
         if self.field != None:
             return
         
-        frame = Frame(self.tela, bd = 10, width=300, height=70)
+        color = 'purple'
+        frame = Frame(self.tela, bd = 100, width=300, height=70, bg = color, relief=RIDGE)
         frame.pack()
-        frame.place(anchor="center", relx=0.7, rely=0.1)
+        frame.place(anchor="center", relx=0.75, rely=0.15)
 
-        label = Label(frame, text = "Campo de inserção")
+        label = Label(frame, text = "Campo de inserção", bg = color)
         label.place(anchor="center", relx=0.23, rely=0.05)
 
-        self.field = Entry(frame, width=40, borderwidth=5)
+        self.field = Entry(frame, width=40, borderwidth=5, bg = 'white')
         self.field.place(anchor="center", relx=0.5, rely=0.5)
 
     # Fechar campo de inserção:
@@ -95,3 +96,9 @@ class MenuPrincipal():
             return
         self.field.destroy()
         self.field = None
+
+    def createCampoDeExibição(self):
+        pass
+
+    def setCampoDeInserção(self, string):
+        pass
