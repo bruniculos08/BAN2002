@@ -9,10 +9,12 @@ from PIL import ImageTk, Image
 # Aqui ficarão as classes de interface:
 class MenuPrincipal():
     tela = Tk()
+    field = None
 
     def __init__(self):
         self.colocarImagem()
         self.criarBotoesDeAba()
+        self.setOnCampoDeInserção()
         self.ajustarTela()
         self.tela.mainloop()
     
@@ -72,7 +74,24 @@ class MenuPrincipal():
         # Adicionando a lista de listas de botões criados à tela:
         self.tela.config(menu = listaDelistaDeBotoes)
     
-    # Abrir campo de inserção ou fechar:
-    def setCampoDeInserção(self, state):
-        field = Entry()
-        pass
+    # Abrir campo de inserção:
+    def setOnCampoDeInserção(self):
+        if self.field != None:
+            return
+        
+        frame = Frame(self.tela, bd = 10, width=300, height=70)
+        frame.pack()
+        frame.place(anchor="center", relx=0.7, rely=0.1)
+
+        label = Label(frame, text = "Campo de inserção")
+        label.place(anchor="center", relx=0.23, rely=0.05)
+
+        self.field = Entry(frame, width=40, borderwidth=5)
+        self.field.place(anchor="center", relx=0.5, rely=0.5)
+
+    # Fechar campo de inserção:
+    def setOffCampoDeInserção(self):
+        if self.field == None:
+            return
+        self.field.destroy()
+        self.field = None
