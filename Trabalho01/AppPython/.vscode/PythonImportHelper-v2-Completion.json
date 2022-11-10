@@ -112,7 +112,7 @@
         "kind": 6,
         "importPath": "View",
         "description": "View",
-        "peekOfCode": "class MenuPrincipal():\n    # Objeto da classe principal do menu:\n    tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    textBox = None\n    def __init__(self):",
+        "peekOfCode": "class MenuPrincipal():\n    # Objeto da classe principal do menu:\n    __tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    __fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    __fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    __textBox = None\n    def __init__(self):",
         "detail": "View",
         "documentation": {}
     }
