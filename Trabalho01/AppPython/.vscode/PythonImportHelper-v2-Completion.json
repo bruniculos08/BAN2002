@@ -1,0 +1,119 @@
+[
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "View",
+        "description": "View",
+        "isExtraImport": true,
+        "detail": "View",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Logic",
+        "description": "Logic",
+        "isExtraImport": true,
+        "detail": "Logic",
+        "documentation": {}
+    },
+    {
+        "label": "Intermediario",
+        "kind": 6,
+        "importPath": "Logic",
+        "description": "Logic",
+        "peekOfCode": "class Intermediario():\n    def __init__(self):\n        pass",
+        "detail": "Logic",
+        "documentation": {}
+    },
+    {
+        "label": "MenuPrincipal",
+        "kind": 6,
+        "importPath": "View",
+        "description": "View",
+        "peekOfCode": "class MenuPrincipal():\n    # Objeto da classe principal do menu:\n    tela = Tk()\n    # Objeto da classe da caixa de inserção:\n    fieldBox = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    textBox = None\n    def __init__(self):\n        self.colocarImagem()\n        self.criarBotoesDeAba()",
+        "detail": "View",
+        "documentation": {}
+    }
+]

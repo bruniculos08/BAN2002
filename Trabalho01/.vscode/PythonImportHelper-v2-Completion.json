@@ -80,36 +80,19 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "Logic",
-        "description": "Logic",
-        "isExtraImport": true,
-        "detail": "Logic",
-        "documentation": {}
-    },
-    {
-        "label": "pandas",
-        "kind": 6,
-        "isExtraImport": true,
-        "importPath": "pandas",
-        "description": "pandas",
-        "detail": "pandas",
-        "documentation": {}
-    },
-    {
-        "label": "as_completed",
-        "importPath": "concurrent.futures",
-        "description": "concurrent.futures",
-        "isExtraImport": true,
-        "detail": "concurrent.futures",
-        "documentation": {}
-    },
-    {
         "label": "mysql.connector",
         "kind": 6,
         "isExtraImport": true,
         "importPath": "mysql.connector",
         "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
         "detail": "mysql.connector",
         "documentation": {}
     },
@@ -136,6 +119,31 @@
         "importPath": "psycopg2",
         "description": "psycopg2",
         "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Logic",
+        "description": "Logic",
+        "isExtraImport": true,
+        "detail": "Logic",
+        "documentation": {}
+    },
+    {
+        "label": "as_completed",
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
+        "isExtraImport": true,
+        "detail": "concurrent.futures",
         "documentation": {}
     },
     {

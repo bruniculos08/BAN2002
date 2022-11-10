@@ -10,6 +10,20 @@
 # Objeto da camada de persistência -> se comunica com o banco de dados e transforma linhas do banco de dados em objetos.
 
 from View import *
+import mysql.connector
+import psycopg2
+from mysql.connector import Error
+import pandas as pd
+
 
 if __name__ == "__main__":
-    interface = MenuPrincipal()
+    conn = psycopg2.connect(database="Mecânica de Veículos (para Funções)",
+                        host="localhost",
+                        user="postgres",
+                        password="1234",
+                        port="5433")
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM mecanico")
+
+    app = MenuPrincipal()
+    app.setCampoDeExibição(str(cursor.fetchall()))
