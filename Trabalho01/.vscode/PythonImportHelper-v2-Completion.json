@@ -169,7 +169,7 @@
         "kind": 6,
         "importPath": "AppPython.View",
         "description": "AppPython.View",
-        "peekOfCode": "class MenuPrincipal():\n    tela = Tk()\n    field = None\n    def __init__(self):\n        self.colocarImagem()\n        self.criarBotoesDeAba()\n        self.setOnCampoDeInserção()\n        self.ajustarTela()\n        self.tela.mainloop()\n    def ajustarTela(self):",
+        "peekOfCode": "class MenuPrincipal():\n    tela = Tk()\n    field = None\n    def __init__(self):\n        self.colocarImagem()\n        self.criarBotoesDeAba()\n        self.setOnCampoDeInserção()\n        self.createCampoDeExibição()\n        self.ajustarTela()\n        self.tela.mainloop()",
         "detail": "AppPython.View",
         "documentation": {}
     },

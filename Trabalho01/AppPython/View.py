@@ -15,6 +15,7 @@ class MenuPrincipal():
         self.colocarImagem()
         self.criarBotoesDeAba()
         self.setOnCampoDeInserção()
+        self.createCampoDeExibição()
         self.ajustarTela()
         self.tela.mainloop()
     
@@ -98,7 +99,19 @@ class MenuPrincipal():
         self.field = None
 
     def createCampoDeExibição(self):
+        # Criando os objetos:
+        T = Text(self.tela, height=5, width=55, borderwidth=4)
+        label = Label(self.tela, text = "Query Result", width=55, bg = "grey", borderwidth=4)
+        label.config(font =("Courier", 10))
+        Fact = """A man can be arrested in Italy for wearing a skirt in public."""
+
+        # Packs e places dos objetos criados:
+        label.pack()
+        T.pack()
+        label.place(anchor="center", relx=0.7, rely=0.3)
+        T.place(anchor="n", relx=0.7, rely=0.32)
+        T.insert(END, Fact)
         pass
 
     def setCampoDeInserção(self, string):
-        pass
+        pass    
