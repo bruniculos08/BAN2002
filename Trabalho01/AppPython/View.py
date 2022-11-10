@@ -8,14 +8,18 @@ from PIL import ImageTk, Image
 
 # Aqui ficarão as classes de interface:
 class MenuPrincipal():
+    # Objeto da classe principal do menu:
     tela = Tk()
-    field = None
+    # Objeto da classe da caixa de inserção:
+    fieldBox = None
+    # Objeto da classe da caixa texto, onde serão exibidos os resultados:
+    textBox = None
 
     def __init__(self):
         self.colocarImagem()
         self.criarBotoesDeAba()
-        self.setOnCampoDeInserção()
-        self.createCampoDeExibição()
+        self.setOnCampoDeInserção("Insira aqui")
+        self.createTextBox()
         self.ajustarTela()
         self.tela.mainloop()
     
@@ -26,21 +30,26 @@ class MenuPrincipal():
         self.tela.title("Fábrica de veículos")
 
     def colocarImagem(self):
+        # Criando frame para colocar a label contendo a imagem:
         frame = Frame(self.tela, width=450, height=240)
         frame.pack()
         frame.place(anchor="center", relx=0.5, rely=0.5)
+
         # O problema que estava ocorrendo antes era devido ao item imagem não estar acessível ao resto da...
         # ... classe (o coletor de lixo apaga tal variável se esta for declarada sem o 'self.' ou sem 'global'):
         self.imagem_de_menu = ImageTk.PhotoImage(Image.open("Arquivos Gerais\\Imagem de Menu.gif").resize((900,480), Image.ANTIALIAS))
-        label_para_imagem = Label(frame, image = self.imagem_de_menu)
-        label_para_imagem.pack()
         # Explicações para o problema em: 
         # https://stackoverflow.com/questions/16424091/why-does-tkinter-image-not-show-up-if-created-in-a-function
+
+        # Criando label para colocar a imagem:
+        label_para_imagem = Label(frame, image = self.imagem_de_menu)
+        label_para_imagem.pack()
         
     def criarBotoesDeAba(self):
 
         def botaoFuncionando(string):
-            print(f"Este botão ({string}) está funcionando")
+            text = "Este botão (" + string + ") está funcionando."
+            self.setCampoDeExibição(text)
 
         # Criando lista de botões de aba (comands para uma cascade)
             
@@ -76,42 +85,52 @@ class MenuPrincipal():
         self.tela.config(menu = listaDelistaDeBotoes)
     
     # Abrir campo de inserção:
-    def setOnCampoDeInserção(self):
-        if self.field != None:
+    def setOnCampoDeInserção(self, string):
+        
+        # Verificando se o frame foi criado:
+        if self.fieldBox != None:
             return
         
-        color = 'purple'
-        frame = Frame(self.tela, bd = 100, width=300, height=70, bg = color, relief=RIDGE)
-        frame.pack()
-        frame.place(anchor="center", relx=0.75, rely=0.15)
+        # Criando frame para colocar a fieldBox:
+        fieldBoxFrameColor = 'purple'
+        fieldBoxFrame = Frame(self.tela, bd = 2, width=400, height=80, bg = fieldBoxFrameColor, relief=SOLID)
+        fieldBoxFrame.pack()
+        fieldBoxFrame.place(anchor="center", relx=0.75, rely=0.15)
 
-        label = Label(frame, text = "Campo de inserção", bg = color)
-        label.place(anchor="center", relx=0.23, rely=0.05)
+        # Criando label para colocar fieldBox:
+        fieldBoxLabel = Label(fieldBoxFrame, text = string, bg = fieldBoxFrameColor, font =("Courier", 12))
+        fieldBoxLabel.place(anchor="n", relx=0.5, rely=0.05)
 
-        self.field = Entry(frame, width=40, borderwidth=5, bg = 'white')
-        self.field.place(anchor="center", relx=0.5, rely=0.5)
+        # Criando a fieldBox:
+        self.fieldBox = Entry(fieldBoxFrame, width=61, borderwidth=2, bg = 'white', relief=SOLID)
+        self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
 
     # Fechar campo de inserção:
     def setOffCampoDeInserção(self):
-        if self.field == None:
+        if self.fieldBox == None:
             return
-        self.field.destroy()
-        self.field = None
+        self.fieldBox.destroy()
+        self.fieldBox = None
 
-    def createCampoDeExibição(self):
+    def createTextBox(self):
         # Criando os objetos:
-        T = Text(self.tela, height=5, width=55, borderwidth=4)
-        label = Label(self.tela, text = "Query Result", width=55, bg = "grey", borderwidth=4)
-        label.config(font =("Courier", 10))
-        Fact = """A man can be arrested in Italy for wearing a skirt in public."""
+        self.textBox = Text(self.tela, height=19, width=72, borderwidth=4, relief="solid")
+        self.textBox.config(font =("Courier", 8))
+        label = Label(self.tela, text = "Resultado", width=50, bg = "grey", borderwidth=6.4, relief="solid")
+        label.config(font =("Courier", 12))
 
-        # Packs e places dos objetos criados:
+        # Packs e places do label:
         label.pack()
-        T.pack()
-        label.place(anchor="center", relx=0.7, rely=0.3)
-        T.place(anchor="n", relx=0.7, rely=0.32)
-        T.insert(END, Fact)
-        pass
+        label.place(anchor="center", relx=0.7, rely=0.2909)
 
-    def setCampoDeInserção(self, string):
+        # Packs e places da textBox:
+        self.textBox.pack()
+        self.textBox.place(anchor="n", relx=0.7, rely=0.32)
+        self.textBox.config(state=DISABLED)
+
+    def setCampoDeExibição(self, string):
+        self.textBox.config(state=NORMAL)
+        self.textBox.delete('1.0', END)
+        self.textBox.insert(END, string)
+        self.textBox.config(state=DISABLED)
         pass    
