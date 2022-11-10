@@ -10,17 +10,19 @@ from PIL import ImageTk, Image
 class MenuPrincipal():
     # Objeto da classe principal do menu:
     tela = Tk()
-    # Objeto da classe da caixa de inserção:
-    fieldBox = None
+    # Objeto da classe de frame que será usado para as caixas de entrada:
+    fieldBoxFrame = None
+    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:
+    fieldBoxes = None
     # Objeto da classe da caixa texto, onde serão exibidos os resultados:
     textBox = None
 
     def __init__(self):
         self.colocarImagem()
         self.criarBotoesDeAba()
-        self.setOnCampoDeInserção("Insira aqui")
+        self.criarCamposDeInsercao()
         self.createTextBox()
-        self.setCampoDeExibição("Texto...")
+        self.setCampoDeExibicao("Texto...")
         self.ajustarTela()
 
     def run(self):
@@ -53,7 +55,7 @@ class MenuPrincipal():
 
         def botaoFuncionando(string):
             text = "Este botão (" + string + ") está funcionando."
-            self.setCampoDeExibição(text)
+            self.setCampoDeExibicao(text)
 
         # Criando lista de botões de aba (comands para uma cascade)
             
@@ -89,7 +91,7 @@ class MenuPrincipal():
         self.tela.config(menu = listaDelistaDeBotoes)
     
     # Abrir campo de inserção:
-    def setOnCampoDeInserção(self, string):
+    def setOnCampoDeInsercao(self, string):
         
         # Verificando se o frame foi criado:
         if self.fieldBox != None:
@@ -109,8 +111,32 @@ class MenuPrincipal():
         self.fieldBox = Entry(fieldBoxFrame, width=61, borderwidth=2, bg = 'white', relief=SOLID)
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
 
+    def criarCamposDeInsercao(self, quantidade=11):
+        self.fieldBoxFrame = Frame(self.tela, bd = 2, width=400, height=50*quantidade, bg = "purple", relief=SOLID)
+        self.fieldBoxFrame.pack()
+        self.fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
+        self.fieldBoxes = []
+
+        # Adicionando campos de entradas:
+        for i in range(0, 2*quantidade, 2):
+            fieldBoxLabel = Label(self.fieldBoxFrame, text = f"Campo {int(i/2)+1}:", height = 1, width = 10, bg = 'purple', font =("Courier", 10))
+            fieldBoxLabel.pack()
+            fieldBoxLabel.place(anchor="n", x=200, y=(22)*(i + 1))
+
+            fieldBox = Entry(self.fieldBoxFrame, width=50, borderwidth=2, bg = 'white', relief=SOLID)
+            fieldBox.place(anchor="n", x=200, y=(22)*(i + 2))
+            self.fieldBoxes.append(fieldBox)
+        return
+    
+    def deletarCamposDeInsercao(self):
+        self.fieldBoxFrame.destroy()
+        for field in self.fieldBoxes:
+            field.destroy()
+        return
+
+
     # Fechar campo de inserção:
-    def setOffCampoDeInserção(self):
+    def setOffCampoDeInsercao(self):
         if self.fieldBox == None:
             return
         self.fieldBox.destroy()
@@ -132,7 +158,7 @@ class MenuPrincipal():
         self.textBox.place(anchor="n", relx=0.7, rely=0.14)
         self.textBox.config(state=DISABLED)
 
-    def setCampoDeExibição(self, string):
+    def setCampoDeExibicao(self, string):
         self.textBox.config(state=NORMAL)
         self.textBox.delete('1.0', END)
         self.textBox.insert(END, string)

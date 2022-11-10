@@ -30,5 +30,5 @@ if __name__ == "__main__":
     string = ""
     for line in cursor.fetchall():
         string += str(line) + "\n"
-    app.setCampoDeExibição(string)
+    app.setCampoDeExibicao(string)
     app.run()
