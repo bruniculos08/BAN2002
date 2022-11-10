@@ -20,13 +20,16 @@ class MenuPrincipal():
         self.criarBotoesDeAba()
         self.setOnCampoDeInserção("Insira aqui")
         self.createTextBox()
+        self.setCampoDeExibição("Texto...")
         self.ajustarTela()
+
+    def run(self):
         self.tela.mainloop()
-    
+
     def ajustarTela(self):
-        self.tela.geometry("900x480")
-        self.tela.minsize(width=900, height=480)
-        self.tela.maxsize(width=900, height=480)
+        self.tela.geometry("1280x720")
+        self.tela.minsize(width=1280, height=720)
+        self.tela.maxsize(width=1280, height=720)
         self.tela.title("Fábrica de veículos")
 
     def colocarImagem(self):
@@ -37,7 +40,8 @@ class MenuPrincipal():
 
         # O problema que estava ocorrendo antes era devido ao item imagem não estar acessível ao resto da...
         # ... classe (o coletor de lixo apaga tal variável se esta for declarada sem o 'self.' ou sem 'global'):
-        self.imagem_de_menu = ImageTk.PhotoImage(Image.open("Arquivos Gerais\\Imagem de Menu.gif").resize((900,480), Image.ANTIALIAS))
+        imagePath = "C:\\Users\\bruni\\OneDrive\Documentos\\GitHub\\BAN2002\Trabalho01\Arquivos Gerais\\Imagem de Menu.gif"
+        self.imagem_de_menu = ImageTk.PhotoImage(Image.open(imagePath).resize((1280,720), Image.ANTIALIAS))
         # Explicações para o problema em: 
         # https://stackoverflow.com/questions/16424091/why-does-tkinter-image-not-show-up-if-created-in-a-function
 
@@ -95,7 +99,7 @@ class MenuPrincipal():
         fieldBoxFrameColor = 'purple'
         fieldBoxFrame = Frame(self.tela, bd = 2, width=400, height=80, bg = fieldBoxFrameColor, relief=SOLID)
         fieldBoxFrame.pack()
-        fieldBoxFrame.place(anchor="center", relx=0.75, rely=0.15)
+        fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
 
         # Criando label para colocar fieldBox:
         fieldBoxLabel = Label(fieldBoxFrame, text = string, bg = fieldBoxFrameColor, font =("Courier", 12))
@@ -114,18 +118,18 @@ class MenuPrincipal():
 
     def createTextBox(self):
         # Criando os objetos:
-        self.textBox = Text(self.tela, height=19, width=72, borderwidth=4, relief="solid")
+        self.textBox = Text(self.tela, height=40, width=100, borderwidth=4, relief="solid")
         self.textBox.config(font =("Courier", 8))
         label = Label(self.tela, text = "Resultado", width=50, bg = "grey", borderwidth=6.4, relief="solid")
         label.config(font =("Courier", 12))
 
         # Packs e places do label:
         label.pack()
-        label.place(anchor="center", relx=0.7, rely=0.2909)
+        label.place(anchor="center", relx=0.7, rely=0.1)
 
         # Packs e places da textBox:
         self.textBox.pack()
-        self.textBox.place(anchor="n", relx=0.7, rely=0.32)
+        self.textBox.place(anchor="n", relx=0.7, rely=0.14)
         self.textBox.config(state=DISABLED)
 
     def setCampoDeExibição(self, string):

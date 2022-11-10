@@ -26,4 +26,9 @@ if __name__ == "__main__":
     cursor.execute("SELECT * FROM mecanico")
 
     app = MenuPrincipal()
-    app.setCampoDeExibição(str(cursor.fetchall()))
+
+    string = ""
+    for line in cursor.fetchall():
+        string += str(line) + "\n"
+    app.setCampoDeExibição(string)
+    app.run()
