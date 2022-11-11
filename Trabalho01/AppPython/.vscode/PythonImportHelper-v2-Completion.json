@@ -17,6 +17,14 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -130,6 +138,24 @@
         "description": "Data.Departamento",
         "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select cast(max(cod_dept) as int) + 1 from departamento\"\n        self.__sqlInsert = \"insert into departamento departamento values({}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:",
         "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "Veiculo",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __manualAutomatico = None\n    __arCondicionado = None\n    __vidrosTravas = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__manualAutomatico = False\n        self.__arCondicionado = False",
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "VeiculoDAO",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class VeiculoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {}, {}, {}, {})\" \n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "detail": "Data.Veiculo",
         "documentation": {}
     },
     {
