@@ -21,7 +21,7 @@ class View():
     def __init__(self):
         self.colocarImagem()
         self.criarBotoesDeAba()
-        self.criarCamposDeInsercao(0)
+        self.criarCamposDeInsercao(2, None)
         self.createTextBox()
         self.setCampoDeExibicao("Texto...")
         self.ajustarTela()
@@ -118,15 +118,20 @@ class View():
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
         return
 
-    def criarCamposDeInsercao(self, quantidade = 0):
+    def criarCamposDeInsercao(self, quantidade = 0, controller = Controller().view(__tela)):
         if(quantidade == 0):
             return
         
         # Ajustando o frame onde serão colocadas os campos de entrada:
-        self.__fieldBoxFrame = Frame(self.__tela, bd = 2, width=400, height=(46.5)*quantidade + 10, bg = "purple", relief=SOLID)
+        self.__fieldBoxFrame = Frame(self.__tela, bd = 2, width=400, height=(46.5)*quantidade + 50, bg = "purple", relief=SOLID)
         self.__fieldBoxFrame.pack()
         self.__fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
         self.__fieldBoxes = []
+
+        # Criando botão de envio dos dados:
+        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : controller.inserirDepartamento())
+        enviar.pack()
+        enviar.place(anchor="n", x = 200, y = (46.5)*quantidade + 15)
 
         # Adicionando campos de entradas:
         for i in range(0, 2*quantidade, 2):

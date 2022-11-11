@@ -40,35 +40,19 @@
         "documentation": {}
     },
     {
-        "label": "ImageTk",
-        "importPath": "PIL",
-        "description": "PIL",
+        "label": "*",
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
         "isExtraImport": true,
-        "detail": "PIL",
+        "detail": "Data.Departamento",
         "documentation": {}
     },
     {
-        "label": "Image",
-        "importPath": "PIL",
-        "description": "PIL",
+        "label": "*",
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
         "isExtraImport": true,
-        "detail": "PIL",
-        "documentation": {}
-    },
-    {
-        "label": "ImageTk",
-        "importPath": "PIL",
-        "description": "PIL",
-        "isExtraImport": true,
-        "detail": "PIL",
-        "documentation": {}
-    },
-    {
-        "label": "Image",
-        "importPath": "PIL",
-        "description": "PIL",
-        "isExtraImport": true,
-        "detail": "PIL",
+        "detail": "Data.Veiculo",
         "documentation": {}
     },
     {
@@ -123,6 +107,22 @@
         "documentation": {}
     },
     {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
         "label": "Departamento",
         "kind": 6,
         "importPath": "Data.Departamento",
@@ -163,7 +163,7 @@
         "kind": 6,
         "importPath": "Controller",
         "description": "Controller",
-        "peekOfCode": "class Controller():\n    def __init__(self):\n        pass",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    def __init__(self):\n        self.__view = None\n        self.__departamentoDAO = DepartamentoDAO()\n        self.__veiculoDAO = VeiculoDAO()\n    def view(self, view):\n        self.__view = view",
         "detail": "Controller",
         "documentation": {}
     },
