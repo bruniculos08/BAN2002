@@ -119,8 +119,11 @@ class MenuPrincipal():
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
         return
 
-    def criarCamposDeInsercao(self, quantidade):
-        quantidade = 15
+    def criarCamposDeInsercao(self, quantidade = 0):
+        if(quantidade == 0):
+            return
+        
+        # Ajustando o frame onde serão colocadas os campos de entrada:
         self.__fieldBoxFrame = Frame(self.__tela, bd = 2, width=400, height=(46.5)*quantidade + 10, bg = "purple", relief=SOLID)
         self.__fieldBoxFrame.pack()
         self.__fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
@@ -137,12 +140,18 @@ class MenuPrincipal():
             self.__fieldBoxes.append(fieldBox)
         return
     
+    def getCamposDeInsercao(self):
+        dados = []
+        for field in self.__fieldBoxes:
+            item = field.get()
+            dados.append(item)
+        return dados
+
     def deletarCamposDeInsercao(self):
         self.__fieldBoxFrame.destroy()
         for field in self.__fieldBoxes:
             field.destroy()
         return
-
 
     # Fechar campo de inserção:
     def setOffCampoDeInsercao(self):

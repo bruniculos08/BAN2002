@@ -23,7 +23,7 @@ if __name__ == "__main__":
                         password="1234",
                         port="5433")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM mecanico")
+    cursor.execute("SELECT * FROM veiculo")
 
     app = MenuPrincipal()
 
