@@ -5,7 +5,7 @@
 from tkinter import *
 from PIL import ImageTk, Image
 
-class Intermediario():
+class Controller():
 
     def __init__(self):
         pass

@@ -1,6 +1,22 @@
 [
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -92,27 +108,54 @@
     },
     {
         "label": "*",
-        "importPath": "Logic",
-        "description": "Logic",
+        "importPath": "Controller",
+        "description": "Controller",
         "isExtraImport": true,
-        "detail": "Logic",
+        "detail": "Controller",
         "documentation": {}
     },
     {
-        "label": "Intermediario",
+        "label": "Departamento",
         "kind": 6,
-        "importPath": "Logic",
-        "description": "Logic",
-        "peekOfCode": "class Intermediario():\n    def __init__(self):\n        pass",
-        "detail": "Logic",
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class Departamento():\n    __codDept = None\n    __tipo = None\n    def __init__(self, codDept, tipo):\n        self.__codDept = -1\n        self.__tipo = \"\"\n    def codDept(self ,codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.Departamento",
         "documentation": {}
     },
     {
-        "label": "MenuPrincipal",
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select cast(max(cod_dept) as int) + 1 from departamento\"\n        self.__sqlInsert = \"insert into departamento departamento values({}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:",
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "Controller",
+        "kind": 6,
+        "importPath": "Controller",
+        "description": "Controller",
+        "peekOfCode": "class Controller():\n    def __init__(self):\n        pass",
+        "detail": "Controller",
+        "documentation": {}
+    },
+    {
+        "label": "Connection",
+        "kind": 6,
+        "importPath": "Model",
+        "description": "Model",
+        "peekOfCode": "class Connection():\n    __instance = None\n    __connection = None\n#    About __new__ vs __init__ constructor methods:\n#\n#   - Python __new__() is the constructor method that controls the creation of the new instance.                    \n#   - It is called first and it returns a new class instance.                                   \n#                    \n#   - Python __init__() is the initializer method to set the attributes (i.e., state) of the newly-created instance.\n#   - It is called after creation and returns nothing, i.e., None.              ",
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "View",
         "kind": 6,
         "importPath": "View",
         "description": "View",
-        "peekOfCode": "class MenuPrincipal():\n    # Objeto da classe principal do menu:\n    __tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    __fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    __fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    __textBox = None\n    def __init__(self):",
+        "peekOfCode": "class View():\n    # Objeto da classe principal do menu:\n    __tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    __fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    __fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    __textBox = None\n    def __init__(self):",
         "detail": "View",
         "documentation": {}
     }

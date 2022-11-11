@@ -2,12 +2,13 @@
 # Camada de negócios, com a lógica da aplicação; e
 # Camada de dados, com funcionalidade de armazenamento e recuperação.
 
-from Logic import *
+from Model import *
+from Controller import *
 from tkinter import *
 from PIL import ImageTk, Image
 
 # Aqui ficarão as classes de interface:
-class MenuPrincipal():
+class View():
     # Objeto da classe principal do menu:
     __tela = Tk()
     # Objeto da classe de frame que será usado para as caixas de entrada:
@@ -20,9 +21,7 @@ class MenuPrincipal():
     def __init__(self):
         self.colocarImagem()
         self.criarBotoesDeAba()
-        # self.criarCamposDeInsercao(2)
-        # self.deletarCamposDeInsercao()
-        self.criarCamposDeInsercao(4)
+        self.criarCamposDeInsercao(0)
         self.createTextBox()
         self.setCampoDeExibicao("Texto...")
         self.ajustarTela()
@@ -141,6 +140,8 @@ class MenuPrincipal():
         return
     
     def getCamposDeInsercao(self):
+        if self.__fieldBoxes == None:
+            return []
         dados = []
         for field in self.__fieldBoxes:
             item = field.get()

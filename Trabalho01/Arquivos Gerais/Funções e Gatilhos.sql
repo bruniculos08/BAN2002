@@ -19,7 +19,8 @@ insert into veiculo values('9BRPRWHEXG0107744', true, true, true, 2);
 -- (4) Modulus the sum of the products by 11, to find the remainder.
 -- (5) If the remainder is 10 replace it with X.
 
-select *, validarChassi(cast('1M8GDM9AXKP042788' as varchar)) from veiculo v;
+-- Obs.: funções letraNumeroChassi() arrumada e validarChassi() (11/11/2022 às 01:06).
+select validarChassi(cast('4KKf00EhutTjg1530' as varchar));
 
 create or replace function validarChassi(p_chassi varchar) returns boolean as
 $$
@@ -31,7 +32,7 @@ begin
 	
 	-- VIN não pode ter as letras Q, I ou O:
 	for i in 1..17 loop
-		if word[i] = 'Q' or word[i] = 'I' or word[i] = 'O' then
+		if upper(word[i]) = 'Q' or upper(word[i]) = 'I' or upper(word[i]) = 'O' then
 			return false;
 		end if;
 	end loop;
@@ -63,6 +64,8 @@ $$ language plpgsql;
 create or replace function letraNumeroChassi(letra char) returns int as
 $$
 begin	
+	letra := upper(letra);
+
 	if letra = 'A' or letra = 'J' then
 		return 1;
 	elsif letra = 'B' or letra = 'K' or letra = 'S' then

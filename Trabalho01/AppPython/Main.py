@@ -17,18 +17,19 @@ import pandas as pd
 
 
 if __name__ == "__main__":
-    conn = psycopg2.connect(database="Mecânica de Veículos (para Funções)",
+    conn = psycopg2.connect(database="Trabalho 01",
                         host="localhost",
                         user="postgres",
                         password="1234",
                         port="5433")
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM veiculo")
+    cursor.execute("select cast(max(cod_dept) as int)+1 from departamento")
 
-    app = MenuPrincipal()
+    app = View()
 
     string = ""
     for line in cursor.fetchall():
         string += str(line) + "\n"
+
     app.setCampoDeExibicao(string)
     app.run()
