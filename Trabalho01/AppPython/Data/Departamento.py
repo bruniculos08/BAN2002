@@ -5,7 +5,7 @@ class Departamento():
     __codDept = None
     __tipo = None
 
-    def __init__(self, codDept, tipo):
+    def __init__(self):
         self.__codDept = -1
         self.__tipo = ""
 
@@ -40,7 +40,7 @@ class DepartamentoDAO():
     def __init__(self):
         self.__sqlSelectAll = "select * from departamento"
         self.__sqlSelectNewCodDept = "select cast(max(cod_dept) as int) + 1 from departamento"
-        self.__sqlInsert = "insert into departamento departamento values({}, '{}')"
+        self.__sqlInsert = "insert into departamento values({}, '{}')"
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
     def selectAll(self) -> list:

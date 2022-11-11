@@ -24,7 +24,7 @@ class Connection():
     def __new__(cls):
         if cls.__instance is None:
             cls.__instance = super().__new__(cls)
-            cls.__connection = postgres.connect(database="Mecânica de Veículos (para Funções)",
+            cls.__connection = postgres.connect(database="Trabalho 01",
                     host="localhost",
                     user="postgres",
                     password="1234",

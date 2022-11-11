@@ -21,11 +21,15 @@ class Controller():
         self.__view = view
         return self
 
+    # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento":
     def setInserirDepartamento(self):
-        self.__view    
+        self.__view.criarCamposDeInsercao(2)
+        self.__view.criarBotaoDepartamento()
 
+    # Esta função pega os dados do campo de inserção e insere na tabela de departamentos do banco de dados:
     def inserirDepartamento(self):
-        # Nesta função devemos setar na view a quantidade de campos esperar pela entrada para receber os dados.
         dados = self.__view.getCamposDeInsercao()
-        self.__view.setCamposDeInsercao(0, self)
-        pass
+        self.__view.criarCamposDeInsercao(0)
+        newDepartamento = Departamento().fromTupla(dados)
+        self.__departamentoDAO.insertDepartamento(newDepartamento)
+

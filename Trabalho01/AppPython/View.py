@@ -17,11 +17,14 @@ class View():
     __fieldBoxes = None
     # Objeto da classe da caixa texto, onde serão exibidos os resultados:
     __textBox = None
+    # Controller que fará a comunicação com o banco de dados:
+    __controller = None
 
     def __init__(self):
+        self.__controller = Controller().view(self)
         self.colocarImagem()
         self.criarBotoesDeAba()
-        self.criarCamposDeInsercao(2, None)
+        self.criarCamposDeInsercao()
         self.createTextBox()
         self.setCampoDeExibicao("Texto...")
         self.ajustarTela()
@@ -65,8 +68,8 @@ class View():
         # Criando lista de botões de aba (comands para uma cascade)
             
         # Botão para opções relacionadas a departamentos:
-        listaDeBotoesDepartamento = Menu(self.__tela, tearoff=0)
-        listaDeBotoesDepartamento.add_command(label = "Adicionar departamento", command = lambda : botaoFuncionando("adicionar departamento comum"))
+        listaDeBotoesDepartamento = Menu(self.__tela, tearoff=0)        #botaoFuncionando("adicionar departamento comum")
+        listaDeBotoesDepartamento.add_command(label = "Adicionar departamento", command = lambda : self.__controller.setInserirDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Adicionar comprador", command = lambda : botaoFuncionando("adicionar departamento de compras"))
         
         # Botão para opções relacionadas à veículos:
@@ -118,8 +121,10 @@ class View():
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
         return
 
-    def criarCamposDeInsercao(self, quantidade = 0, controller = Controller().view(__tela)):
+    def criarCamposDeInsercao(self, quantidade = 0):
         if(quantidade == 0):
+            if self.__fieldBoxFrame != None:
+                self.__fieldBoxFrame.destroy()
             return
         
         # Ajustando o frame onde serão colocadas os campos de entrada:
@@ -127,11 +132,6 @@ class View():
         self.__fieldBoxFrame.pack()
         self.__fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
         self.__fieldBoxes = []
-
-        # Criando botão de envio dos dados:
-        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : controller.inserirDepartamento())
-        enviar.pack()
-        enviar.place(anchor="n", x = 200, y = (46.5)*quantidade + 15)
 
         # Adicionando campos de entradas:
         for i in range(0, 2*quantidade, 2):
@@ -143,6 +143,14 @@ class View():
             fieldBox.place(anchor="n", x=200, y=23*(i+1.1) + 0.1)
             self.__fieldBoxes.append(fieldBox)
         return
+    
+    def criarBotaoDepartamento(self):
+        # Criando botão de envio dos dados:
+        self.__tela.update()
+        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : self.__controller.inserirDepartamento())
+        enviar.pack()
+        enviar.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35)
+        pass
     
     def getCamposDeInsercao(self):
         if self.__fieldBoxes == None:
