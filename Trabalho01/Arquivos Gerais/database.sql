@@ -69,7 +69,9 @@ create table veiculo(
 -- ... haverão mais linhas.
 
 
-create table esta_na_lista(
+drop table componentes_necessarios;
+
+create table componente_necessario(
     cod_dept integer not null,
     referencia integer not null,
     primary key(referencia, cod_dept),
