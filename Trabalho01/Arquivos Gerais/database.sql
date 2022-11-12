@@ -1,9 +1,12 @@
 ﻿
 drop sequence dept_cod;
-create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
+create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 1 cache 10;
 select currval('dept_cod');
 select nextval('dept_cod');
 
+select * from componente;
+delete from departamento;
+select * from fornecedor;
 
 create table departamento(
     cod_dept integer not null,
@@ -43,14 +46,16 @@ create table pedido(
 
 create sequence componente_referencia increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
 
+drop table componente cascade;
+select * from componente;
+
 create table componente(
-    referencia integer not null,
+    nome character varying(50) not null,
     tipo character varying(50) not null,
     minimo_quant integer not null,
-    quant integer not null,
-    setor_armazenamento integer not null,
+    quantidade integer not null,
     cnpj_principal character varying(14) not null,
-    primary key(referencia),
+    primary key(nome),
     foreign key(cnpj_principal) references fornecedor(cnpj)
 );
 
@@ -69,33 +74,37 @@ create table veiculo(
 -- ... haverão mais linhas.
 
 
-drop table componentes_necessarios;
+drop table componente_necessario;
 
 create table componente_necessario(
     cod_dept integer not null,
-    referencia integer not null,
-    primary key(referencia, cod_dept),
-    FOREIGN KEY (referencia) references componente (referencia),
-    FOREIGN KEY (cod_dept) references departamento (cod_dept)
-
+    nome_componente character varying(50) not null,
+    primary key(cod_dept, nome_componente),
+    FOREIGN KEY (cod_dept) references departamento (cod_dept),
+    FOREIGN KEY (nome_componente) references componente (nome)
 );
 
+select * from departamento;
 -- Supõe-se que os pedidos são unitários:
 
+drop table contem;
+
 create table contem(
-    referencia integer not null,
+    nome_componente character varying(50) not null,
     id_pedido integer not null,
-    primary key(referencia, id_pedido),
-    FOREIGN KEY (referencia) references componente (referencia),
+    primary key(nome_componente, id_pedido),
+    FOREIGN KEY (nome_componente) references componente (nome),
     FOREIGN KEY (id_pedido) references pedido (id)
 
 );
 
+drop table fornece;
+
 create table fornece(
-    referencia integer not null,
+    nome_componente character varying(50) not null,
     cnpj character varying(14) not null,
-    primary key (referencia, cnpj),
-    FOREIGN KEY (referencia) references componente (referencia),
+    primary key (nome_componente, cnpj),
+    FOREIGN KEY (nome_componente) references componente (nome),
     FOREIGN KEY (cnpj) references fornecedor (cnpj)
     
 );

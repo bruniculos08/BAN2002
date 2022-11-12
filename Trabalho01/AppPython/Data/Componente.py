@@ -1,13 +1,14 @@
 from Model import *
 
-class Departamento():
+class Componente():
 
-    __codDept = None
-    __tipo = None
+    
 
     def __init__(self):
-        self.__codDept = -1
-        self.__tipo = ""
+        self.__referencia = -1
+        self.__quantidadeMin = -1
+        self.__quantidade = -1
+        self.__setorDeArmazenamento = -1
 
     def codDept(self ,codDept):
         self.__codDept = codDept

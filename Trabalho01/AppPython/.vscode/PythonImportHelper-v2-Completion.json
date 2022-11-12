@@ -41,6 +41,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -139,6 +155,24 @@
         "documentation": {}
     },
     {
+        "label": "Componente",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class Componente():\n    def __init__(self):\n        self.__referencia = -1\n        self.__quantidadeMin = -1\n        self.__quantidade = -1\n        self.__setorDeArmazenamento = -1\n    def codDept(self ,codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
         "label": "Departamento",
         "kind": 6,
         "importPath": "Data.Departamento",
@@ -152,8 +186,26 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
         "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "Fornecedor",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class Fornecedor():\n    __cnpj = None\n    __nome = None\n    def __init__(self):\n        self.__cnpj = \"\"\n        self.__nome = \"\"\n    def cnpj(self, cnpj):\n        self.__cnpj = cnpj\n        return self\n    def getCnpj(self):",
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "FornecedorDAO",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class FornecedorDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
+        "detail": "Data.Fornecedor",
         "documentation": {}
     },
     {

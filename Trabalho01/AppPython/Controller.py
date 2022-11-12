@@ -23,16 +23,20 @@ class Controller():
 
     # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento":
     def setInserirDepartamento(self):
-        campos = ["Código de departamento:", "Tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        # Como o codDept é gerado automaticamente (por sequência, basta inserir o tipo):
+        campos = ["Tipo do departamento:"]
+        self.__view.criarCamposDeInsercao(1, campos)
         self.__view.criarBotaoDepartamento()
 
     # Esta função pega os dados do campo de inserção e insere na tabela de departamento do banco de dados:
     def inserirDepartamento(self):
-        dados = self.__view.getCamposDeInsercao()
+        dados = [-1]
+        dados = dados + (self.__view.getCamposDeInsercao())
         self.__view.criarCamposDeInsercao(0)
         newDepartamento = Departamento().fromTupla(dados)
         self.__departamentoDAO.insertDepartamento(newDepartamento)
+        text = f"Departamento adicionando com codDept = {self.__departamentoDAO.selectCurrCodDept()}!"
+        self.__view.setCampoDeExibicao(text)
 
     # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Veiculo":
     def setInserirVeiculo(self):
