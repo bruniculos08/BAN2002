@@ -75,19 +75,16 @@ create table veiculo(
 
 
 drop table componente_necessario;
+select * from componente_necessario;
 
 create table componente_necessario(
     cod_dept integer not null,
     nome_componente character varying(50) not null,
+    quantidade integer not null,
     primary key(cod_dept, nome_componente),
     FOREIGN KEY (cod_dept) references departamento (cod_dept),
     FOREIGN KEY (nome_componente) references componente (nome)
 );
-
-select * from departamento;
--- Supõe-se que os pedidos são unitários:
-
-drop table contem;
 
 create table contem(
     nome_componente character varying(50) not null,
@@ -98,8 +95,6 @@ create table contem(
 
 );
 
-drop table fornece;
-
 create table fornece(
     nome_componente character varying(50) not null,
     cnpj character varying(14) not null,
@@ -108,4 +103,34 @@ create table fornece(
     FOREIGN KEY (cnpj) references fornecedor (cnpj)
     
 );
+
+
+-- Gatilho para ajuste da table 'componente' em inserções:
+create or replace function addComponente() returns trigger as
+$$
+begin
+	if (select count(*) from componente_necessario cn where cn.nome_componente = new.nome_componente) > 0 then
+		update componente_necessario cn set cn.quantidade = cn.quantidade + 1 where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept;
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+
+-- Gatilhos para ajuste da tabela 'componente_necessario' em inserções:
+create or replace function addComponenteNecessario() returns trigger as
+$$
+begin
+	if (select count(*) from componente_necessario cn where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept) > 0 then
+		update componente_necessario cn set cn.quantidade = cn.quantidade + 1 where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept;
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 

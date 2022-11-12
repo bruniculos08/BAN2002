@@ -57,6 +57,14 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -159,17 +167,35 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class Componente():\n    def __init__(self):\n        self.__referencia = -1\n        self.__quantidadeMin = -1\n        self.__quantidade = -1\n        self.__setorDeArmazenamento = -1\n    def codDept(self ,codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"\n        self.__quantidadeMin = -1",
         "detail": "Data.Componente",
         "documentation": {}
     },
     {
-        "label": "DepartamentoDAO",
+        "label": "ComponenteDAO",
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
+        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
         "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "Componente",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"\n        self.__quantidadeMin = -1",
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteDAO",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
+        "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },
     {
