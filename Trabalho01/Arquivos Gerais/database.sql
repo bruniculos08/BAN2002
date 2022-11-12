@@ -1,4 +1,11 @@
-﻿create table departamento(
+﻿
+drop sequence dept_cod;
+create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
+select currval('dept_cod');
+select nextval('dept_cod');
+
+
+create table departamento(
     cod_dept integer not null,
     tipo character varying(50) not null,
     primary key(cod_dept)
@@ -22,6 +29,8 @@ create table fornecedor(
 );
 
 --drop table pedido cascade;
+create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
+
 create table pedido(
     id integer not null,
     valor numeric not null,
@@ -31,6 +40,8 @@ create table pedido(
     foreign key(cnpj) references fornecedor(cnpj),
     foreign key (cod_dept_compra) references departamento(cod_dept)
 );
+
+create sequence componente_referencia increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
 
 create table componente(
     referencia integer not null,

@@ -39,7 +39,7 @@ class DepartamentoDAO():
     
     def __init__(self):
         self.__sqlSelectAll = "select * from departamento"
-        self.__sqlSelectNewCodDept = "select cast(max(cod_dept) as int) + 1 from departamento"
+        self.__sqlSelectNewCodDept = "select nextval('dept_cod')"
         self.__sqlInsert = "insert into departamento values({}, '{}')"
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
@@ -53,7 +53,7 @@ class DepartamentoDAO():
             departamentos.append(Departamento().fromTupla(line))
         return departamentos
     
-    def selectNewCodDept(self) -> int:
+    def __selectNewCodDept(self) -> int:
         con = Connection()
         cursor = con.cursor()
         cursor.execute(self.__sqlSelectNewCodDept)
@@ -61,7 +61,7 @@ class DepartamentoDAO():
         return result[0]
     
     def insertDepartamento(self, departamento):
-        codDept = self.selectNewCodDept()
+        codDept = self.__selectNewCodDept()
         con = Connection()
         cursor = con.cursor()
         cursor.execute(self.__sqlInsert.format(codDept, departamento.getTipo()))
