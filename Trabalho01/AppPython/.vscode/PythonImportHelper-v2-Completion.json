@@ -25,6 +25,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -138,6 +154,33 @@
         "description": "Data.Departamento",
         "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select cast(max(cod_dept) as int) + 1 from departamento\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:",
         "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "EmissaoDeNota",
+        "kind": 6,
+        "importPath": "Data.EmissaoDeNota",
+        "description": "Data.EmissaoDeNota",
+        "peekOfCode": "class EmissaoDeNota():\n    __codNota = None\n    __codDeptoComum = None\n    __codDeptoCompra = None\n    def __init__(self):\n        self.__codNota = \"\"\n        self.__codDeptoComum = -1\n        self.__codDeptoCompra = -1\n    def codNota(self, codNota):\n        self.__codNota = codNota",
+        "detail": "Data.EmissaoDeNota",
+        "documentation": {}
+    },
+    {
+        "label": "EmissaoDeNotaDAO",
+        "kind": 6,
+        "importPath": "Data.EmissaoDeNota",
+        "description": "Data.EmissaoDeNota",
+        "peekOfCode": "class EmissaoDeNotaDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from emissao_de_nota\"\n        self.__sqlInsert = \"insert into emissao_de_nota values('{}', {}, {})\"\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "detail": "Data.EmissaoDeNota",
+        "documentation": {}
+    },
+    {
+        "label": "PedidoDeCompra",
+        "kind": 6,
+        "importPath": "Data.PedidoDeCompra",
+        "description": "Data.PedidoDeCompra",
+        "peekOfCode": "class PedidoDeCompra():\n    __id = None\n    __codNota = None\n    __cnpj = None\n    __valor = None\n    def __init__(self):\n        self.__id = -1\n        self.__cod_nota = \"\"\n        self.__cnpj = \"\"\n        self.__valor = 0",
+        "detail": "Data.PedidoDeCompra",
         "documentation": {}
     },
     {

@@ -4,17 +4,18 @@
     primary key(cod_dept)
 );
 
-drop view numpedidos;
-drop table emissao_de_nota;
+select * from departamento;
+--drop view numpedidos;
+--drop table emissao_de_nota; 
 
-create table Emissao_de_nota(
-    cod_nota varchar(44),
-    cod_depto_comum integer not null,
-    cod_depto_compra Integer not null,
-    primary key(cod_nota),
-    FOREIGN KEY (cod_depto_comum ) references departamento (cod_dept),
-    FOREIGN KEY (cod_depto_compra) references departamento (cod_dept)
-);
+--create table Nota(
+--    cod_nota varchar(44),
+--    cnpj character varying(14) not null,
+--    id_pedido integer not null,
+--    primary key (cod_nota),
+--    foreign key(cnpj) references fornecedor (cnpj),
+--    foreign key (id_pedido) references pedido
+--);
 
 create table fornecedor(
     cnpj character varying(14) not null,
@@ -22,14 +23,15 @@ create table fornecedor(
     primary key(cnpj)
 );
 
-
-create table pedido_de_compra(
+--drop table pedido cascade;
+create table pedido(
     id integer not null,
-    cod_nota integer not null,
-    cnpj character varying(14) not null,
     valor numeric not null,
+    cnpj character varying(14) not null,
+    cod_dept_compra integer not null,
     primary key (id),
-    FOREIGN key(cnpj) references fornecedor (cnpj)
+    foreign key(cnpj) references fornecedor(cnpj),
+    foreign key (cod_dept_compra) references departamento(cod_dept)
 );
 
 create table componente(
@@ -39,7 +41,8 @@ create table componente(
     quant integer not null,
     setor_armazenamento integer not null,
     cnpj_principal character varying(14) not null,
-    primary key(referencia)
+    primary key(referencia),
+    foreign key(cnpj_principal) references fornecedor(cnpj)
 );
 
 create table veiculo(
@@ -52,6 +55,11 @@ create table veiculo(
     FOREIGN KEY (cod_dept) references departamento (cod_dept)
 );
 
+-- Quando é adicionado um veículo na lista de veículos produzidos supões se que o departamento responsável pela fabricação adicione as peças para fabricação de...
+-- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
+-- ... haverão mais linhas.
+
+
 create table esta_na_lista(
     cod_dept integer not null,
     referencia integer not null,
@@ -61,12 +69,14 @@ create table esta_na_lista(
 
 );
 
+-- Supõe-se que os pedidos são unitários:
+
 create table contem(
     referencia integer not null,
     id_pedido integer not null,
     primary key(referencia, id_pedido),
     FOREIGN KEY (referencia) references componente (referencia),
-    FOREIGN KEY (id_pedido) references pedido_de_compra (id)
+    FOREIGN KEY (id_pedido) references pedido (id)
 
 );
 

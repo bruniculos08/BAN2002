@@ -121,7 +121,7 @@ class View():
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
         return
 
-    def criarCamposDeInsercao(self, quantidade = 0):
+    def criarCamposDeInsercao(self, quantidade = 0, campos = []):
         if(quantidade == 0):
             if self.__fieldBoxFrame != None:
                 self.__fieldBoxFrame.destroy()
@@ -135,14 +135,13 @@ class View():
 
         # Adicionando campos de entradas:
         for i in range(0, 2*quantidade, 2):
-            fieldBoxLabel = Label(self.__fieldBoxFrame, text = f"Campo {int(i/2)+1}:", height = 2, width = 10, bg = 'purple', font =("Courier", 10))
+            fieldBoxLabel = Label(self.__fieldBoxFrame, text = f"{campos[int(i/2)]}", height = 2, width = 45, bg = 'purple', font =("Courier", 10))
             fieldBoxLabel.pack()
             fieldBoxLabel.place(anchor="n", x=200, y=23*i + 0.1)
 
             fieldBox = Entry(self.__fieldBoxFrame, width=50, borderwidth=2, bg = 'white', relief=SOLID)
             fieldBox.place(anchor="n", x=200, y=23*(i+1.1) + 0.1)
             self.__fieldBoxes.append(fieldBox)
-        return
     
     def criarBotaoDepartamento(self):
         # Criando botão de envio dos dados:
@@ -150,7 +149,13 @@ class View():
         enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : self.__controller.inserirDepartamento())
         enviar.pack()
         enviar.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35)
-        pass
+
+    def criarBotaoVeiculo(self):
+        # Criando botão de envio dos dados:
+        self.__tela.update()
+        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : self.__controller.inserirVeiculo())
+        enviar.pack()
+        enviar.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35) 
     
     def getCamposDeInsercao(self):
         if self.__fieldBoxes == None:
@@ -165,7 +170,6 @@ class View():
         self.__fieldBoxFrame.destroy()
         for field in self.__fieldBoxes:
             field.destroy()
-        return
 
     # Fechar campo de inserção:
     def setOffCampoDeInsercao(self):
@@ -197,4 +201,3 @@ class View():
         self.__textBox.delete('1.0', END)
         self.__textBox.insert(END, string)
         self.__textBox.config(state=DISABLED)
-        return    
