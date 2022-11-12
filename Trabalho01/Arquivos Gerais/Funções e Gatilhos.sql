@@ -1,7 +1,7 @@
 ﻿select * from veiculo;
 select * from departamento;
-select * from emissao_de_nota;
-select * from pedido_de_compra;
+select * from Nota;
+select * from pedido;
 
 insert into departamento values(1, 'Carros Azuis');
 insert into departamento values(2, 'Carros Amarelos');
@@ -89,7 +89,7 @@ begin
 end;
 $$ language plpgsql;
 
--- Gatilho para verificar VIN antes de inserir ou de fazer update na tabela veículo:
+-- Gatilho para verificar VIN (chassi) antes de inserir ou de fazer update na tabela veículo:
 
 create or replace function validarChassiGatilho() returns trigger as
 $$
@@ -137,7 +137,7 @@ select validarNota('13181017921427000125650010000000309887251170');
 select validarNota('42221039766179000128650200000524051005241115');
 
 
--- Gatilho para verificar nota fiscal antes de ser inserida em emissao de nota:
+-- Gatilho para verificar nota fiscal antes de ser inserida em nota_fiscal:
 
 create or replace function verificarNota() returns trigger as
 $$
@@ -151,11 +151,11 @@ end;
 $$
 language plpgsql;
 
-create trigger verificarNotaGatilho before insert or update on emissao_de_nota for each row execute procedure verificarNota();
+create trigger verificarNotaGatilho before insert or update on nota_fiscal for each row execute procedure verificarNota();
+select * from nota_fiscal;
+insert into nota_fiscal values('13181017921427000125650010000000309887251170', 1);
 
-insert into emissao_de_nota values('13181017921427000125650010000000309887251170', 1, 7);
-
--- Gatilho para não permitir que um departamento de compra produza veículo:
+-- Gatilho para não permitir que um departamento de compra personalize veículo:
 update veiculo set cod_dept = 7;
 
 create or replace function verificaDepartamentoDeCompra() returns trigger as
@@ -172,8 +172,9 @@ language plpgsql;
 
 create trigger verificaDepartamentoDeCompraGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
 
--- Gatilho para não permitir que um departamento que produz veiculo atue como departamento de compra:
-update emissao_de_nota set cod_depto_compra = 2;
+-- Gatilho para não permitir que um departamento que personalização veiculo atue como departamento de compra:
+update pedido set cod_depto_compra = 2;
+select * from pedido;
 
 create or replace function verificaDepartamentoDeProducao() returns trigger as
 $$
@@ -187,9 +188,9 @@ end;
 $$
 language plpgsql;
 
-create trigger verificaDepartamentoDeProducaoGatilho before insert or update on emissao_de_nota for each row execute procedure verificaDepartamentoDeProducao();
+create trigger verificaDepartamentoDeProducaoGatilho before insert or update on pedido for each row execute procedure verificaDepartamentoDeProducao();
 
--- View para o número de veículos produzidos por departamento:
+-- View para o número de veículos personalizados por departamento:
 
 create view NumCarros(dept, NumOfCars) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
 create view NumCarros(dept, NumOfCars) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
@@ -197,9 +198,10 @@ create view NumCarros(dept, NumOfCars) as select d.cod_dept, count(v.chassi) fro
 drop view NumCarros;
 select * from NumCarros;
 
--- View para o número de pedidos de compra por departamento:
+-- View para o número de pedidos de compra por departamento(de compra):
+select * from pedido;
 
-create view NumPedidos(dept, NumOfPedidos) as select d.cod_dept, count(e.cod_nota) from emissao_de_nota e right join departamento d on d.cod_dept = e.cod_depto_comum group by d.cod_dept;
+create view NumPedidos(dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
 
 drop view NumPedidos;
 select * from NumPedidos;

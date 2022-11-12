@@ -8,14 +8,12 @@ select * from departamento;
 --drop view numpedidos;
 --drop table emissao_de_nota; 
 
---create table Nota(
---    cod_nota varchar(44),
---    cnpj character varying(14) not null,
---    id_pedido integer not null,
---    primary key (cod_nota),
---    foreign key(cnpj) references fornecedor (cnpj),
---    foreign key (id_pedido) references pedido
---);
+create table Nota_fiscal(
+    cod_nota varchar(44),
+    id_pedido integer not null,
+    primary key (cod_nota),
+    foreign key (id_pedido) references pedido
+);
 
 create table fornecedor(
     cnpj character varying(14) not null,
