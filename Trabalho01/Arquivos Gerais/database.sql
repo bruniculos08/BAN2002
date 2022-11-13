@@ -73,9 +73,11 @@ create table veiculo(
 -- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
 -- ... haverão mais linhas.
 
-
 drop table componente_necessario;
+select * from departamento;
 select * from componente_necessario;
+insert into componente_necessario values(1, 'motor do batmóvel', 1); 
+
 
 create table componente_necessario(
     cod_dept integer not null,
@@ -104,13 +106,13 @@ create table fornece(
     
 );
 
-
 -- Gatilho para ajuste da table 'componente' em inserções:
 create or replace function addComponente() returns trigger as
 $$
 begin
-	if (select count(*) from componente_necessario cn where cn.nome_componente = new.nome_componente) > 0 then
-		update componente_necessario cn set cn.quantidade = cn.quantidade + 1 where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept;
+	if (select count(*) from componente cn where nome = new.nome) > 0 then
+		update componente cn set quantidade = quantidade + 1, minimo_quant = max(minimo_quant, new.minimo_quant) where nome = new.nome;
+		
 		return old;
 	end if;
 	return new;
@@ -118,13 +120,26 @@ end;
 $$
 language plpgsql;
 
+create trigger addComponeteGatilho before insert on componente for each row execute procedure addComponente();
 
--- Gatilhos para ajuste da tabela 'componente_necessario' em inserções:
+-- Função auxiliar para a função acima:
+create or replace function max(num1 numeric, num2 numeric) returns numeric as
+$$
+begin
+	if num1 >= num2 then
+		return num1;
+	end if;
+	return num2;
+end;
+$$
+language plpgsql;
+
+-- Gatilho para ajuste da tabela 'componente_necessario' em inserções:
 create or replace function addComponenteNecessario() returns trigger as
 $$
 begin
-	if (select count(*) from componente_necessario cn where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept) > 0 then
-		update componente_necessario cn set cn.quantidade = cn.quantidade + 1 where cn.nome_componente = new.nome_componente and cn.codDept = new.codDept;
+	if (select count(*) from componente_necessario where nome_componente = new.nome_componente and cod_dept = new.cod_dept) > 0 then
+		update componente_necessario set quantidade = quantidade + new.quantidade where nome_componente = new.nome_componente and cod_dept = new.cod_dept;
 		return old;
 	end if;
 	return new;
@@ -134,3 +149,22 @@ language plpgsql;
 
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
+-- Gatilho para manter a tabela 'componente' atualizada:
+
+select * from pedido;
+select * from componente_necessario;
+
+create or replace function atualizaComponente() returns trigger as
+$$
+declare numeroComponente int default 0;
+declare minComponente int default 0;
+declare cnpjPrincipal varchar(14);
+begin
+	select quantidade from componente where nome = new.nome_componente into numeroComponente;
+	select 
+	if numeroComponente 
+end;
+$$
+language plpgsql;
+
+create trigger atualizaComponenteGatilho after insert or update on componente_necessario execute procedure atualizaComponente();
