@@ -1,19 +1,13 @@
 from Model import *
 
-class Componente():
+class ComponenteNecessario():
 
     __nome = None
-    __tipo = None
-    __quantidadeMin = None
-    __quantidade = None
-    __cnpjPrincipal = None
+    __codDept = None
 
     def __init__(self):
         self.__nome = ""
-        self.__tipo = ""
-        self.__quantidadeMin = -1
-        self.__quantidade = -1
-        self.__cnpjPrincipal = ""
+        self.__codDept = ""
 
     def nome(self, nome):
         self.__nome = nome
@@ -22,56 +16,31 @@ class Componente():
     def getNome(self):
         return self.__nome
     
-    def tipo(self, tipo):
-        self.__tipo = tipo
-        return self
-
-    def getTipo(self):
-        return self.__tipo
-    
-    def quatidadeMin(self, quatidadeMin):
-        self.__quantidadeMin = quatidadeMin
+    def codDept(self ,codDept):
+        self.__codDept = codDept
         return self
     
-    def getQuatidadeMin(self):
-        return self.__quantidadeMin
-    
-    def quantidade(self, quantidade):
-        self.__quantidade = quantidade
-        return self
-    
-    def getQuantidade(self):
-        return self.__quantidade
-    
-    def cnpjPrincipal(self, cnpjPrincipal):
-        self.__cnpjPrincipal = cnpjPrincipal
-        return self
-    
-    def getCnpjPrincipal(self):
-        return self.__cnpjPrincipal
+    def getCodDept(self):
+        return self.__codDept
     
     def fromTupla(self, tupla):
         self.__nome = tupla[0]
-        self.__tipo = tupla[1]
-        self.__quantidadeMin = tupla[2]
-        self.__quantidade = tupla[3]
-        self.__cnpjPrincipal = tupla[4]
+        self.__codDept = tupla[1]
         return self
     
     def __repr__(self):
-        return u'{}:{}:{}:{}:{}'.format(self.__nome, self.__tipo, self.__quantidadeMin, self.__quantidade, self.__cnpjPrincipal)
+        return u'{}:{}'.format(self.__nome, self.__codDept)
     
-class ComponenteDAO():
+class ComponenteNecessarioDAO():
 
     __sqlSelectAll = None
-    __sqlSelectNewCodDept = None
     __sqlInsert = None
     
     def __init__(self):
-        self.__sqlSelectAll = "select * from componente"
-        self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, '{}')"
+        self.__sqlSelectAll = "select * from componente_necessario"
+        self.__sqlInsert = "insert into componente_necessario values('{}', {})"
 
-    # Retorna uma lista com um objeto de cada departamento do banco de dados:
+    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:
     def selectAll(self) -> list:
         con = Connection()
         cursor = con.cursor()
@@ -79,12 +48,11 @@ class ComponenteDAO():
         result = cursor.fetchall()
         componentes = []
         for line in result:
-            componentes.append(Componente().fromTupla(line))
+            componentes.append(ComponenteNecessario().fromTupla(line))
         return componentes
     
-    def insertComponente(self, componente):
+    def insertComponenteNecessario(self, componenteNecessario):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(componente.getNome(), componente.getTipo(), componente.getQuatidadeMin(),
-            componente.getQuantidade(), componente.getCnpjPrincipal()))
+        cursor.execute(self.__sqlInsert.format(componenteNecessario.getNome(), componenteNecessario.getCodDept()))
         con.commit()

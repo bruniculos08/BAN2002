@@ -71,7 +71,7 @@ class ComponenteDAO():
         self.__sqlSelectAll = "select * from componente"
         self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, '{}')"
 
-    # Retorna uma lista com um objeto de cada departamento do banco de dados:
+    # Retorna uma lista com um objeto de cada componente do banco de dados:
     def selectAll(self) -> list:
         con = Connection()
         cursor = con.cursor()

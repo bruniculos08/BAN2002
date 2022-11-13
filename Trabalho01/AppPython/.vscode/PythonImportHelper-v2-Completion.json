@@ -176,25 +176,25 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
+        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n    # Retorna uma lista com um objeto de cada componente do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
         "detail": "Data.Componente",
         "documentation": {}
     },
     {
-        "label": "Componente",
+        "label": "ComponenteNecessario",
         "kind": 6,
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
-        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"\n        self.__quantidadeMin = -1",
+        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = \"\"\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
         "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },
     {
-        "label": "ComponenteDAO",
+        "label": "ComponenteNecessarioDAO",
         "kind": 6,
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
+        "peekOfCode": "class ComponenteNecessarioDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', {})\"\n    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
         "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },

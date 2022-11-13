@@ -153,18 +153,18 @@ create trigger addComponenteNecessarioGatilho before insert on componente_necess
 
 select * from pedido;
 select * from componente_necessario;
+select * from componente;
 
-create or replace function atualizaComponente() returns trigger as
-$$
-declare numeroComponente int default 0;
-declare minComponente int default 0;
-declare cnpjPrincipal varchar(14);
-begin
-	select quantidade from componente where nome = new.nome_componente into numeroComponente;
-	select 
-	if numeroComponente 
-end;
-$$
-language plpgsql;
+--create or replace function atualizaComponente() returns trigger as
+--$$
+--declare numeroComponente int default 0;
+--declare minComponente int default 0;
+--begin
+--	select quantidade from componente where nome = new.nome_componente into numeroComponente;
+--	select minimo_quant from componente where 
+--	if numeroComponente 
+--end;
+--$$
+--language plpgsql;
 
-create trigger atualizaComponenteGatilho after insert or update on componente_necessario execute procedure atualizaComponente();
+--create trigger atualizaComponenteGatilho after insert or update on componente_necessario execute procedure atualizaComponente();
