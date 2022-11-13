@@ -65,6 +65,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -185,7 +201,7 @@
         "kind": 6,
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = \"\"\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
         "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },
@@ -196,6 +212,24 @@
         "description": "Data.ComponenteNecessario",
         "peekOfCode": "class ComponenteNecessarioDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', {})\"\n    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
         "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "Contem",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "ContemDAO",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class ContemDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n    # Retorna uma lista com um objeto de cada contem do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "detail": "Data.Contem",
         "documentation": {}
     },
     {
@@ -212,8 +246,26 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currtval('dept_cod')\"",
         "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "Fornece",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class Fornece():\n    __nome = None\n    __idPedido = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "ForneceDAO",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class ForneceDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornce values('{}', {})\"\n    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "detail": "Data.Fornece",
         "documentation": {}
     },
     {

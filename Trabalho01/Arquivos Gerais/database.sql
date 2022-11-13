@@ -88,6 +88,7 @@ create table componente_necessario(
     FOREIGN KEY (nome_componente) references componente (nome)
 );
 
+select * from contem;
 create table contem(
     nome_componente character varying(50) not null,
     id_pedido integer not null,
@@ -105,6 +106,9 @@ create table fornece(
     FOREIGN KEY (cnpj) references fornecedor (cnpj)
     
 );
+
+
+-- Gatilhos e funções  a partir desta linha:
 
 -- Gatilho para ajuste da table 'componente' em inserções:
 create or replace function addComponente() returns trigger as

@@ -1,13 +1,13 @@
 from Model import *
 
-class ComponenteNecessario():
+class Fornece():
 
     __nome = None
-    __codDept = None
+    __idPedido = None
 
     def __init__(self):
         self.__nome = ""
-        self.__codDept = -1
+        self.__idPedido = -1
 
     def nome(self, nome):
         self.__nome = nome
@@ -16,29 +16,29 @@ class ComponenteNecessario():
     def getNome(self):
         return self.__nome
     
-    def codDept(self ,codDept):
-        self.__codDept = codDept
+    def idPedido(self ,idPedido):
+        self.__idPedido = idPedido
         return self
     
-    def getCodDept(self):
-        return self.__codDept
+    def getIdPedido(self):
+        return self.__idPedido
     
     def fromTupla(self, tupla):
         self.__nome = tupla[0]
-        self.__codDept = tupla[1]
+        self.__idPedido = tupla[1]
         return self
     
     def __repr__(self):
-        return u'{}:{}'.format(self.__nome, self.__codDept)
+        return u'{}:{}'.format(self.__nome, self.__idPedido)
     
-class ComponenteNecessarioDAO():
+class ForneceDAO():
 
     __sqlSelectAll = None
     __sqlInsert = None
     
     def __init__(self):
-        self.__sqlSelectAll = "select * from componente_necessario"
-        self.__sqlInsert = "insert into componente_necessario values('{}', {})"
+        self.__sqlSelectAll = "select * from fornece"
+        self.__sqlInsert = "insert into fornce values('{}', {})"
 
     # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:
     def selectAll(self) -> list:
@@ -46,13 +46,13 @@ class ComponenteNecessarioDAO():
         cursor = con.cursor()
         cursor.execute(self.__sqlSelectAll)
         result = cursor.fetchall()
-        componentesNecessarios = []
+        fornecem = []
         for line in result:
-            componentesNecessarios.append(ComponenteNecessario().fromTupla(line))
-        return componentesNecessarios
+            fornecem.append(Fornece().fromTupla(line))
+        return fornecem
     
-    def insertComponenteNecessario(self, componenteNecessario):
+    def insertComponenteNecessario(self, fornece):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(componenteNecessario.getNome(), componenteNecessario.getCodDept()))
+        cursor.execute(self.__sqlInsert.format(fornece.getNome(), fornece.getIdPedido()))
         con.commit()
