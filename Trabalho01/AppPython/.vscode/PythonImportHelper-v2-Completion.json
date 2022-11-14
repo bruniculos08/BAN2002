@@ -256,7 +256,7 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        self.__sqlDelete = \"delete from \"\n    # Retorna uma lista com um objeto de cada componente do banco de dados:\n    def selectAll(self) -> list:",
+        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        self.__sqlDelete = \"delete from componente\"\n    # Retorna uma lista com um objeto de cada componente do banco de dados:\n    def selectAll(self) -> list:",
         "detail": "Data.Componente",
         "documentation": {}
     },

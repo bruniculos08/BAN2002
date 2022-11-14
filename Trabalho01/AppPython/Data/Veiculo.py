@@ -90,3 +90,21 @@ class VeiculoDAO():
             veiculo.getArCondicionado(), veiculo.getCodDept()))
         con.commit()
 
+    def delete(self, campos = None, dados = None):
+        con = Connection()
+        cursor = con.cursor()
+
+        # Se não há condicionais se deletam todos as linhas:
+        if campos is None:
+            cursor.execute(self.__sqlDelete)
+
+        # Construindo condicionais:
+        string = ""
+        for campo, dado in zip(campos, dados):
+            if dado == "":
+                continue
+            string = string + " " + campo + " = " + dado
+            if campo != campos[-1]:
+                string = string + ","
+        
+        cursor.execute(self.__sqlDelete + " " + "where" + string)
