@@ -22,7 +22,7 @@ class Controller():
     __fornecedorDAO = None
     __pedidoDAO = None
     __componenteDAO = None
-    __componeteNecessarioDAO = None
+    __componenteNecessarioDAO = None
     __contemDAO = None
     __notaFiscalDAO = None
     __forneceDAO = None
@@ -37,7 +37,7 @@ class Controller():
         self.__fornecedorDAO = FornecedorDAO()
         self.__pedidoDAO = PedidoDAO()
         self.__componenteDAO = ComponenteDAO()
-        self.__componeteNecessarioDAO = ComponenteNecessarioDAO()
+        self.__componenteNecessarioDAO = ComponenteNecessarioDAO()
         self.__contemDAO = ContemDAO()
         self.__notaFiscalDAO = NotaFiscalDAO()
         self.__forneceDAO = ForneceDAO()
@@ -67,6 +67,23 @@ class Controller():
             self.__model.rollback()
             self.__model.commit()
         self.__noticesSizes = len(notices)
+
+    def printQuery(self, query, campos):
+        # Limpando o campo de texto:
+        self.__view.clearCampoDeExibicao()
+
+        # Imprimindo o nome dos atributos no campo de texto:
+        self.__view.addCampoDeExibicao("Atributos: ")
+        for word in campos[0:-1]:
+            self.__view.addCampoDeExibicao(word + ', ')
+        self.__view.addCampoDeExibicao(campos[-1] + '.\n\n')
+
+        # Imprimindo as linhas resultantes da query:
+        for item in query:
+            row = list(map(str, item.__repr__().split(":")))
+            for word in row[0:-1]:
+                self.__view.addCampoDeExibicao(word + '\t|\t')
+            self.__view.addCampoDeExibicao(row[-1] + '\n')
 
     def clearAndGetData(self):
         dados = self.__view.getCamposDeInsercao()
@@ -153,8 +170,13 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verComponente(self):
+        campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
+        text = self.__componenteDAO.selectAll()
+        self.printQuery(text, campos)
             
-    def setInserirComponentNecessario(self):
+    def setInserirComponenteNecessario(self):
         campos = ["Código do Departamento:", "Nome do Componente:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(3, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponenteNecessario())
@@ -164,10 +186,14 @@ class Controller():
         dados = self.clearAndGetData()
         newComponenteNecessario = ComponenteNecessario().fromTupla(dados)
         try:
-            self.__componeteNecessarioDAO.insertComponenteNecessario(newComponenteNecessario)
+            self.__componenteNecessarioDAO.insertComponenteNecessario(newComponenteNecessario)
             self.printSucess()
         except:
             self.printError()
+
+    def verComponenteNecessario(self):
+        text = self.__componenteNecessarioDAO.selectAll()
+        self.printQuery(text)
             
     def setInserirContem(self):
         campos = ["Nome do Componente:", "Id do pedido:"]
@@ -183,6 +209,10 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verContem(self):
+        text = self.__contemDAO.selectAll()
+        self.printQuery(text)
             
     def setInserirNotaFiscal(self):
         campos = ["Código da nota:", "Id do pedido:"]
@@ -198,6 +228,10 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verNotasFiscais(self):
+        text = self.__notaFiscalDAO.selectAll()
+        self.printQuery(text)
             
     def setInserirFornece(self):
         campos = ["Nome do Componente:", "CNPJ:"]

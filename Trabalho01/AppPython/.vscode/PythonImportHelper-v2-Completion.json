@@ -409,7 +409,7 @@
         "kind": 6,
         "importPath": "Controller",
         "description": "Controller",
-        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componeteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componenteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
         "detail": "Controller",
         "documentation": {}
     },
