@@ -51,8 +51,8 @@ class ContemDAO():
             contemLista.append(Contem().fromTupla(line))
         return contemLista
     
-    def insertComponenteNecessario(self, componenteNecessario):
+    def insertContem(self, contem):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(componenteNecessario.getNome(), componenteNecessario.getIdPedido()))
+        cursor.execute(self.__sqlInsert.format(contem.getNome(), contem.getIdPedido()))
         con.commit()    

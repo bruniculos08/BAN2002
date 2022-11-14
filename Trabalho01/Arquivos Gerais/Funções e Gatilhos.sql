@@ -133,6 +133,9 @@ end;
 $$
 language plpgsql;
 
+select * from pedido;
+select * from nota_fiscal;
+delete from nota_fiscal;
 select validarNota('13181017921427000125650010000000309887251170');
 select validarNota('42221039766179000128650200000524051005241115');
 
@@ -152,16 +155,13 @@ $$
 language plpgsql;
 
 create trigger verificarNotaGatilho before insert or update on nota_fiscal for each row execute procedure verificarNota();
-select * from nota_fiscal;
-insert into nota_fiscal values('13181017921427000125650010000000309887251170', 1);
 
 -- Gatilho para não permitir que um departamento de compra personalize veículo:
-update veiculo set cod_dept = 7;
 
 create or replace function verificaDepartamentoDeCompra() returns trigger as
 $$
 begin
-	if(select count(1) from emissao_de_nota e where e.cod_depto_compra = new.cod_dept) > 0 then
+	if(select count(1) from pedido p where p.cod_dept_compra = new.cod_dept) > 0 then
 		raise notice 'Um departamento de compras não pode produzir carros!';
 		return old;
 	end if;
@@ -179,7 +179,7 @@ select * from pedido;
 create or replace function verificaDepartamentoDeProducao() returns trigger as
 $$
 begin
-	if(select count(1) from veiculo where cod_dept = new.cod_depto_compra) > 0 then
+	if(select count(1) from veiculo where cod_dept = new.cod_dept_compra) > 0 then
 		raise notice 'Um departamento de produção não pode atuar como departamento de compras!';
 		return old;
 	end if;

@@ -52,7 +52,7 @@ class FornecedorDAO():
             fornecedores.append(Fornecedor().fromTupla(line))
         return fornecedores
     
-    def insertDepartamento(self, fornecedor):
+    def insertFornecedor(self, fornecedor):
         con = Connection()
         cursor = con.cursor()
         cursor.execute(self.__sqlInsert.format(fornecedor.getCnpj(), fornecedor.getNome()))

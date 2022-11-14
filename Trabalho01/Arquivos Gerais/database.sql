@@ -1,6 +1,6 @@
 ﻿
 drop sequence dept_cod;
-create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 1 cache 10;
+create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 32 cache 1;
 select currval('dept_cod');
 select nextval('dept_cod');
 
@@ -14,9 +14,8 @@ create table departamento(
     primary key(cod_dept)
 );
 
-select * from departamento;
---drop view numpedidos;
---drop table emissao_de_nota; 
+select * from pedido;
+select * from fornece;
 
 create table Nota_fiscal(
     cod_nota varchar(44),
@@ -31,9 +30,7 @@ create table fornecedor(
     primary key(cnpj)
 );
 
---drop table pedido cascade;
-create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
-
+create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 1;
 create table pedido(
     id integer not null,
     valor numeric not null,
@@ -43,11 +40,6 @@ create table pedido(
     foreign key(cnpj) references fornecedor(cnpj),
     foreign key (cod_dept_compra) references departamento(cod_dept)
 );
-
-create sequence componente_referencia increment by 1 maxvalue 99999999999999 minvalue 1 cache 20;
-
-drop table componente cascade;
-select * from componente;
 
 create table componente(
     nome character varying(50) not null,
@@ -97,6 +89,8 @@ create table contem(
     FOREIGN KEY (id_pedido) references pedido (id)
 
 );
+
+select * from departamento;
 
 create table fornece(
     nome_componente character varying(50) not null,

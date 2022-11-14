@@ -81,6 +81,14 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -109,6 +117,62 @@
         "description": "Data.Veiculo",
         "isExtraImport": true,
         "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "isExtraImport": true,
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "isExtraImport": true,
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "isExtraImport": true,
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "isExtraImport": true,
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "isExtraImport": true,
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "isExtraImport": true,
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "isExtraImport": true,
+        "detail": "Data.Fornece",
         "documentation": {}
     },
     {
@@ -246,7 +310,7 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currtval('dept_cod')\"",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
         "detail": "Data.Departamento",
         "documentation": {}
     },
@@ -345,7 +409,7 @@
         "kind": 6,
         "importPath": "Controller",
         "description": "Controller",
-        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    def __init__(self):\n        self.__view = None\n        self.__departamentoDAO = DepartamentoDAO()\n        self.__veiculoDAO = VeiculoDAO()\n    def view(self, view):\n        self.__view = view",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componeteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
         "detail": "Controller",
         "documentation": {}
     },

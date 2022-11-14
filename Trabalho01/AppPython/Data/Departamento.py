@@ -42,7 +42,7 @@ class DepartamentoDAO():
         self.__sqlSelectAll = "select * from departamento"
         self.__sqlSelectNewCodDept = "select nextval('dept_cod')"
         self.__sqlInsert = "insert into departamento values({}, '{}')"
-        self.__selectCurrCodDept = "select currtval('dept_cod')"
+        self.__selectCurrCodDept = "select currval('dept_cod')"
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
     def selectAll(self) -> list:
@@ -74,4 +74,4 @@ class DepartamentoDAO():
         con = Connection()
         cursor = con.cursor()
         cursor.execute(self.__sqlInsert.format(codDept, departamento.getTipo()))
-        con.commit()    
+        con.commit()

@@ -38,4 +38,10 @@ class Connection():
         self.__connection.commit()
 
     def close(self):
-        return self.__connection.close()        
+        return self.__connection.close()
+    
+    def notices(self):
+        return self.__connection.notices
+    
+    def rollback(self):
+        self.__connection.cursor().execute("rollback")

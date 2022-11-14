@@ -23,9 +23,9 @@ class View():
     def __init__(self):
         self.__controller = Controller().view(self)
         self.colocarImagem()
+        self.createTextBox()
         self.criarBotoesDeAba()
         self.criarCamposDeInsercao()
-        self.createTextBox()
         self.setCampoDeExibicao("Texto...")
         self.ajustarTela()
         return
@@ -33,6 +33,9 @@ class View():
     def run(self):
         self.__tela.mainloop()
         return
+
+    def getFieldBoxFrame(self):
+        return self.__fieldBoxFrame
 
     def ajustarTela(self):
         self.__tela.geometry("1280x720")
@@ -72,28 +75,40 @@ class View():
         listaDeBotoesDepartamento.add_command(label = "Adicionar departamento", command = lambda : self.__controller.setInserirDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Adicionar comprador", command = lambda : botaoFuncionando("adicionar departamento de compras"))
         
+        # Botão para opções relacionadas a fornecedores:
+        listaDeBotoesFornecedor = Menu(self.__tela, tearoff=0)
+        listaDeBotoesFornecedor.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirFornecedor())
+        listaDeBotoesFornecedor.add_command(label = "Remover", command = lambda : botaoFuncionando("remover componente"))
+
         # Botão para opções relacionadas à veículos:
         listaDeBotoesVeiculo = Menu(self.__tela, tearoff=0)
-        listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : botaoFuncionando("adicionar veículo"))
+        listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : botaoFuncionando("remover veículo"))
         
         # Botão para opções relacionadas à pedidos:
         listaDeBotoesPedido = Menu(self.__tela, tearoff=0)
-        listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : botaoFuncionando("adicionar pedido de compra"))
+        listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirPedido())
         listaDeBotoesPedido.add_command(label = "Ver lista", command = lambda : botaoFuncionando("ver lista de pedidos"))
         listaDeBotoesPedido.add_command(label = "Remover", command = lambda : botaoFuncionando("Remover pedido de compra"))
 
         # Botão para opções relacionadas à componentes:
         listaDeBotoesComponente = Menu(self.__tela, tearoff=0)
-        listaDeBotoesComponente.add_command(label = "Adicionar", command = lambda : botaoFuncionando("adicionar componente"))
+        listaDeBotoesComponente.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirComponente())
         listaDeBotoesComponente.add_command(label = "Remover", command = lambda : botaoFuncionando("remover componente"))
-        
+
+        # Botão para opções relacionadas à nota fiscal:
+        listaDeBotoesNotaFiscal = Menu(self.__tela, tearoff=0)
+        listaDeBotoesNotaFiscal.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirNotaFiscal())
+        listaDeBotoesNotaFiscal.add_command(label = "Remover", command = lambda : botaoFuncionando("remover componente"))
+
         # Criando barra superior de botões de aba:
         listaDelistaDeBotoes = Menu(self.__tela)
         listaDelistaDeBotoes.add_cascade(label = "Departamentos", menu = listaDeBotoesDepartamento)
+        listaDelistaDeBotoes.add_cascade(label = "Fornecedores", menu = listaDeBotoesFornecedor)
         listaDelistaDeBotoes.add_cascade(label = "Veículos", menu = listaDeBotoesVeiculo)
         listaDelistaDeBotoes.add_cascade(label = "Pedidos", menu = listaDeBotoesPedido)
         listaDelistaDeBotoes.add_cascade(label = "Componentes", menu = listaDeBotoesComponente)
+        listaDelistaDeBotoes.add_cascade(label = "Nota Fiscal", menu = listaDeBotoesNotaFiscal)
 
         # Adicionando a lista de listas de botões criados à tela:
         self.__tela.config(menu = listaDelistaDeBotoes)
@@ -119,12 +134,14 @@ class View():
         # Criando a fieldBox:
         self.fieldBox = Entry(fieldBoxFrame, width=61, borderwidth=2, bg = 'white', relief=SOLID)
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
-        return
 
     def criarCamposDeInsercao(self, quantidade = 0, campos = []):
-        if(quantidade == 0):
-            if self.__fieldBoxFrame != None:
-                self.__fieldBoxFrame.destroy()
+        self.setCampoDeExibicao(" ")
+
+        if self.__fieldBoxFrame != None: 
+            self.__fieldBoxFrame.destroy()
+
+        if quantidade == 0:
             return
         
         # Ajustando o frame onde serão colocadas os campos de entrada:
@@ -142,20 +159,12 @@ class View():
             fieldBox = Entry(self.__fieldBoxFrame, width=50, borderwidth=2, bg = 'white', relief=SOLID)
             fieldBox.place(anchor="n", x=200, y=23*(i+1.1) + 0.1)
             self.__fieldBoxes.append(fieldBox)
-    
-    def criarBotaoDepartamento(self):
-        # Criando botão de envio dos dados:
-        self.__tela.update()
-        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : self.__controller.inserirDepartamento())
-        enviar.pack()
-        enviar.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35)
 
-    def criarBotaoVeiculo(self):
+    def criarBotao(self, botao):
         # Criando botão de envio dos dados:
         self.__tela.update()
-        enviar = Button(self.__fieldBoxFrame, text = "Enviar dados", state = 'normal', command = lambda : self.__controller.inserirVeiculo())
-        enviar.pack()
-        enviar.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35) 
+        botao.pack()
+        botao.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35) 
     
     def getCamposDeInsercao(self):
         if self.__fieldBoxes == None:
@@ -173,11 +182,11 @@ class View():
 
     # Fechar campo de inserção:
     def setOffCampoDeInsercao(self):
-        if self.fieldBox == None:
+        if self.__fieldBoxFrame == None:
             return
-        self.fieldBox.destroy()
-        self.fieldBox = None
-        return
+        self.deletarCamposDeInsercao()
+        self.__fieldBoxFrame.destroy()
+        self.__fieldBoxFrame = None
 
     def createTextBox(self):
         # Criando os objetos:
