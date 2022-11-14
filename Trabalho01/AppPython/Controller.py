@@ -109,6 +109,11 @@ class Controller():
         except:
             self.printError()
 
+    def verDepartamento(self):
+        campos = ["Código do departamento", "Tipo do departamento"]
+        text = self.__departamentoDAO.selectAll()
+        self.printQuery(text, campos)
+
     # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Veiculo":
     def setInserirVeiculo(self):
         campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
@@ -125,6 +130,11 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verVeiculo(self):
+        campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
+        text = self.__veiculoDAO.selectAll()
+        self.printQuery(text, campos)
             
     def setInserirFornecedor(self):
         campos = ["CNPJ:", "Nome:"]
@@ -140,6 +150,11 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+    
+    def verFornecedor(self):
+        campos = ["CNPJ", "Nome"]
+        text = self.__fornecedorDAO.selectAll()
+        self.printQuery(text, campos)
             
     def setInserirPedido(self):
         campos = ["Valor:", "CNPJ:", "Código do Departamento:"]
@@ -155,6 +170,11 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verPedido(self):
+        campos = ["Id do pedido", "Valor", "CNPJ", "Código do Departamento"]
+        text = self.__pedidoDAO.selectAll()
+        self.printQuery(text, campos)
 
     def setInserirComponente(self):
         campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
@@ -192,8 +212,9 @@ class Controller():
             self.printError()
 
     def verComponenteNecessario(self):
+        campos = ["Código do Departamento", "Nome do Componente", "Quantidade"]
         text = self.__componenteNecessarioDAO.selectAll()
-        self.printQuery(text)
+        self.printQuery(text, campos)
             
     def setInserirContem(self):
         campos = ["Nome do Componente:", "Id do pedido:"]
@@ -211,8 +232,9 @@ class Controller():
             self.printError()
 
     def verContem(self):
+        campos = ["Nome do Componente", "Id do pedido"]
         text = self.__contemDAO.selectAll()
-        self.printQuery(text)
+        self.printQuery(text, campos)
             
     def setInserirNotaFiscal(self):
         campos = ["Código da nota:", "Id do pedido:"]
@@ -230,8 +252,9 @@ class Controller():
             self.printError()
 
     def verNotasFiscais(self):
+        campos = ["Código da nota", "Id do pedido"]
         text = self.__notaFiscalDAO.selectAll()
-        self.printQuery(text)
+        self.printQuery(text, campos)
             
     def setInserirFornece(self):
         campos = ["Nome do Componente:", "CNPJ:"]
@@ -247,3 +270,8 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def verFornece(self):
+        campos = ["Nome do Componente", "CNPJ"]
+        text = self.__forneceDAO.selectAll()
+        self.printQuery(text, campos)
