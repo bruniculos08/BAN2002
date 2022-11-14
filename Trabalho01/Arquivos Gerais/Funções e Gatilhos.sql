@@ -133,6 +133,8 @@ end;
 $$
 language plpgsql;
 
+
+select * from componente;
 select * from pedido;
 select * from nota_fiscal;
 delete from nota_fiscal;

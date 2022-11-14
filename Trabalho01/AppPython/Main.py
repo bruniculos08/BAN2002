@@ -15,7 +15,6 @@ import psycopg2
 from mysql.connector import Error
 import pandas as pd
 
-
 if __name__ == "__main__":
     app = View()
     app.run()

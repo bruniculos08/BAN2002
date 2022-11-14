@@ -116,7 +116,7 @@ class View():
         # Botão para opções relacionadas à nota fiscal:
         listaDeBotoesNotaFiscal = Menu(self.__tela, tearoff=0)
         listaDeBotoesNotaFiscal.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirNotaFiscal())
-        listaDeBotoesNotaFiscal.add_command(label = "Ver todos", command = lambda : self.__controller.verNotasFiscais())
+        listaDeBotoesNotaFiscal.add_command(label = "Ver todos", command = lambda : self.__controller.verNotaFiscal())
         listaDeBotoesNotaFiscal.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
 
         # Botão para opções relacionadas a fornece:

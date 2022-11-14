@@ -109,6 +109,9 @@ class Controller():
         except:
             self.printError()
 
+    def deletarDepartamento(self):
+        pass
+
     def verDepartamento(self):
         campos = ["Código do departamento", "Tipo do departamento"]
         text = self.__departamentoDAO.selectAll()
@@ -131,6 +134,9 @@ class Controller():
         except:
             self.printError()
 
+    def deletarVeiculo(self):
+        pass
+
     def verVeiculo(self):
         campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
         text = self.__veiculoDAO.selectAll()
@@ -150,6 +156,9 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def deletarFornecedor(self):
+        pass
     
     def verFornecedor(self):
         campos = ["CNPJ", "Nome"]
@@ -171,6 +180,9 @@ class Controller():
         except:
             self.printError()
 
+    def deletarPedido(self):
+        pass
+
     def verPedido(self):
         campos = ["Id do pedido", "Valor", "CNPJ", "Código do Departamento"]
         text = self.__pedidoDAO.selectAll()
@@ -190,6 +202,9 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def deletarComponente(self):
+        pass
 
     def verComponente(self):
         campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
@@ -211,6 +226,9 @@ class Controller():
         except:
             self.printError()
 
+    def deletarComponenteNecessario(self):
+        pass
+
     def verComponenteNecessario(self):
         campos = ["Código do Departamento", "Nome do Componente", "Quantidade"]
         text = self.__componenteNecessarioDAO.selectAll()
@@ -230,6 +248,9 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+    
+    def deletarContem(self):
+        pass
 
     def verContem(self):
         campos = ["Nome do Componente", "Id do pedido"]
@@ -251,7 +272,10 @@ class Controller():
         except:
             self.printError()
 
-    def verNotasFiscais(self):
+    def deletarNotaFiscal(self):
+        pass
+
+    def verNotaFiscal(self):
         campos = ["Código da nota", "Id do pedido"]
         text = self.__notaFiscalDAO.selectAll()
         self.printQuery(text, campos)
@@ -270,6 +294,9 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def deletarFornece(self):
+        pass
 
     def verFornece(self):
         campos = ["Nome do Componente", "CNPJ"]
