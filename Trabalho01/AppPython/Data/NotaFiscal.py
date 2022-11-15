@@ -36,6 +36,7 @@ class NotaFiscalDAO():
     __sqlSelectAll = None
     __sqlInsert = None
     __sqlDelete = None
+    __sqlUpdate = None
     __columns = None
     __sqlSelectNewCodNota= None
     
@@ -43,6 +44,7 @@ class NotaFiscalDAO():
         self.__sqlSelectAll = "select * from nota_fiscal"
         self.__sqlInsert = "insert into nota_fiscal values('{}', {})"
         self.__sqlDelete = "delete from nota_fiscal"
+        self.__sqlUpdate = "update nota_fiscal set"
         self.__columns = ["cod_nota", "id_pedido"]
 
     def selectAll(self) -> list:
@@ -80,4 +82,36 @@ class NotaFiscalDAO():
         if string == "":
             cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string) 
+        cursor.execute(self.__sqlDelete + " " + "where" + string)
+
+    def update(self, dadosSet,  dadosWhere):
+        con = Connection()
+        cursor = con.cursor()
+        campos = self.__columns
+
+        stringSet = ""
+        stringWhere = ""
+
+        # Montando stringSet:
+        for campo, dado in zip(campos, dadosSet):
+            if dado == '' or dado == '\'\'':
+                continue
+            if campo != campos[-1]:
+                stringSet = stringSet + " " + campo + " = " + dado + ","
+            else:
+                stringSet = stringSet + " " + campo + " = " + dado
+
+        # Montando stringWhere:
+        for campo, dado in zip(campos, dadosWhere):
+            if dado == '' or dado == '\'\'':
+                continue
+            if campo != campos[-1]:
+                stringWhere = stringWhere + " " + campo + " = " + dado + ","
+            else:
+                stringWhere = stringWhere + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if stringWhere == "":
+            cursor.execute(self.__sqlDelete + " " + stringSet) 
+
+        cursor.execute(self.__sqlDelete + stringSet + " " + "where" + stringWhere)
