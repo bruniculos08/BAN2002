@@ -34,15 +34,16 @@ class Fornecedor():
 class FornecedorDAO():
 
     __sqlSelectAll = None
-    __sqlSelectNewCodDept = None
     __sqlInsert = None
     __sqlDelete = None
+    __sqlUpdate = None
     __columns = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from fornecedor"
         self.__sqlInsert = "insert into fornecedor values('{}', '{}')"
         self.__sqlDelete = "delete from fornecedor"
+        self.__sqlUpdate = "update fornecedor set"
         self.__columns = ["cnpj", "nome"]
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
@@ -72,8 +73,8 @@ class FornecedorDAO():
         for campo, dado in zip(campos, dados):
             if dado == '' or dado == '\'\'':
                 continue
-            if campo != campos[-1]:
-                string = string + " " + campo + " = " + dado + ","
+            if len(string) > 0:
+                string = string + "," + " " + campo + " = " + dado
             else:
                 string = string + " " + campo + " = " + dado
 
@@ -81,4 +82,36 @@ class FornecedorDAO():
         if string == "":
             cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string) 
+        cursor.execute(self.__sqlDelete + " " + "where" + string)
+
+    def update(self, dadosSet,  dadosWhere):
+        con = Connection()
+        cursor = con.cursor()
+        campos = self.__columns
+
+        stringSet = ""
+        stringWhere = ""
+
+        # Montando stringSet:
+        for campo, dado in zip(campos, dadosSet):
+            if dado == '' or dado == '\'\'':
+                continue
+            if len(stringSet) > 0:
+                stringSet = stringSet + "," + " " + campo + " = " + dado
+            else:
+                stringSet = stringSet + " " + campo + " = " + dado
+
+        # Montando stringWhere:
+        for campo, dado in zip(campos, dadosWhere):
+            if dado == '' or dado == '\'\'':
+                continue
+            if len(stringWhere) > 0:
+                stringWhere = stringWhere + "," + " " + campo + " = " + dado
+            else:
+                stringWhere = stringWhere + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if stringWhere == "":
+            cursor.execute(self.__sqlUpdate + " " + stringSet) 
+
+        cursor.execute(self.__sqlUpdate + stringSet + " " + "where" + stringWhere)

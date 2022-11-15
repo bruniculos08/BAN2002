@@ -68,13 +68,16 @@ class VeiculoDAO():
     __sqlSelectAll = None
     __sqlSelectNewChassi = None
     __sqlInsert = None
-    __columns = None
     __sqlDelete = None
+    __sqlUpdate = None
+    __columns = None
+
     
     def __init__(self):
         self.__sqlSelectAll = "select * from veiculo"
         self.__sqlInsert = "insert into veiculo values('{}', {}, {}, {}, {})" 
         self.__sqlDelete = "delete from veiculo"
+        self.__sqlUpdate = "update veiculo set"
         self.__columns = ["chassi", "manual_automatico", "ar_condicionado", "vidro_travas", "cod_dept"]
         
     def selectAll(self) -> list:
@@ -104,8 +107,8 @@ class VeiculoDAO():
         for campo, dado in zip(campos, dados):
             if dado == '' or dado == '\'\'':
                 continue
-            if campo != campos[-1]:
-                string = string + " " + campo + " = " + dado + ","
+            if len(string) > 0:
+                string = string + "," + " " + campo + " = " + dado
             else:
                 string = string + " " + campo + " = " + dado
 
@@ -113,4 +116,36 @@ class VeiculoDAO():
         if string == "":
             cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string) 
+        cursor.execute(self.__sqlDelete + " " + "where" + string)
+
+    def update(self, dadosSet,  dadosWhere):
+        con = Connection()
+        cursor = con.cursor()
+        campos = self.__columns
+
+        stringSet = ""
+        stringWhere = ""
+
+        # Montando stringSet:
+        for campo, dado in zip(campos, dadosSet):
+            if dado == '' or dado == '\'\'':
+                continue
+            if len(stringSet) > 0:
+                stringSet = stringSet + "," + " " + campo + " = " + dado
+            else:
+                stringSet = stringSet + " " + campo + " = " + dado
+
+        # Montando stringWhere:
+        for campo, dado in zip(campos, dadosWhere):
+            if dado == '' or dado == '\'\'':
+                continue
+            if len(stringWhere) > 0:
+                stringWhere = stringWhere + "," + " " + campo + " = " + dado
+            else:
+                stringWhere = stringWhere + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if stringWhere == "":
+            cursor.execute(self.__sqlUpdate + " " + stringSet) 
+
+        cursor.execute(self.__sqlUpdate + stringSet + " " + "where" + stringWhere)

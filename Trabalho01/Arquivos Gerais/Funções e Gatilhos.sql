@@ -133,7 +133,8 @@ end;
 $$
 language plpgsql;
 
-
+delete from fornecedor;
+update nota_fiscal set cod_nota = '42221039766179000128650200000524051005241115' where cod_nota = '42221039766179000128650200000524051005241115';
 insert into fornecedor values('88672068908640', 'Corleone');
 delete from fornecedor where cnpj = '88672068908640';
 select * from departamento;
@@ -145,6 +146,9 @@ select * from nota_fiscal where cod_nota = '422210397661790001286502000005240510
 delete from nota_fiscal where cod_nota = '42221039766179000128650200000524051005241115'
 select validarNota('13181017921427000125650010000000309887251170');
 select validarNota('42221039766179000128650200000524051005241115');
+insert into nota_fiscal values('42221039766179000128650200000524051005241115', 3)
+
+select * from contem;
 
 
 -- Gatilho para verificar nota fiscal antes de ser inserida em nota_fiscal:

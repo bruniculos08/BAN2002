@@ -118,6 +118,7 @@ class View():
         listaDeBotoesNotaFiscal.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirNotaFiscal())
         listaDeBotoesNotaFiscal.add_command(label = "Ver todos", command = lambda : self.__controller.verNotaFiscal())
         listaDeBotoesNotaFiscal.add_command(label = "Remover", command = lambda : self.__controller.setDeletarNotaFiscal())
+        listaDeBotoesNotaFiscal.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarNotaFiscal())
 
         # Botão para opções relacionadas a fornece:
         listaDeBotoesFornece = Menu(self.__tela, tearoff=0)
@@ -203,7 +204,7 @@ class View():
         for field in self.__fieldBoxes:
             item = field.get()
             dados.append(item)
-        print(dados)
+        # print(dados)
         return dados
 
     def deletarCamposDeInsercao(self):

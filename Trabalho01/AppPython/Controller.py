@@ -128,6 +128,15 @@ class Controller():
         except:
             self.printError()
         
+    def setPrimarioAtualizarDepartamento(self):
+        pass
+
+    def setSecundarioAtualizarDepartamento(self):
+        pass
+
+    def atualizarDepartamento(self, dadosSet):
+        pass
+
     # Esta função executa o comando 'select all' sobre a tabela 'departamento':
     def verDepartamento(self):
         campos = ["Código do departamento", "Tipo do departamento"]
@@ -163,6 +172,15 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def setPrimarioAtualizarVeiculo(self):
+        pass
+
+    def setSecundarioAtualizarVeiculo(self):
+        pass
+
+    def atualizarVeiculo(self, dadosSet):
+        pass
 
     def verVeiculo(self):
         campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
@@ -201,6 +219,15 @@ class Controller():
         except:
             self.printError() 
     
+    def setPrimarioAtualizarFornecedor(self):
+        pass
+
+    def setSecundarioAtualizarFornecedor(self):
+        pass
+
+    def atualizarFornecedor(self, dadosSet):
+        pass
+
     def verFornecedor(self):
         campos = ["CNPJ", "Nome"]
         text = self.__fornecedorDAO.selectAll()
@@ -235,6 +262,15 @@ class Controller():
             self.printSucess()
         except:
             self.printError()
+
+    def setPrimarioAtualizarPedido(self):
+        pass
+
+    def setSecundarioAtualizarPedido(self):
+        pass
+
+    def atualizarPedido(self, dadosSet):
+        pass
 
     def verPedido(self):
         campos = ["Id do pedido", "Valor", "CNPJ", "Código do Departamento"]
@@ -273,6 +309,15 @@ class Controller():
         except:
             self.printError()
 
+    def setPrimarioAtualizarComponente(self):
+        pass
+
+    def setSecundarioAtualizarComponente(self):
+        pass
+
+    def atualizarComponente(self, dadosSet):
+        pass
+
     def verComponente(self):
         campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
         text = self.__componenteDAO.selectAll()
@@ -308,6 +353,15 @@ class Controller():
         except:
             self.printError()
 
+    def setPrimarioAtualizarComponenteNecessario(self):
+        pass
+
+    def setSecundarioAtualizarComponenteNecessario(self):
+        pass
+
+    def atualizarComponenteNecessario(self, dadosSet):
+        pass
+
     def verComponenteNecessario(self):
         campos = ["Código do Departamento", "Nome do Componente", "Quantidade"]
         text = self.__componenteNecessarioDAO.selectAll()
@@ -339,6 +393,29 @@ class Controller():
         dados[0] = '\'' + dados[0] + '\''
         try:
             self.__contemDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def setPrimarioAtualizarContem(self):
+        campos = ["Novo nome do Componente:", "Id do pedido:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarContem())
+        self.__view.criarBotoes(botao)
+        
+    def setSecundarioAtualizarContem(self):
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        campos = ["Antigo nome do componente:", "Antigo CNPJ:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarContem(dadosSet))
+        self.__view.criarBotoes(botao)
+        
+    def atualizarContem(self, dadosSet):
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        try:
+            self.__contemDAO.update(dadosSet, dadosWhere)
             self.printSucess()
         except:
             self.printError()
@@ -378,6 +455,29 @@ class Controller():
         except:
             self.printError()
 
+    def setPrimarioAtualizarNotaFiscal(self):
+        campos = ["Novo código da nota:", "Novo id do pedido:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarNotaFiscal())
+        self.__view.criarBotoes(botao)
+
+    def setSecundarioAtualizarNotaFiscal(self):
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        campos = ["Antigo código da nota:", "Antigo id do pedido:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarNotaFiscal(dadosSet))
+        self.__view.criarBotoes(botao)
+
+    def atualizarNotaFiscal(self, dadosSet):
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        try:
+            self.__notaFiscalDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
+
     def verNotaFiscal(self):
         campos = ["Código da nota", "Id do pedido"]
         text = self.__notaFiscalDAO.selectAll()
@@ -410,6 +510,31 @@ class Controller():
         dados[1] = '\'' + dados[1] + '\''
         try:
             self.__forneceDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def setPrimarioAtualizarFornece(self):
+        campos = ["Novo nome do componente:", "Novo CNPJ:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarFornece())
+        self.__view.criarBotoes(botao)
+    
+    def setSecundarioAtualizarFornece(self):
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        campos = ["Antigo nome do componente:", "Antigo CNPJ:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarFornece(dadosSet))
+        self.__view.criarBotoes(botao)
+
+    def atualizarFornece(self, dadosSet):
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
+        try:
+            self.__forneceDAO.update(dadosSet, dadosWhere)
             self.printSucess()
         except:
             self.printError()
