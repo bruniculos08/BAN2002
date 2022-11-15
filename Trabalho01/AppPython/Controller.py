@@ -310,10 +310,17 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarComponente(self):
-        pass
+        campos = ["Novo nome:", "Novo tipo:", "Nova quantidade mínima:", "Nova quantidade:", "Novo CNPJ principal:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponente())
+        self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarComponente(self):
-        pass
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        dadosSet[4] = '\'' + dadosSet[4] + '\''
+        
 
     def atualizarComponente(self, dadosSet):
         pass
