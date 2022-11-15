@@ -264,13 +264,29 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        pass
-
+        campos = ["Novo id do pedido:", "Novo valor:", "Novo CNPJ:", "Novo código do departamento:"]
+        self.__view.criarCamposDeInsercao(4, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
+        self.__view.criarBotoes(botao)
+        
     def setSecundarioAtualizarPedido(self):
-        pass
+        dadosSet = self.clearAndGetData()
+        dadosSet[2] = '\'' + dadosSet[2] + '\''
+        dadosSet[3] = '\'' + dadosSet[3] + '\''
+        campos = ["Antigo id do pedido:", "Antigo valor:", "Antigo CNPJ:", "Antigo código do departamento:"]
+        self.__view.criarCamposDeInsercao(4, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarPedido(dadosSet))
+        self.__view.criarBotoes(botao)
 
     def atualizarPedido(self, dadosSet):
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[2] = '\'' + dadosWhere[2] + '\''
+        dadosWhere[3] = '\'' + dadosWhere[3] + '\''
+        try:
+            self.__pedidoDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verPedido(self):
         campos = ["Id do pedido", "Valor", "CNPJ", "Código do Departamento"]
@@ -326,8 +342,15 @@ class Controller():
         self.__view.criarBotoes(botao)
 
     def atualizarComponente(self, dadosSet):
-        
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
+        dadosWhere[4] = '\'' + dadosWhere[4] + '\''
+        try:
+            self.__componenteDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verComponente(self):
         campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
