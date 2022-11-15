@@ -39,7 +39,7 @@ class Connection():
 
     def close(self):
         return self.__connection.close()
-    
+
     def notices(self):
         return self.__connection.notices
     

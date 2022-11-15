@@ -68,10 +68,14 @@ class VeiculoDAO():
     __sqlSelectAll = None
     __sqlSelectNewChassi = None
     __sqlInsert = None
-
+    __columns = None
+    __sqlDelete = None
+    
     def __init__(self):
         self.__sqlSelectAll = "select * from veiculo"
         self.__sqlInsert = "insert into veiculo values('{}', {}, {}, {}, {})" 
+        self.__sqlDelete = "delete from veiculo"
+        self.__columns = ["chassi", "manual_automatico", "ar_condicionado", "vidro_travas", "cod_dept"]
         
     def selectAll(self) -> list:
         con = Connection()
@@ -90,21 +94,23 @@ class VeiculoDAO():
             veiculo.getArCondicionado(), veiculo.getCodDept()))
         con.commit()
 
-    def delete(self, campos = None, dados = None):
+    def delete(self, dados = None):
         con = Connection()
         cursor = con.cursor()
-
-        # Se não há condicionais se deletam todos as linhas:
-        if campos is None:
-            cursor.execute(self.__sqlDelete)
+        campos = self.__columns
 
         # Construindo condicionais:
         string = ""
         for campo, dado in zip(campos, dados):
-            if dado == "":
+            if dado == '' or dado == '\'\'':
                 continue
-            string = string + " " + campo + " = " + dado
             if campo != campos[-1]:
-                string = string + ","
+                string = string + " " + campo + " = " + dado + ","
+            else:
+                string = string + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if string == "":
+            cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string)
+        cursor.execute(self.__sqlDelete + " " + "where" + string) 

@@ -134,10 +134,15 @@ $$
 language plpgsql;
 
 
-select * from componente;
+insert into fornecedor values('88672068908640', 'Corleone');
+delete from fornecedor where cnpj = '88672068908640';
+select * from departamento;
+select * from veiculo;
+select * from fornece;
+select * from componente_necessario;
 select * from pedido;
-select * from nota_fiscal;
-delete from nota_fiscal;
+select * from nota_fiscal where cod_nota = '42221039766179000128650200000524051005241115';
+delete from nota_fiscal where cod_nota = '42221039766179000128650200000524051005241115'
 select validarNota('13181017921427000125650010000000309887251170');
 select validarNota('42221039766179000128650200000524051005241115');
 

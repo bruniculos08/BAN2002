@@ -256,7 +256,7 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        self.__sqlDelete = \"delete from componente\"\n    # Retorna uma lista com um objeto de cada componente do banco de dados:\n    def selectAll(self) -> list:",
+        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        self.__sqlDelete = \"delete from componente\"\n        self.__columns = [\"nome\", \"tipo\", \"minimo_quant\", \"quantidade\", \"cnpj_principal\"]",
         "detail": "Data.Componente",
         "documentation": {}
     },
@@ -274,7 +274,7 @@
         "kind": 6,
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessarioDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', {})\"\n    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "peekOfCode": "class ComponenteNecessarioDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', {})\"\n        self.__sqlDelete = \"delete from componente_necessario\"\n        self.__columns = [\"cod_dept\", \"nome_componente\", \"quantidade\"]",
         "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },
@@ -292,7 +292,7 @@
         "kind": 6,
         "importPath": "Data.Contem",
         "description": "Data.Contem",
-        "peekOfCode": "class ContemDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n    # Retorna uma lista com um objeto de cada contem do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "peekOfCode": "class ContemDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n        self.__sqlDelete = \"delete from contem\"\n        self.__columns = [\"nome_componente\", \"id_pedido\"]",
         "detail": "Data.Contem",
         "documentation": {}
     },
@@ -310,7 +310,7 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __selectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"\n        self.__sqlInsert = \"insert into departamento values({}, '{}')\"\n        self.__selectCurrCodDept = \"select currval('dept_cod')\"",
+        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"\n        self.__sqlSelectNewCodDept = \"select nextval('dept_cod')\"",
         "detail": "Data.Departamento",
         "documentation": {}
     },
@@ -328,7 +328,7 @@
         "kind": 6,
         "importPath": "Data.Fornece",
         "description": "Data.Fornece",
-        "peekOfCode": "class ForneceDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornce values('{}', {})\"\n    # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "peekOfCode": "class ForneceDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornce values('{}', {})\"\n        self.__sqlDelete = \"delete from fornce\"\n        self.__columns = [\"nome_componente\", \"cnpj\"]",
         "detail": "Data.Fornece",
         "documentation": {}
     },
@@ -346,7 +346,7 @@
         "kind": 6,
         "importPath": "Data.Fornecedor",
         "description": "Data.Fornecedor",
-        "peekOfCode": "class FornecedorDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n    # Retorna uma lista com um objeto de cada departamento do banco de dados:\n    def selectAll(self) -> list:\n        con = Connection()",
+        "peekOfCode": "class FornecedorDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n        self.__sqlDelete = \"delete from fornecedor\"",
         "detail": "Data.Fornecedor",
         "documentation": {}
     },
@@ -364,7 +364,7 @@
         "kind": 6,
         "importPath": "Data.NotaFiscal",
         "description": "Data.NotaFiscal",
-        "peekOfCode": "class NotaFiscalDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodNota= None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "peekOfCode": "class NotaFiscalDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"\n        self.__sqlDelete = \"delete from nota_fiscal\"",
         "detail": "Data.NotaFiscal",
         "documentation": {}
     },
@@ -382,7 +382,7 @@
         "kind": 6,
         "importPath": "Data.Pedido",
         "description": "Data.Pedido",
-        "peekOfCode": "class PedidoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewId= None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from pedido\"\n        self.__sqlSelectNewId = \"select nextval('pedido_id')\"\n        self.__sqlInsert = \"insert into pedido values({}, {}, '{}', {})\"\n    def selectAll(self) -> list:\n        con = Connection()",
+        "peekOfCode": "class PedidoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewId= None\n    __sqlInsert = None\n    __sqlDelete = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from pedido\"\n        self.__sqlSelectNewId = \"select nextval('pedido_id')\"\n        self.__sqlInsert = \"insert into pedido values({}, {}, '{}', {})\"",
         "detail": "Data.Pedido",
         "documentation": {}
     },
@@ -400,7 +400,7 @@
         "kind": 6,
         "importPath": "Data.Veiculo",
         "description": "Data.Veiculo",
-        "peekOfCode": "class VeiculoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {}, {}, {}, {})\" \n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "peekOfCode": "class VeiculoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    __columns = None\n    __sqlDelete = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {}, {}, {}, {})\" \n        self.__sqlDelete = \"delete from veiculo\"",
         "detail": "Data.Veiculo",
         "documentation": {}
     },

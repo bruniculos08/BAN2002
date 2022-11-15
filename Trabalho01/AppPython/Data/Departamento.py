@@ -36,13 +36,16 @@ class DepartamentoDAO():
     __sqlSelectAll = None
     __sqlSelectNewCodDept = None
     __sqlInsert = None
-    __selectCurrCodDept = None
+    __sqlDelete = None
+    __columns = None
+    __sqlSelectCurrCodDept = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from departamento"
         self.__sqlSelectNewCodDept = "select nextval('dept_cod')"
         self.__sqlInsert = "insert into departamento values({}, '{}')"
-        self.__selectCurrCodDept = "select currval('dept_cod')"
+        self.__sqlSelectCurrCodDept = "select currval('dept_cod')"
+        self.__columns = ["cod_dept", "tipo"]
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
     def selectAll(self) -> list:
@@ -65,7 +68,7 @@ class DepartamentoDAO():
     def selectCurrCodDept(self):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__selectCurrCodDept)
+        cursor.execute(self.__sqlSelectCurrCodDept)
         result = cursor.fetchone()
         return result[0]
     
@@ -76,21 +79,23 @@ class DepartamentoDAO():
         cursor.execute(self.__sqlInsert.format(codDept, departamento.getTipo()))
         con.commit()
 
-    def delete(self, campos = None, dados = None):
+    def delete(self, dados = None):
         con = Connection()
         cursor = con.cursor()
-
-        # Se não há condicionais se deletam todos as linhas:
-        if campos is None:
-            cursor.execute(self.__sqlDelete)
+        campos = self.__columns
 
         # Construindo condicionais:
         string = ""
         for campo, dado in zip(campos, dados):
-            if dado == "":
+            if dado == '' or dado == '\'\'':
                 continue
-            string = string + " " + campo + " = " + dado
             if campo != campos[-1]:
-                string = string + ","
+                string = string + " " + campo + " = " + dado + ","
+            else:
+                string = string + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if string == "":
+            cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string)
+        cursor.execute(self.__sqlDelete + " " + "where" + string) 

@@ -74,56 +74,56 @@ class View():
         listaDeBotoesDepartamento = Menu(self.__tela, tearoff=0)        #botaoFuncionando("adicionar departamento comum")
         listaDeBotoesDepartamento.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Ver todos", command = lambda : self.__controller.verDepartamento())
-        listaDeBotoesDepartamento.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
-        listaDeBotoesDepartamento.add_command(label = "Ver departamentos com classificação", command = lambda : botaoFuncionando("ver todos por classificação"))
+        listaDeBotoesDepartamento.add_command(label = "Remover", command = lambda : self.__controller.setDeletarDepartamento())
+        # listaDeBotoesDepartamento.add_command(label = "Ver departamentos com classificação", command = lambda : botaoFuncionando("ver todos por classificação"))
         
         # Botão para opções relacionadas a fornecedores:
         listaDeBotoesFornecedor = Menu(self.__tela, tearoff=0)
         listaDeBotoesFornecedor.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirFornecedor())
         listaDeBotoesFornecedor.add_command(label = "Ver todos", command = lambda : self.__controller.verFornecedor())
-        listaDeBotoesFornecedor.add_command(label = "Remover", command = lambda : botaoFuncionando("remover componente"))
+        listaDeBotoesFornecedor.add_command(label = "Remover", command = lambda : self.__controller.setDeletarFornecedor())
 
         # Botão para opções relacionadas à veículos:
         listaDeBotoesVeiculo = Menu(self.__tela, tearoff=0)
         listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Ver todos", command = lambda : self.__controller.verVeiculo())
-        listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : botaoFuncionando("remover veículo"))
+        listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : self.__controller.setDeletarVeiculo())
         
         # Botão para opções relacionadas à pedidos:
         listaDeBotoesPedido = Menu(self.__tela, tearoff=0)
         listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirPedido())
         listaDeBotoesPedido.add_command(label = "Ver lista", command = lambda : self.__controller.verPedido())
-        listaDeBotoesPedido.add_command(label = "Remover", command = lambda : botaoFuncionando("remover "))
+        listaDeBotoesPedido.add_command(label = "Remover", command = lambda : self.__controller.setDeletarPedido())
 
         # Botão para opções relacionadas à componentes:
         listaDeBotoesComponente = Menu(self.__tela, tearoff=0)
         listaDeBotoesComponente.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirComponente())
         listaDeBotoesComponente.add_command(label = "Ver todos", command = lambda : self.__controller.verComponente())
-        listaDeBotoesComponente.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
+        listaDeBotoesComponente.add_command(label = "Remover", command = lambda : self.__controller.setDeletarComponente())
 
         # Botão para opções relacionadas à componentes necessario:
         listaDeBotoesComponenteNecessario = Menu(self.__tela, tearoff=0)
         listaDeBotoesComponenteNecessario.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirComponenteNecessario())
         listaDeBotoesComponenteNecessario.add_command(label = "Ver todos", command = lambda : self.__controller.verComponenteNecessario())
-        listaDeBotoesComponenteNecessario.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
+        listaDeBotoesComponenteNecessario.add_command(label = "Remover", command = lambda : self.__controller.setDeletarComponenteNecessario())
 
         # Botão para opções relacionadas à contem:
         listaDeBotoesContem = Menu(self.__tela, tearoff=0)
         listaDeBotoesContem.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirContem())
         listaDeBotoesContem.add_command(label = "Ver todos", command = lambda : self.__controller.verContem())
-        listaDeBotoesContem.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
+        listaDeBotoesContem.add_command(label = "Remover", command = lambda : self.__controller.setDeletarContem())
 
         # Botão para opções relacionadas à nota fiscal:
         listaDeBotoesNotaFiscal = Menu(self.__tela, tearoff=0)
         listaDeBotoesNotaFiscal.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirNotaFiscal())
         listaDeBotoesNotaFiscal.add_command(label = "Ver todos", command = lambda : self.__controller.verNotaFiscal())
-        listaDeBotoesNotaFiscal.add_command(label = "Remover", command = lambda : botaoFuncionando("remover"))
+        listaDeBotoesNotaFiscal.add_command(label = "Remover", command = lambda : self.__controller.setDeletarNotaFiscal())
 
         # Botão para opções relacionadas a fornece:
         listaDeBotoesFornece = Menu(self.__tela, tearoff=0)
         listaDeBotoesFornece.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirFornece())
         listaDeBotoesFornece.add_command(label = "Ver todos", command = lambda : self.__controller.verFornece())
-        listaDeBotoesFornece.add_command(label = "Remover", command = lambda : botaoFuncionando("remover componente"))
+        listaDeBotoesFornece.add_command(label = "Remover", command = lambda : self.__controller.setDeletarFornece())
 
         # Criando barra superior de botões de aba:
         listaDelistaDeBotoes = Menu(self.__tela)
@@ -187,11 +187,14 @@ class View():
             fieldBox.place(anchor="n", x=200, y=23*(i+1.1) + 0.1)
             self.__fieldBoxes.append(fieldBox)
 
-    def criarBotao(self, botao):
+    def criarBotoes(self, botao):
         # Criando botão de envio dos dados:
         self.__tela.update()
         botao.pack()
-        botao.place(anchor = "n", x = 200, y = self.__fieldBoxFrame.winfo_height() - 35) 
+        botao.place(anchor = "n", x = 250, y = self.__fieldBoxFrame.winfo_height() - 35) 
+        cancel = Button(self.getFieldBoxFrame(), text = "Cancelar", state = 'normal', command = lambda : self.criarCamposDeInsercao(0))
+        cancel.pack()
+        cancel.place(anchor="n", x = 150, y = self.__fieldBoxFrame.winfo_height() - 35)
     
     def getCamposDeInsercao(self):
         if self.__fieldBoxes == None:
@@ -200,6 +203,7 @@ class View():
         for field in self.__fieldBoxes:
             item = field.get()
             dados.append(item)
+        print(dados)
         return dados
 
     def deletarCamposDeInsercao(self):

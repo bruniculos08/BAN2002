@@ -51,10 +51,12 @@ create table componente(
     foreign key(cnpj_principal) references fornecedor(cnpj)
 );
 
+drop table veiculo cascade;
+
 create table veiculo(
     chassi character varying(17) not null,
     manual_automatico boolean not null, -- 0 manual 1 automatico
-    arcondicionado boolean not null,
+    ar_condicionado boolean not null,
     vidro_travas boolean not null,
     cod_dept integer not null,
     primary key(chassi),

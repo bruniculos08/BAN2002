@@ -4,11 +4,12 @@ class Fornece():
 
     __nome = None
     __idPedido = None
+    
 
     def __init__(self):
         self.__nome = ""
         self.__idPedido = -1
-
+        
     def nome(self, nome):
         self.__nome = nome
         return self
@@ -35,10 +36,14 @@ class ForneceDAO():
 
     __sqlSelectAll = None
     __sqlInsert = None
+    __sqlDelete = None
+    __columns = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from fornece"
         self.__sqlInsert = "insert into fornce values('{}', {})"
+        self.__sqlDelete = "delete from fornce"
+        self.__columns = ["nome_componente", "cnpj"]
 
     # Retorna uma lista com um objeto de cada componente_necessario do banco de dados:
     def selectAll(self) -> list:
@@ -57,21 +62,23 @@ class ForneceDAO():
         cursor.execute(self.__sqlInsert.format(fornece.getNome(), fornece.getIdPedido()))
         con.commit()
 
-    def delete(self, campos = None, dados = None):
+    def delete(self, dados = None):
         con = Connection()
         cursor = con.cursor()
-
-        # Se não há condicionais se deletam todos as linhas:
-        if campos is None:
-            cursor.execute(self.__sqlDelete)
+        campos = self.__columns
 
         # Construindo condicionais:
         string = ""
         for campo, dado in zip(campos, dados):
-            if dado == "":
+            if dado == '' or dado == '\'\'':
                 continue
-            string = string + " " + campo + " = " + dado
             if campo != campos[-1]:
-                string = string + ","
+                string = string + " " + campo + " = " + dado + ","
+            else:
+                string = string + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if string == "":
+            cursor.execute(self.__sqlDelete) 
         
         cursor.execute(self.__sqlDelete + " " + "where" + string)

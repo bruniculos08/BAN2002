@@ -66,11 +66,13 @@ class ComponenteDAO():
     __sqlSelectAll = None
     __sqlInsert = None
     __sqlDelete = None
+    __columns = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from componente"
         self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, '{}')"
         self.__sqlDelete = "delete from componente"
+        self.__columns = ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"]
 
 
     # Retorna uma lista com um objeto de cada componente do banco de dados:
@@ -91,21 +93,23 @@ class ComponenteDAO():
             componente.getQuantidade(), componente.getCnpjPrincipal()))
         con.commit()
 
-    def delete(self, campos = None, dados = None):
+    def delete(self, dados = None):
         con = Connection()
         cursor = con.cursor()
-
-        # Se não há condicionais se deletam todos as linhas:
-        if campos is None:
-            cursor.execute(self.__sqlDelete)
+        campos = self.__columns
 
         # Construindo condicionais:
         string = ""
         for campo, dado in zip(campos, dados):
-            if dado == "":
+            if dado == '' or dado == '\'\'':
                 continue
-            string = string + " " + campo + " = " + dado
             if campo != campos[-1]:
-                string = string + ","
+                string = string + " " + campo + " = " + dado + ","
+            else:
+                string = string + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if string == "":
+            cursor.execute(self.__sqlDelete) 
         
         cursor.execute(self.__sqlDelete + " " + "where" + string)

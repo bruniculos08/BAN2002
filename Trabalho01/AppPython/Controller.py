@@ -41,8 +41,7 @@ class Controller():
         self.__contemDAO = ContemDAO()
         self.__notaFiscalDAO = NotaFiscalDAO()
         self.__forneceDAO = ForneceDAO()
-        self.__noticesSizes = 0
-        
+        self.__noticesSize = 0
 
     def view(self, view):
         self.__view = view
@@ -51,22 +50,22 @@ class Controller():
     def printSucess(self):
         self.__model = Connection()
         notices = self.__model.notices()
-        if(len(notices) > self.__noticesSizes):
+        if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao(notices[-1])
         else:
-            self.__view.setCampoDeExibicao("Operação realizada com sucesso!")
-        self.__noticesSizes = len(notices)
+            self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
+        self.__noticesSize = len(notices)
 
     def printError(self):
         self.__model = Connection()
         notices = self.__model.notices()
-        if(len(notices) > self.__noticesSizes):
+        if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao(notices[-1])
         else:
-            self.__view.setCampoDeExibicao("Operação não realizada!")
-            self.__model.rollback()
-            self.__model.commit()
-        self.__noticesSizes = len(notices)
+            self.__view.setCampoDeExibicao("Operação não realizada!\n")
+        self.__model.rollback()
+        self.__model.commit()
+        self.__noticesSize = len(notices)
 
     def printQuery(self, query, campos):
         # Limpando o campo de texto:
@@ -90,13 +89,14 @@ class Controller():
         self.__view.criarCamposDeInsercao(0)
         return dados
         
-    # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento":
+    # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento" para...
+    # ... a operação de 'insert':
     def setInserirDepartamento(self):
         # Como o codDept é gerado automaticamente (por sequência, basta inserir o tipo):
         campos = ["Tipo do departamento:"]
         self.__view.criarCamposDeInsercao(1, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirDepartamento())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     # Esta função pega os dados do campo de inserção e insere na tabela de departamento do banco de dados:
     def inserirDepartamento(self):
@@ -109,22 +109,37 @@ class Controller():
         except:
             self.printError()
 
+    # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento" para...
+    # ... a operação de 'delete':
+    def setDeletarDepartamento(self):
+        campos = ["Código do departamento:", "Tipo do departamento:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarDepartamento())
+        self.__view.criarBotoes(botao)
+            
+    # Esta função pega os dados do campo de inserção e deleta na tabela de departamento do banco de dados os itens cujos...
+    # ... atributos são iguais aos colocados nos respectivos campos:
     def deletarDepartamento(self):
-        pass
-
+        dados = self.clearAndGetData()
+        dados[1] = '\'' + dados[1] + '\''
+        try:
+            self.__departamentoDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
+        
+    # Esta função executa o comando 'select all' sobre a tabela 'departamento':
     def verDepartamento(self):
         campos = ["Código do departamento", "Tipo do departamento"]
         text = self.__departamentoDAO.selectAll()
         self.printQuery(text, campos)
 
-    # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Veiculo":
     def setInserirVeiculo(self):
         campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(5, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
-    # Esta função pega os dados do campo de inserção e insere na tabela de veiculo do banco de dados:
     def inserirVeiculo(self):
         dados = self.clearAndGetData()
         newVeiculo = Veiculo().fromTupla(dados)
@@ -134,8 +149,20 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarVeiculo(self):
+        campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
+        self.__view.criarBotoes(botao)
+        
     def deletarVeiculo(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        try:
+            self.__veiculoDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verVeiculo(self):
         campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
@@ -146,7 +173,7 @@ class Controller():
         campos = ["CNPJ:", "Nome:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirFornecedor())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirFornecedor(self):
         dados = self.clearAndGetData()
@@ -157,8 +184,22 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarFornecedor(self):
+        campos = ["CNPJ:", "Nome:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarFornecedor())
+        self.__view.criarBotoes(botao)
+
     def deletarFornecedor(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        dados[1] = '\'' + dados[1] + '\''
+        self.__fornecedorDAO.delete(dados)
+        try:
+            self.__fornecedorDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError() 
     
     def verFornecedor(self):
         campos = ["CNPJ", "Nome"]
@@ -169,7 +210,7 @@ class Controller():
         campos = ["Valor:", "CNPJ:", "Código do Departamento:"]
         self.__view.criarCamposDeInsercao(3, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirPedido())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirPedido(self):
         dados = [-1] + self.clearAndGetData()
@@ -180,8 +221,20 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarPedido(self):    
+        campos = ["Id do pedido:", "Valor:", "CNPJ:", "Código do Departamento:"]
+        self.__view.criarCamposDeInsercao(4, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarPedido())
+        self.__view.criarBotoes(botao)
+
     def deletarPedido(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[2] = '\'' + dados[2] + '\''
+        try:
+            self.__pedidoDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verPedido(self):
         campos = ["Id do pedido", "Valor", "CNPJ", "Código do Departamento"]
@@ -192,7 +245,7 @@ class Controller():
         campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
         self.__view.criarCamposDeInsercao(5, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponente())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirComponente(self):
         dados = self.clearAndGetData()
@@ -203,8 +256,22 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarComponente(self):
+        campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponente())
+        self.__view.criarBotoes(botao)      
+    
     def deletarComponente(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        dados[1] = '\'' + dados[1] + '\''
+        dados[4] = '\'' + dados[4] + '\''
+        try:
+            self.__componenteDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verComponente(self):
         campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
@@ -215,7 +282,7 @@ class Controller():
         campos = ["Código do Departamento:", "Nome do Componente:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(3, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponenteNecessario())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirComponenteNecessario(self):
         dados = self.clearAndGetData()
@@ -226,8 +293,20 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarComponenteNecessario(self):
+        campos = ["Código do Departamento:", "Nome do Componente:", "Quantidade:"]
+        self.__view.criarCamposDeInsercao(3, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponenteNecessario())
+        self.__view.criarBotoes(botao)
+    
     def deletarComponenteNecessario(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[1] = '\'' + dados[1] + '\''
+        try:
+            self.__componenteDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verComponenteNecessario(self):
         campos = ["Código do Departamento", "Nome do Componente", "Quantidade"]
@@ -238,7 +317,7 @@ class Controller():
         campos = ["Nome do Componente:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirContem())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirContem(self):
         dados = self.clearAndGetData()
@@ -249,8 +328,20 @@ class Controller():
         except:
             self.printError()
     
+    def setDeletarContem(self):
+        campos = ["Nome do Componente:", "Id do pedido:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarContem())
+        self.__view.criarBotoes(botao)
+
     def deletarContem(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        try:
+            self.__contemDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verContem(self):
         campos = ["Nome do Componente", "Id do pedido"]
@@ -261,7 +352,7 @@ class Controller():
         campos = ["Código da nota:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirNotaFiscal())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirNotaFiscal(self):
         dados = self.clearAndGetData()
@@ -272,8 +363,20 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarNotaFiscal(self):
+        campos = ["Código da nota:", "Id do pedido:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarNotaFiscal())
+        self.__view.criarBotoes(botao)
+            
     def deletarNotaFiscal(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        try:
+            self.__notaFiscalDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verNotaFiscal(self):
         campos = ["Código da nota", "Id do pedido"]
@@ -284,7 +387,7 @@ class Controller():
         campos = ["Nome do Componente:", "CNPJ:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirFornece())
-        self.__view.criarBotao(botao)
+        self.__view.criarBotoes(botao)
 
     def inserirFornece(self):
         dados = self.clearAndGetData()
@@ -295,8 +398,21 @@ class Controller():
         except:
             self.printError()
 
+    def setDeletarFornece(self):
+        campos = ["Nome do Componente:", "CNPJ:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarFornece())
+        self.__view.criarBotoes(botao)
+
     def deletarFornece(self):
-        pass
+        dados = self.clearAndGetData()
+        dados[0] = '\'' + dados[0] + '\''
+        dados[1] = '\'' + dados[1] + '\''
+        try:
+            self.__forneceDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verFornece(self):
         campos = ["Nome do Componente", "CNPJ"]

@@ -34,12 +34,16 @@ class NotaFiscal():
 class NotaFiscalDAO():
     
     __sqlSelectAll = None
-    __sqlSelectNewCodNota= None
     __sqlInsert = None
+    __sqlDelete = None
+    __columns = None
+    __sqlSelectNewCodNota= None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from nota_fiscal"
         self.__sqlInsert = "insert into nota_fiscal values('{}', {})"
+        self.__sqlDelete = "delete from nota_fiscal"
+        self.__columns = ["cod_nota", "id_pedido"]
 
     def selectAll(self) -> list:
         con = Connection()
@@ -57,21 +61,23 @@ class NotaFiscalDAO():
         cursor.execute(self.__sqlInsert.format(notaFiscal.getCodNota(), notaFiscal.getIdPedido()))
         con.commit()
 
-    def delete(self, campos = None, dados = None):
+    def delete(self, dados = None):
         con = Connection()
         cursor = con.cursor()
-
-        # Se não há condicionais se deletam todos as linhas:
-        if campos is None:
-            cursor.execute(self.__sqlDelete)
+        campos = self.__columns
 
         # Construindo condicionais:
         string = ""
         for campo, dado in zip(campos, dados):
-            if dado == "":
+            if dado == '' or dado == '\'\'':
                 continue
-            string = string + " " + campo + " = " + dado
             if campo != campos[-1]:
-                string = string + ","
+                string = string + " " + campo + " = " + dado + ","
+            else:
+                string = string + " " + campo + " = " + dado
+
+        # Se não há condicional:
+        if string == "":
+            cursor.execute(self.__sqlDelete) 
         
-        cursor.execute(self.__sqlDelete + " " + "where" + string)
+        cursor.execute(self.__sqlDelete + " " + "where" + string) 
