@@ -27,7 +27,7 @@ class Controller():
     __notaFiscalDAO = None
     __forneceDAO = None
     __model = None
-    __noticesSizes = None
+    __noticesSize = None
     
 
     def __init__(self):
@@ -129,13 +129,27 @@ class Controller():
             self.printError()
         
     def setPrimarioAtualizarDepartamento(self):
-        pass
+        campos = ["Novo código do departamento:", "Novo tipo do departamento:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarDepartamento())
+        self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarDepartamento(self):
-        pass
-
+        dadosSet = self.clearAndGetData()
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        campos = ["Antigo código do departamento:", "Antigo tipo do departamento:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarDepartamento(dadosSet))
+        self.__view.criarBotoes(botao)
+        
     def atualizarDepartamento(self, dadosSet):
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
+        try:
+            self.__departamentoDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     # Esta função executa o comando 'select all' sobre a tabela 'departamento':
     def verDepartamento(self):
@@ -174,13 +188,27 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarVeiculo(self):
-        pass
+        campos = ["Novo chassi:", "Novo manual automatico(boolean):", "Novo ar condicionado(boolean):", "Novo vidro com travas(boolean):", "Novo código de departamento:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo)
+        self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarVeiculo(self):
-        pass
-
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        campos = ["Antigo chassi:", "Antigo manual automatico(boolean):", "Antigo ar condicionado(boolean):", "Antigo vidro com travas(boolean):", "Antigo código de departamento:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
+        self.__view.criarBotoes(botao)
+        
     def atualizarVeiculo(self, dadosSet):
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        try:
+            self.__veiculoDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verVeiculo(self):
         campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
@@ -220,13 +248,29 @@ class Controller():
             self.printError() 
     
     def setPrimarioAtualizarFornecedor(self):
-        pass
-
+        campos = ["Novo CNPJ:", "Novo nome:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarFornecedor())
+        self.__view.criarBotoes(botao)
+        
     def setSecundarioAtualizarFornecedor(self):
-        pass
+        dadosSet = self.clearAndGetData()
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        campos = ["Antigo CNPJ:", "Antigo nome:"]
+        self.__view.criarCamposDeInsercao(2, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarFornecedor(dadosSet))
+        self.__view.criarBotoes(botao)
 
     def atualizarFornecedor(self, dadosSet):
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
+        try:
+            self.__fornecedorDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verFornecedor(self):
         campos = ["CNPJ", "Nome"]
@@ -454,7 +498,7 @@ class Controller():
     def setSecundarioAtualizarContem(self):
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
-        campos = ["Antigo nome do componente:", "Antigo CNPJ:"]
+        campos = ["Antigo nome do componente:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarContem(dadosSet))
         self.__view.criarBotoes(botao)
