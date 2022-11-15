@@ -89,6 +89,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -366,6 +382,33 @@
         "description": "Data.NotaFiscal",
         "peekOfCode": "class NotaFiscalDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
         "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "NumCarros",
+        "kind": 6,
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "peekOfCode": "class NumCarros():\n    __codDept = None\n    __numOfCarros = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfCarros = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "NumPedidos",
+        "kind": 6,
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "peekOfCode": "class NumPedidos():\n    __codDept = None\n    __numOfPedidos = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfPedidos = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "NumPedidosDAO",
+        "kind": 6,
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "peekOfCode": "class NumPedidosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumPedidos\"\n        self.__sqlSelectDept = \"select NumOfPedidos from NumPedidos where\"\n        self.__sqlSelectMore = \"select * from NumPedidos where NumOfPedidos >\"",
+        "detail": "Data.NumPedidos",
         "documentation": {}
     },
     {

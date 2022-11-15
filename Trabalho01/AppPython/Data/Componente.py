@@ -76,7 +76,6 @@ class ComponenteDAO():
         self.__sqlUpdate = "update componente set"
         self.__columns = ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"]
 
-
     # Retorna uma lista com um objeto de cada componente do banco de dados:
     def selectAll(self) -> list:
         con = Connection()

@@ -95,9 +95,11 @@ class View():
         # Botão para opções relacionadas à pedidos:
         listaDeBotoesPedido = Menu(self.__tela, tearoff=0)
         listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirPedido())
-        listaDeBotoesPedido.add_command(label = "Ver lista", command = lambda : self.__controller.verPedido())
+        listaDeBotoesPedido.add_command(label = "Ver todos", command = lambda : self.__controller.verPedido())
+        listaDeBotoesPedido.add_command(label = "Ver lista de pedidos por departamento", command = lambda : self.__controller.verPedido())
         listaDeBotoesPedido.add_command(label = "Remover", command = lambda : self.__controller.setDeletarPedido())
         listaDeBotoesPedido.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarPedido())
+        
 
         # Botão para opções relacionadas à componentes:
         listaDeBotoesComponente = Menu(self.__tela, tearoff=0)

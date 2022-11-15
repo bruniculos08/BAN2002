@@ -133,24 +133,6 @@ end;
 $$
 language plpgsql;
 
-delete from fornecedor;
-update nota_fiscal set cod_nota = '42221039766179000128650200000524051005241115' where cod_nota = '42221039766179000128650200000524051005241115';
-insert into fornecedor values('88672068908640', 'Corleone');
-delete from fornecedor where cnpj = '88672068908640';
-select * from departamento;
-select * from veiculo;
-select * from fornece;
-select * from componente_necessario;
-select * from pedido;
-select * from nota_fiscal where cod_nota = '42221039766179000128650200000524051005241115';
-delete from nota_fiscal where cod_nota = '42221039766179000128650200000524051005241115'
-select validarNota('13181017921427000125650010000000309887251170');
-select validarNota('42221039766179000128650200000524051005241115');
-insert into nota_fiscal values('42221039766179000128650200000524051005241115', 3)
-
-select * from contem;
-
-
 -- Gatilho para verificar nota fiscal antes de ser inserida em nota_fiscal:
 
 create or replace function verificarNota() returns trigger as
@@ -203,16 +185,17 @@ create trigger verificaDepartamentoDeProducaoGatilho before insert or update on 
 
 -- View para o número de veículos personalizados por departamento:
 
-create view NumCarros(dept, NumOfCars) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
-create view NumCarros(dept, NumOfCars) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
+create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
+create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
 
 drop view NumCarros;
 select * from NumCarros;
+select * from veiculo;
 
 -- View para o número de pedidos de compra por departamento(de compra):
 select * from pedido;
 
-create view NumPedidos(dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
+create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
 
 drop view NumPedidos;
 select * from NumPedidos;
