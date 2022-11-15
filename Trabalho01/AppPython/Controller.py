@@ -339,7 +339,7 @@ class Controller():
             self.printError()
 
     def setDeletarComponenteNecessario(self):
-        campos = ["Código do Departamento:", "Nome do Componente:", "Quantidade:"]
+        campos = ["Código do departamento:", "Nome do componente:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(3, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponenteNecessario())
         self.__view.criarBotoes(botao)
@@ -354,13 +354,27 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarComponenteNecessario(self):
-        pass
-
+        campos = ["Novo código do departamento:", "Novo nome do componente:", "Nova quantidade:"]
+        self.__view.criarCamposDeInsercao(3, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponenteNecessario())
+        self.__view.criarBotoes(botao)
+        
     def setSecundarioAtualizarComponenteNecessario(self):
-        pass
+        dadosSet = self.clearAndGetData()
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        campos = ["Antigo código do departamento:", "Antigo nome do componente:", "Antiga quantidade:"]
+        self.__view.criarCamposDeInsercao(3, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponenteNecessario(dadosSet))
+        self.__view.criarBotoes(botao)
 
     def atualizarComponenteNecessario(self, dadosSet):
-        pass
+        dadosWhere = self.clearAndGetData()
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
+        try:
+            self.__componenteNecessarioDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
 
     def verComponenteNecessario(self):
         campos = ["Código do Departamento", "Nome do Componente", "Quantidade"]
@@ -368,7 +382,7 @@ class Controller():
         self.printQuery(text, campos)
             
     def setInserirContem(self):
-        campos = ["Nome do Componente:", "Id do pedido:"]
+        campos = ["Nome do componente:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirContem())
         self.__view.criarBotoes(botao)
@@ -383,7 +397,7 @@ class Controller():
             self.printError()
     
     def setDeletarContem(self):
-        campos = ["Nome do Componente:", "Id do pedido:"]
+        campos = ["Nome do componente:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarContem())
         self.__view.criarBotoes(botao)
@@ -398,7 +412,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarContem(self):
-        campos = ["Novo nome do Componente:", "Id do pedido:"]
+        campos = ["Novo nome do componente:", "Id do pedido:"]
         self.__view.criarCamposDeInsercao(2, campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarContem())
         self.__view.criarBotoes(botao)
