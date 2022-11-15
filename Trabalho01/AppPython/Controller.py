@@ -320,9 +320,13 @@ class Controller():
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         dadosSet[4] = '\'' + dadosSet[4] + '\''
-        
+        campos = ["Antigo nome:", "Antigo tipo:", "Antigo quantidade mínima:", "Antigo quantidade:", "Antigo CNPJ principal:"]
+        self.__view.criarCamposDeInsercao(5, campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponente(dadosSet))
+        self.__view.criarBotoes(botao)
 
     def atualizarComponente(self, dadosSet):
+        
         pass
 
     def verComponente(self):
