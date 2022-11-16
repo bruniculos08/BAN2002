@@ -459,7 +459,7 @@
         "kind": 6,
         "importPath": "Data.Veiculo",
         "description": "Data.Veiculo",
-        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __manualAutomatico = None\n    __arCondicionado = None\n    __vidrosTravas = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__manualAutomatico = False\n        self.__arCondicionado = False",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__codDept = -1\n    def chassi(self, chassi):\n        self.chassi = chassi",
         "detail": "Data.Veiculo",
         "documentation": {}
     },

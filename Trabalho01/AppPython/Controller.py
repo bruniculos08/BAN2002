@@ -164,7 +164,7 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirVeiculo(self):
-        campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
         self.__view.criarBotoes(botao)
@@ -179,7 +179,7 @@ class Controller():
             self.printError()
 
     def setDeletarVeiculo(self):
-        campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
         self.__view.criarBotoes(botao)
@@ -194,7 +194,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarVeiculo(self):
-        campos = ["Novo chassi:", "Novo manual automatico(boolean):", "Novo ar condicionado(boolean):", "Novo vidro com travas(boolean):", "Novo código de departamento:"]
+        campos = ["Novo chassi:", "Novo valor de produção:", "Novo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo)
         self.__view.criarBotoes(botao)
@@ -202,7 +202,7 @@ class Controller():
     def setSecundarioAtualizarVeiculo(self):
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
-        campos = ["Antigo chassi:", "Antigo manual automatico(boolean):", "Antigo ar condicionado(boolean):", "Antigo vidro com travas(boolean):", "Antigo código de departamento:"]
+        campos = ["Antigo chassi:", "Antigo valor de produção:", "Antigo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
         self.__view.criarBotoes(botao)
@@ -217,7 +217,7 @@ class Controller():
             self.printError()
 
     def verVeiculo(self):
-        campos = ["Chassi", "Manual automatico(boolean)", "Ar condicionado(boolean)", "Vidro com travas(boolean)", "Código de departamento"]
+        campos = ["Chassi", "Valor de produção", "Código de departamento"]
         text = self.__veiculoDAO.selectAll()
         self.printQuery(text, campos)
             

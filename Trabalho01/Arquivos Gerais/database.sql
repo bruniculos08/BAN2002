@@ -1,12 +1,5 @@
 ﻿
-drop sequence dept_cod;
 create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 32 cache 1;
-select currval('dept_cod');
-select nextval('dept_cod');
-
-select * from componente;
-delete from departamento;
-select * from fornecedor;
 
 create table departamento(
     cod_dept integer not null,
@@ -31,6 +24,7 @@ create table fornecedor(
 );
 
 create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 1;
+
 create table pedido(
     id integer not null,
     valor numeric not null,
@@ -52,12 +46,9 @@ create table componente(
 );
 
 drop table veiculo cascade;
-
 create table veiculo(
     chassi character varying(17) not null,
-    manual_automatico boolean not null, -- 0 manual 1 automatico
-    ar_condicionado boolean not null,
-    vidro_travas boolean not null,
+    valor_producao float,
     cod_dept integer not null,
     primary key(chassi),
     FOREIGN KEY (cod_dept) references departamento (cod_dept)
@@ -66,12 +57,6 @@ create table veiculo(
 -- Quando é adicionado um veículo na lista de veículos produzidos supões se que o departamento responsável pela fabricação adicione as peças para fabricação de...
 -- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
 -- ... haverão mais linhas.
-
-drop table componente_necessario;
-select * from departamento;
-select * from componente_necessario;
-insert into componente_necessario values(1, 'motor do batmóvel', 1); 
-
 
 create table componente_necessario(
     cod_dept integer not null,
@@ -82,7 +67,6 @@ create table componente_necessario(
     FOREIGN KEY (nome_componente) references componente (nome)
 );
 
-select * from contem;
 create table contem(
     nome_componente character varying(50) not null,
     id_pedido integer not null,
@@ -91,8 +75,6 @@ create table contem(
     FOREIGN KEY (id_pedido) references pedido (id)
 
 );
-
-select * from departamento;
 
 create table fornece(
     nome_componente character varying(50) not null,
@@ -106,7 +88,8 @@ create table fornece(
 
 -- Gatilhos e funções  a partir desta linha:
 
--- Gatilho para ajuste da table 'componente' em inserções:
+-- Gatilho para ajuste da table 'componente' em inserções, se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
+-- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
 create or replace function addComponente() returns trigger as
 $$
 begin
@@ -150,21 +133,3 @@ language plpgsql;
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
 -- Gatilho para manter a tabela 'componente' atualizada:
-
-select * from pedido;
-select * from componente_necessario;
-select * from componente;
-
---create or replace function atualizaComponente() returns trigger as
---$$
---declare numeroComponente int default 0;
---declare minComponente int default 0;
---begin
---	select quantidade from componente where nome = new.nome_componente into numeroComponente;
---	select minimo_quant from componente where 
---	if numeroComponente 
---end;
---$$
---language plpgsql;
-
---create trigger atualizaComponenteGatilho after insert or update on componente_necessario execute procedure atualizaComponente();

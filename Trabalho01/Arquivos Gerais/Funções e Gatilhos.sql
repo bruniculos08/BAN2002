@@ -1,17 +1,4 @@
-﻿select * from veiculo;
-select * from departamento;
-select * from Nota;
-select * from pedido;
-
-insert into departamento values(1, 'Carros Azuis');
-insert into departamento values(2, 'Carros Amarelos');
-insert into departamento values(5, 'Carros Voadores');
-insert into departamento values(7, 'O cara da grana');
-insert into veiculo values('1M8GDM9AXKP042788', true, true, true, 1);
-insert into veiculo values('9BRPRWHEXG0107792', true, true, true, 1);
-insert into veiculo values('9BRPRWHEXG0107744', true, true, true, 2);
-
--- Função para verificar se o código do chassi é válido:
+﻿-- Função para verificar se o código do chassi é válido:
 
 -- (1) Remove all of the letters from the VIN by transliterating them with their numeric counterparts. Numerical counterparts can be found in the table below.
 -- (2) Multiply this new number, the yield of the transliteration, with the assigned weight. Weights can be found in the table below.
@@ -183,19 +170,69 @@ language plpgsql;
 
 create trigger verificaDepartamentoDeProducaoGatilho before insert or update on pedido for each row execute procedure verificaDepartamentoDeProducao();
 
--- View para o número de veículos personalizados por departamento:
+-- Gatilhos e funções extras (adicionados após a entrega 03) a partir desta linha:
 
+-- Gatilho para ajuste da table 'componente' em inserções, se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
+-- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
+create or replace function addComponente() returns trigger as
+$$
+begin
+	if (select count(*) from componente cn where nome = new.nome) > 0 then
+		update componente cn set quantidade = quantidade + 1, minimo_quant = max(minimo_quant, new.minimo_quant) where nome = new.nome;
+		
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger addComponeteGatilho before insert on componente for each row execute procedure addComponente();
+
+-- Função auxiliar para a função acima:
+create or replace function max(num1 numeric, num2 numeric) returns numeric as
+$$
+begin
+	if num1 >= num2 then
+		return num1;
+	end if;
+	return num2;
+end;
+$$
+language plpgsql;
+
+-- Gatilho para ajuste da tabela 'componente_necessario' em inserções (igual o gatilho anterior sobre a tabela componente), se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
+-- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
+create or replace function addComponenteNecessario() returns trigger as
+$$
+begin
+	if (select count(*) from componente_necessario where nome_componente = new.nome_componente and cod_dept = new.cod_dept) > 0 then
+		update componente_necessario set quantidade = quantidade + new.quantidade where nome_componente = new.nome_componente and cod_dept = new.cod_dept;
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
+
+-- Ideias:
+-- (1) gatilho para manter a tabela 'componente' atualizada;
+-- (2) comando para calcular despesas;
+-- (3) comando para calcular receitas;
+-- (4) alterar a tabela 'veículo' para que haja um atributo de valor do serviço sobre tal veículos(isso será usado para calcular as receitas);
+-- (5) como se diz no final da descrição "personalização de veículos", o dono da empresa analisa as receitas e despesas mensais portanto deve haver o atributo data na tabela 'pedido' e 'veículo';
+
+-- View para o número de veículos personalizados por departamento:
 create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
 create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
-
 drop view NumCarros;
 select * from NumCarros;
-select * from veiculo;
 
 -- View para o número de pedidos de compra por departamento(de compra):
-select * from pedido;
-
 create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
-
 drop view NumPedidos;
 select * from NumPedidos;
+
+-- Comando para obter despesas:
