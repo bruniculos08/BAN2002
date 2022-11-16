@@ -92,15 +92,18 @@ class Controller():
 
     def clearAndGetData(self):
         dados = self.__view.getCamposDeInsercao()
-        self.__view.criarCamposDeInsercao(0)
+        self.__view.criarCamposDeInsercao()
         return dados
+    
+    def setCampoFunc(campos, func):
+        pass
         
     # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento" para...
     # ... a operação de 'insert':
     def setInserirDepartamento(self):
         # Como o codDept é gerado automaticamente (por sequência, basta inserir o tipo):
         campos = ["Tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(1, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirDepartamento())
         self.__view.criarBotoes(botao)
 
@@ -119,7 +122,7 @@ class Controller():
     # ... a operação de 'delete':
     def setDeletarDepartamento(self):
         campos = ["Código do departamento:", "Tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarDepartamento())
         self.__view.criarBotoes(botao)
             
@@ -136,7 +139,7 @@ class Controller():
         
     def setPrimarioAtualizarDepartamento(self):
         campos = ["Novo código do departamento:", "Novo tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarDepartamento())
         self.__view.criarBotoes(botao)
 
@@ -144,7 +147,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         campos = ["Antigo código do departamento:", "Antigo tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarDepartamento(dadosSet))
         self.__view.criarBotoes(botao)
         
@@ -165,7 +168,7 @@ class Controller():
 
     def setInserirVeiculo(self):
         campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
         self.__view.criarBotoes(botao)
 
@@ -180,7 +183,7 @@ class Controller():
 
     def setDeletarVeiculo(self):
         campos = ["Chassi:", "Manual automatico(boolean):", "Ar condicionado(boolean):", "Vidro com travas(boolean):", "Código de departamento:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
         self.__view.criarBotoes(botao)
         
@@ -195,7 +198,7 @@ class Controller():
 
     def setPrimarioAtualizarVeiculo(self):
         campos = ["Novo chassi:", "Novo manual automatico(boolean):", "Novo ar condicionado(boolean):", "Novo vidro com travas(boolean):", "Novo código de departamento:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo)
         self.__view.criarBotoes(botao)
 
@@ -203,7 +206,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         campos = ["Antigo chassi:", "Antigo manual automatico(boolean):", "Antigo ar condicionado(boolean):", "Antigo vidro com travas(boolean):", "Antigo código de departamento:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
         self.__view.criarBotoes(botao)
         
@@ -223,7 +226,7 @@ class Controller():
             
     def setInserirFornecedor(self):
         campos = ["CNPJ:", "Nome:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirFornecedor())
         self.__view.criarBotoes(botao)
 
@@ -238,7 +241,7 @@ class Controller():
 
     def setDeletarFornecedor(self):
         campos = ["CNPJ:", "Nome:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarFornecedor())
         self.__view.criarBotoes(botao)
 
@@ -255,7 +258,7 @@ class Controller():
     
     def setPrimarioAtualizarFornecedor(self):
         campos = ["Novo CNPJ:", "Novo nome:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarFornecedor())
         self.__view.criarBotoes(botao)
         
@@ -264,7 +267,7 @@ class Controller():
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         campos = ["Antigo CNPJ:", "Antigo nome:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarFornecedor(dadosSet))
         self.__view.criarBotoes(botao)
 
@@ -285,7 +288,7 @@ class Controller():
             
     def setInserirPedido(self):
         campos = ["Valor:", "CNPJ:", "Código do Departamento:"]
-        self.__view.criarCamposDeInsercao(3, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirPedido())
         self.__view.criarBotoes(botao)
 
@@ -300,7 +303,7 @@ class Controller():
 
     def setDeletarPedido(self):    
         campos = ["Id do pedido:", "Valor:", "CNPJ:", "Código do Departamento:"]
-        self.__view.criarCamposDeInsercao(4, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarPedido())
         self.__view.criarBotoes(botao)
 
@@ -315,7 +318,7 @@ class Controller():
 
     def setPrimarioAtualizarPedido(self):
         campos = ["Novo id do pedido:", "Novo valor:", "Novo CNPJ:", "Novo código do departamento:"]
-        self.__view.criarCamposDeInsercao(4, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
@@ -324,7 +327,7 @@ class Controller():
         dadosSet[2] = '\'' + dadosSet[2] + '\''
         dadosSet[3] = '\'' + dadosSet[3] + '\''
         campos = ["Antigo id do pedido:", "Antigo valor:", "Antigo CNPJ:", "Antigo código do departamento:"]
-        self.__view.criarCamposDeInsercao(4, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarPedido(dadosSet))
         self.__view.criarBotoes(botao)
 
@@ -345,7 +348,7 @@ class Controller():
 
     def setInserirComponente(self):
         campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponente())
         self.__view.criarBotoes(botao)
 
@@ -360,7 +363,7 @@ class Controller():
 
     def setDeletarComponente(self):
         campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponente())
         self.__view.criarBotoes(botao)      
     
@@ -377,7 +380,7 @@ class Controller():
 
     def setPrimarioAtualizarComponente(self):
         campos = ["Novo nome:", "Novo tipo:", "Nova quantidade mínima:", "Nova quantidade:", "Novo CNPJ principal:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponente())
         self.__view.criarBotoes(botao)
 
@@ -387,7 +390,7 @@ class Controller():
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         dadosSet[4] = '\'' + dadosSet[4] + '\''
         campos = ["Antigo nome:", "Antigo tipo:", "Antigo quantidade mínima:", "Antigo quantidade:", "Antigo CNPJ principal:"]
-        self.__view.criarCamposDeInsercao(5, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponente(dadosSet))
         self.__view.criarBotoes(botao)
 
@@ -409,7 +412,7 @@ class Controller():
             
     def setInserirComponenteNecessario(self):
         campos = ["Código do Departamento:", "Nome do Componente:", "Quantidade:"]
-        self.__view.criarCamposDeInsercao(3, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponenteNecessario())
         self.__view.criarBotoes(botao)
 
@@ -424,7 +427,7 @@ class Controller():
 
     def setDeletarComponenteNecessario(self):
         campos = ["Código do departamento:", "Nome do componente:", "Quantidade:"]
-        self.__view.criarCamposDeInsercao(3, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponenteNecessario())
         self.__view.criarBotoes(botao)
     
@@ -439,7 +442,7 @@ class Controller():
 
     def setPrimarioAtualizarComponenteNecessario(self):
         campos = ["Novo código do departamento:", "Novo nome do componente:", "Nova quantidade:"]
-        self.__view.criarCamposDeInsercao(3, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponenteNecessario())
         self.__view.criarBotoes(botao)
         
@@ -447,7 +450,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         campos = ["Antigo código do departamento:", "Antigo nome do componente:", "Antiga quantidade:"]
-        self.__view.criarCamposDeInsercao(3, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponenteNecessario(dadosSet))
         self.__view.criarBotoes(botao)
 
@@ -467,7 +470,7 @@ class Controller():
             
     def setInserirContem(self):
         campos = ["Nome do componente:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirContem())
         self.__view.criarBotoes(botao)
 
@@ -482,7 +485,7 @@ class Controller():
     
     def setDeletarContem(self):
         campos = ["Nome do componente:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarContem())
         self.__view.criarBotoes(botao)
 
@@ -497,7 +500,7 @@ class Controller():
 
     def setPrimarioAtualizarContem(self):
         campos = ["Novo nome do componente:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarContem())
         self.__view.criarBotoes(botao)
         
@@ -505,7 +508,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         campos = ["Antigo nome do componente:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarContem(dadosSet))
         self.__view.criarBotoes(botao)
         
@@ -525,7 +528,7 @@ class Controller():
             
     def setInserirNotaFiscal(self):
         campos = ["Código da nota:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirNotaFiscal())
         self.__view.criarBotoes(botao)
 
@@ -540,7 +543,7 @@ class Controller():
 
     def setDeletarNotaFiscal(self):
         campos = ["Código da nota:", "Id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarNotaFiscal())
         self.__view.criarBotoes(botao)
             
@@ -555,7 +558,7 @@ class Controller():
 
     def setPrimarioAtualizarNotaFiscal(self):
         campos = ["Novo código da nota:", "Novo id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarNotaFiscal())
         self.__view.criarBotoes(botao)
 
@@ -563,7 +566,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         campos = ["Antigo código da nota:", "Antigo id do pedido:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarNotaFiscal(dadosSet))
         self.__view.criarBotoes(botao)
 
@@ -583,7 +586,7 @@ class Controller():
             
     def setInserirFornece(self):
         campos = ["Nome do Componente:", "CNPJ:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirFornece())
         self.__view.criarBotoes(botao)
 
@@ -598,7 +601,7 @@ class Controller():
 
     def setDeletarFornece(self):
         campos = ["Nome do Componente:", "CNPJ:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarFornece())
         self.__view.criarBotoes(botao)
 
@@ -614,7 +617,7 @@ class Controller():
 
     def setPrimarioAtualizarFornece(self):
         campos = ["Novo nome do componente:", "Novo CNPJ:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarFornece())
         self.__view.criarBotoes(botao)
     
@@ -623,7 +626,7 @@ class Controller():
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         campos = ["Antigo nome do componente:", "Antigo CNPJ:"]
-        self.__view.criarCamposDeInsercao(2, campos)
+        self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarFornece(dadosSet))
         self.__view.criarBotoes(botao)
 

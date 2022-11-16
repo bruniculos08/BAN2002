@@ -89,7 +89,7 @@ class View():
         listaDeBotoesVeiculo = Menu(self.__tela, tearoff=0)
         listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Ver todos", command = lambda : self.__controller.verVeiculo())
-        listaDeBotoesVeiculo.add_command(label = "Ver veículos por departamento", command = lambda : self.__controller.verVeiculo())
+        listaDeBotoesVeiculo.add_command(label = "Ver veículos por departamento", command = lambda : self.__controller.verNumCarrros())
         listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : self.__controller.setDeletarVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarVeiculo())
         
@@ -97,7 +97,7 @@ class View():
         listaDeBotoesPedido = Menu(self.__tela, tearoff=0)
         listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirPedido())
         listaDeBotoesPedido.add_command(label = "Ver todos", command = lambda : self.__controller.verPedido())
-        listaDeBotoesPedido.add_command(label = "Ver pedidos por departamento", command = lambda : self.__controller.verPedido())
+        listaDeBotoesPedido.add_command(label = "Ver pedidos por departamento", command = lambda : self.__controller.verNumPedidos())
         listaDeBotoesPedido.add_command(label = "Remover", command = lambda : self.__controller.setDeletarPedido())
         listaDeBotoesPedido.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarPedido())
 
@@ -172,7 +172,8 @@ class View():
         self.fieldBox = Entry(fieldBoxFrame, width=61, borderwidth=2, bg = 'white', relief=SOLID)
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
 
-    def criarCamposDeInsercao(self, quantidade = 0, campos = []):
+    def criarCamposDeInsercao(self, campos = []):
+        quantidade = len(campos)
         self.setCampoDeExibicao(" ")
 
         if self.__fieldBoxFrame != None: 
