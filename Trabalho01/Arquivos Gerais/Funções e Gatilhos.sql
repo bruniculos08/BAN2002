@@ -236,10 +236,12 @@ create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) 
 drop view NumPedidos;
 select * from NumPedidos;
 
--- Comando para obter despesas:
+-- View para obter despesas mensais:
 select * from pedido;
 
 select extract(month from now());
+
+insert into pedido values(-1, 10, '2022-11-11')
 
 drop view Despesa;
 create view Despesa(valor) as select sum(valor) from pedido group by (extract(month from data_criacao), extract(year from data_criacao)) order by (extract(year from data_criacao), extract(month from data_criacao));
