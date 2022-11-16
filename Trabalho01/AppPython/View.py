@@ -41,7 +41,7 @@ class View():
         self.__tela.geometry("1280x720")
         self.__tela.minsize(width=1280, height=720)
         self.__tela.maxsize(width=1280, height=720)
-        self.__tela.title("Fábrica de veículos")
+        self.__tela.title("Personalização de veículos")
         return
 
     def colocarImagem(self):
@@ -89,6 +89,7 @@ class View():
         listaDeBotoesVeiculo = Menu(self.__tela, tearoff=0)
         listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Ver todos", command = lambda : self.__controller.verVeiculo())
+        listaDeBotoesVeiculo.add_command(label = "Ver veículos por departamento", command = lambda : self.__controller.verVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : self.__controller.setDeletarVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarVeiculo())
         
@@ -96,10 +97,9 @@ class View():
         listaDeBotoesPedido = Menu(self.__tela, tearoff=0)
         listaDeBotoesPedido.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirPedido())
         listaDeBotoesPedido.add_command(label = "Ver todos", command = lambda : self.__controller.verPedido())
-        listaDeBotoesPedido.add_command(label = "Ver lista de pedidos por departamento", command = lambda : self.__controller.verPedido())
+        listaDeBotoesPedido.add_command(label = "Ver pedidos por departamento", command = lambda : self.__controller.verPedido())
         listaDeBotoesPedido.add_command(label = "Remover", command = lambda : self.__controller.setDeletarPedido())
         listaDeBotoesPedido.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarPedido())
-        
 
         # Botão para opções relacionadas à componentes:
         listaDeBotoesComponente = Menu(self.__tela, tearoff=0)
@@ -150,7 +150,6 @@ class View():
 
         # Adicionando a lista de listas de botões criados à tela:
         self.__tela.config(menu = listaDelistaDeBotoes)
-        return
     
     # Abrir campo de inserção:
     def setOnCampoDeInsercao(self, string):
@@ -232,10 +231,10 @@ class View():
 
     def createTextBox(self):
         # Criando os objetos:
-        self.__textBox = Text(self.__tela, height=40, width=100, borderwidth=4, relief="solid")
-        self.__textBox.config(font =("Courier", 8))
-        label = Label(self.__tela, text = "Resultado", width=50, bg = "grey", borderwidth=6.4, relief="solid")
-        label.config(font =("Courier", 12))
+        self.__textBox = Text(self.__tela, height=30, width=80, borderwidth=2, relief="solid")
+        self.__textBox.config(font =("Courier", 10, "bold"))
+        label = Label(self.__tela, text = "Resultado", width=50, bg = "grey", borderwidth=2, relief="solid")
+        label.config(font = ("Courier", 10, "bold"))
 
         # Packs e places do label:
         label.pack()

@@ -193,6 +193,22 @@
     },
     {
         "label": "*",
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "isExtraImport": true,
+        "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "isExtraImport": true,
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "View",
         "description": "View",
         "isExtraImport": true,
@@ -390,6 +406,15 @@
         "importPath": "Data.NumCarros",
         "description": "Data.NumCarros",
         "peekOfCode": "class NumCarros():\n    __codDept = None\n    __numOfCarros = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfCarros = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "NumCarrosDAO",
+        "kind": 6,
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "peekOfCode": "class NumCarrosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumCarros\"\n        self.__sqlSelectDept = \"select NumOfCarros from NumCarros where\"\n        self.__sqlSelectMore = \"select * from NumCarros where NumOfCarros >\"",
         "detail": "Data.NumCarros",
         "documentation": {}
     },

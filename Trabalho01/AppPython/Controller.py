@@ -13,6 +13,8 @@ from Data.ComponenteNecessario import *
 from Data.Contem import *
 from Data.NotaFiscal import *
 from Data.Fornece import *
+from Data.NumPedidos import *
+from Data.NumCarros import *
 
 class Controller():
 
@@ -26,6 +28,8 @@ class Controller():
     __contemDAO = None
     __notaFiscalDAO = None
     __forneceDAO = None
+    __numPedidosDAO = None
+    __numCarrosDAO = None
     __model = None
     __noticesSize = None
     
@@ -41,6 +45,8 @@ class Controller():
         self.__contemDAO = ContemDAO()
         self.__notaFiscalDAO = NotaFiscalDAO()
         self.__forneceDAO = ForneceDAO()
+        self.__numPedidosDAO = NumPedidosDAO()
+        self.__numCarrosDAO = NumCarrosDAO()
         self.__noticesSize = 0
 
     def view(self, view):
@@ -635,3 +641,13 @@ class Controller():
         campos = ["Nome do Componente", "CNPJ"]
         text = self.__forneceDAO.selectAll()
         self.printQuery(text, campos)
+
+    def verNumPedidos(self):
+        campos = ["Id do departamento", "Número de pedidos"]
+        text = self.__numPedidosDAO.selectAll()
+        self.printQuery(text,campos)
+
+    def verNumCarrros(self):
+        campos = ["Id do departamento", "Número de veículos"]
+        text = self.__numCarrosDAO.selectAll()
+        self.printQuery(text,campos)
