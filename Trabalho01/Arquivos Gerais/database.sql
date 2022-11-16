@@ -29,7 +29,7 @@ create table pedido(
     id integer not null,
     valor numeric not null,
     cnpj character varying(14) not null,
-    --data_de_criacao date, -- 'YYYY-MM-DD' 
+    --data_criacao date, -- 'YYYY-MM-DD' 
     cod_dept_compra integer not null,
     primary key (id),
     foreign key(cnpj) references fornecedor(cnpj),
@@ -50,7 +50,7 @@ drop table veiculo cascade;
 create table veiculo(
     chassi character varying(17) not null,
     valor_producao float,
-    --inicio date, -- 'YYYY-MM-DD' 
+    --data_producao date, -- 'YYYY-MM-DD' 
     cod_dept integer not null,
     primary key(chassi),
     FOREIGN KEY (cod_dept) references departamento (cod_dept)
@@ -59,6 +59,8 @@ create table veiculo(
 -- Quando é adicionado um veículo na lista de veículos produzidos supões se que o departamento responsável pela fabricação adicione as peças para fabricação de...
 -- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
 -- ... haverão mais linhas.
+
+select cast(now() as date);
 
 create table componente_necessario(
     cod_dept integer not null,
