@@ -4,12 +4,14 @@ class Pedido():
 
     __id = None
     __valor = None
+    __dataCriacao = None
     __cnpj = None
     __codDeptCompra = None
 
     def __init__(self):
         self.__id = -1
         self.__valor = 0
+        self.__dataCriacao = 'YYYY-MM-DD'
         self.__cnpj = ""
         self.__codDeptCompra = -1
 
@@ -26,6 +28,13 @@ class Pedido():
     
     def getValor(self):
         return self.__valor
+    
+    def dataCriacao(self, dataCriacao):
+        self.__dataCriacao = dataCriacao
+        return self
+    
+    def getDataCriacao(self):
+        self.__dataCriacao
 
     def cnpj(self, cnpj):
         self.__cnpj = cnpj
@@ -63,10 +72,10 @@ class PedidoDAO():
     def __init__(self):
         self.__sqlSelectAll = "select * from pedido"
         self.__sqlSelectNewId = "select nextval('pedido_id')"
-        self.__sqlInsert = "insert into pedido values({}, {}, '{}', {})"
+        self.__sqlInsert = "insert into pedido values({}, '{}', '{}', {})"
         self.__sqlDelete = "delete from pedido"
         self.__sqlUpdate = "update pedido set"
-        self.__columns = ["id", "valor", "cnpj", "cod_dept_compra"]
+        self.__columns = ["id", "valor", "data_criacao", "cnpj", "cod_dept_compra"]
 
     def selectAll(self) -> list:
         con = Connection()
@@ -89,7 +98,7 @@ class PedidoDAO():
         id = self.__selectNewId()
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(id, pedido.getCnpj(), pedido.getCodDeptCompra()))
+        cursor.execute(self.__sqlInsert.format(id, pedido.getValor(), pedido.getDataCriacao(), pedido.getCnpj(), pedido.getCodDeptCompra()))
         con.commit()
 
     def delete(self, dados = None):

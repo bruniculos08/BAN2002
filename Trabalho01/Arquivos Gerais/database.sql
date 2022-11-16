@@ -25,16 +25,19 @@ create table fornecedor(
 
 create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 1;
 
+drop table pedido cascade;
 create table pedido(
     id integer not null,
-    valor numeric not null,
+    valor float not null,
+    data_criacao date, -- 'YYYY-MM-DD' 
     cnpj character varying(14) not null,
-    --data_criacao date, -- 'YYYY-MM-DD' 
     cod_dept_compra integer not null,
     primary key (id),
     foreign key(cnpj) references fornecedor(cnpj),
     foreign key (cod_dept_compra) references departamento(cod_dept)
 );
+
+select cast(now() as date);
 
 create table componente(
     nome character varying(50) not null,
@@ -49,8 +52,8 @@ create table componente(
 drop table veiculo cascade;
 create table veiculo(
     chassi character varying(17) not null,
-    valor_producao float,
-    --data_producao date, -- 'YYYY-MM-DD' 
+    valor_producao float not null,
+    data_producao date, -- 'YYYY-MM-DD' 
     cod_dept integer not null,
     primary key(chassi),
     FOREIGN KEY (cod_dept) references departamento (cod_dept)

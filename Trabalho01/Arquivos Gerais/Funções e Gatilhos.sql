@@ -223,6 +223,7 @@ create trigger addComponenteNecessarioGatilho before insert on componente_necess
 -- (3) comando para calcular receitas;
 -- (4) alterar a tabela 'veículo' para que haja um atributo de valor do serviço sobre tal veículos(isso será usado para calcular as receitas);
 -- (5) como se diz no final da descrição "personalização de veículos", o dono da empresa analisa as receitas e despesas mensais portanto deve haver o atributo data na tabela 'pedido' e 'veículo';
+-- (6) gatilho para impedir que diferentes fornecedores tenham nomes iguais
 
 -- View para o número de veículos personalizados por departamento:
 create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
@@ -236,3 +237,25 @@ drop view NumPedidos;
 select * from NumPedidos;
 
 -- Comando para obter despesas:
+select * from pedido;
+
+select extract(month from now());
+
+drop view Despesa;
+create view Despesa(valor) as select sum(valor) from pedido group by (extract(month from data_criacao), extract(year from data_criacao)) order by (extract(year from data_criacao), extract(month from data_criacao));
+
+-- Gatilho para nome de fornecedores:
+
+create function nomeIgual() returns trigger as
+$$
+begin
+	if (select count(*) from forncedor where fornecedor.nome = new.nome) > 0 then
+		raise notice 'Não pode haver mais de um fornecedor com o mesmo nome!';
+		return null;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+create trigger nomeIgualGatilho before insert or update on fornecedor for each row execute procedure nomeIgual();

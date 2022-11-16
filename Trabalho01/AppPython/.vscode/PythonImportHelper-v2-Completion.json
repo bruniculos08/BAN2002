@@ -441,7 +441,7 @@
         "kind": 6,
         "importPath": "Data.Pedido",
         "description": "Data.Pedido",
-        "peekOfCode": "class Pedido():\n    __id = None\n    __valor = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__valor = 0\n        self.__cnpj = \"\"\n        self.__codDeptCompra = -1",
+        "peekOfCode": "class Pedido():\n    __id = None\n    __valor = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__valor = 0\n        self.__dataCriacao = 'YYYY-MM-DD'",
         "detail": "Data.Pedido",
         "documentation": {}
     },
@@ -459,7 +459,7 @@
         "kind": 6,
         "importPath": "Data.Veiculo",
         "description": "Data.Veiculo",
-        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__codDept = -1\n    def chassi(self, chassi):\n        self.chassi = chassi",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__codDept = -1\n    def chassi(self, chassi):",
         "detail": "Data.Veiculo",
         "documentation": {}
     },
@@ -468,7 +468,7 @@
         "kind": 6,
         "importPath": "Data.Veiculo",
         "description": "Data.Veiculo",
-        "peekOfCode": "class VeiculoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {}, {}, {}, {})\" ",
+        "peekOfCode": "class VeiculoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {}, '{}', {})\" ",
         "detail": "Data.Veiculo",
         "documentation": {}
     },

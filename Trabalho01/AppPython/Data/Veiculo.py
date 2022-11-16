@@ -6,6 +6,7 @@ class Veiculo():
 
     __chassi = None
     __valorProducao = None
+    __dataProducao = None
     __codDept = None
 
     def __init__(self):
@@ -27,6 +28,13 @@ class Veiculo():
     def getValorProducao(self):
         return self.__valorProducao
     
+    def dataProducao(self, dataProducao):
+        self.__dataProducao = dataProducao
+        return self
+    
+    def getDataProducao(self):
+        return self.__dataProducao
+    
     def codDept(self ,codDept):
         self.__codDept = codDept
         return self
@@ -37,11 +45,12 @@ class Veiculo():
     def fromTupla(self, tupla):
         self.__chassi = tupla[0]
         self.__valorProducao = tupla[1]
-        self.__codDept = tupla[2]
+        self.__dataProducao = tupla[2]
+        self.__codDept = tupla[3]
     # Obs.: essa função também serve para listas(para qualquer estrutura indexada no geral)!
 
     def __repr__(self):
-        return u'{}:{}:{}'.format(self.__chassi, self.__valorProducao, self.__codDept)
+        return u'{}:{}:{}:{}'.format(self.__chassi, self.__valorProducao, self.__dataProducao, self.__codDept)
     
 class VeiculoDAO():
 
@@ -55,10 +64,10 @@ class VeiculoDAO():
     
     def __init__(self):
         self.__sqlSelectAll = "select * from veiculo"
-        self.__sqlInsert = "insert into veiculo values('{}', {}, {}, {}, {})" 
+        self.__sqlInsert = "insert into veiculo values('{}', {}, '{}', {})" 
         self.__sqlDelete = "delete from veiculo"
         self.__sqlUpdate = "update veiculo set"
-        self.__columns = ["chassi", "valor_prod", "cod_dept"]
+        self.__columns = ["chassi", "valor_producao", "data_producao", "cod_dept"]
         
     def selectAll(self) -> list:
         con = Connection()
@@ -73,7 +82,7 @@ class VeiculoDAO():
     def insertVeiculo(self, veiculo):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(veiculo.getChassi(), veiculo.getValorProducao(), veiculo.getCodDept()))
+        cursor.execute(self.__sqlInsert.format(veiculo.getChassi(), veiculo.getValorProducao(), veiculo.getDataProducao(), veiculo.getCodDept()))
         con.commit()
 
     def delete(self, dados = None):
