@@ -60,7 +60,7 @@ create table veiculo(
 -- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
 -- ... haverão mais linhas.
 
-select cast(now() as date);
+select cast(now() as date) where now = '2022-11-16';
 
 create table componente_necessario(
     cod_dept integer not null,
