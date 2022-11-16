@@ -29,6 +29,7 @@ create table pedido(
     id integer not null,
     valor numeric not null,
     cnpj character varying(14) not null,
+    --data_de_criacao date, -- 'YYYY-MM-DD' 
     cod_dept_compra integer not null,
     primary key (id),
     foreign key(cnpj) references fornecedor(cnpj),
@@ -49,6 +50,7 @@ drop table veiculo cascade;
 create table veiculo(
     chassi character varying(17) not null,
     valor_producao float,
+    --inicio date, -- 'YYYY-MM-DD' 
     cod_dept integer not null,
     primary key(chassi),
     FOREIGN KEY (cod_dept) references departamento (cod_dept)
