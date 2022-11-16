@@ -26,7 +26,7 @@ class View():
         self.createTextBox()
         self.criarBotoesDeAba()
         self.criarCamposDeInsercao()
-        self.setCampoDeExibicao("Texto...")
+        self.setCampoDeExibicao(" ")
         self.ajustarTela()
         return
 
@@ -203,7 +203,7 @@ class View():
         self.__tela.update()
         botao.pack()
         botao.place(anchor = "n", x = 250, y = self.__fieldBoxFrame.winfo_height() - 35) 
-        cancel = Button(self.getFieldBoxFrame(), text = "Cancelar", state = 'normal', command = lambda : self.criarCamposDeInsercao(0))
+        cancel = Button(self.getFieldBoxFrame(), text = "Cancelar", state = 'normal', command = lambda : self.criarCamposDeInsercao())
         cancel.pack()
         cancel.place(anchor="n", x = 150, y = self.__fieldBoxFrame.winfo_height() - 35)
     

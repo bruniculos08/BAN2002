@@ -95,17 +95,21 @@ class Controller():
         self.__view.criarCamposDeInsercao()
         return dados
     
-    def setCampoFunc(campos, func):
-        pass
+    # Essa função pode ser usada para abstrair os sets abaixo:
+    def setCampoFunc(self, campos, func):
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : func())
+        self.__view.criarBotoes(botao)
         
     # Esta função criar os campos de inserção de acordo com a quantidade de atributos da entidade "Departamento" para...
     # ... a operação de 'insert':
     def setInserirDepartamento(self):
         # Como o codDept é gerado automaticamente (por sequência, basta inserir o tipo):
         campos = ["Tipo do departamento:"]
-        self.__view.criarCamposDeInsercao(campos)
-        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirDepartamento())
-        self.__view.criarBotoes(botao)
+        self.setCampoFunc(campos, self.inserirDepartamento())
+        # self.__view.criarCamposDeInsercao(campos)
+        # botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirDepartamento())
+        # self.__view.criarBotoes(botao)
 
     # Esta função pega os dados do campo de inserção e insere na tabela de departamento do banco de dados:
     def inserirDepartamento(self):
