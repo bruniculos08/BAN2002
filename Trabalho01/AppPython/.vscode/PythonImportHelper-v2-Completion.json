@@ -534,7 +534,7 @@
         "kind": 6,
         "importPath": "Data.NotaFiscal",
         "description": "Data.NotaFiscal",
-        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
+        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
         "detail": "Data.NotaFiscal",
         "documentation": {}
     },

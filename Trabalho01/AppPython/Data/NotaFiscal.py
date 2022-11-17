@@ -36,17 +36,17 @@ class NotaFiscalDAO(PadraoDAO):
     
     __sqlSelectAll = None
     __sqlInsert = None
-    # __sqlDelete = None
-    # __sqlUpdate = None
-    # __columns = None
+    __sqlDelete = None
+    __sqlUpdate = None
+    __columns = None
     __sqlSelectNewCodNota= None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from nota_fiscal"
         self.__sqlInsert = "insert into nota_fiscal values('{}', {})"
-        # self.__sqlDelete = "delete from nota_fiscal"
-        # self.__sqlUpdate = "update nota_fiscal set"
-        # self.__columns = ["cod_nota", "id_pedido"]
+        self.__sqlDelete = "delete from nota_fiscal"
+        self.__sqlUpdate = "update nota_fiscal set"
+        self.__columns = ["cod_nota", "id_pedido"]
         super().__init__("delete from nota_fiscal", "update nota_fiscal set", ["cod_nota", "id_pedido"])
 
     def selectAll(self) -> list:
@@ -64,3 +64,18 @@ class NotaFiscalDAO(PadraoDAO):
         cursor = con.cursor()
         cursor.execute(self.__sqlInsert.format(notaFiscal.getCodNota(), notaFiscal.getIdPedido()))
         con.commit()
+
+    # def delete(self, notaFiscal):
+    #     dados = [notaFiscal.getCodNota(), notaFiscal.getIdPedido()]
+    #     query = ""
+    #     if(dados[0] != ""):
+    #         query.append(" " + f"where cod_nota = {dados[0]}")
+    #     if(dados[1] != -1):
+    #         if dados[0] != "":
+    #             query.append(" " + "and" + " " + f"id_pedido = {dados[1]}")
+    #         else:
+    #             query.append(" " + f"where id_pedido = {dados[1]}")
+    #     con = Connection()
+    #     cursor = con.cursor()
+    #     cursor.execute(self.__sqlDelete + query)
+    #     con.commit()
