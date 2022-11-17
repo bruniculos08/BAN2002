@@ -121,6 +121,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -374,7 +390,7 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
         "detail": "Data.Departamento",
         "documentation": {}
     },
@@ -484,6 +500,15 @@
         "description": "Data.NumPedidos",
         "peekOfCode": "class NumPedidosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumPedidos\"\n        self.__sqlSelectDept = \"select NumOfPedidos from NumPedidos where\"\n        self.__sqlSelectMore = \"select * from NumPedidos where NumOfPedidos >\"",
         "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "PadraoDAO",
+        "kind": 6,
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "peekOfCode": "class PadraoDAO():\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self, sqlDelete, sqlUpdate, campos):\n        self.__sqlDelete = sqlDelete\n        self.__sqlUpdate = sqlUpdate\n        self.__columns = campos\n    def delete(self, dados = None):\n        con = Connection()",
+        "detail": "Data.Padrao",
         "documentation": {}
     },
     {

@@ -134,20 +134,22 @@ class Controller():
     def deletarDepartamento(self):
         dados = self.clearAndGetData()
         dados[1] = '\'' + dados[1] + '\''
-        try:
-            self.__departamentoDAO.delete(dados)
-            self.printSucess()
-        except:
-            self.printError()
+        self.__departamentoDAO.delete(dados)
+        self.printSucess()
+        # try:
+        #     self.__departamentoDAO.delete(dados)
+        #     self.printSucess()
+        # except:
+        #     self.printError()
         
     def setPrimarioAtualizarDepartamento(self):
-        campos = ["Novo código do departamento:", "Novo tipo do departamento:"]
+        campos = ["Novo tipo do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarDepartamento())
         self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarDepartamento(self):
-        dadosSet = self.clearAndGetData()
+        dadosSet = [''] + self.clearAndGetData()
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         campos = ["Antigo código do departamento:", "Antigo tipo do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
@@ -323,13 +325,13 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        campos = ["Novo id do pedido:", "Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
+        campos = ["Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
     def setSecundarioAtualizarPedido(self):
-        dadosSet = self.clearAndGetData()
+        dadosSet = [''] + self.clearAndGetData()
         dadosSet[2] = '\'' + dadosSet[2] + '\''
         dadosSet[3] = '\'' + dadosSet[3] + '\''
         campos = ["Antigo id do pedido:", "Antigo valor:", "Antiga data de criação(YYYY-MM-DD):", "Antigo CNPJ:", "Antigo código do departamento:"]
