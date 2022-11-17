@@ -54,12 +54,13 @@ class Pedido():
     def fromTupla(self, tupla):
         self.__idPedido = tupla[0]
         self.__valor = tupla[1]
-        self.__cnpj = tupla[2]
-        self.__codDeptCompra = tupla[3]
+        self.__dataCriacao = tupla[2]
+        self.__cnpj = tupla[3]
+        self.__codDeptCompra = tupla[4]
         return self
     
     def __repr__(self):
-        return u'{}:{}:{}:{}'.format(self.__idPedido, self.__valor, self.__cnpj, self.__codDeptCompra)    
+        return u'{}:{}:{}:{}:{}'.format(self.__idPedido, self.__valor, self.__dataCriacao, self.__cnpj, self.__codDeptCompra)    
 
 class PedidoDAO(PadraoDAO):
 

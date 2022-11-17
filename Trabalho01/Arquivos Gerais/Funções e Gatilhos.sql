@@ -236,6 +236,8 @@ create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) 
 drop view NumPedidos;
 select * from NumPedidos;
 
+
+select * from pedido;
 -- View para obter receitas mensais:
 
 select * from departamento;

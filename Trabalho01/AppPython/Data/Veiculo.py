@@ -48,6 +48,7 @@ class Veiculo():
         self.__valorProducao = tupla[1]
         self.__dataProducao = tupla[2]
         self.__codDept = tupla[3]
+        return self
     # Obs.: essa função também serve para listas(para qualquer estrutura indexada no geral)!
 
     def __repr__(self):
@@ -65,7 +66,7 @@ class VeiculoDAO(PadraoDAO):
     
     def __init__(self):
         self.__sqlSelectAll = "select * from veiculo"
-        self.__sqlInsert = "insert into veiculo values('{}', {}, '{}', {})" 
+        self.__sqlInsert = "insert into veiculo values('{}', {},  '{}', {})" 
         # self.__sqlDelete = "delete from veiculo"
         # self.__sqlUpdate = "update veiculo set"
         # self.__columns = ["chassi", "valor_producao", "data_producao", "cod_dept"]
