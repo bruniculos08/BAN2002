@@ -39,18 +39,18 @@ class DepartamentoDAO(PadraoDAO):
     __sqlInsert = None
     # __sqlDelete = None
     # __sqlUpdate = None
-    __columns = None
+    # __columns = None
     __sqlSelectCurrCodDept = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from departamento"
         self.__sqlSelectNewCodDept = "select nextval('dept_cod')"
         self.__sqlInsert = "insert into departamento values({}, '{}')"
-        self.__sqlDelete = "delete from departamento"
-        self.__sqlUpdate = "update departamento set"
         self.__sqlSelectCurrCodDept = "select currval('dept_cod')"
-        self.__columns = ["cod_dept", "tipo"]
-        super().__init__(self.__sqlDelete, self.__sqlUpdate, self.__columns)
+        # self.__sqlDelete = "delete from departamento"
+        # self.__sqlUpdate = "update departamento set"
+        # self.__columns = ["cod_dept", "tipo"]
+        super().__init__("delete from departamento", "update departamento set", ["cod_dept", "tipo"])
 
     # Retorna uma lista com um objeto de cada departamento do banco de dados:
     def selectAll(self) -> list:

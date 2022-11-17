@@ -1,4 +1,5 @@
 from Model import *
+from Padrao import *
 
 class Componente():
 
@@ -61,20 +62,21 @@ class Componente():
     def __repr__(self):
         return u'{}:{}:{}:{}:{}'.format(self.__nome, self.__tipo, self.__quantidadeMin, self.__quantidade, self.__cnpjPrincipal)
     
-class ComponenteDAO():
+class ComponenteDAO(PadraoDAO):
 
     __sqlSelectAll = None
     __sqlInsert = None
-    __sqlDelete = None
-    __sqlUpdate = None
-    __columns = None
+    # __sqlDelete = None
+    # __sqlUpdate = None
+    # __columns = None
     
     def __init__(self):
         self.__sqlSelectAll = "select * from componente"
         self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, '{}')"
-        self.__sqlDelete = "delete from componente"
-        self.__sqlUpdate = "update componente set"
-        self.__columns = ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"]
+        # self.__sqlDelete = "delete from componente"
+        # self.__sqlUpdate = "update componente set"
+        # self.__columns = ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"]
+        super().__init__("delete from componente", "update componente set", ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"])
 
     # Retorna uma lista com um objeto de cada componente do banco de dados:
     def selectAll(self) -> list:
@@ -93,56 +95,3 @@ class ComponenteDAO():
         cursor.execute(self.__sqlInsert.format(componente.getNome(), componente.getTipo(), componente.getQuatidadeMin(),
             componente.getQuantidade(), componente.getCnpjPrincipal()))
         con.commit()
-
-    def delete(self, dados = None):
-        con = Connection()
-        cursor = con.cursor()
-        campos = self.__columns
-
-        # Construindo condicionais:
-        string = ""
-        for campo, dado in zip(campos, dados):
-            if dado == '' or dado == '\'\'':
-                continue
-            if len(string) > 0:
-                string = string + "," + " " + campo + " = " + dado
-            else:
-                string = string + " " + campo + " = " + dado
-
-        # Se não há condicional:
-        if string == "":
-            cursor.execute(self.__sqlDelete) 
-        
-        cursor.execute(self.__sqlDelete + " " + "where" + string)
-
-    def update(self, dadosSet,  dadosWhere):
-        con = Connection()
-        cursor = con.cursor()
-        campos = self.__columns
-
-        stringSet = ""
-        stringWhere = ""
-
-        # Montando stringSet:
-        for campo, dado in zip(campos, dadosSet):
-            if dado == '' or dado == '\'\'':
-                continue
-            if len(stringSet) > 0:
-                stringSet = stringSet + "," + " " + campo + " = " + dado
-            else:
-                stringSet = stringSet + " " + campo + " = " + dado
-
-        # Montando stringWhere:
-        for campo, dado in zip(campos, dadosWhere):
-            if dado == '' or dado == '\'\'':
-                continue
-            if len(stringWhere) > 0:
-                stringWhere = stringWhere + "," + " " + campo + " = " + dado
-            else:
-                stringWhere = stringWhere + " " + campo + " = " + dado
-
-        # Se não há condicional:
-        if stringWhere == "":
-            cursor.execute(self.__sqlUpdate + " " + stringSet) 
-
-        cursor.execute(self.__sqlUpdate + stringSet + " " + "where" + stringWhere)

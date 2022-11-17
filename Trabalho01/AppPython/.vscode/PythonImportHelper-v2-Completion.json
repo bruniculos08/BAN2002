@@ -129,6 +129,30 @@
     },
     {
         "label": "*",
+        "importPath": "Padrao",
+        "description": "Padrao",
+        "isExtraImport": true,
+        "detail": "Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Padrao",
+        "description": "Padrao",
+        "isExtraImport": true,
+        "detail": "Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
         "isExtraImport": true,
@@ -336,7 +360,7 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class ComponenteDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        self.__sqlDelete = \"delete from componente\"",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
         "detail": "Data.Componente",
         "documentation": {}
     },
@@ -372,7 +396,7 @@
         "kind": 6,
         "importPath": "Data.Contem",
         "description": "Data.Contem",
-        "peekOfCode": "class ContemDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n        self.__sqlDelete = \"delete from contem\"",
+        "peekOfCode": "class ContemDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n        # self.__sqlDelete = \"delete from contem\"",
         "detail": "Data.Contem",
         "documentation": {}
     },
@@ -390,7 +414,7 @@
         "kind": 6,
         "importPath": "Data.Departamento",
         "description": "Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
         "detail": "Data.Departamento",
         "documentation": {}
     },
@@ -426,7 +450,7 @@
         "kind": 6,
         "importPath": "Data.Fornece",
         "description": "Data.Fornece",
-        "peekOfCode": "class ForneceDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', {})\"\n        self.__sqlDelete = \"delete from fornece\"",
+        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', {})\"\n        # self.__sqlDelete = \"delete from fornece\"",
         "detail": "Data.Fornece",
         "documentation": {}
     },
@@ -444,7 +468,7 @@
         "kind": 6,
         "importPath": "Data.Fornecedor",
         "description": "Data.Fornecedor",
-        "peekOfCode": "class FornecedorDAO():\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n        self.__sqlDelete = \"delete from fornecedor\"",
+        "peekOfCode": "class FornecedorDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornecedor\"",
         "detail": "Data.Fornecedor",
         "documentation": {}
     },
