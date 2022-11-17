@@ -1,4 +1,5 @@
 from Model import *
+from Data.Padrao import *
 
 class PadraoDAO():
 

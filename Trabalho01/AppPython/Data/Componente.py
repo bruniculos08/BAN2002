@@ -1,5 +1,5 @@
 from Model import *
-from Padrao import *
+from Data.Padrao import *
 
 class Componente():
 

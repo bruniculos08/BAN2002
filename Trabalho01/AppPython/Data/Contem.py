@@ -1,4 +1,5 @@
 from Model import *
+from Data.Padrao import *
 
 class Contem():
 
@@ -31,7 +32,7 @@ class Contem():
     def __repr__(self):
         return u'{}:{}'.format(self.__nome, self.__idPedido)
     
-class ContemDAO():
+class ContemDAO(PadraoDAO):
 
     __sqlSelectAll = None
     __sqlInsert = None

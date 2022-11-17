@@ -134,13 +134,11 @@ class Controller():
     def deletarDepartamento(self):
         dados = self.clearAndGetData()
         dados[1] = '\'' + dados[1] + '\''
-        self.__departamentoDAO.delete(dados)
-        self.printSucess()
-        # try:
-        #     self.__departamentoDAO.delete(dados)
-        #     self.printSucess()
-        # except:
-        #     self.printError()
+        try:
+            self.__departamentoDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
         
     def setPrimarioAtualizarDepartamento(self):
         campos = ["Novo tipo do departamento:"]
