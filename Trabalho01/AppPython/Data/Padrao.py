@@ -30,8 +30,10 @@ class PadraoDAO():
         # Se não há condicional:
         if string == "":
             cursor.execute(self.__sqlDelete) 
-        
-        cursor.execute(self.__sqlDelete + " " + "where" + string)
+        else:
+            cursor.execute(self.__sqlDelete + " " + "where" + string)
+
+        con.commit()
 
     def update(self, dadosSet,  dadosWhere):
         con = Connection()
@@ -62,5 +64,7 @@ class PadraoDAO():
         # Se não há condicional:
         if stringWhere == "":
             cursor.execute(self.__sqlUpdate + " " + stringSet) 
+        else:
+            cursor.execute(self.__sqlUpdate + stringSet + " " + "where" + stringWhere)
 
-        cursor.execute(self.__sqlUpdate + stringSet + " " + "where" + stringWhere)
+        con.commit()

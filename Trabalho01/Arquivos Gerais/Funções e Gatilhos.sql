@@ -236,12 +236,14 @@ create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) 
 drop view NumPedidos;
 select * from NumPedidos;
 
-
-select * from pedido;
 -- View para obter receitas mensais:
 
 select * from departamento;
-select * from veiculo;
+select * from pedido;
+
+select * from extract(year from cast('2002-06-30' as date));
+
+
 insert into veiculo values('4KKf00EhutTjg1530', 1000, '2022-08-30', 33);
 insert into veiculo values('JH4KA2630HC019837', 1100, '2022-08-30', 32);
 insert into veiculo values('JH4KA7670RC000738', 1100, '2022-07-30', 32);

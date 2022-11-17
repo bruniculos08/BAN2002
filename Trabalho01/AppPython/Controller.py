@@ -148,14 +148,14 @@ class Controller():
 
     def setSecundarioAtualizarDepartamento(self):
         dadosSet = [''] + self.clearAndGetData()
-        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        dadosSet[0] = '\'' + dadosSet[0] + '\''
         campos = ["Antigo código do departamento:", "Antigo tipo do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarDepartamento(dadosSet))
         self.__view.criarBotoes(botao)
         
     def atualizarDepartamento(self, dadosSet):
-        dadosWhere = self.clearAndGetData()
+        dadosWhere = [''] + self.clearAndGetData()
         dadosWhere[1] = '\'' + dadosWhere[1] + '\''
         try:
             self.__departamentoDAO.update(dadosSet, dadosWhere)
@@ -170,19 +170,13 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirVeiculo(self):
-        # campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:"]
-        campos = ["Chassi:", "Valor de produção:", "Dia", "Mês", "Ano", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
         self.__view.criarBotoes(botao)
 
     def inserirVeiculo(self):
         dados = self.clearAndGetData()
-        data = dados[4] + '-' + dados[3] + '-' + dados[2]
-        dados[2] = data
-        dados[3] = dados[5]
-        dados = dados[0:4]
-        print(dados)
         newVeiculo = Veiculo().fromTupla(dados)
         try:
             self.__veiculoDAO.insertVeiculo(newVeiculo)
@@ -191,7 +185,7 @@ class Controller():
             self.printError()
 
     def setDeletarVeiculo(self):
-        campos = ["Chassi:", "Valor de produção:", "Dia", "Mês", "Ano", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
         self.__view.criarBotoes(botao)
@@ -199,10 +193,7 @@ class Controller():
     def deletarVeiculo(self):
         dados = self.clearAndGetData()
         dados[0] = '\'' + dados[0] + '\''
-        data = '\'' + dados[4] + '-' + dados[3] + '-' + dados[2] + '\''
-        dados[2] = data
-        dados[3] = dados[5]
-        dados = dados[0:4]
+        dados[2] = '\'' + dados[2] + '\''
         try:
             self.__veiculoDAO.delete(dados)
             self.printSucess()
@@ -210,7 +201,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarVeiculo(self):
-        campos = ["Novo chassi:", "Novo valor de produção:", "Nova dia:", "Novo mês:", "Novo ano:", "Novo código de departamento:"]
+        campos = ["Novo chassi:", "Novo valor de produção:", "Nova data de produção(YYYY-MM-DD):", "Novo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo)
         self.__view.criarBotoes(botao)
@@ -218,11 +209,8 @@ class Controller():
     def setSecundarioAtualizarVeiculo(self):
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
-        data = '\'' + dadosSet[4] + '-' + dadosSet[3] + '-' + dadosSet[2] + '\''
-        dadosSet[2] = data
-        dadosSet[3] = dadosSet[5]
-        dadosSet = dadosSet[0:4]
-        campos = ["Antigo chassi:", "Antigo valor de produção:", "Nova dia:", "Novo mês:", "Novo ano:", "Antigo código de departamento:"]
+        dadosSet[2] = '\'' + dadosSet[2] + '\''
+        campos = ["Antigo chassi:", "Antigo valor de produção:", "Antiga data de produção(YYYY-MM-DD):", "Antigo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
         self.__view.criarBotoes(botao)
@@ -230,10 +218,7 @@ class Controller():
     def atualizarVeiculo(self, dadosSet):
         dadosWhere = self.clearAndGetData()
         dadosWhere[0] = '\'' + dadosWhere[0] + '\''
-        data = '\'' + dadosWhere[4] + '-' + dadosWhere[3] + '-' + dadosWhere[2] + '\''
-        dadosWhere[2] = data
-        dadosWhere[3] = dadosWhere[5]
-        dadosWhere = dadosWhere[0:4]
+        dadosWhere[2] = '\'' + dadosWhere[2] + '\''
         try:
             self.__veiculoDAO.update(dadosSet, dadosWhere)
             self.printSucess()
@@ -323,7 +308,7 @@ class Controller():
             self.printError()
 
     def setDeletarPedido(self):    
-        campos = ["Id do pedido:", "Data de criação(YYYY-MM-DD):","Valor:", "CNPJ:", "Código do Departamento:"]
+        campos = ["Id do pedido:", "Valor:", "Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarPedido())
         self.__view.criarBotoes(botao)
@@ -338,13 +323,13 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        campos = ["Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
+        campos = ["Novo id do pedido:", "Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
     def setSecundarioAtualizarPedido(self):
-        dadosSet = [''] + self.clearAndGetData()
+        dadosSet = self.clearAndGetData()
         dadosSet[2] = '\'' + dadosSet[2] + '\''
         dadosSet[3] = '\'' + dadosSet[3] + '\''
         campos = ["Antigo id do pedido:", "Antigo valor:", "Antiga data de criação(YYYY-MM-DD):", "Antigo CNPJ:", "Antigo código do departamento:"]
