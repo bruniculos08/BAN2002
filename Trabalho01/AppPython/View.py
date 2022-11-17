@@ -89,7 +89,7 @@ class View():
         listaDeBotoesVeiculo = Menu(self.__tela, tearoff=0)
         listaDeBotoesVeiculo.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Ver todos", command = lambda : self.__controller.verVeiculo())
-        listaDeBotoesVeiculo.add_command(label = "Ver veículos por departamento", command = lambda : self.__controller.verNumCarrros())
+        listaDeBotoesVeiculo.add_command(label = "Ver veículos por departamento", command = lambda : self.__controller.verNumCarros())
         listaDeBotoesVeiculo.add_command(label = "Remover", command = lambda : self.__controller.setDeletarVeiculo())
         listaDeBotoesVeiculo.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarVeiculo())
         
@@ -136,6 +136,11 @@ class View():
         listaDeBotoesFornece.add_command(label = "Remover", command = lambda : self.__controller.setDeletarFornece())
         listaDeBotoesFornece.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarFornece())
 
+        # Botão para opções relacionadas ao orçamento:
+        listaDeBotoesOrcamento = Menu(self.__tela, tearoff=0)
+        listaDeBotoesOrcamento.add_command(label = "Ver despesas mensais", command = lambda : self.__controller.verDespesa())
+        listaDeBotoesOrcamento.add_command(label = "Ver receitas mensais", command = lambda : self.__controller.verReceita())
+        
         # Criando barra superior de botões de aba:
         listaDelistaDeBotoes = Menu(self.__tela)
         listaDelistaDeBotoes.add_cascade(label = "Departamentos", menu = listaDeBotoesDepartamento)
@@ -147,6 +152,7 @@ class View():
         listaDelistaDeBotoes.add_cascade(label = "Componente(s) por pedido", menu = listaDeBotoesContem)
         listaDelistaDeBotoes.add_cascade(label = "Fornecedor por componente", menu = listaDeBotoesFornece)
         listaDelistaDeBotoes.add_cascade(label = "Nota Fiscal", menu = listaDeBotoesNotaFiscal)
+        listaDelistaDeBotoes.add_cascade(label = "Orçamento", menu = listaDeBotoesOrcamento)
 
         # Adicionando a lista de listas de botões criados à tela:
         self.__tela.config(menu = listaDelistaDeBotoes)

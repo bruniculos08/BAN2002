@@ -105,6 +105,22 @@
     },
     {
         "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -205,6 +221,22 @@
         "description": "Data.NumCarros",
         "isExtraImport": true,
         "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "isExtraImport": true,
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "isExtraImport": true,
+        "detail": "Data.Receita",
         "documentation": {}
     },
     {
@@ -347,6 +379,24 @@
         "documentation": {}
     },
     {
+        "label": "Despesa",
+        "kind": 6,
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "peekOfCode": "class Despesa():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
+        "label": "DespesaDAO",
+        "kind": 6,
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "peekOfCode": "class DespesaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Despesa\"\n        self.__sqlSelectData = \"select valor from Despesa where\"\n        self.__sqlSelectMore = \"select * from Despesa where valor >\"",
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
         "label": "Fornece",
         "kind": 6,
         "importPath": "Data.Fornece",
@@ -452,6 +502,24 @@
         "description": "Data.Pedido",
         "peekOfCode": "class PedidoDAO():\n    __sqlSelectAll = None\n    __sqlSelectNewId= None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from pedido\"\n        self.__sqlSelectNewId = \"select nextval('pedido_id')\"",
         "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "Receita",
+        "kind": 6,
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "peekOfCode": "class Receita():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
+        "detail": "Data.Receita",
+        "documentation": {}
+    },
+    {
+        "label": "ReceitaDAO",
+        "kind": 6,
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "peekOfCode": "class ReceitaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Receita\"\n        self.__sqlSelectData = \"select valor from Receita where\"\n        self.__sqlSelectMore = \"select * from Receita where valor >\"",
+        "detail": "Data.Receita",
         "documentation": {}
     },
     {

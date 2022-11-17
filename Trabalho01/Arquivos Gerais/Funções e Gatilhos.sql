@@ -236,15 +236,22 @@ create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) 
 drop view NumPedidos;
 select * from NumPedidos;
 
+-- View para obter receitas mensais:
+
+select * from departamento;
+select * from veiculo;
+insert into veiculo values('4KKf00EhutTjg1530', 1000, '2022-08-30', 33);
+insert into veiculo values('JH4KA2630HC019837', 1100, '2022-08-30', 32);
+insert into veiculo values('JH4KA7670RC000738', 1100, '2022-07-30', 32);
+
+create view Receita(valor, mes, ano) as select sum(valor_producao), extract(month from data_producao), extract(year from data_producao) from veiculo group by (extract(month from data_producao), 
+extract(year from data_producao)) order by (extract(year from data_producao), extract(month from data_producao));
+select * from Receita;
+
 -- View para obter despesas mensais:
-select * from pedido;
-
-select extract(month from now());
-
-insert into pedido values(-1, 10, '2022-11-11')
 
 drop view Despesa;
-create view Despesa(valor) as select sum(valor) from pedido group by (extract(month from data_criacao), extract(year from data_criacao)) order by (extract(year from data_criacao), extract(month from data_criacao));
+create view Despesa(valor, mes, ano) as select sum(valor), extract(month from data_criacao), extract(year from data_criacao) from pedido group by (extract(month from data_criacao), extract(year from data_criacao)) order by (extract(year from data_criacao), extract(month from data_criacao));
 
 -- Gatilho para nome de fornecedores:
 

@@ -15,6 +15,8 @@ from Data.NotaFiscal import *
 from Data.Fornece import *
 from Data.NumPedidos import *
 from Data.NumCarros import *
+from Data.Despesa import *
+from Data.Receita import *
 
 class Controller():
 
@@ -30,6 +32,8 @@ class Controller():
     __forneceDAO = None
     __numPedidosDAO = None
     __numCarrosDAO = None
+    __despesaDAO = None
+    __receitaDAO = None
     __model = None
     __noticesSize = None
     
@@ -47,6 +51,8 @@ class Controller():
         self.__forneceDAO = ForneceDAO()
         self.__numPedidosDAO = NumPedidosDAO()
         self.__numCarrosDAO = NumCarrosDAO()
+        self.__despesaDAO = DespesaDAO()
+        self.__receitaDAO = ReceitaDAO()
         self.__noticesSize = 0
 
     def view(self, view):
@@ -650,7 +656,17 @@ class Controller():
         text = self.__numPedidosDAO.selectAll()
         self.printQuery(text,campos)
 
-    def verNumCarrros(self):
+    def verNumCarros(self):
         campos = ["Id do departamento", "Número de veículos"]
         text = self.__numCarrosDAO.selectAll()
+        self.printQuery(text,campos)
+
+    def verDespesa(self):
+        campos = ["Valor", "Mês", "Ano"]
+        text = self.__despesaDAO.selectAll()
+        self.printQuery(text,campos)
+
+    def verReceita(self):
+        campos = ["Valor", "Mês", "Ano"]
+        text = self.__receitaDAO.selectAll()
         self.printQuery(text,campos)
