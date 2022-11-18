@@ -23,9 +23,9 @@ class PadraoDAO():
             if dado == '' or dado == '\'\'':
                 continue
             if len(string) > 0:
-                string = string + "," + " " + campo + " = " + dado
+                string = string + "," + " " + campo + " = " + str(dado)
             else:
-                string = string + " " + campo + " = " + dado
+                string = string + " " + campo + " = " + str(dado)
 
         # Se não há condicional:
         if string == "":

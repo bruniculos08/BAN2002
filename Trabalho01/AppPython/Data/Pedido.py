@@ -12,7 +12,7 @@ class Pedido():
     def __init__(self):
         self.__id = -1
         self.__valor = 0
-        self.__dataCriacao = 'YYYY-MM-DD'
+        self.__dataCriacao = ''
         self.__cnpj = ""
         self.__codDeptCompra = -1
 
@@ -35,7 +35,7 @@ class Pedido():
         return self
     
     def getDataCriacao(self):
-        self.__dataCriacao
+        return self.__dataCriacao
 
     def cnpj(self, cnpj):
         self.__cnpj = cnpj
@@ -74,7 +74,7 @@ class PedidoDAO(PadraoDAO):
     def __init__(self):
         self.__sqlSelectAll = "select * from pedido"
         self.__sqlSelectNewId = "select nextval('pedido_id')"
-        self.__sqlInsert = "insert into pedido values({}, '{}', '{}', {})"
+        self.__sqlInsert = "insert into pedido values({}, {}, '{}', '{}', {})"
         # self.__sqlDelete = "delete from pedido"
         # self.__sqlUpdate = "update pedido set"
         # self.__columns = ["id", "valor", "data_criacao", "cnpj", "cod_dept_compra"]

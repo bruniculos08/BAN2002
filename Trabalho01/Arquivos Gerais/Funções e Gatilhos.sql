@@ -172,7 +172,7 @@ create trigger verificaDepartamentoDeProducaoGatilho before insert or update on 
 
 -- Gatilhos e funções extras (adicionados após a entrega 03) a partir desta linha:
 
--- Gatilho para ajuste da table 'componente' em inserções, se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
+-- Gatilho para ajuste da table 'componente' em inserções, se o componente já existir na tabela, sua quantidade será acrescida de acordo...
 -- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
 create or replace function addComponente() returns trigger as
 $$
@@ -202,7 +202,9 @@ $$
 language plpgsql;
 
 -- Gatilho para ajuste da tabela 'componente_necessario' em inserções (igual o gatilho anterior sobre a tabela componente), se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
--- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
+-- ... com a quantidade que seria adicionada:
+
+drop function addComponenteNecessario() cascade;
 create or replace function addComponenteNecessario() returns trigger as
 $$
 begin
@@ -214,6 +216,8 @@ begin
 end;
 $$
 language plpgsql;
+
+insert into componente_necessario values(1, 'motor do batmóvel', 1);
 
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
@@ -237,16 +241,6 @@ drop view NumPedidos;
 select * from NumPedidos;
 
 -- View para obter receitas mensais:
-
-select * from departamento;
-select * from pedido;
-
-select * from extract(year from cast('2002-06-30' as date));
-
-
-insert into veiculo values('4KKf00EhutTjg1530', 1000, '2022-08-30', 33);
-insert into veiculo values('JH4KA2630HC019837', 1100, '2022-08-30', 32);
-insert into veiculo values('JH4KA7670RC000738', 1100, '2022-07-30', 32);
 
 create view Receita(valor, mes, ano) as select sum(valor_producao), extract(month from data_producao), extract(year from data_producao) from veiculo group by (extract(month from data_producao), 
 extract(year from data_producao)) order by (extract(year from data_producao), extract(month from data_producao));
@@ -272,3 +266,20 @@ $$
 language plpgsql;
 
 create trigger nomeIgualGatilho before insert or update on fornecedor for each row execute procedure nomeIgual();
+
+-- Gatilho para quando um componente for adicionado o seu fornecedor principal seja automaticamente adicionado na tabela fornece:
+
+select * from componente;
+select * from fornece;
+
+create function atualizaFornecedorPrincipal() returns trigger as
+$$
+begin
+	insert into fornece values(new.nome, new.cnpj_principal);
+	return new;
+end;
+$$
+language plpgsql;
+
+drop trigger atualizaFornecedorPrincipalGatilho on componente;
+create trigger atualizaFornecedorPrincipalGatilho after insert or update on componente for each row execute procedure atualizaFornecedorPrincipal();

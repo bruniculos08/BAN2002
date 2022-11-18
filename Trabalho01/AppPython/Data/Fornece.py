@@ -4,11 +4,11 @@ from Data.Padrao import *
 class Fornece():
 
     __nome = None
-    __idPedido = None
+    __cnpj = None
 
     def __init__(self):
         self.__nome = ""
-        self.__idPedido = -1
+        self.__cnpj = ""
         
     def nome(self, nome):
         self.__nome = nome
@@ -17,20 +17,20 @@ class Fornece():
     def getNome(self):
         return self.__nome
     
-    def idPedido(self ,idPedido):
-        self.__idPedido = idPedido
+    def cnpj(self ,cnpj):
+        self.__cnpj = cnpj
         return self
     
-    def getIdPedido(self):
-        return self.__idPedido
+    def getCnpj(self):
+        return self.__cnpj
     
     def fromTupla(self, tupla):
         self.__nome = tupla[0]
-        self.__idPedido = tupla[1]
+        self.__cnpj = tupla[1]
         return self
     
     def __repr__(self):
-        return u'{}:{}'.format(self.__nome, self.__idPedido)
+        return u'{}:{}'.format(self.__nome, self.__cnpj)
     
 class ForneceDAO(PadraoDAO):
 
@@ -42,7 +42,7 @@ class ForneceDAO(PadraoDAO):
     
     def __init__(self):
         self.__sqlSelectAll = "select * from fornece"
-        self.__sqlInsert = "insert into fornece values('{}', {})"
+        self.__sqlInsert = "insert into fornece values('{}', '{}')"
         # self.__sqlDelete = "delete from fornece"
         # self.__sqlUpdate = "update fornece set"
         # self.__columns = ["nome_componente", "cnpj"]
@@ -59,8 +59,8 @@ class ForneceDAO(PadraoDAO):
             fornecem.append(Fornece().fromTupla(line))
         return fornecem
     
-    def insertComponenteNecessario(self, fornece):
+    def insertFornece(self, fornece):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(fornece.getNome(), fornece.getIdPedido()))
+        cursor.execute(self.__sqlInsert.format(fornece.getNome(), fornece.getCnpj()))
         con.commit()

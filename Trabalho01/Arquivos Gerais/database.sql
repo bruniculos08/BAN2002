@@ -10,11 +10,12 @@ create table departamento(
 select * from pedido;
 select * from fornece;
 
+drop table Nota_fiscal;
 create table Nota_fiscal(
     cod_nota varchar(44),
     id_pedido integer not null,
     primary key (cod_nota),
-    foreign key (id_pedido) references pedido
+    foreign key (id_pedido) references pedido(id)
 );
 
 create table fornecedor(
