@@ -193,7 +193,9 @@ class Controller():
     def deletarVeiculo(self):
         dados = self.clearAndGetData()
         dados[0] = '\'' + dados[0] + '\''
+        if(dados[1] != ''): dados[1] = float(dados[1])
         dados[2] = '\'' + dados[2] + '\''
+        if(dados[3] != ''): dados[3] = int(dados[3])
         try:
             self.__veiculoDAO.delete(dados)
             self.printSucess()
@@ -203,13 +205,15 @@ class Controller():
     def setPrimarioAtualizarVeiculo(self):
         campos = ["Novo chassi:", "Novo valor de produção:", "Nova data de produção(YYYY-MM-DD):", "Novo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
-        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo())
         self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarVeiculo(self):
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
+        if(dadosSet[1] != ''): dadosSet[1] = float(dadosSet[1])
         dadosSet[2] = '\'' + dadosSet[2] + '\''
+        if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
         campos = ["Antigo chassi:", "Antigo valor de produção:", "Antiga data de produção(YYYY-MM-DD):", "Antigo código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
@@ -218,7 +222,9 @@ class Controller():
     def atualizarVeiculo(self, dadosSet):
         dadosWhere = self.clearAndGetData()
         dadosWhere[0] = '\'' + dadosWhere[0] + '\''
+        if(dadosWhere[1] != ''): dadosWhere[1] = float(dadosWhere[1])
         dadosWhere[2] = '\'' + dadosWhere[2] + '\''
+        if(dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
         try:
             self.__veiculoDAO.update(dadosSet, dadosWhere)
             self.printSucess()

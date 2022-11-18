@@ -45,7 +45,7 @@ class NotaFiscalDAO(PadraoDAO):
         self.__sqlSelectAll = "select * from nota_fiscal"
         self.__sqlInsert = "insert into nota_fiscal values('{}', {})"
         self.__sqlDelete = "delete from nota_fiscal"
-        self.__sqlUpdate = "update nota_fiscal set"
+        self.__sqlUpdate = "update nota_fiscal set cod_nota = '{}', id_pedido = {}  where cod_nota = '{}' and id_pedido {}"
         self.__columns = ["cod_nota", "id_pedido"]
         super().__init__("delete from nota_fiscal", "update nota_fiscal set", ["cod_nota", "id_pedido"])
 
@@ -65,17 +65,24 @@ class NotaFiscalDAO(PadraoDAO):
         cursor.execute(self.__sqlInsert.format(notaFiscal.getCodNota(), notaFiscal.getIdPedido()))
         con.commit()
 
-    # def delete(self, notaFiscal):
-    #     dados = [notaFiscal.getCodNota(), notaFiscal.getIdPedido()]
-    #     query = ""
-    #     if(dados[0] != ""):
-    #         query.append(" " + f"where cod_nota = {dados[0]}")
-    #     if(dados[1] != -1):
-    #         if dados[0] != "":
-    #             query.append(" " + "and" + " " + f"id_pedido = {dados[1]}")
-    #         else:
-    #             query.append(" " + f"where id_pedido = {dados[1]}")
-    #     con = Connection()
-    #     cursor = con.cursor()
-    #     cursor.execute(self.__sqlDelete + query)
-    #     con.commit()
+    # Obs.: as funções únicas de insert e delete ainda possibilitam sql injection. 
+    def deleteNotaFiscal(self, notaFiscal):
+        query = ""
+        if(notaFiscal.getCodNota() != ""):
+            query.append(" " + f"where cod_nota = {notaFiscal.getCodNota()}")
+        if(notaFiscal.getIdPedido() != -1):
+            if(notaFiscal.getCodNota() != ""):
+                query.append(" " + "and" + " " + f"id_pedido = {notaFiscal.getIdPedido()}")
+            else:
+                query.append(" " + f"where id_pedido = { notaFiscal.getIdPedido()}")
+        con = Connection()
+        cursor = con.cursor()
+        cursor.execute(self.__sqlDelete + query)
+        con.commit()
+
+    def updateNotaFiscal(self, newNotaFiscal, oldNotaFiscal):
+        con = Connection()
+        cursor = con.cursor()
+        cursor.execute(self.__sqlUpdate.format(newNotaFiscal.getCodNota(), newNotaFiscal.getIdPedido(),
+            oldNotaFiscal.getCodNota(), oldNotaFiscal.getIdPedido()))
+        con.commit()
