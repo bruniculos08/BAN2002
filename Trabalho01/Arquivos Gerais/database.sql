@@ -1,5 +1,4 @@
-﻿
-drop sequence dept_cod;
+﻿drop sequence dept_cod;
 create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 32 cache 1;
 
 drop table departamento cascade;
@@ -7,14 +6,6 @@ create table departamento(
     cod_dept integer not null,
     tipo character varying(50) not null,
     primary key(cod_dept)
-);
-
-drop table Nota_fiscal cascade;
-create table Nota_fiscal(
-    cod_nota varchar(44),
-    id_pedido integer not null,
-    primary key (cod_nota),
-    foreign key (id_pedido) references pedido(id)
 );
 
 drop table fornecedor cascade;
@@ -37,6 +28,14 @@ create table pedido(
     primary key (id),
     foreign key(cnpj) references fornecedor(cnpj),
     foreign key (cod_dept_compra) references departamento(cod_dept)
+);
+
+drop table Nota_fiscal cascade;
+create table Nota_fiscal(
+    cod_nota varchar(44),
+    id_pedido integer not null,
+    primary key (cod_nota),
+    foreign key (id_pedido) references pedido(id)
 );
 
 drop table componente cascade;
