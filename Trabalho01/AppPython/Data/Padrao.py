@@ -23,7 +23,7 @@ class PadraoDAO():
             if dado == '' or dado == '\'\'':
                 continue
             if len(string) > 0:
-                string = string + "," + " " + campo + " = " + str(dado)
+                string = string + " " + "and" + " " + campo + " = " + str(dado)
             else:
                 string = string + " " + campo + " = " + str(dado)
 
@@ -48,7 +48,7 @@ class PadraoDAO():
             if dado == '' or dado == '\'\'':
                 continue
             if len(stringSet) > 0:
-                stringSet = stringSet + "," + " " + campo + " = " + str(dado)
+                stringSet = stringSet + ","  + " " + campo + " = " + str(dado)
             else:
                 stringSet = stringSet + " " + campo + " = " + str(dado)
 
@@ -57,7 +57,7 @@ class PadraoDAO():
             if dado == '' or dado == '\'\'':
                 continue
             if len(stringWhere) > 0:
-                stringWhere = stringWhere + "," + " " + campo + " = " + str(dado)
+                stringWhere = stringWhere + " " + "and" + " " + campo + " = " + str(dado)
             else:
                 stringWhere = stringWhere + " " + campo + " = " + str(dado)
 

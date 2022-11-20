@@ -1,4 +1,64 @@
-﻿-- Função para verificar se o código do chassi é válido:
+﻿-- Função para verificar de CNPJ é válido:
+
+select validarCNPJ('11222333000181');
+
+create or replace function validarCNPJ(p_cnpj varchar) returns boolean as
+$$
+declare check_sum int default 0;
+declare check_num1 int default 0;
+declare check_num2 int default 0;
+declare nums varchar[];
+declare vetor_pesos int[] default '{6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2}';
+begin
+	nums := regexp_split_to_array(p_cnpj, '');
+	for i in 1..12	 loop
+		check_sum := check_sum + (cast(nums[i] as int) * vetor_pesos[i+1]);
+	end loop;
+	
+	check_num1 := 0;
+	if (check_sum % 11) < 2 then
+		check_num1 := 0;
+	else
+		check_num1 := 11 - check_sum % 11;
+	end if;
+	
+	check_sum := 0;
+	for i in 1..12 loop
+		check_sum := check_sum + (cast(nums[i] as int) * vetor_pesos[i]);
+	end loop;
+	check_sum := check_sum + 2*check_num1;
+	
+	check_num2 := 0;
+	if (check_sum % 11) < 2 then
+		check_num2 := 0;
+	else
+		check_num2 := 11 - check_sum % 11;
+	end if;
+	
+	if (check_num1 = cast(nums[13] as int) and check_num2 = cast(nums[14] as int)) then
+		return true;
+	end if;
+	return false;
+end;
+$$
+language plpgsql;
+
+-- Gatilho para verificar o CNPJ de fornecedor antes de inserir ou fazer update na tabela:
+
+create or replace function verificaCNPJ() returns trigger as
+$$
+begin
+	if(validarCNPJ(new.cnpj) = true) then
+		return new;
+	end if;
+	return old;
+end;
+$$
+language plpgsql;
+
+create trigger verificaCnpjGatilho before insert or update on fornecedor for each row execute procedure verificaCNPJ();
+
+-- Função para verificar se o VIN (Chassi internacional) é válido:
 
 -- (1) Remove all of the letters from the VIN by transliterating them with their numeric counterparts. Numerical counterparts can be found in the table below.
 -- (2) Multiply this new number, the yield of the transliteration, with the assigned weight. Weights can be found in the table below.
@@ -7,7 +67,6 @@
 -- (5) If the remainder is 10 replace it with X.
 
 -- Obs.: funções letraNumeroChassi() arrumada e validarChassi() (11/11/2022 às 01:06).
-select validarChassi(cast('4KKf00EhutTjg1530' as varchar));
 
 create or replace function validarChassi(p_chassi varchar) returns boolean as
 $$
@@ -269,17 +328,94 @@ create trigger nomeIgualGatilho before insert or update on fornecedor for each r
 
 -- Gatilho para quando um componente for adicionado o seu fornecedor principal seja automaticamente adicionado na tabela fornece:
 
-select * from componente;
-select * from fornece;
-
-create function atualizaFornecedorPrincipal() returns trigger as
+create or replace function atualizaInsertUpdateFornecedorPrincipal() returns trigger as
 $$
 begin
-	insert into fornece values(new.nome, new.cnpj_principal);
+	if (select count(*) from fornece f where f.nome_componente = new.nome and f.cnpj = new.cnpj_principal) = 0 then
+		insert into fornece values(new.nome, new.cnpj_principal);
+	end if;
 	return new;
 end;
 $$
 language plpgsql;
 
-drop trigger atualizaFornecedorPrincipalGatilho on componente;
-create trigger atualizaFornecedorPrincipalGatilho after insert or update on componente for each row execute procedure atualizaFornecedorPrincipal();
+drop trigger atualizaInsertUpdateFornecedorPrincipalGatilho on componente;
+create trigger atualizaInsertUpdateFornecedorPrincipalGatilho after insert or update on componente for each row execute procedure atualizaInsertUpdateFornecedorPrincipal();
+
+-- Gatilho para quando um componente for atualizado ou deletado o seu fornecedor principal seja automaticamente alterado na tabela fornece e...
+-- ... eliminar da tabela fornece linhas relacionadas à um componente cujo nome será atualizado ou deletado:
+
+create or replace function atualizaUpdateDeleteFornecedorPrincipal() returns trigger as
+$$
+begin
+	if TG_OP = 'DELETE' then
+		update variable set trigger_on = false;
+		delete from fornece where nome_componente = old.nome and cnpj = old.cnpj_principal;
+		update variable set trigger_on = true;
+		return old;
+	elsif old.nome <> new.nome then 
+		update variable set trigger_on = false;
+		delete from fornece where nome_componente = old.nome;
+		update variable set trigger_on = true;
+		return new;
+	end if;
+	update variable set trigger_on = true;
+	return new;
+end;
+$$
+language plpgsql;
+
+drop trigger atualizaUpdateDeleteFornecedorPrincipalGatilho on componente;
+create trigger atualizaUpdateDeleteFornecedorPrincipalGatilho before update or delete on componente for each row execute procedure atualizaUpdateDeleteFornecedorPrincipal();
+
+-- Para esta função é necessária um "variável global" para que não haja problema com a função seguinte:
+--create table variable(trigger_on boolean);
+--insert into variable values(true);
+--select * from variable;
+
+select * from componente order by nome;
+select * from fornece order by nome_componente;
+
+delete from fornece where nome_componente = 'bateria Moura V2';
+update componente set cnpj_principal = '15887951194460' where nome = 'bateria Moura V2';
+update componente set cnpj_principal = '25157270610711' where nome = 'bateria Moura V2';
+
+update componente set nome = 'bateria Moura V5' where nome = 'bateria Moura V2';
+
+-- Gatilho para impedir que um fornecedor principal seja removido da tabela fornecedor por componente:
+
+select * from componente;
+select * from fornece;
+
+drop function fornecedorPermanente();
+create or replace function fornecedorPermanente() returns trigger as
+$$
+declare counter int default 0;
+declare	do_trigger int default 1;
+begin
+	counter := (select count(*) from componente c where c.nome = old.nome_componente and c.cnpj_principal = old.cnpj);
+	do_trigger := (select count(*) from variable where trigger_on = true);
+	
+	if do_trigger = 0 then
+		if TG_OP = 'DELETE' then 
+			return old;
+		elsif TG_OP = 'UPDATE' then
+			return new;
+		end if;
+	elsif TG_OP = 'DELETE' and counter > 0 then
+		raise notice 'Este campo não pode ser deletado pois se trata de uma relação entre componente e fornecedor principal!';
+		return null;
+	elsif counter > 0 and (new.cnpj <> old.cnpj or new.nome_componente <> old.nome_componente) then
+		raise notice 'Este campo não pode ser atualizado pois se trata de uma relação entre componente e fornecedor principal!';
+		return old;
+	elsif TG_OP = 'UPDATE' then
+		return new;
+	end if;
+	return old;
+end;
+$$
+language plpgsql;
+
+create trigger fornecedorPermanenteGatilho before update or delete on fornece for each row execute procedure fornecedorPermanente();
+
+-- SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

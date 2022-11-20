@@ -74,7 +74,7 @@ class Controller():
         if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao(notices[-1])
         else:
-            self.__view.setCampoDeExibicao("Operação não realizada!\n")
+            self.__view.setCampoDeExibicao("Operação não realizada!\n" + self.__model.error())
         self.__model.rollback()
         self.__model.commit()
         self.__noticesSize = len(notices)
@@ -150,13 +150,13 @@ class Controller():
     def setSecundarioAtualizarDepartamento(self):
         dadosSet = [''] + self.clearAndGetData()
         dadosSet[1] = '\'' + dadosSet[1] + '\''
-        campos = ["Antigo código do departamento:", "Antigo tipo do departamento:"]
+        campos = ["Código do departamento:", "Antigo tipo do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarDepartamento(dadosSet))
         self.__view.criarBotoes(botao)
         
     def atualizarDepartamento(self, dadosSet):
-        dadosWhere = [''] + self.clearAndGetData()
+        dadosWhere = self.clearAndGetData()
         if dadosWhere[0] != '': dadosWhere[0] = int(dadosWhere[0])
         dadosWhere[1] = '\'' + dadosWhere[1] + '\''
         try:
@@ -263,7 +263,6 @@ class Controller():
         dados = self.clearAndGetData()
         dados[0] = '\'' + dados[0] + '\''
         dados[1] = '\'' + dados[1] + '\''
-        self.__fornecedorDAO.delete(dados)
         try:
             self.__fornecedorDAO.delete(dados)
             self.printSucess()
@@ -291,7 +290,7 @@ class Controller():
         dadosWhere[1] = '\'' + dadosWhere[1] + '\''
         try:
             self.__fornecedorDAO.update(dadosSet, dadosWhere)
-            self.printSucess()
+            self.printSucess() 
         except:
             self.printError()
 
@@ -335,14 +334,13 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        campos = ["Novo id do pedido:", "Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
+        campos = ["Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
     def setSecundarioAtualizarPedido(self):
-        dadosSet = self.clearAndGetData()
-        if dadosSet[0] != '': dadosSet[0] = int(dadosSet[0])
+        dadosSet = [''] + self.clearAndGetData()
         if dadosSet[1] != '': dadosSet[1] = float(dadosSet[1])
         dadosSet[2] = '\'' + dadosSet[2] + '\''
         dadosSet[3] = '\'' + dadosSet[3] + '\''
@@ -379,13 +377,11 @@ class Controller():
     def inserirComponente(self):
         dados = self.clearAndGetData()
         newComponente = Componente().fromTupla(dados)
-        self.__componenteDAO.insertComponente(newComponente)
-        self.printSucess()
-        # try:
-        #     self.__componenteDAO.insertComponente(newComponente)
-        #     self.printSucess()
-        # except:
-        #     self.printError()
+        try:
+            self.__componenteDAO.insertComponente(newComponente)
+            self.printSucess()
+        except:
+            self.printError()
 
     def setDeletarComponente(self):
         campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
@@ -538,7 +534,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarContem(self):
-        campos = ["Novo nome do componente:", "Id do pedido:"]
+        campos = ["Novo nome do componente:", "Novo id do pedido:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarContem())
         self.__view.criarBotoes(botao)
@@ -547,7 +543,7 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         if(dadosSet[1] != ''): dadosSet[1] = int(dadosSet[1])
-        campos = ["Antigo nome do componente:", "Id do pedido:"]
+        campos = ["Antigo nome do componente:", "Antigo id do pedido:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarContem(dadosSet))
         self.__view.criarBotoes(botao)

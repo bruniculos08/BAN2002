@@ -2,6 +2,7 @@
 # Camada de negócios, com a lógica da aplicação (na qual se encontra); e
 # Camada de dados, com funcionalidade de armazenamento e recuperação.
 
+import mysql.connector
 import psycopg2 as postgres
 
 class Connection():
@@ -43,5 +44,8 @@ class Connection():
     def notices(self):
         return self.__connection.notices
     
+    def error(self):
+        return (self.__connection.info.error_message)
+
     def rollback(self):
         self.__connection.cursor().execute("rollback")
