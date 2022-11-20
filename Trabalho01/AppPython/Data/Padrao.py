@@ -1,6 +1,7 @@
 from Model import *
 from Data.Padrao import *
 
+# Para herdar métodos delete e update:
 class PadraoDAO():
 
     __sqlDelete = None
