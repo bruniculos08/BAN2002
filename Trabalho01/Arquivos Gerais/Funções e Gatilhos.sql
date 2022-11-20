@@ -1,7 +1,6 @@
 ﻿-- Função para verificar de CNPJ é válido:
 
-select validarCNPJ('11222333000181');
-
+drop function validarCNPJ(p_cnpj varchar);
 create or replace function validarCNPJ(p_cnpj varchar) returns boolean as
 $$
 declare check_sum int default 0;
@@ -68,6 +67,7 @@ create trigger verificaCnpjGatilho before insert or update on fornecedor for eac
 
 -- Obs.: funções letraNumeroChassi() arrumada e validarChassi() (11/11/2022 às 01:06).
 
+drop function validarChassi(p_chassi varchar);
 create or replace function validarChassi(p_chassi varchar) returns boolean as
 $$
 declare check_sum int default 0;
@@ -107,6 +107,8 @@ end;
 $$ language plpgsql;
 
 -- Função que recebe uma letra e retorna um número de acordo com a tabela de dígitos para chassi:
+
+drop function letraNumeroChassi(letra char);
 create or replace function letraNumeroChassi(letra char) returns int as
 $$
 begin	
@@ -137,6 +139,7 @@ $$ language plpgsql;
 
 -- Gatilho para verificar VIN (chassi) antes de inserir ou de fazer update na tabela veículo:
 
+drop function validarChassiGatilho() cascade;
 create or replace function validarChassiGatilho() returns trigger as
 $$
 begin
@@ -153,6 +156,7 @@ create trigger verificaChassi before insert or update on veiculo for each row ex
 
 -- Função que valida a chave de acesso de nota fiscal:
 
+drop function validarNota(p_cod varchar(44));
 create or replace function validarNota(p_cod varchar(44)) returns boolean as
 $$
 declare vetor_pesos int[] default '{4, 3, 2, 9, 8, 7, 6, 5}';
@@ -181,6 +185,7 @@ language plpgsql;
 
 -- Gatilho para verificar nota fiscal antes de ser inserida em nota_fiscal:
 
+drop function verificaNota() cascade;
 create or replace function verificarNota() returns trigger as
 $$
 begin
@@ -193,10 +198,12 @@ end;
 $$
 language plpgsql;
 
+drop trigger verificaNotaGatilho;
 create trigger verificarNotaGatilho before insert or update on nota_fiscal for each row execute procedure verificarNota();
 
 -- Gatilho para não permitir que um departamento de compra personalize veículo:
 
+drop function verificaDepartamentoDeCompra() cascade;
 create or replace function verificaDepartamentoDeCompra() returns trigger as
 $$
 begin
@@ -209,12 +216,12 @@ end;
 $$
 language plpgsql;
 
+drop trigger verificaDepartamentoDeCompraGatilho;
 create trigger verificaDepartamentoDeCompraGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
 
 -- Gatilho para não permitir que um departamento que personalização veiculo atue como departamento de compra:
-update pedido set cod_depto_compra = 2;
-select * from pedido;
 
+drop function verificaDepartamentoDeProducao() cascade;
 create or replace function verificaDepartamentoDeProducao() returns trigger as
 $$
 begin
@@ -227,12 +234,15 @@ end;
 $$
 language plpgsql;
 
+drop trigger verificaDepartamentoDeProducaoGatilho;
 create trigger verificaDepartamentoDeProducaoGatilho before insert or update on pedido for each row execute procedure verificaDepartamentoDeProducao();
 
 -- Gatilhos e funções extras (adicionados após a entrega 03) a partir desta linha:
 
 -- Gatilho para ajuste da table 'componente' em inserções, se o componente já existir na tabela, sua quantidade será acrescida de acordo...
 -- ... com a quantidade que seria adicionada e a quantidade miníma será a maior das duas quantidades mínimas:
+
+drop function addComponente() cascade;
 create or replace function addComponente() returns trigger as
 $$
 begin
@@ -246,9 +256,12 @@ end;
 $$
 language plpgsql;
 
+drop trigger addComponeteGatilho;
 create trigger addComponeteGatilho before insert on componente for each row execute procedure addComponente();
 
 -- Função auxiliar para a função acima:
+
+drop funciton max(num1 numeric, num2 numeric);
 create or replace function max(num1 numeric, num2 numeric) returns numeric as
 $$
 begin
@@ -276,8 +289,7 @@ end;
 $$
 language plpgsql;
 
-insert into componente_necessario values(1, 'motor do batmóvel', 1);
-
+drop trigger addComponenteNecessarioGatilho;
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
 -- Ideias:
@@ -289,21 +301,21 @@ create trigger addComponenteNecessarioGatilho before insert on componente_necess
 -- (6) gatilho para impedir que diferentes fornecedores tenham nomes iguais
 
 -- View para o número de veículos personalizados por departamento:
-create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v on d.cod_dept = v.cod_dept group by d.cod_dept;
-create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
+
 drop view NumCarros;
-select * from NumCarros;
+create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
+
 
 -- View para o número de pedidos de compra por departamento(de compra):
-create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
+
 drop view NumPedidos;
-select * from NumPedidos;
+create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
 
 -- View para obter receitas mensais:
 
+drop view Receita;
 create view Receita(valor, mes, ano) as select sum(valor_producao), extract(month from data_producao), extract(year from data_producao) from veiculo group by (extract(month from data_producao), 
 extract(year from data_producao)) order by (extract(year from data_producao), extract(month from data_producao));
-select * from Receita;
 
 -- View para obter despesas mensais:
 
@@ -312,6 +324,7 @@ create view Despesa(valor, mes, ano) as select sum(valor), extract(month from da
 
 -- Gatilho para nome de fornecedores:
 
+drop function nomeIgual() cascade;
 create function nomeIgual() returns trigger as
 $$
 begin
@@ -324,10 +337,12 @@ end;
 $$
 language plpgsql;
 
+drop trigger nomeIgualGatilho;
 create trigger nomeIgualGatilho before insert or update on fornecedor for each row execute procedure nomeIgual();
 
 -- Gatilho para quando um componente for adicionado o seu fornecedor principal seja automaticamente adicionado na tabela fornece:
 
+drop function atualizaInsertUpdateFornecedorPrincipal() cascade;
 create or replace function atualizaInsertUpdateFornecedorPrincipal() returns trigger as
 $$
 begin
@@ -345,6 +360,7 @@ create trigger atualizaInsertUpdateFornecedorPrincipalGatilho after insert or up
 -- Gatilho para quando um componente for atualizado ou deletado o seu fornecedor principal seja automaticamente alterado na tabela fornece e...
 -- ... eliminar da tabela fornece linhas relacionadas à um componente cujo nome será atualizado ou deletado:
 
+drop function atualizaUpdateDeleteFornecedorPrincipal() cascade;
 create or replace function atualizaUpdateDeleteFornecedorPrincipal() returns trigger as
 $$
 begin
@@ -369,25 +385,13 @@ drop trigger atualizaUpdateDeleteFornecedorPrincipalGatilho on componente;
 create trigger atualizaUpdateDeleteFornecedorPrincipalGatilho before update or delete on componente for each row execute procedure atualizaUpdateDeleteFornecedorPrincipal();
 
 -- Para esta função é necessária um "variável global" para que não haja problema com a função seguinte:
---create table variable(trigger_on boolean);
---insert into variable values(true);
---select * from variable;
-
-select * from componente order by nome;
-select * from fornece order by nome_componente;
-
-delete from fornece where nome_componente = 'bateria Moura V2';
-update componente set cnpj_principal = '15887951194460' where nome = 'bateria Moura V2';
-update componente set cnpj_principal = '25157270610711' where nome = 'bateria Moura V2';
-
-update componente set nome = 'bateria Moura V5' where nome = 'bateria Moura V2';
+-- create table variable(trigger_on boolean);
+-- insert into variable values(true);
+-- select * from variable;
 
 -- Gatilho para impedir que um fornecedor principal seja removido da tabela fornecedor por componente:
 
-select * from componente;
-select * from fornece;
-
-drop function fornecedorPermanente();
+drop function fornecedorPermanente() cascade;
 create or replace function fornecedorPermanente() returns trigger as
 $$
 declare counter int default 0;
@@ -416,6 +420,7 @@ end;
 $$
 language plpgsql;
 
+drop trigger fornecedorPermanenteGatilho;
 create trigger fornecedorPermanenteGatilho before update or delete on fornece for each row execute procedure fornecedorPermanente();
 
 -- SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';
