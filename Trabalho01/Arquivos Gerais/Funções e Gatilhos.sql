@@ -292,14 +292,6 @@ language plpgsql;
 drop trigger addComponenteNecessarioGatilho;
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
--- Ideias:
--- (1) gatilho para manter a tabela 'componente' atualizada;
--- (2) comando para calcular despesas;
--- (3) comando para calcular receitas;
--- (4) alterar a tabela 'veículo' para que haja um atributo de valor do serviço sobre tal veículos(isso será usado para calcular as receitas);
--- (5) como se diz no final da descrição "personalização de veículos", o dono da empresa analisa as receitas e despesas mensais portanto deve haver o atributo data na tabela 'pedido' e 'veículo';
--- (6) gatilho para impedir que diferentes fornecedores tenham nomes iguais
-
 -- View para o número de veículos personalizados por departamento:
 
 drop view NumCarros;
