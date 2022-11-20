@@ -503,7 +503,7 @@ class Controller():
         self.printQuery(text, campos)
             
     def setInserirContem(self):
-        campos = ["Nome do componente:", "Id do pedido:"]
+        campos = ["Nome do componente:", "Id do pedido:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirContem())
         self.__view.criarBotoes(botao)
@@ -518,7 +518,7 @@ class Controller():
             self.printError()
     
     def setDeletarContem(self):
-        campos = ["Nome do componente:", "Id do pedido:"]
+        campos = ["Nome do componente:", "Id do pedido:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarContem())
         self.__view.criarBotoes(botao)
@@ -527,6 +527,7 @@ class Controller():
         dados = self.clearAndGetData()
         dados[0] = '\'' + dados[0] + '\''
         if(dados[1] != ''): dados[1] = int(dados[1])
+        if(dados[2] != ''): dados[2] = int(dados[2])
         try:
             self.__contemDAO.delete(dados)
             self.printSucess()
@@ -534,7 +535,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarContem(self):
-        campos = ["Novo nome do componente:", "Novo id do pedido:"]
+        campos = ["Novo nome do componente:", "Novo id do pedido:", "Nova quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarContem())
         self.__view.criarBotoes(botao)
@@ -543,7 +544,8 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         if(dadosSet[1] != ''): dadosSet[1] = int(dadosSet[1])
-        campos = ["Antigo nome do componente:", "Antigo id do pedido:"]
+        if(dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
+        campos = ["Antigo nome do componente:", "Antigo id do pedido:", "Antiga quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarContem(dadosSet))
         self.__view.criarBotoes(botao)
@@ -552,6 +554,7 @@ class Controller():
         dadosWhere = self.clearAndGetData()
         dadosWhere[0] = '\'' + dadosWhere[0] + '\''
         if(dadosWhere[1] != ''): dadosWhere[1] = int(dadosWhere[1])
+        if(dadosWhere[2] != ''): dadosWhere[2] = int(dadosWhere[2])
         try:
             self.__contemDAO.update(dadosSet, dadosWhere)
             self.printSucess()
@@ -559,7 +562,7 @@ class Controller():
             self.printError()
 
     def verContem(self):
-        campos = ["Nome do Componente", "Id do pedido"]
+        campos = ["Nome do Componente", "Id do pedido", "Quantidade"]
         text = self.__contemDAO.selectAll()
         self.printQuery(text, campos)
             

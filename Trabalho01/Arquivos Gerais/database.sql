@@ -77,8 +77,9 @@ drop table contem cascade;
 create table contem(
     nome_componente character varying(50) not null,
     id_pedido integer not null,
+	quantidade integer not null,
     primary key(nome_componente, id_pedido),
-    FOREIGN KEY (nome_componente) references componente (nome),
+    FOREIGN KEY (nome_componente) references componente (nome) on update cascade on delete cascade,
     FOREIGN KEY (id_pedido) references pedido (id)
 
 );

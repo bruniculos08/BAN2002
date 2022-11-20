@@ -435,7 +435,7 @@
         "kind": 6,
         "importPath": "Data.Contem",
         "description": "Data.Contem",
-        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n        self.__quantidade = 0\n    def nome(self, nome):\n        self.__nome = nome",
         "detail": "Data.Contem",
         "documentation": {}
     },
@@ -444,7 +444,7 @@
         "kind": 6,
         "importPath": "Data.Contem",
         "description": "Data.Contem",
-        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n        # self.__sqlDelete = \"delete from contem\"",
+        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {}, {})\"\n        # self.__sqlDelete = \"delete from contem\"",
         "detail": "Data.Contem",
         "documentation": {}
     },

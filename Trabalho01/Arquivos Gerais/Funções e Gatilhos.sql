@@ -358,12 +358,12 @@ $$
 begin
 	if TG_OP = 'DELETE' then
 		update variable set trigger_on = false;
-		delete from fornece where nome_componente = old.nome and cnpj = old.cnpj_principal;
+		delete from fornece where nome_componente = old.nome;
 		update variable set trigger_on = true;
 		return old;
 	elsif old.nome <> new.nome then 
 		update variable set trigger_on = false;
-		delete from fornece where nome_componente = old.nome;
+		update fornece where nome_componente = old.nome set new.nome_componente = ;
 		update variable set trigger_on = true;
 		return new;
 	end if;
