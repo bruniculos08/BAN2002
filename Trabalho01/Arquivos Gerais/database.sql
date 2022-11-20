@@ -21,7 +21,6 @@ create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cach
 drop table pedido cascade;
 create table pedido(
     id integer not null,
-    valor float not null,
     data_criacao date not null,
     cnpj character varying(14) not null,
     cod_dept_compra integer not null, -- lembrar de alterar para not null após testes!
@@ -42,6 +41,7 @@ drop table componente cascade;
 create table componente(
     nome character varying(50) not null,
     tipo character varying(50) not null,
+	valor_compra float not null,
     minimo_quant integer not null,
     quantidade integer not null,
     cnpj_principal character varying(14) not null,
@@ -89,7 +89,7 @@ create table fornece(
     nome_componente character varying(50) not null,
     cnpj character varying(14) not null,
     primary key (nome_componente, cnpj),
-    FOREIGN KEY (nome_componente) references componente (nome),
+    FOREIGN KEY (nome_componente) references componente (nome) on update cascade on delete cascade,
     FOREIGN KEY (cnpj) references fornecedor (cnpj)
     
 );

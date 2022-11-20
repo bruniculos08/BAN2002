@@ -4,14 +4,12 @@ from Data.Padrao import *
 class Pedido():
 
     __id = None
-    __valor = None
     __dataCriacao = None
     __cnpj = None
     __codDeptCompra = None
 
     def __init__(self):
         self.__id = -1
-        self.__valor = 0
         self.__dataCriacao = ''
         self.__cnpj = ""
         self.__codDeptCompra = -1
@@ -22,13 +20,6 @@ class Pedido():
     
     def getId(self):
         return self.__id
-
-    def valor(self, valor):
-        self.__valor = valor
-        return self
-    
-    def getValor(self):
-        return self.__valor
     
     def dataCriacao(self, dataCriacao):
         self.__dataCriacao = dataCriacao
@@ -53,14 +44,13 @@ class Pedido():
 
     def fromTupla(self, tupla):
         self.__idPedido = tupla[0]
-        self.__valor = tupla[1]
-        self.__dataCriacao = tupla[2]
-        self.__cnpj = tupla[3]
-        self.__codDeptCompra = tupla[4]
+        self.__dataCriacao = tupla[1]
+        self.__cnpj = tupla[2]
+        self.__codDeptCompra = tupla[3]
         return self
     
     def __repr__(self):
-        return u'{}:{}:{}:{}:{}'.format(self.__idPedido, self.__valor, self.__dataCriacao, self.__cnpj, self.__codDeptCompra)    
+        return u'{}:{}:{}:{}'.format(self.__idPedido, self.__dataCriacao, self.__cnpj, self.__codDeptCompra)    
 
 class PedidoDAO(PadraoDAO):
 
@@ -74,11 +64,11 @@ class PedidoDAO(PadraoDAO):
     def __init__(self):
         self.__sqlSelectAll = "select * from pedido"
         self.__sqlSelectNewId = "select nextval('pedido_id')"
-        self.__sqlInsert = "insert into pedido values({}, {}, '{}', '{}', {})"
+        self.__sqlInsert = "insert into pedido values({}, '{}', '{}', {})"
         # self.__sqlDelete = "delete from pedido"
         # self.__sqlUpdate = "update pedido set"
         # self.__columns = ["id", "valor", "data_criacao", "cnpj", "cod_dept_compra"]
-        super().__init__("delete from pedido", "update pedido set", ["id", "valor", "data_criacao", "cnpj", "cod_dept_compra"])
+        super().__init__("delete from pedido", "update pedido set", ["id", "data_criacao", "cnpj", "cod_dept_compra"])
 
     def selectAll(self) -> list:
         con = Connection()

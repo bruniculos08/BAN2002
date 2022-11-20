@@ -588,7 +588,7 @@
         "kind": 6,
         "importPath": "Data.Pedido",
         "description": "Data.Pedido",
-        "peekOfCode": "class Pedido():\n    __id = None\n    __valor = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__valor = 0\n        self.__dataCriacao = ''",
+        "peekOfCode": "class Pedido():\n    __id = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__dataCriacao = ''\n        self.__cnpj = \"\"\n        self.__codDeptCompra = -1",
         "detail": "Data.Pedido",
         "documentation": {}
     },

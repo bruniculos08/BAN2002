@@ -273,7 +273,7 @@ end;
 $$
 language plpgsql;
 
--- Gatilho para ajuste da tabela 'componente_necessario' em inserções (igual o gatilho anterior sobre a tabela componente), se o componente já existir na tabela, sua quantidade será acrecscida de acordo...
+-- Gatilho para ajuste da tabela 'componente_necessario' em inserções (igual o gatilho anterior sobre a tabela componente), se o componente já existir na tabela sua quantidade será acrecscida de acordo...
 -- ... com a quantidade que seria adicionada:
 
 drop function addComponenteNecessario() cascade;
@@ -281,7 +281,7 @@ create or replace function addComponenteNecessario() returns trigger as
 $$
 begin
 	if (select count(*) from componente_necessario where nome_componente = new.nome_componente and cod_dept = new.cod_dept) > 0 then
-		update componente_necessario set quantidade = quantidade + new.quantidade where nome_componente = new.nome_componente and cod_dept = new.cod_dept;
+		update componente_necessario set quantidade = (quantidade + new.quantidade) where nome_componente = new.nome_componente and cod_dept = new.cod_dept;
 		return old;
 	end if;
 	return new;
@@ -291,6 +291,25 @@ language plpgsql;
 
 drop trigger addComponenteNecessarioGatilho;
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
+
+-- Gatilho para ajuste da tabela 'contem' em inserções (igual o gatilho anterior sobre a tabela componente_necessario), se o componente já existir na tabela sua quantidade será acrecscida de acordo...
+-- ... com a quantidade que seria adicionada:
+
+drop function addContem() cascade;
+create or replace function addContem() returns trigger as
+$$
+begin
+	if (select count(*) from contem where nome_componente = new.nome_componente and id_pedido = new.id_pedido) > 0 then
+		update contem set quantidade = (quantidade + new.quantidade) where nome_componente = new.nome_componente and id_pedido = new.id_pedido;
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+drop trigger addContemGatilho;
+create trigger addContemGatilho before insert on contem for each row execute procedure addContem();
 
 -- View para o número de veículos personalizados por departamento:
 
@@ -308,6 +327,11 @@ create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) 
 drop view Receita;
 create view Receita(valor, mes, ano) as select sum(valor_producao), extract(month from data_producao), extract(year from data_producao) from veiculo group by (extract(month from data_producao), 
 extract(year from data_producao)) order by (extract(year from data_producao), extract(month from data_producao));
+
+-- View para ver componentes em falta (quantidade abaixo da quantidade mínima):
+
+drop view emFalta;
+create view emFalta(nome_componente, quantidade_mínima, quantidade_atual) as select nome, minimo_quant, quantidade from componente c where c.minimo_quant > c.quantidade;
 
 -- View para obter despesas mensais:
 
@@ -349,38 +373,6 @@ language plpgsql;
 drop trigger atualizaInsertUpdateFornecedorPrincipalGatilho on componente;
 create trigger atualizaInsertUpdateFornecedorPrincipalGatilho after insert or update on componente for each row execute procedure atualizaInsertUpdateFornecedorPrincipal();
 
--- Gatilho para quando um componente for atualizado ou deletado o seu fornecedor principal seja automaticamente alterado na tabela fornece e...
--- ... eliminar da tabela fornece linhas relacionadas à um componente cujo nome será atualizado ou deletado:
-
-drop function atualizaUpdateDeleteFornecedorPrincipal() cascade;
-create or replace function atualizaUpdateDeleteFornecedorPrincipal() returns trigger as
-$$
-begin
-	if TG_OP = 'DELETE' then
-		update variable set trigger_on = false;
-		delete from fornece where nome_componente = old.nome;
-		update variable set trigger_on = true;
-		return old;
-	elsif old.nome <> new.nome then 
-		update variable set trigger_on = false;
-		update fornece where nome_componente = old.nome set new.nome_componente = ;
-		update variable set trigger_on = true;
-		return new;
-	end if;
-	update variable set trigger_on = true;
-	return new;
-end;
-$$
-language plpgsql;
-
-drop trigger atualizaUpdateDeleteFornecedorPrincipalGatilho on componente;
-create trigger atualizaUpdateDeleteFornecedorPrincipalGatilho before update or delete on componente for each row execute procedure atualizaUpdateDeleteFornecedorPrincipal();
-
--- Para esta função é necessária um "variável global" para que não haja problema com a função seguinte:
-drop table variable cascade;
-create table variable(trigger_on boolean);
-insert into variable values(true);
-
 -- Gatilho para impedir que um fornecedor principal seja removido da tabela fornecedor por componente:
 
 drop function fornecedorPermanente() cascade;
@@ -414,6 +406,52 @@ language plpgsql;
 
 drop trigger fornecedorPermanenteGatilho;
 create trigger fornecedorPermanenteGatilho before update or delete on fornece for each row execute procedure fornecedorPermanente();
+
+-- Função que atualiza a quantidade de um determinado componente:
+
+select * from pedido;
+select cast(now() as date);
+
+create or replace function atualizaQuantidadeComponente(nome varchar(50)) returns void as
+$$
+declare counterContem int default 0;
+declare counterNecessario int default 0;
+declare saldo int default 0;
+declare quantidadeMinima int default 0;
+declare newIdPedido int;
+begin
+	counterContem := (select sum(c.quantidade) from contem c where c.nome_componente = nome);
+	counterNecessario := (select sum(c.quantidade) from componente_necessario c where c.nome_componente = nome);
+	quantidadeMinima : = (select minimo_quant from componente c where c.nome = nome);
+	saldo := (counterContem - counterNecessario);
+	if (saldo < quantidadeMinima) then
+		newIdPedido := (select nextval('pedido_id'));
+		insert into pedido values()
+	
+
+	update componente c set c.quantidade = (counterContem - counterNecessario) where c.nome = nome;
+end;
+$$
+language plpgsql;
+
+-- Função que verifica se um componente está com a quantidade menor que a mínima e gera novo pedido automático:
+
+
+
+-- Gatilho para que sempre que um componente for atualizado na tabela componente sua quantidade seja atualizada para a soma das quantidades...
+-- ... em pedidos subtraído da soma das quantidades do produto em componenetes necessários (à fazer)
+
+create or replace function QuantidadeUpdateComponente() returns trigger as
+$$
+begin
+	if new.nome != old.nome then
+		atualizaQuantidadeComponente(new.nome);
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
 
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

@@ -300,7 +300,7 @@ class Controller():
         self.printQuery(text, campos)
             
     def setInserirPedido(self):
-        campos = ["Valor:", "Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
+        campos = ["Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirPedido())
         self.__view.criarBotoes(botao)
@@ -315,7 +315,7 @@ class Controller():
             self.printError()
 
     def setDeletarPedido(self):    
-        campos = ["Id do pedido:", "Valor:", "Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
+        campos = ["Id do pedido:", "Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarPedido())
         self.__view.criarBotoes(botao)
@@ -323,10 +323,9 @@ class Controller():
     def deletarPedido(self):
         dados = self.clearAndGetData()
         if dados[0] != '': dados[0] = int(dados[0])
-        if dados[1] != '': dados[1] = float(dados[1])
+        dados[1] = '\'' + dados[1] + '\''
         dados[2] = '\'' + dados[2] + '\''
-        dados[3] = '\'' + dados[3] + '\''
-        if(dados[4] != ''): dados[4] = int(dados[4])
+        if(dados[3] != ''): dados[3] = int(dados[3])
         try:
             self.__pedidoDAO.delete(dados)
             self.printSucess()
@@ -334,17 +333,16 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        campos = ["Novo valor:", "Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
+        campos = ["Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
     def setSecundarioAtualizarPedido(self):
         dadosSet = [''] + self.clearAndGetData()
-        if dadosSet[1] != '': dadosSet[1] = float(dadosSet[1])
+        dadosSet[1] = '\'' + dadosSet[1] + '\''
         dadosSet[2] = '\'' + dadosSet[2] + '\''
-        dadosSet[3] = '\'' + dadosSet[3] + '\''
-        if(dadosSet[4] != ''): dadosSet[4] = int(dadosSet[4])
+        if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
         campos = ["Antigo id do pedido:", "Antigo valor:", "Antiga data de criação(YYYY-MM-DD):", "Antigo CNPJ:", "Antigo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarPedido(dadosSet))
@@ -353,10 +351,9 @@ class Controller():
     def atualizarPedido(self, dadosSet):
         dadosWhere = self.clearAndGetData()
         if dadosWhere[0] != '': dadosWhere[0] = int(dadosWhere[0])
-        if dadosWhere[1] != '': dadosWhere[1] = float(dadosWhere[1])
+        dadosWhere[1] = '\'' + dadosWhere[1] + '\''
         dadosWhere[2] = '\'' + dadosWhere[2] + '\''
-        dadosWhere[3] = '\'' + dadosWhere[3] + '\''
-        if(dadosWhere[4] != ''): dadosWhere[4] = int(dadosWhere[4])
+        if(dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
         try:
             self.__pedidoDAO.update(dadosSet, dadosWhere)
             self.printSucess()
@@ -364,7 +361,7 @@ class Controller():
             self.printError()
 
     def verPedido(self):
-        campos = ["Id do pedido", "Valor", "Data de criação(YYYY-MM-DD)", "CNPJ", "Código do Departamento"]
+        campos = ["Id do pedido", "Data de criação(YYYY-MM-DD)", "CNPJ", "Código do Departamento"]
         text = self.__pedidoDAO.selectAll()
         self.printQuery(text, campos)
 
