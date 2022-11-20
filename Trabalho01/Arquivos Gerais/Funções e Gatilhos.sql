@@ -377,9 +377,9 @@ drop trigger atualizaUpdateDeleteFornecedorPrincipalGatilho on componente;
 create trigger atualizaUpdateDeleteFornecedorPrincipalGatilho before update or delete on componente for each row execute procedure atualizaUpdateDeleteFornecedorPrincipal();
 
 -- Para esta função é necessária um "variável global" para que não haja problema com a função seguinte:
--- create table variable(trigger_on boolean);
--- insert into variable values(true);
--- select * from variable;
+drop table variable cascade;
+create table variable(trigger_on boolean);
+insert into variable values(true);
 
 -- Gatilho para impedir que um fornecedor principal seja removido da tabela fornecedor por componente:
 
@@ -415,4 +415,5 @@ language plpgsql;
 drop trigger fornecedorPermanenteGatilho;
 create trigger fornecedorPermanenteGatilho before update or delete on fornece for each row execute procedure fornecedorPermanente();
 
--- SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';
+-- Comando para listar todas as funções no banco de dados:
+SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

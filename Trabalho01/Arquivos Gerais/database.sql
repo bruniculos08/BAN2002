@@ -1,16 +1,15 @@
 ﻿
+drop sequence dept_cod;
 create sequence dept_cod increment by 1 maxvalue 99999999999999 minvalue 32 cache 1;
 
+drop table departamento cascade;
 create table departamento(
     cod_dept integer not null,
     tipo character varying(50) not null,
     primary key(cod_dept)
 );
 
-select * from pedido;
-select * from fornece;
-
-drop table Nota_fiscal;
+drop table Nota_fiscal cascade;
 create table Nota_fiscal(
     cod_nota varchar(44),
     id_pedido integer not null,
@@ -18,28 +17,29 @@ create table Nota_fiscal(
     foreign key (id_pedido) references pedido(id)
 );
 
+drop table fornecedor cascade;
 create table fornecedor(
     cnpj character varying(14) not null,
     nome character varying(100) not null,
     primary key(cnpj)
 );
 
+drop sequence pedido_id;
 create sequence pedido_id increment by 1 maxvalue 99999999999999 minvalue 1 cache 1;
 
 drop table pedido cascade;
 create table pedido(
     id integer not null,
     valor float not null,
-    data_criacao date, -- 'YYYY-MM-DD' 
+    data_criacao date not null,
     cnpj character varying(14) not null,
-    cod_dept_compra integer not null,
+    cod_dept_compra integer not null, -- lembrar de alterar para not null após testes!
     primary key (id),
     foreign key(cnpj) references fornecedor(cnpj),
     foreign key (cod_dept_compra) references departamento(cod_dept)
 );
 
-select cast(now() as date);
-
+drop table componente cascade;
 create table componente(
     nome character varying(50) not null,
     tipo character varying(50) not null,
@@ -61,11 +61,10 @@ create table veiculo(
 );
 
 -- Quando é adicionado um veículo na lista de veículos produzidos supões se que o departamento responsável pela fabricação adicione as peças para fabricação de...
--- ... tal veículo à tabela "esta_na_lista", assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
+-- ... tal veículo à tabela "componente_necessario" (antiga "esta_na_lista"), assim cada linha desta tabela indica o departamento que precisa de uma unidade de um tal componente (se forem mais unidades...
 -- ... haverão mais linhas.
 
-select cast(now() as date) where now = '2022-11-16';
-
+drop table componente_necessario cascade;
 create table componente_necessario(
     cod_dept integer not null,
     nome_componente character varying(50) not null,
@@ -75,6 +74,7 @@ create table componente_necessario(
     FOREIGN KEY (nome_componente) references componente (nome)
 );
 
+drop table contem cascade;
 create table contem(
     nome_componente character varying(50) not null,
     id_pedido integer not null,
@@ -84,6 +84,7 @@ create table contem(
 
 );
 
+drop table fornece cascade;
 create table fornece(
     nome_componente character varying(50) not null,
     cnpj character varying(14) not null,
