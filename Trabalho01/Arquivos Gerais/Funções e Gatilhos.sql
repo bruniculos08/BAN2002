@@ -436,6 +436,7 @@ drop view pedidosPorDepartamento;
 create view pedidosPorDepartamento as select d.cod_dept, count(p.id) from departamento d left join pedido p on d.cod_dept = p.cod_dept_compra 
 where d.tipo = 'compra' group by d.cod_dept order by count(p.id) ASC;
 
+-- Testes:
 select * from componente_necessario;
 select * from componente;
 select * from contem;
@@ -446,6 +447,7 @@ delete from componente;
 insert into departamento values(nextval('dept_cod'), 'compra');
 insert into componente_necessario values(4, 'motor do batmóvel', 1);
 insert into componente values('motor do batmóvel', 'motor', 1000, 20, 0, '15887951194460')
+delete from fornecedor where cnpj = '15887951194460';
 
 -- Função que retorna o cod_dept do departamento de compra com menos pedidos feitos:
 
