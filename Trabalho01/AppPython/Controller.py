@@ -366,13 +366,14 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirComponente(self):
-        campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
+        campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "CNPJ Principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponente())
         self.__view.criarBotoes(botao)
 
     def inserirComponente(self):
         dados = self.clearAndGetData()
+        dados = dados[0:4] + [0] + dados[4:5]
         newComponente = Componente().fromTupla(dados)
         try:
             self.__componenteDAO.insertComponente(newComponente)
@@ -401,18 +402,18 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarComponente(self):
-        campos = ["Novo nome:", "Novo tipo:", "Novo valor de compra:", "Nova quantidade mínima:", "Nova quantidade:", "Novo CNPJ principal:"]
+        campos = ["Novo nome:", "Novo tipo:", "Novo valor de compra:", "Nova quantidade mínima:", "Novo CNPJ principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponente())
         self.__view.criarBotoes(botao)
 
     def setSecundarioAtualizarComponente(self):
         dadosSet = self.clearAndGetData()
+        dadosSet = dadosSet[0:4] + [''] + dadosSet[4:5]
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         dadosSet[1] = '\'' + dadosSet[1] + '\''
         if (dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
         if (dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
-        if (dadosSet[4] != ''): dadosSet[4] = int(dadosSet[4])
         dadosSet[5] = '\'' + dadosSet[5] + '\''
         campos = ["Antigo nome:", "Antigo tipo:", "Antigo valor de compra:", "Antigo quantidade mínima:", "Antigo quantidade:", "Antigo CNPJ principal:"]
         self.__view.criarCamposDeInsercao(campos)
