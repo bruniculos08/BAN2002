@@ -34,7 +34,7 @@ create table Nota_fiscal(
     cod_nota varchar(44),
     id_pedido integer not null,
     primary key (cod_nota),
-    foreign key (id_pedido) references pedido(id)
+    foreign key (id_pedido) references pedido(id) on delete cascade on update cascade
 );
 
 drop table componente cascade;
@@ -80,17 +80,8 @@ create table contem(
 	quantidade integer not null,
     primary key(nome_componente, id_pedido),
     FOREIGN KEY (nome_componente) references componente (nome) on update cascade on delete cascade,
-    FOREIGN KEY (id_pedido) references pedido (id)
+    FOREIGN KEY (id_pedido) references pedido (id) on update cascade on delete cascade
 );
-
-delete from componente;
-insert into componente values('motor do batmóvel', 'motor', 1000, 11, 1, '15887951194460');
-select * from fornecedor;
-select * from componente;
-select * from contem;
-select * from componente_necessario;
-select * from departamento;
-insert into componente_necessario values(1, 'motor do batmóvel', 1);
 
 drop table fornece cascade;
 create table fornece(

@@ -317,12 +317,14 @@ create trigger addContemGatilho before insert on contem for each row execute pro
 -- View para o número de veículos personalizados por departamento:
 
 drop view NumCarros;
-create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
+create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) where d.tipo = 'producao' 
+group by d.cod_dept;
 
 -- View para o número de pedidos de compra por departamento(de compra):
 
 drop view NumPedidos;
-create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra group by d.cod_dept;
+create view NumPedidos(cod_dept, NumOfPedidos) as select d.cod_dept, count(e.*) from pedido e right join departamento d on d.cod_dept = e.cod_dept_compra 
+where d.tipo = 'compra' group by d.cod_dept;
 
 -- View para obter receitas mensais:
 
@@ -333,7 +335,9 @@ extract(year from data_producao)) order by (extract(year from data_producao), ex
 -- View para obter despesas mensais:
 
 drop view Despesa;
-create view Despesa(valor, mes, ano) as select sum(valor), extract(month from data_criacao), extract(year from data_criacao) from pedido group by (extract(month from data_criacao), extract(year from data_criacao)) order by (extract(year from data_criacao), extract(month from data_criacao));
+create view Despesa(valor, mes, ano) as 
+select sum(valor_compra*contem.quantidade), extract(month from data_criacao), extract(year from data_criacao) from pedido left join contem on id = id_pedido 
+join (select nome, valor_compra from componente) as componente on nome = nome_componente group by extract(year from data_criacao), extract(month from data_criacao);
 
 -- Gatilho para nome de fornecedores:
 
@@ -480,7 +484,7 @@ begin
 			update variable set trigger_on = true;
 			return false;
 		end if;
-		insert into pedido values(newIdPedido, codDeptPedido, data_atual, cnpjPrincipal, codDeptPedido);
+		insert into pedido values(newIdPedido, data_atual, cnpjPrincipal, codDeptPedido);
 		insert into contem values(arg_nome, newIdPedido, (quantidadeMinima-saldo));
 		update componente set quantidade = (quantidadeMinima) where nome = arg_nome;
 		update variable set trigger_on = true;
