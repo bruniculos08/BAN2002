@@ -261,7 +261,7 @@ create trigger addComponeteGatilho before insert on componente for each row exec
 
 -- Função auxiliar para a função acima:
 
-drop funciton max(num1 numeric, num2 numeric);
+drop function max(num1 numeric, num2 numeric);
 create or replace function max(num1 numeric, num2 numeric) returns numeric as
 $$
 begin
@@ -316,7 +316,6 @@ create trigger addContemGatilho before insert on contem for each row execute pro
 drop view NumCarros;
 create view NumCarros(cod_dept, NumOfCarros) as select d.cod_dept, count(v.chassi) from departamento d left join veiculo v using(cod_dept) group by d.cod_dept;
 
-
 -- View para o número de pedidos de compra por departamento(de compra):
 
 drop view NumPedidos;
@@ -328,11 +327,6 @@ drop view Receita;
 create view Receita(valor, mes, ano) as select sum(valor_producao), extract(month from data_producao), extract(year from data_producao) from veiculo group by (extract(month from data_producao), 
 extract(year from data_producao)) order by (extract(year from data_producao), extract(month from data_producao));
 
--- View para ver componentes em falta (quantidade abaixo da quantidade mínima):
-
-drop view emFalta;
-create view emFalta(nome_componente, quantidade_mínima, quantidade_atual) as select nome, minimo_quant, quantidade from componente c where c.minimo_quant > c.quantidade;
-
 -- View para obter despesas mensais:
 
 drop view Despesa;
@@ -341,7 +335,7 @@ create view Despesa(valor, mes, ano) as select sum(valor), extract(month from da
 -- Gatilho para nome de fornecedores:
 
 drop function nomeIgual() cascade;
-create function nomeIgual() returns trigger as
+create or replace function nomeIgual() returns trigger as
 $$
 begin
 	if (select count(*) from forncedor where fornecedor.nome = new.nome) > 0 then
@@ -427,7 +421,7 @@ $$
 language plpgsql;
 
 drop trigger tipoDepartamentoGatilho on departamento;
-create trigger tipoDepartamentoGatilho() on departamento before insert or update for each row execute procedure tipoDepartamento();
+create trigger tipoDepartamentoGatilho before insert or update on departamento for each row execute procedure tipoDepartamento();
 
 -- View que mostra os departamentos de compra e a quantidade de pedidos em cada:
 
@@ -468,9 +462,10 @@ declare data_atual date;
 begin
 	update variable set trigger_on = false;
 	
-	counterContem := (select sum(c.quantidade) from contem c where c.nome_componente = arg_nome);
-	counterNecessario := (select sum(c.quantidade) from componente_necessario c where c.nome_componente = arg_nome);
+	counterContem := (select COALESCE(sum(c.quantidade),0) from contem c where c.nome_componente = arg_nome);
+	counterNecessario := (select COALESCE(sum(c.quantidade),0) from componente_necessario c where c.nome_componente = arg_nome);
 	quantidadeMinima := (select minimo_quant from componente c where c.nome = arg_nome);
+	
 	saldo := (counterContem - counterNecessario);
 	
 	if (saldo < quantidadeMinima) then
@@ -496,6 +491,7 @@ $$
 language plpgsql;
 
 -- Para esta função é necessária um "variável global" para que não haja problema de recursão infinita:
+
 drop table variable cascade;
 create table variable(trigger_on boolean);
 insert into variable values(true);

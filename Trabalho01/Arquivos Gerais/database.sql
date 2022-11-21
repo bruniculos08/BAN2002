@@ -43,7 +43,7 @@ create table componente(
     tipo character varying(50) not null,
 	valor_compra float not null,
     minimo_quant integer not null,
-    quantidade integer not null,
+    quantidade integer,
     cnpj_principal character varying(14) not null,
     primary key(nome),
     foreign key(cnpj_principal) references fornecedor(cnpj)
@@ -69,8 +69,8 @@ create table componente_necessario(
     nome_componente character varying(50) not null,
     quantidade integer not null,
     primary key(cod_dept, nome_componente),
-    FOREIGN KEY (cod_dept) references departamento (cod_dept),
-    FOREIGN KEY (nome_componente) references componente (nome)
+    FOREIGN KEY (cod_dept) references departamento (cod_dept) on update cascade on delete cascade,
+    FOREIGN KEY (nome_componente) references componente (nome) on update cascade on delete cascade
 );
 
 drop table contem cascade;
@@ -81,8 +81,15 @@ create table contem(
     primary key(nome_componente, id_pedido),
     FOREIGN KEY (nome_componente) references componente (nome) on update cascade on delete cascade,
     FOREIGN KEY (id_pedido) references pedido (id)
-
 );
+
+delete from componente;
+insert into componente values('motor do batmóvel', 'motor', 1000, 10, 1, '15887951194460');
+select * from fornecedor;
+select * from componente;
+select * from contem;
+select * from componente_necessario;
+select * from departamento;
 
 drop table fornece cascade;
 create table fornece(
