@@ -55,6 +55,7 @@ end;
 $$
 language plpgsql;
 
+drop trigger verificaCnpjGatilho on fornecedor;
 create trigger verificaCnpjGatilho before insert or update on fornecedor for each row execute procedure verificaCNPJ();
 
 -- Função para verificar se o VIN (Chassi internacional) é válido:
@@ -152,6 +153,7 @@ end;
 $$
 language plpgsql;
 
+drop trigger verificaChassi on veiculo;
 create trigger verificaChassi before insert or update on veiculo for each row execute procedure validarChassiGatilho();
 
 -- Função que valida a chave de acesso de nota fiscal:
@@ -170,7 +172,6 @@ begin
 		check_sum := check_sum + (word[i])*(vetor_pesos[(i-1)%8 + 1]);
 	end loop;
 	
-	--raise notice 'check sum = %', check_sum;
 	check_sum := check_sum%11;
 	
 	if (check_sum = 0 or check_sum = 1) and word[44] = '0' then
@@ -198,7 +199,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger verificaNotaGatilho;
+drop trigger verificaNotaGatilho on nota_fiscal;
 create trigger verificarNotaGatilho before insert or update on nota_fiscal for each row execute procedure verificarNota();
 
 -- Gatilho para não permitir que um departamento de compra personalize veículo:
@@ -216,10 +217,10 @@ end;
 $$
 language plpgsql;
 
-drop trigger verificaDepartamentoDeCompraGatilho;
+drop trigger verificaDepartamentoDeCompraGatilho on veiculo;
 create trigger verificaDepartamentoDeCompraGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
 
--- Gatilho para não permitir que um departamento que personalização veiculo atue como departamento de compra:
+-- Gatilho para não permitir que um departamento de personalização veiculo atue como departamento de compra:
 
 drop function verificaDepartamentoDeProducao() cascade;
 create or replace function verificaDepartamentoDeProducao() returns trigger as
@@ -234,7 +235,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger verificaDepartamentoDeProducaoGatilho;
+drop trigger verificaDepartamentoDeProducaoGatilho on pedido;
 create trigger verificaDepartamentoDeProducaoGatilho before insert or update on pedido for each row execute procedure verificaDepartamentoDeProducao();
 
 -- Gatilhos e funções extras (adicionados após a entrega 03) a partir desta linha:
@@ -248,7 +249,6 @@ $$
 begin
 	if (select count(*) from componente cn where nome = new.nome) > 0 then
 		update componente cn set quantidade = quantidade + 1, minimo_quant = max(minimo_quant, new.minimo_quant) where nome = new.nome;
-		
 		return old;
 	end if;
 	return new;
@@ -256,7 +256,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger addComponeteGatilho;
+drop trigger addComponeteGatilho on componente;
 create trigger addComponeteGatilho before insert on componente for each row execute procedure addComponente();
 
 -- Função auxiliar para a função acima:
@@ -289,7 +289,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger addComponenteNecessarioGatilho;
+drop trigger addComponenteNecessarioGatilho on componente_necessario;
 create trigger addComponenteNecessarioGatilho before insert on componente_necessario for each row execute procedure addComponenteNecessario();
 
 -- Gatilho para ajuste da tabela 'contem' em inserções (igual o gatilho anterior sobre a tabela componente_necessario), se o componente já existir na tabela sua quantidade será acrecscida de acordo...
@@ -308,7 +308,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger addContemGatilho;
+drop trigger addContemGatilho on contem;
 create trigger addContemGatilho before insert on contem for each row execute procedure addContem();
 
 -- View para o número de veículos personalizados por departamento:
@@ -353,7 +353,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger nomeIgualGatilho;
+drop trigger nomeIgualGatilho on fornecedor;
 create trigger nomeIgualGatilho before insert or update on fornecedor for each row execute procedure nomeIgual();
 
 -- Gatilho para quando um componente for adicionado o seu fornecedor principal seja automaticamente adicionado na tabela fornece:
@@ -404,54 +404,137 @@ end;
 $$
 language plpgsql;
 
-drop trigger fornecedorPermanenteGatilho;
+drop trigger fornecedorPermanenteGatilho on fornece;
 create trigger fornecedorPermanenteGatilho before update or delete on fornece for each row execute procedure fornecedorPermanente();
 
--- Função que atualiza a quantidade de um determinado componente:
+-- Gatilho para que o tipo de um departamento seja 'personalização' ou 'compra':
 
-select * from pedido;
-select cast(now() as date);
-
-create or replace function atualizaQuantidadeComponente(nome varchar(50)) returns void as
-$$
-declare counterContem int default 0;
-declare counterNecessario int default 0;
-declare saldo int default 0;
-declare quantidadeMinima int default 0;
-declare newIdPedido int;
-begin
-	counterContem := (select sum(c.quantidade) from contem c where c.nome_componente = nome);
-	counterNecessario := (select sum(c.quantidade) from componente_necessario c where c.nome_componente = nome);
-	quantidadeMinima : = (select minimo_quant from componente c where c.nome = nome);
-	saldo := (counterContem - counterNecessario);
-	if (saldo < quantidadeMinima) then
-		newIdPedido := (select nextval('pedido_id'));
-		insert into pedido values()
-	
-
-	update componente c set c.quantidade = (counterContem - counterNecessario) where c.nome = nome;
-end;
-$$
-language plpgsql;
-
--- Função que verifica se um componente está com a quantidade menor que a mínima e gera novo pedido automático:
-
-
-
--- Gatilho para que sempre que um componente for atualizado na tabela componente sua quantidade seja atualizada para a soma das quantidades...
--- ... em pedidos subtraído da soma das quantidades do produto em componenetes necessários (à fazer)
-
-create or replace function QuantidadeUpdateComponente() returns trigger as
+drop function tipoDepartamento() cascade;
+create or replace function tipoDepartamento() return trigger as
 $$
 begin
-	if new.nome != old.nome then
-		atualizaQuantidadeComponente(new.nome);
+	if upper(new.tipo) != 'COMPRA' and (upper(new.tipo) != 'PRODUÇÃO' or upper(new.tipo) != 'PRODUCAO') then
+		raise notice 'O tipo de do deparmento deve ser compra ou personalização'; 
+		return old;
+	elsif upper(new.tipo) != 'COMPRA' then
+		new.tipo = 'compra';
+	elsif (upper(new.tipo) != 'PERSONALIZAÇÃO' or upper(new.tipo) != 'PERSONALIZACAO') then
+		new.tipo = 'producao';
 	end if;
 	return new;
 end;
 $$
 language plpgsql;
 
+drop trigger tipoDepartamentoGatilho;
+create trigger tipoDepartamentoGatilho() on departamento before insert or update for each row execute procedure tipoDepartamento();
+
+-- View que mostra os departamentos de compra e a quantidade de pedidos em cada:
+
+select * from pedidosPorDepartamento;
+drop view pedidosPorDepartamento;
+create view pedidosPorDepartamento as select d.cod_dept, count(p.id) from departamento d left join pedido p on d.cod_dept = p.cod_dept_compra 
+where d.tipo = 'compra' group by d.cod_dept order by count(p.id) DESC;
+	
+-- Função que retorna o cod_dept do departamento de compra com menos pedidos feitos:
+
+drop function getDepartamentoDeCompra() cascade;
+create or replace function getDepartamentoDeCompra() returns integer as
+$$
+declare codigo int default 0;
+begin
+	if (select count(*) from pedidosPorDepartamento) = 0 then
+		raise notice 'Não há departamento de compra';
+		return null;
+	end if;
+	codigo := (select cod_dept from (select * from pedidosPorDepartamento fetch first row only) as tabela);
+	return codigo;
+end;
+$$
+language plpgsql;
+
+-- Função que atualiza a quantidade de um determinado componente:
+
+drop function atualizaQuantidadeComponente(nome varchar(50)) cascade;
+create or replace function atualizaQuantidadeComponente(arg_nome varchar(50)) returns boolean as
+$$
+declare counterContem int default 0;
+declare counterNecessario int default 0;
+declare saldo int default 0;
+declare quantidadeMinima int default 0;
+declare cnpjPrincipal varchar(14);
+declare newIdPedido int;
+declare codDeptPedido int;
+declare data_atual date;
+begin
+	update variable set trigger_on = false;
+	
+	counterContem := (select sum(c.quantidade) from contem c where c.nome_componente = arg_nome);
+	counterNecessario := (select sum(c.quantidade) from componente_necessario c where c.nome_componente = arg_nome);
+	quantidadeMinima := (select minimo_quant from componente c where c.nome = arg_nome);
+	saldo := (counterContem - counterNecessario);
+	
+	if (saldo < quantidadeMinima) then
+		newIdPedido := (select nextval('pedido_id'));
+		cnpjPrincipal := (select cnpj_principal from componente c where c.nome = arg_nome);
+		data_atual := (select cast(now() as date));
+		codDeptPedido := (getDepartamentoDeCompra());
+		if codDeptPedido = null then 
+			update variable set trigger_on = true;
+			return false;
+		end if;
+		insert into pedido values(newIdPedido, codDeptPedido, data_atual, cnpjPrincipal, codDeptPedido);
+		insert into contem values(arg_nome, newIdPedido, (quantidadeMinima-saldo));
+		update componente set quantidade = (quantidadeMinima) where nome = arg_nome;
+		update variable set trigger_on = true;
+		return true;
+	end if;
+	update componente set quantidade = (saldo) where nome = arg_nome;
+	update variable set trigger_on = true;
+	return true;
+end;
+$$
+language plpgsql;
+
+-- Para esta função é necessária um "variável global" para que não haja problema de recursão infinita:
+drop table variable cascade;
+create table variable(trigger_on boolean);
+insert into variable values(true);
+
+-- Gatilho que verifica se um componente está com a quantidade menor que a mínima e gera novo pedido automático:
+
+drop function pedidoAutomatico() cascade;
+create or replace function pedidoAutomatico() returns trigger as
+$$
+declare signal boolean default false;
+declare	do_trigger int default 1;
+begin
+	do_trigger := (select count(*) from variable where trigger_on = true);
+	if do_trigger = 0 then
+		return new;
+	end if;
+
+	if TG_TABLE_NAME = 'componente' then
+		signal := atualizaQuantidadeComponente(new.nome);
+	else
+		signal := atualizaQuantidadeComponente(new.nome_componente);
+	end if;
+	if signal = false then
+		return old;
+	end if;
+	return new;
+end;
+$$
+language plpgsql;
+
+drop trigger pedidoAutomaticoOnComponenteGatilho on componente;
+create trigger pedidoAutomaticoOnComponenteGatilho after update or insert on componente for each row execute procedure pedidoAutomatico();
+
+drop trigger pedidoAutomaticoOnComponenteNecessarioGatilho on componente_necessario;
+create trigger pedidoAutomaticoOnComponenteNecessarioGatilho after update or insert on componente_necessario for each row execute procedure pedidoAutomatico();
+
+drop trigger pedidoAutomaticoOnContemGatilho on contem;
+create trigger pedidoAutomaticoOnContemGatilho after update or insert on contem for each row execute procedure pedidoAutomatico();
 
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

@@ -5,6 +5,7 @@ class Componente():
 
     __nome = None
     __tipo = None
+    __valorCompra = None
     __quantidadeMin = None
     __quantidade = None
     __cnpjPrincipal = None
@@ -12,6 +13,7 @@ class Componente():
     def __init__(self):
         self.__nome = ""
         self.__tipo = ""
+        self.__valorCompra = 0.0
         self.__quantidadeMin = -1
         self.__quantidade = -1
         self.__cnpjPrincipal = ""
@@ -29,6 +31,13 @@ class Componente():
 
     def getTipo(self):
         return self.__tipo
+
+    def valorCompra(self, valorCompra):
+        self.__valorCompra = valorCompra
+        return self
+
+    def getValorCompra(self):
+        return self.__valorCompra
     
     def quatidadeMin(self, quatidadeMin):
         self.__quantidadeMin = quatidadeMin

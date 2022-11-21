@@ -399,7 +399,7 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"\n        self.__quantidadeMin = -1",
+        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __valorCompra = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"",
         "detail": "Data.Componente",
         "documentation": {}
     },

@@ -366,7 +366,7 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirComponente(self):
-        campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
+        campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponente())
         self.__view.criarBotoes(botao)
@@ -381,7 +381,7 @@ class Controller():
             self.printError()
 
     def setDeletarComponente(self):
-        campos = ["Nome:", "Tipo:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
+        campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponente())
         self.__view.criarBotoes(botao)      
@@ -390,9 +390,10 @@ class Controller():
         dados = self.clearAndGetData()
         dados[0] = '\'' + dados[0] + '\''
         dados[1] = '\'' + dados[1] + '\''
-        if(dados[2] != ''): dados[2] = int(dados[2])
-        if(dados[3] != ''): dados[3] = int(dados[3])
-        dados[4] = '\'' + dados[4] + '\''
+        if (dados[2] != ''): dados[2] = int(dados[2])
+        if (dados[3] != ''): dados[3] = int(dados[3])
+        if (dados[4] != ''): dados[4] = int(dados[4])
+        dados[5] = '\'' + dados[5] + '\''
         try:
             self.__componenteDAO.delete(dados)
             self.printSucess()
@@ -400,7 +401,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarComponente(self):
-        campos = ["Novo nome:", "Novo tipo:", "Nova quantidade mínima:", "Nova quantidade:", "Novo CNPJ principal:"]
+        campos = ["Novo nome:", "Novo tipo:", "Novo valor de compra:", "Nova quantidade mínima:", "Nova quantidade:", "Novo CNPJ principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponente())
         self.__view.criarBotoes(botao)
@@ -409,10 +410,11 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         dadosSet[1] = '\'' + dadosSet[1] + '\''
-        if(dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
-        if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
-        dadosSet[4] = '\'' + dadosSet[4] + '\''
-        campos = ["Antigo nome:", "Antigo tipo:", "Antigo quantidade mínima:", "Antigo quantidade:", "Antigo CNPJ principal:"]
+        if (dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
+        if (dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
+        if (dadosSet[4] != ''): dadosSet[4] = int(dadosSet[4])
+        dadosSet[5] = '\'' + dadosSet[5] + '\''
+        campos = ["Antigo nome:", "Antigo tipo:", "Antigo valor de compra:", "Antigo quantidade mínima:", "Antigo quantidade:", "Antigo CNPJ principal:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponente(dadosSet))
         self.__view.criarBotoes(botao)
@@ -421,9 +423,10 @@ class Controller():
         dadosWhere = self.clearAndGetData()
         dadosWhere[0] = '\'' + dadosWhere[0] + '\''
         dadosWhere[1] = '\'' + dadosWhere[1] + '\''
-        if(dadosWhere[2] != ''): dadosWhere[2] = int(dadosWhere[2])
-        if(dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
-        dadosWhere[4] = '\'' + dadosWhere[4] + '\''
+        if (dadosWhere[2] != ''): dadosWhere[2] = int(dadosWhere[2])
+        if (dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
+        if (dadosWhere[4] != ''): dadosWhere[4] = int(dadosWhere[4])
+        dadosWhere[5] = '\'' + dadosWhere[5] + '\''
         try:
             self.__componenteDAO.update(dadosSet, dadosWhere)
             self.printSucess()
@@ -431,7 +434,7 @@ class Controller():
             self.printError()
 
     def verComponente(self):
-        campos = ["Nome", "Tipo", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
+        campos = ["Nome", "Tipo", "Valor de compra", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
         text = self.__componenteDAO.selectAll()
         self.printQuery(text, campos)
             
