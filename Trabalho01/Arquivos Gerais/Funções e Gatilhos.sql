@@ -410,7 +410,7 @@ create trigger fornecedorPermanenteGatilho before update or delete on fornece fo
 -- Gatilho para que o tipo de um departamento seja 'personalização' ou 'compra':
 
 drop function tipoDepartamento() cascade;
-create or replace function tipoDepartamento() return trigger as
+create or replace function tipoDepartamento() returns trigger as
 $$
 begin
 	if upper(new.tipo) != 'COMPRA' and (upper(new.tipo) != 'PRODUÇÃO' or upper(new.tipo) != 'PRODUCAO') then
@@ -426,12 +426,11 @@ end;
 $$
 language plpgsql;
 
-drop trigger tipoDepartamentoGatilho;
+drop trigger tipoDepartamentoGatilho on departamento;
 create trigger tipoDepartamentoGatilho() on departamento before insert or update for each row execute procedure tipoDepartamento();
 
 -- View que mostra os departamentos de compra e a quantidade de pedidos em cada:
 
-select * from pedidosPorDepartamento;
 drop view pedidosPorDepartamento;
 create view pedidosPorDepartamento as select d.cod_dept, count(p.id) from departamento d left join pedido p on d.cod_dept = p.cod_dept_compra 
 where d.tipo = 'compra' group by d.cod_dept order by count(p.id) DESC;
