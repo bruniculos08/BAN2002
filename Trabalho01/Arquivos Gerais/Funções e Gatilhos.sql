@@ -440,6 +440,7 @@ where d.tipo = 'compra' group by d.cod_dept order by count(p.id) ASC;
 select * from componente_necessario;
 select * from componente;
 select * from contem;
+select * from veiculo;
 select * from fornecedor;
 select * from fornece;
 select * from pedido;
