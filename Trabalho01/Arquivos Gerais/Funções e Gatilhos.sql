@@ -414,12 +414,12 @@ drop function tipoDepartamento() cascade;
 create or replace function tipoDepartamento() returns trigger as
 $$
 begin
-	if upper(new.tipo) != 'COMPRA' and (upper(new.tipo) != 'PRODUÇÃO' or upper(new.tipo) != 'PRODUCAO') then
+	if upper(new.tipo) <> 'COMPRA' and (upper(new.tipo) <> 'PRODUÇÃO' and upper(new.tipo) <> 'PRODUCAO') then
 		raise notice 'O tipo de do deparmento deve ser compra ou personalização'; 
 		return old;
-	elsif upper(new.tipo) != 'COMPRA' then
+	elsif upper(new.tipo) = 'COMPRA' then
 		new.tipo = 'compra';
-	elsif (upper(new.tipo) != 'PERSONALIZAÇÃO' or upper(new.tipo) != 'PERSONALIZACAO') then
+	elsif (upper(new.tipo) = 'PRODUCAO' or upper(new.tipo) != 'PRODUCAO') then
 		new.tipo = 'producao';
 	end if;
 	return new;
@@ -434,8 +434,19 @@ create trigger tipoDepartamentoGatilho before insert or update on departamento f
 
 drop view pedidosPorDepartamento;
 create view pedidosPorDepartamento as select d.cod_dept, count(p.id) from departamento d left join pedido p on d.cod_dept = p.cod_dept_compra 
-where d.tipo = 'compra' group by d.cod_dept order by count(p.id) DESC;
-	
+where d.tipo = 'compra' group by d.cod_dept order by count(p.id) ASC;
+
+select * from componente_necessario;
+select * from componente;
+select * from contem;
+select * from fornecedor;
+select * from fornece;
+select * from pedido;
+delete from componente;
+insert into departamento values(nextval('dept_cod'), 'compra');
+insert into componente_necessario values(4, 'motor do batmóvel', 1);
+insert into componente values('motor do batmóvel', 'motor', 1000, 20, 0, '15887951194460')
+
 -- Função que retorna o cod_dept do departamento de compra com menos pedidos feitos:
 
 drop function getDepartamentoDeCompra() cascade;
