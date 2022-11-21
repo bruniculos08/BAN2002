@@ -208,7 +208,7 @@ drop function verificaDepartamentoDeCompra() cascade;
 create or replace function verificaDepartamentoDeCompra() returns trigger as
 $$
 begin
-	if(select count(1) from pedido p where p.cod_dept_compra = new.cod_dept) > 0 then
+	if(select 1 from departamento d where d.cod_dept = new.cod_dept and d.tipo = 'compra') then
 		raise notice 'Um departamento de compras não pode produzir carros!';
 		return old;
 	end if;
@@ -217,8 +217,11 @@ end;
 $$
 language plpgsql;
 
-drop trigger verificaDepartamentoDeCompraGatilho on veiculo;
-create trigger verificaDepartamentoDeCompraGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
+drop trigger verificaDepartamentoDeCompraOnVeiculoGatilho on veiculo;
+create trigger verificaDepartamentoDeCompraOnVeiculoGatilho before insert or update on veiculo for each row execute procedure verificaDepartamentoDeCompra();
+
+drop trigger verificaDepartamentoDeCompraOnComponenteNecessarioGatilho on componente_necessario;
+create trigger verificaDepartamentoDeCompraOnComponenteNecessarioGatilho before insert or update on componente_necessario for each row execute procedure verificaDepartamentoDeCompra();
 
 -- Gatilho para não permitir que um departamento de personalização veiculo atue como departamento de compra:
 
@@ -226,7 +229,7 @@ drop function verificaDepartamentoDeProducao() cascade;
 create or replace function verificaDepartamentoDeProducao() returns trigger as
 $$
 begin
-	if(select count(1) from veiculo where cod_dept = new.cod_dept_compra) > 0 then
+	if(select 1 from departamento d where d.cod_dept = new.cod_dept_compra and d.tipo = 'producao') then
 		raise notice 'Um departamento de produção não pode atuar como departamento de compras!';
 		return old;
 	end if;
@@ -511,8 +514,10 @@ begin
 
 	if TG_TABLE_NAME = 'componente' then
 		signal := atualizaQuantidadeComponente(new.nome);
-	else
+	elsif TG_OP != 'DELETE' then
 		signal := atualizaQuantidadeComponente(new.nome_componente);
+	else
+		signal := atualizaQuantidadeComponente(old.nome_componente);
 	end if;
 	if signal = false then
 		return old;
@@ -526,10 +531,10 @@ drop trigger pedidoAutomaticoOnComponenteGatilho on componente;
 create trigger pedidoAutomaticoOnComponenteGatilho after update or insert on componente for each row execute procedure pedidoAutomatico();
 
 drop trigger pedidoAutomaticoOnComponenteNecessarioGatilho on componente_necessario;
-create trigger pedidoAutomaticoOnComponenteNecessarioGatilho after update or insert on componente_necessario for each row execute procedure pedidoAutomatico();
+create trigger pedidoAutomaticoOnComponenteNecessarioGatilho after update or insert or delete on componente_necessario for each row execute procedure pedidoAutomatico();
 
 drop trigger pedidoAutomaticoOnContemGatilho on contem;
-create trigger pedidoAutomaticoOnContemGatilho after update or insert on contem for each row execute procedure pedidoAutomatico();
+create trigger pedidoAutomaticoOnContemGatilho after update or insert or delete on contem for each row execute procedure pedidoAutomatico();
 
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

@@ -84,12 +84,13 @@ create table contem(
 );
 
 delete from componente;
-insert into componente values('motor do batmóvel', 'motor', 1000, 10, 1, '15887951194460');
+insert into componente values('motor do batmóvel', 'motor', 1000, 11, 1, '15887951194460');
 select * from fornecedor;
 select * from componente;
 select * from contem;
 select * from componente_necessario;
 select * from departamento;
+insert into componente_necessario values(1, 'motor do batmóvel', 1);
 
 drop table fornece cascade;
 create table fornece(
