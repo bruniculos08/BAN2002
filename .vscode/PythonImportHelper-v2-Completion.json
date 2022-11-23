@@ -464,7 +464,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Componente",
         "description": "Trabalho01.AppPython.Data.Componente",
-        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"\n        self.__quantidadeMin = -1",
+        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __valorCompra = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"",
         "detail": "Trabalho01.AppPython.Data.Componente",
         "documentation": {}
     },
@@ -482,7 +482,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.ComponenteNecessario",
         "description": "Trabalho01.AppPython.Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self",
         "detail": "Trabalho01.AppPython.Data.ComponenteNecessario",
         "documentation": {}
     },
@@ -491,7 +491,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.ComponenteNecessario",
         "description": "Trabalho01.AppPython.Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', {})\"\n        # self.__sqlDelete = \"delete from componente_necessario\"",
+        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', '{}', {})\"\n        # self.__sqlDelete = \"delete from componente_necessario\"",
         "detail": "Trabalho01.AppPython.Data.ComponenteNecessario",
         "documentation": {}
     },
@@ -500,7 +500,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Contem",
         "description": "Trabalho01.AppPython.Data.Contem",
-        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n        self.__quantidade = 0\n    def nome(self, nome):\n        self.__nome = nome",
         "detail": "Trabalho01.AppPython.Data.Contem",
         "documentation": {}
     },
@@ -509,7 +509,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Contem",
         "description": "Trabalho01.AppPython.Data.Contem",
-        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {})\"\n        # self.__sqlDelete = \"delete from contem\"",
+        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {}, {})\"\n        # self.__sqlDelete = \"delete from contem\"",
         "detail": "Trabalho01.AppPython.Data.Contem",
         "documentation": {}
     },
@@ -554,7 +554,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Fornece",
         "description": "Trabalho01.AppPython.Data.Fornece",
-        "peekOfCode": "class Fornece():\n    __nome = None\n    __idPedido = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "peekOfCode": "class Fornece():\n    __nome = None\n    __cnpj = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__cnpj = \"\"\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
         "detail": "Trabalho01.AppPython.Data.Fornece",
         "documentation": {}
     },
@@ -563,7 +563,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Fornece",
         "description": "Trabalho01.AppPython.Data.Fornece",
-        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', {})\"\n        # self.__sqlDelete = \"delete from fornece\"",
+        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornece\"",
         "detail": "Trabalho01.AppPython.Data.Fornece",
         "documentation": {}
     },
@@ -599,7 +599,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.NotaFiscal",
         "description": "Trabalho01.AppPython.Data.NotaFiscal",
-        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
+        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
         "detail": "Trabalho01.AppPython.Data.NotaFiscal",
         "documentation": {}
     },
@@ -653,7 +653,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Pedido",
         "description": "Trabalho01.AppPython.Data.Pedido",
-        "peekOfCode": "class Pedido():\n    __id = None\n    __valor = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__valor = 0\n        self.__dataCriacao = 'YYYY-MM-DD'",
+        "peekOfCode": "class Pedido():\n    __id = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__dataCriacao = ''\n        self.__cnpj = \"\"\n        self.__codDeptCompra = -1",
         "detail": "Trabalho01.AppPython.Data.Pedido",
         "documentation": {}
     },

@@ -436,20 +436,6 @@ drop view pedidosPorDepartamento;
 create view pedidosPorDepartamento as select d.cod_dept, count(p.id) from departamento d left join pedido p on d.cod_dept = p.cod_dept_compra 
 where d.tipo = 'compra' group by d.cod_dept order by count(p.id) ASC;
 
--- Testes:
-select * from componente_necessario;
-select * from componente;
-select * from contem;
-select * from veiculo;
-select * from fornecedor;
-select * from fornece;
-select * from pedido;
-delete from componente;
-insert into departamento values(nextval('dept_cod'), 'compra');
-insert into componente_necessario values(4, 'motor do batmóvel', 1);
-insert into componente values('motor do batmóvel', 'motor', 1000, 20, 0, '15887951194460')
-delete from fornecedor where cnpj = '15887951194460';
-
 -- Função que retorna o cod_dept do departamento de compra com menos pedidos feitos:
 
 drop function getDepartamentoDeCompra() cascade;
@@ -496,6 +482,7 @@ begin
 		codDeptPedido := (getDepartamentoDeCompra());
 		if codDeptPedido = null then 
 			update variable set trigger_on = true;
+			raise notice 'a operação implica na necessidade de serem feitos pedidos mas não há departamento de compra para tal!';
 			return false;
 		end if;
 		insert into pedido values(newIdPedido, data_atual, cnpjPrincipal, codDeptPedido);
@@ -531,7 +518,9 @@ begin
 	end if;
 
 	if TG_TABLE_NAME = 'componente' then
-		signal := atualizaQuantidadeComponente(new.nome);
+		if new.minimo_quant > 0 then
+			signal := atualizaQuantidadeComponente(new.nome);
+		end if;
 	elsif TG_OP != 'DELETE' then
 		signal := atualizaQuantidadeComponente(new.nome_componente);
 	else
@@ -544,6 +533,10 @@ begin
 end;
 $$
 language plpgsql;
+
+select * from componente;
+select * from componente_necessario;
+insert into componente_necessario values(4, 'motor do batmóvel', 1);
 
 drop trigger pedidoAutomaticoOnComponenteGatilho on componente;
 create trigger pedidoAutomaticoOnComponenteGatilho after update or insert on componente for each row execute procedure pedidoAutomatico();
