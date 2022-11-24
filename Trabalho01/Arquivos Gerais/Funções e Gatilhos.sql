@@ -564,17 +564,20 @@ begin
 		new.data_criacao := cast(now() as date);
 	elsif
 		new.data_producao := cast(now() as date);
+		new.estagio := 'início'
 	end if;
 	return new;
 end;
 $
 language plpgsql;
 
-drop trigger dataInsertOnPedido;
-create or replace trigger dataInsertOnPedido before insert or update on pedido for each row execute procedure dataInsert();
+select * from veiculo;
 
-drop trigger dataInsertOnVeiculo;
-create or replace trigger dataInsertOnVeiculo before insert or update on pedido for each row execute procedure dataInsert();
+drop trigger dataInsertOnPedido on pedido;
+create trigger dataInsertOnPedido before insert on pedido for each row execute procedure dataInsert();
+
+drop trigger dataInsertOnVeiculo on veiculo;
+create trigger dataInsertOnVeiculo before insert on veiculo for each row execute procedure dataInsert();
 
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

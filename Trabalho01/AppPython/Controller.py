@@ -181,13 +181,14 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirVeiculo(self):
-        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Código de departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
         self.__view.criarBotoes(botao)
 
     def inserirVeiculo(self):
         dados = self.clearAndGetData()
+        dados = [dados[0]] + [dados[1]] + ["0000-00-00"] + [dados[2]] + ['']
         newVeiculo = Veiculo().fromTupla(dados)
         try:
             self.__veiculoDAO.insertVeiculo(newVeiculo)
@@ -196,7 +197,7 @@ class Controller():
             self.printError()
 
     def setDeletarVeiculo(self):
-        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Código de departamento:", "Estágio:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
         self.__view.criarBotoes(botao)
@@ -207,6 +208,7 @@ class Controller():
         if(dados[1] != ''): dados[1] = float(dados[1])
         dados[2] = '\'' + dados[2] + '\''
         if(dados[3] != ''): dados[3] = int(dados[3])
+        dados[4] = '\'' + dados[4] + '\''
         try:
             self.__veiculoDAO.delete(dados)
             self.printSucess()
@@ -214,7 +216,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarVeiculo(self):
-        campos = ["Novo chassi:", "Novo valor de produção:", "Nova data de produção(YYYY-MM-DD):", "Novo código de departamento:"]
+        campos = ["Novo chassi:", "Novo valor de produção:", "Novo código de departamento:", "Novo Estágio:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo())
         self.__view.criarBotoes(botao)
@@ -223,9 +225,10 @@ class Controller():
         dadosSet = self.clearAndGetData()
         dadosSet[0] = '\'' + dadosSet[0] + '\''
         if(dadosSet[1] != ''): dadosSet[1] = float(dadosSet[1])
-        dadosSet[2] = '\'' + dadosSet[2] + '\''
-        if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
-        campos = ["Antigo chassi:", "Antigo valor de produção:", "Antiga data de produção(YYYY-MM-DD):", "Antigo código de departamento:"]
+        if(dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
+        dadosSet[3] = '\'' + dadosSet[3] + '\''
+        dadosSet = [dadosSet[0]] + [dadosSet[1]] + [''] + [dadosSet[2]] + [dadosSet[3]]
+        campos = ["Antigo chassi:", "Antigo valor de produção:", "Antiga data de produção(YYYY-MM-DD):", "Antigo código de departamento:", "Antigo estágio:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
         self.__view.criarBotoes(botao)
@@ -236,6 +239,7 @@ class Controller():
         if(dadosWhere[1] != ''): dadosWhere[1] = float(dadosWhere[1])
         dadosWhere[2] = '\'' + dadosWhere[2] + '\''
         if(dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
+        dadosWhere[4] = '\'' + dadosWhere[4] + '\''
         try:
             self.__veiculoDAO.update(dadosSet, dadosWhere)
             self.printSucess()
@@ -243,7 +247,7 @@ class Controller():
             self.printError()
 
     def verVeiculo(self):
-        campos = ["Chassi", "Valor de produção", "Data de produção(YYYY-MM-DD)", "Código de departamento"]
+        campos = ["Chassi", "Valor de produção", "Data de produção(YYYY-MM-DD)", "Código de departamento", "Estágio"]
         text = self.__veiculoDAO.selectAll()
         self.printQuery(text, campos)
             

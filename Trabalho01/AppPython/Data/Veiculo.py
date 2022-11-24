@@ -9,11 +9,14 @@ class Veiculo():
     __valorProducao = None
     __dataProducao = None
     __codDept = None
+    __estagio = None
 
     def __init__(self):
         self.__chassi = ""
         self.__valorProducao = 0
+        self.__dataProducao = "0000-00-00"
         self.__codDept = -1
+        self.__estagio = ""
 
     def chassi(self, chassi):
         self.chassi = chassi
@@ -43,34 +46,34 @@ class Veiculo():
     def getCodDept(self):
         return self.__codDept
     
+    def estagio(self, estagio):
+        self.__estagio = estagio
+        return self
+    
+    def getEstagio(self):
+        return self.__estagio
+            
     def fromTupla(self, tupla):
         self.__chassi = tupla[0]
         self.__valorProducao = tupla[1]
         self.__dataProducao = tupla[2]
         self.__codDept = tupla[3]
+        self.__estagio = tupla[4]
         return self
     # Obs.: essa função também serve para listas(para qualquer estrutura indexada no geral)!
 
     def __repr__(self):
-        return u'{}:{}:{}:{}'.format(self.__chassi, self.__valorProducao, self.__dataProducao, self.__codDept)
+        return u'{}:{}:{}:{}:{}'.format(self.__chassi, self.__valorProducao, self.__dataProducao, self.__codDept, self.__estagio)
     
 class VeiculoDAO(PadraoDAO):
 
     __sqlSelectAll = None
-    __sqlSelectNewChassi = None
     __sqlInsert = None
-    # __sqlDelete = None
-    # __sqlUpdate = None
-    # __columns = None
-
     
     def __init__(self):
         self.__sqlSelectAll = "select * from veiculo"
-        self.__sqlInsert = "insert into veiculo values('{}', {},  '{}', {})" 
-        # self.__sqlDelete = "delete from veiculo"
-        # self.__sqlUpdate = "update veiculo set"
-        # self.__columns = ["chassi", "valor_producao", "data_producao", "cod_dept"]
-        super().__init__("delete from veiculo", "update veiculo set", ["chassi", "valor_producao", "data_producao", "cod_dept"])
+        self.__sqlInsert = "insert into veiculo values('{}', {},  '{}', {}, '{}')"
+        super().__init__("delete from veiculo", "update veiculo set", ["chassi", "valor_producao", "data_producao", "cod_dept", "estagio"])
         
     def selectAll(self) -> list:
         con = Connection()
@@ -85,5 +88,6 @@ class VeiculoDAO(PadraoDAO):
     def insertVeiculo(self, veiculo):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(veiculo.getChassi(), veiculo.getValorProducao(), veiculo.getDataProducao(), veiculo.getCodDept()))
+        cursor.execute(self.__sqlInsert.format(veiculo.getChassi(), veiculo.getValorProducao(), 
+            veiculo.getDataProducao(), veiculo.getCodDept(), veiculo.getEstagio()))
         con.commit()
