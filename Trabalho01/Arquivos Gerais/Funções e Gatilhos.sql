@@ -50,6 +50,7 @@ begin
 	if(validarCNPJ(new.cnpj) = true) then
 		return new;
 	end if;
+	raise notice 'CNPJ inválido!';
 	return old;
 end;
 $$
@@ -345,6 +346,11 @@ drop function nomeIgual() cascade;
 create or replace function nomeIgual() returns trigger as
 $$
 begin
+	if TG_OP = 'UPDATE' then
+		if old.nome = new.nome then
+			return new;
+		end if;
+	end if;
 	if (select count(*) from fornecedor where fornecedor.nome = new.nome) > 0 then
 		raise notice 'Não pode haver mais de um fornecedor com o mesmo nome!';
 		return null;
@@ -500,6 +506,7 @@ begin
 		insert into contem values(arg_nome, newIdPedido, (quantidadeMinima-saldo));
 		update componente set quantidade = (quantidadeMinima) where nome = arg_nome;
 		update variable set trigger_on = true;
+		raise notice 'pedido(s) automaticos realizados!';
 		return true;
 	end if;
 	update componente set quantidade = (saldo) where nome = arg_nome;
@@ -560,7 +567,7 @@ drop function dataInsert() cascade;
 create or replace function dataInsert() returns trigger as
 $$
 begin
-	if TG_NAME = 'pedido' then
+	if TG_TABLE_NAME = 'pedido' then
 		new.data_criacao := cast(now() as date);
 	else
 		new.data_producao := cast(now() as date);

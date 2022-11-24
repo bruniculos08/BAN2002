@@ -74,7 +74,7 @@ class Controller():
         self.__model = Connection()
         notices = self.__model.notices()
         if(len(notices) > self.__noticesSize):
-            self.__view.setCampoDeExibicao('')
+            self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n")
             for i in range(self.__noticesSize, len(notices)):
                 self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i-1][9:]}")
         else:
