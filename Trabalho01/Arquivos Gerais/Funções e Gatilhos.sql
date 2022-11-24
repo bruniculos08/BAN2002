@@ -554,5 +554,27 @@ create trigger pedidoAutomaticoOnComponenteNecessarioGatilho after update or ins
 drop trigger pedidoAutomaticoOnContemGatilho on contem;
 create trigger pedidoAutomaticoOnContemGatilho after update or insert or delete on contem for each row execute procedure pedidoAutomatico();
 
+-- Gatilho para que veiculos e pedidos sejam sempre adicionados com a data do memomento da inserção:
+
+drop function dataInsert() cascade;
+create or replace function dataInsert() returns trigger as
+$
+begin
+	if TG_NAME = 'pedido' then
+		new.data_criacao := cast(now() as date);
+	elsif
+		new.data_producao := cast(now() as date);
+	end if;
+	return new;
+end;
+$
+language plpgsql;
+
+drop trigger dataInsertOnPedido;
+create or replace trigger dataInsertOnPedido before insert or update on pedido for each row execute procedure dataInsert();
+
+drop trigger dataInsertOnVeiculo;
+create or replace trigger dataInsertOnVeiculo before insert or update on pedido for each row execute procedure dataInsert();
+
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';

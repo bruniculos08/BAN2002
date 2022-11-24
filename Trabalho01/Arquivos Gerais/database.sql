@@ -55,6 +55,7 @@ create table veiculo(
     valor_producao float not null,
     data_producao date, -- 'YYYY-MM-DD' 
     cod_dept integer not null,
+	estagio varchar(50),
     primary key(chassi),
     FOREIGN KEY (cod_dept) references departamento (cod_dept)
 );
