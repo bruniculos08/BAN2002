@@ -63,7 +63,9 @@ class Controller():
         self.__model = Connection()
         notices = self.__model.notices()
         if(len(notices) > self.__noticesSize):
-            self.__view.setCampoDeExibicao(notices[-1])
+            self.__view.setCampoDeExibicao('')
+            for i in range(self.__noticesSize, len(notices)):
+                self.__view.addCampoDeExibicao(f"Notificação {i}: {notices[i-1][9:]}")
         else:
             self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
         self.__noticesSize = len(notices)
@@ -72,10 +74,12 @@ class Controller():
         self.__model = Connection()
         notices = self.__model.notices()
         if(len(notices) > self.__noticesSize):
-            self.__view.setCampoDeExibicao(notices[-1])
+            self.__view.setCampoDeExibicao('')
+            for i in range(self.__noticesSize, len(notices)):
+                self.__view.addCampoDeExibicao(notices[i-1])
         else:
             self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n" 
-                # + "Erro no banco de dados:\n" + self.__model.error()
+                + "Erro no banco de dados:\n" + self.__model.error()
                 )
         self.__model.rollback()
         self.__model.commit()

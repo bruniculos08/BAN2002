@@ -392,7 +392,7 @@ begin
 			return new;
 		end if;
 	elsif TG_OP = 'DELETE' and counter > 0 then
-		raise notice 'Este campo não pode ser deletado pois se trata de uma relação entre componente e fornecedor principal!';
+		raise notice 'Este campo não pode ser deletado pois se trata de uma relação entre componente e fornecedor principal!', TG_LEVEL;
 		return null;
 	elsif counter > 0 and (new.cnpj <> old.cnpj or new.nome_componente <> old.nome_componente) then
 		raise notice 'Este campo não pode ser atualizado pois se trata de uma relação entre componente e fornecedor principal!';
@@ -422,7 +422,17 @@ begin
 	elsif (upper(new.tipo) = 'PRODUCAO' or upper(new.tipo) != 'PRODUCAO') then
 		new.tipo := 'producao';
 	end if;
-	new.cod_dept := (select nextval('dept_cod'));
+	if TG_OP = 'INSERT' then 
+		new.cod_dept := (select nextval('dept_cod'));
+	elsif new.tipo != old.tipo then
+		if old.tipo = 'compra' and (select count(*) from pedido where cod_dept_compra = old.cod_dept) > 0 then
+			raise notice 'O tipo do departamento não pode ser alterado pois ele possui pedidos de compra realizados!';
+			return old;
+		elsif (select count(*) from veiculo where cod_dept = old.cod_dept) > 0 then
+			raise notice 'O tipo do departamento não pode ser alterado pois ele possui veiculos colocados em producao!';
+			return old;
+		end if;
+	end if;
 	return new;
 end;
 $$
