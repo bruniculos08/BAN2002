@@ -91,5 +91,5 @@ class PedidoDAO(PadraoDAO):
         id = self.__selectNewId()
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(id, pedido.getValor(), pedido.getDataCriacao(), pedido.getCnpj(), pedido.getCodDeptCompra()))
+        cursor.execute(self.__sqlInsert.format(id, pedido.getDataCriacao(), pedido.getCnpj(), pedido.getCodDeptCompra()))
         con.commit()

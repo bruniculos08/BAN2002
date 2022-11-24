@@ -78,7 +78,7 @@ class DepartamentoDAO(PadraoDAO):
         return result[0]
     
     def insertDepartamento(self, departamento):
-        codDept = self.__selectNewCodDept()
+        codDept = -1 # self.__selectNewCodDept()
         con = Connection()
         cursor = con.cursor()
         cursor.execute(self.__sqlInsert.format(codDept, departamento.getTipo()))

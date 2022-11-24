@@ -408,7 +408,7 @@
         "kind": 6,
         "importPath": "Data.Componente",
         "description": "Data.Componente",
-        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
         "detail": "Data.Componente",
         "documentation": {}
     },

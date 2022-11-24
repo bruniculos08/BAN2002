@@ -74,7 +74,9 @@ class Controller():
         if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao(notices[-1])
         else:
-            self.__view.setCampoDeExibicao("Operação não realizada!\n" + self.__model.error())
+            self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n" 
+                # + "Erro no banco de dados:\n" + self.__model.error()
+                )
         self.__model.rollback()
         self.__model.commit()
         self.__noticesSize = len(notices)
@@ -114,6 +116,9 @@ class Controller():
     def inserirDepartamento(self):
         dados = [-1] + self.clearAndGetData()
         newDepartamento = Departamento().fromTupla(dados)
+        self.__departamentoDAO.insertDepartamento(newDepartamento)
+        text = f"Departamento adicionando com codDept = {self.__departamentoDAO.selectCurrCodDept()}!"
+        self.__view.setCampoDeExibicao(text)
         try:
             self.__departamentoDAO.insertDepartamento(newDepartamento)
             text = f"Departamento adicionando com codDept = {self.__departamentoDAO.selectCurrCodDept()}!"

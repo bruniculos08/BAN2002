@@ -63,13 +63,14 @@ class Componente():
     def fromTupla(self, tupla):
         self.__nome = tupla[0]
         self.__tipo = tupla[1]
-        self.__quantidadeMin = tupla[2]
-        self.__quantidade = tupla[3]
-        self.__cnpjPrincipal = tupla[4]
+        self.__valorCompra = tupla[2]
+        self.__quantidadeMin = tupla[3]
+        self.__quantidade = tupla[4]
+        self.__cnpjPrincipal = tupla[5]
         return self
     
     def __repr__(self):
-        return u'{}:{}:{}:{}:{}'.format(self.__nome, self.__tipo, self.__quantidadeMin, self.__quantidade, self.__cnpjPrincipal)
+        return u'{}:{}:{}:{}:{}:{}'.format(self.__nome, self.__tipo, self.__valorCompra, self.__quantidadeMin, self.__quantidade, self.__cnpjPrincipal)
     
 class ComponenteDAO(PadraoDAO):
 
@@ -81,11 +82,11 @@ class ComponenteDAO(PadraoDAO):
     
     def __init__(self):
         self.__sqlSelectAll = "select * from componente"
-        self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, '{}')"
+        self.__sqlInsert = "insert into componente values('{}', '{}', {}, {}, {}, '{}')"
         # self.__sqlDelete = "delete from componente"
         # self.__sqlUpdate = "update componente set"
         # self.__columns = ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"]
-        super().__init__("delete from componente", "update componente set", ["nome", "tipo", "minimo_quant", "quantidade", "cnpj_principal"])
+        super().__init__("delete from componente", "update componente set", ["nome", "tipo", "valor_compra", "minimo_quant", "quantidade", "cnpj_principal"])
 
     # Retorna uma lista com um objeto de cada componente do banco de dados:
     def selectAll(self) -> list:
@@ -101,6 +102,7 @@ class ComponenteDAO(PadraoDAO):
     def insertComponente(self, componente):
         con = Connection()
         cursor = con.cursor()
-        cursor.execute(self.__sqlInsert.format(componente.getNome(), componente.getTipo(), componente.getQuatidadeMin(),
+        cursor.execute(self.__sqlInsert.format(componente.getNome(), componente.getTipo(), 
+            componente.getValorCompra(), componente.getQuatidadeMin(),
             componente.getQuantidade(), componente.getCnpjPrincipal()))
         con.commit()

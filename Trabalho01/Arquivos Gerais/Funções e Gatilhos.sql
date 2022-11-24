@@ -345,7 +345,7 @@ drop function nomeIgual() cascade;
 create or replace function nomeIgual() returns trigger as
 $$
 begin
-	if (select count(*) from forncedor where fornecedor.nome = new.nome) > 0 then
+	if (select count(*) from fornecedor where fornecedor.nome = new.nome) > 0 then
 		raise notice 'Não pode haver mais de um fornecedor com o mesmo nome!';
 		return null;
 	end if;
@@ -415,13 +415,14 @@ create or replace function tipoDepartamento() returns trigger as
 $$
 begin
 	if upper(new.tipo) <> 'COMPRA' and (upper(new.tipo) <> 'PRODUÇÃO' and upper(new.tipo) <> 'PRODUCAO') then
-		raise notice 'O tipo de do deparmento deve ser compra ou personalização'; 
+		raise notice 'O tipo de do deparmento deve ser compra ou personalização';
 		return old;
 	elsif upper(new.tipo) = 'COMPRA' then
-		new.tipo = 'compra';
+		new.tipo := 'compra';
 	elsif (upper(new.tipo) = 'PRODUCAO' or upper(new.tipo) != 'PRODUCAO') then
-		new.tipo = 'producao';
+		new.tipo := 'producao';
 	end if;
+	new.cod_dept := (select nextval('dept_cod'));
 	return new;
 end;
 $$
@@ -533,10 +534,6 @@ begin
 end;
 $$
 language plpgsql;
-
-select * from componente;
-select * from componente_necessario;
-insert into componente_necessario values(4, 'motor do batmóvel', 1);
 
 drop trigger pedidoAutomaticoOnComponenteGatilho on componente;
 create trigger pedidoAutomaticoOnComponenteGatilho after update or insert on componente for each row execute procedure pedidoAutomatico();
