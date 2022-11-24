@@ -65,7 +65,7 @@ class Controller():
         if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao('')
             for i in range(self.__noticesSize, len(notices)):
-                self.__view.addCampoDeExibicao(f"Notificação {i}: {notices[i-1][9:]}")
+                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i-1][9:]}")
         else:
             self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
         self.__noticesSize = len(notices)
@@ -76,7 +76,7 @@ class Controller():
         if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao('')
             for i in range(self.__noticesSize, len(notices)):
-                self.__view.addCampoDeExibicao(notices[i-1])
+                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i-1][9:]}")
         else:
             self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n" 
                 + "Erro no banco de dados:\n" + self.__model.error()
@@ -181,14 +181,14 @@ class Controller():
         self.printQuery(text, campos)
 
     def setInserirVeiculo(self):
-        campos = ["Chassi:", "Valor de produção:", "Código de departamento:"]
+        campos = ["Chassi:", "Valor de produção:", "Código de departamento:"] # quando inserido estágio = "início"
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
         self.__view.criarBotoes(botao)
 
     def inserirVeiculo(self):
         dados = self.clearAndGetData()
-        dados = [dados[0]] + [dados[1]] + ["0000-00-00"] + [dados[2]] + ['']
+        dados = [dados[0]] + [dados[1]] + ["0001-01-01"] + [dados[2]] + ['']
         newVeiculo = Veiculo().fromTupla(dados)
         try:
             self.__veiculoDAO.insertVeiculo(newVeiculo)
@@ -313,13 +313,13 @@ class Controller():
         self.printQuery(text, campos)
             
     def setInserirPedido(self):
-        campos = ["Data de criação(YYYY-MM-DD):", "CNPJ:", "Código do Departamento:"]
+        campos = ["CNPJ:", "Código do Departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirPedido())
         self.__view.criarBotoes(botao)
 
     def inserirPedido(self):
-        dados = [-1] + self.clearAndGetData()
+        dados = [-1] + ["0001-01-01"] + self.clearAndGetData()
         newPedido = Pedido().fromTupla(dados)
         try:
             self.__pedidoDAO.insertPedido(newPedido)
@@ -346,17 +346,16 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarPedido(self):
-        campos = ["Nova data de criação(YYYY-MM-DD):", "Novo CNPJ:", "Novo código do departamento:"]
+        campos = ["Novo CNPJ:", "Novo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarPedido())
         self.__view.criarBotoes(botao)
         
     def setSecundarioAtualizarPedido(self):
-        dadosSet = [''] + self.clearAndGetData()
-        dadosSet[1] = '\'' + dadosSet[1] + '\''
+        dadosSet = [''] + [''] + self.clearAndGetData()
         dadosSet[2] = '\'' + dadosSet[2] + '\''
         if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
-        campos = ["Antigo id do pedido:", "Antigo valor:", "Antiga data de criação(YYYY-MM-DD):", "Antigo CNPJ:", "Antigo código do departamento:"]
+        campos = ["Antigo id do pedido:", "Antiga data de criação(YYYY-MM-DD):", "Antigo CNPJ:", "Antigo código do departamento:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarPedido(dadosSet))
         self.__view.criarBotoes(botao)

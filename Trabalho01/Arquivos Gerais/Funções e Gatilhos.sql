@@ -558,20 +558,18 @@ create trigger pedidoAutomaticoOnContemGatilho after update or insert or delete 
 
 drop function dataInsert() cascade;
 create or replace function dataInsert() returns trigger as
-$
+$$
 begin
 	if TG_NAME = 'pedido' then
 		new.data_criacao := cast(now() as date);
-	elsif
+	else
 		new.data_producao := cast(now() as date);
-		new.estagio := 'início'
+		new.estagio := 'início';
 	end if;
 	return new;
 end;
-$
+$$
 language plpgsql;
-
-select * from veiculo;
 
 drop trigger dataInsertOnPedido on pedido;
 create trigger dataInsertOnPedido before insert on pedido for each row execute procedure dataInsert();

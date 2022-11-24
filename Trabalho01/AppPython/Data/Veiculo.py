@@ -14,7 +14,7 @@ class Veiculo():
     def __init__(self):
         self.__chassi = ""
         self.__valorProducao = 0
-        self.__dataProducao = "0000-00-00"
+        self.__dataProducao = "0001-01-01"
         self.__codDept = -1
         self.__estagio = ""
 

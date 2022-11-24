@@ -624,7 +624,7 @@
         "kind": 6,
         "importPath": "Data.Veiculo",
         "description": "Data.Veiculo",
-        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    __estagio = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__dataProducao = \"0000-00-00\"",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    __estagio = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__dataProducao = \"0001-01-01\"",
         "detail": "Data.Veiculo",
         "documentation": {}
     },
