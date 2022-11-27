@@ -65,7 +65,7 @@ class Controller():
         if(len(notices) > self.__noticesSize):
             self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
             for i in range(self.__noticesSize-1, len(notices)-1):
-                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i+1][9:]}")
+                self.__view.addCampoDeExibicao(f"Notificação {i+2 - self.__noticesSize}: {notices[i+1][9:]}")
         else:
             self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
         self.__noticesSize = len(notices)
