@@ -507,7 +507,7 @@ begin
 		insert into contem values(arg_nome, newIdPedido, (quantidadeMinima-saldo));
 		update componente set quantidade = (quantidadeMinima) where nome = arg_nome;
 		update variable set trigger_on = true;
-		raise notice 'pedido(s) automaticos realizados!';
+		raise notice '% pedido(s) automaticos realizados!', (quantidadeMinima-saldo);
 		return true;
 	end if;
 	update componente set quantidade = (saldo) where nome = arg_nome;
