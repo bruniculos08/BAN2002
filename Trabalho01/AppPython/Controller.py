@@ -63,9 +63,9 @@ class Controller():
         self.__model = Connection()
         notices = self.__model.notices()
         if(len(notices) > self.__noticesSize):
-            self.__view.setCampoDeExibicao('')
-            for i in range(self.__noticesSize, len(notices)):
-                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i-1][9:]}")
+            self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
+            for i in range(self.__noticesSize-1, len(notices)-1):
+                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i+1][9:]}")
         else:
             self.__view.setCampoDeExibicao("Operação realizada com sucesso!\n")
         self.__noticesSize = len(notices)
@@ -73,14 +73,9 @@ class Controller():
     def printError(self):
         self.__model = Connection()
         notices = self.__model.notices()
-        if(len(notices) > self.__noticesSize):
-            self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n")
-            for i in range(self.__noticesSize, len(notices)):
-                self.__view.addCampoDeExibicao(f"Notificação {i+1 - self.__noticesSize}: {notices[i-1][9:]}")
-        else:
-            self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n" 
-                + "Erro no banco de dados:\n" + self.__model.error()
-                )
+        self.__view.setCampoDeExibicao("Operação não realizada pois parâmetros inseridos são inválidos.\n\n" 
+            + "Erro no banco de dados:\n" + self.__model.error()
+            )
         self.__model.rollback()
         self.__model.commit()
         self.__noticesSize = len(notices)
@@ -121,8 +116,6 @@ class Controller():
         dados = [-1] + self.clearAndGetData()
         newDepartamento = Departamento().fromTupla(dados)
         self.__departamentoDAO.insertDepartamento(newDepartamento)
-        text = f"Departamento adicionando com codDept = {self.__departamentoDAO.selectCurrCodDept()}!"
-        self.__view.setCampoDeExibicao(text)
         try:
             self.__departamentoDAO.insertDepartamento(newDepartamento)
             text = f"Departamento adicionando com codDept = {self.__departamentoDAO.selectCurrCodDept()}!"

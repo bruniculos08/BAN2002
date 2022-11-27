@@ -44,13 +44,14 @@ language plpgsql;
 
 -- Gatilho para verificar o CNPJ de fornecedor antes de inserir ou fazer update na tabela:
 
+drop function verificaCNPJ();
 create or replace function verificaCNPJ() returns trigger as
 $$
 begin
 	if(validarCNPJ(new.cnpj) = true) then
 		return new;
 	end if;
-	raise notice 'CNPJ inválido!';
+	raise exception 'CNPJ inválido!';
 	return old;
 end;
 $$
@@ -148,7 +149,7 @@ begin
 	if validarChassi(new.chassi) = true then
 		return new;
 	end if;
-	raise notice 'Chassi inválido!';
+	raise exception 'Chassi inválido!';
 	return old;
 end;
 $$
@@ -200,7 +201,7 @@ end;
 $$
 language plpgsql;
 
-drop trigger verificaNotaGatilho on nota_fiscal;
+drop trigger verificarNotaGatilho on nota_fiscal;
 create trigger verificarNotaGatilho before insert or update on nota_fiscal for each row execute procedure verificarNota();
 
 -- Gatilho para não permitir que um departamento de compra personalize veículo:
@@ -231,7 +232,7 @@ create or replace function verificaDepartamentoDeProducao() returns trigger as
 $$
 begin
 	if(select 1 from departamento d where d.cod_dept = new.cod_dept_compra and d.tipo = 'producao') then
-		raise notice 'Um departamento de produção não pode atuar como departamento de compras!';
+		raise exception 'Um departamento de produção não pode atuar como departamento de compras!';
 		return old;
 	end if;
 	return new;
@@ -352,7 +353,7 @@ begin
 		end if;
 	end if;
 	if (select count(*) from fornecedor where fornecedor.nome = new.nome) > 0 then
-		raise notice 'Não pode haver mais de um fornecedor com o mesmo nome!';
+		raise exception 'Não pode haver mais de um fornecedor com o mesmo nome!';
 		return null;
 	end if;
 	return new;
@@ -398,10 +399,10 @@ begin
 			return new;
 		end if;
 	elsif TG_OP = 'DELETE' and counter > 0 then
-		raise notice 'Este campo não pode ser deletado pois se trata de uma relação entre componente e fornecedor principal!', TG_LEVEL;
+		raise exception 'Este campo não pode ser deletado pois se trata de uma relação entre componente e fornecedor principal!';
 		return null;
 	elsif counter > 0 and (new.cnpj <> old.cnpj or new.nome_componente <> old.nome_componente) then
-		raise notice 'Este campo não pode ser atualizado pois se trata de uma relação entre componente e fornecedor principal!';
+		raise exception 'Este campo não pode ser atualizado pois se trata de uma relação entre componente e fornecedor principal!';
 		return old;
 	elsif TG_OP = 'UPDATE' then
 		return new;
@@ -421,7 +422,7 @@ create or replace function tipoDepartamento() returns trigger as
 $$
 begin
 	if upper(new.tipo) <> 'COMPRA' and (upper(new.tipo) <> 'PRODUÇÃO' and upper(new.tipo) <> 'PRODUCAO') then
-		raise notice 'O tipo de do deparmento deve ser compra ou personalização';
+		raise exception 'O tipo de do deparmento deve ser compra ou personalização';
 		return old;
 	elsif upper(new.tipo) = 'COMPRA' then
 		new.tipo := 'compra';
@@ -432,10 +433,10 @@ begin
 		new.cod_dept := (select nextval('dept_cod'));
 	elsif new.tipo != old.tipo then
 		if old.tipo = 'compra' and (select count(*) from pedido where cod_dept_compra = old.cod_dept) > 0 then
-			raise notice 'O tipo do departamento não pode ser alterado pois ele possui pedidos de compra realizados!';
+			raise exception 'O tipo do departamento não pode ser alterado pois ele possui pedidos de compra realizados!';
 			return old;
 		elsif (select count(*) from veiculo where cod_dept = old.cod_dept) > 0 then
-			raise notice 'O tipo do departamento não pode ser alterado pois ele possui veiculos colocados em producao!';
+			raise exception 'O tipo do departamento não pode ser alterado pois ele possui veiculos colocados em producao!';
 			return old;
 		end if;
 	end if;
@@ -461,7 +462,7 @@ $$
 declare codigo int default 0;
 begin
 	if (select count(*) from pedidosPorDepartamento) = 0 then
-		raise notice 'Não há departamento de compra';
+		raise exception 'Não há departamento de compra';
 		return null;
 	end if;
 	codigo := (select cod_dept from (select * from pedidosPorDepartamento fetch first row only) as tabela);
@@ -499,7 +500,7 @@ begin
 		codDeptPedido := (getDepartamentoDeCompra());
 		if codDeptPedido = null then 
 			update variable set trigger_on = true;
-			raise notice 'a operação implica na necessidade de serem feitos pedidos mas não há departamento de compra para tal!';
+			raise exception 'a operação implica na necessidade de serem feitos pedidos mas não há departamento de compra para tal!';
 			return false;
 		end if;
 		insert into pedido values(newIdPedido, data_atual, cnpjPrincipal, codDeptPedido);
@@ -584,5 +585,14 @@ create trigger dataInsertOnPedido before insert on pedido for each row execute p
 drop trigger dataInsertOnVeiculo on veiculo;
 create trigger dataInsertOnVeiculo before insert on veiculo for each row execute procedure dataInsert();
 
+-- Testando:
+
+select * from pedido;
+insert into pedido values(84, '0001-01-01', '', '');
+insert into fornecedor values('121111', 'teste');
+
 -- Comando para listar todas as funções no banco de dados:
 SELECT pg_get_functiondef(p.oid) FROM pg_proc p INNER JOIN pg_namespace ns ON p.pronamespace = ns.oid WHERE ns.nspname = 'public';
+
+-- Comando para listar todas os gatilhos no banco de dados:
+select trigger_schema, trigger_name, action_statement from information_schema.triggers;

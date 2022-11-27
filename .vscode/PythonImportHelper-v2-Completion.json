@@ -473,7 +473,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Componente",
         "description": "Trabalho01.AppPython.Data.Componente",
-        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
         "detail": "Trabalho01.AppPython.Data.Componente",
         "documentation": {}
     },
@@ -689,7 +689,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Veiculo",
         "description": "Trabalho01.AppPython.Data.Veiculo",
-        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__codDept = -1\n    def chassi(self, chassi):",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    __estagio = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__dataProducao = \"0001-01-01\"",
         "detail": "Trabalho01.AppPython.Data.Veiculo",
         "documentation": {}
     },
@@ -698,7 +698,7 @@
         "kind": 6,
         "importPath": "Trabalho01.AppPython.Data.Veiculo",
         "description": "Trabalho01.AppPython.Data.Veiculo",
-        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewChassi = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {},  '{}', {})\" ",
+        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {},  '{}', {}, '{}')\"\n        super().__init__(\"delete from veiculo\", \"update veiculo set\", [\"chassi\", \"valor_producao\", \"data_producao\", \"cod_dept\", \"estagio\"])\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
         "detail": "Trabalho01.AppPython.Data.Veiculo",
         "documentation": {}
     },
