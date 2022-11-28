@@ -188,8 +188,8 @@ class Controller():
         try:
             dados = self.clearAndGetData()
             dados = [dados[0]] + [dados[1]] + ["0001-01-01"] + [dados[2]] + ['']
-            if dados[1] != '': dados[1] = float(dados[1])
-            if dados[3] != '': dados[3] = int(dados[3])
+            dados[1] = float(dados[1])
+            dados[3] = int(dados[3])
             newVeiculo = Veiculo().fromTupla(dados)
             self.__veiculoDAO.insertVeiculo(newVeiculo)
             self.printSucess()
@@ -327,7 +327,7 @@ class Controller():
     def inserirPedido(self):
         try:
             dados = [-1] + ["0001-01-01"] + self.clearAndGetData()
-            if dados[3] != '': dados[3] = int(dados[3])
+            dados[3] = int(dados[3])
             newPedido = Pedido().fromTupla(dados)
             self.__pedidoDAO.insertPedido(newPedido)
             self.printSucess()
@@ -397,8 +397,8 @@ class Controller():
         try:
             dados = self.clearAndGetData()
             dados = dados[0:4] + [0] + dados[4:5]
-            if dados[2] != '': dados[2] = float(dados[2])
-            if dados[3] != '': dados[3] = int(dados[3])
+            dados[2] = float(dados[2])
+            dados[3] = int(dados[3])
             newComponente = Componente().fromTupla(dados)
             self.__componenteDAO.insertComponente(newComponente)
             self.printSucess()
@@ -475,8 +475,8 @@ class Controller():
     def inserirComponenteNecessario(self):
         try:
             dados = self.clearAndGetData()
-            if dados[0] != '': dados[0] = int(dados[0])
-            if dados[2] != '': dados[2] = int(dados[2])
+            dados[0] = int(dados[0])
+            dados[2] = int(dados[2])
             newComponenteNecessario = ComponenteNecessario().fromTupla(dados)
             self.__componenteNecessarioDAO.insertComponenteNecessario(newComponenteNecessario)
             self.printSucess()
@@ -544,8 +544,8 @@ class Controller():
     def inserirContem(self):
         try:
             dados = self.clearAndGetData()
-            if dados[1] != '': dados[1] = int(dados[1])
-            if dados[2] != '': dados[2] = int(dados[2])
+            dados[1] = int(dados[1])
+            dados[2] = int(dados[2])
             newContem = Contem().fromTupla(dados)
             self.__contemDAO.insertContem(newContem)
             self.printSucess()
@@ -613,7 +613,7 @@ class Controller():
     def inserirNotaFiscal(self):
         try:
             dados = self.clearAndGetData()
-            if dados[1] != '': dados[1] = int(dados[1])
+            dados[1] = int(dados[1])
             newNotaFiscal = NotaFiscal().fromTupla(dados)
             self.__notaFiscalDAO.insertNotaFiscal(newNotaFiscal)
             self.printSucess()
