@@ -211,7 +211,7 @@ create or replace function verificaDepartamentoDeCompra() returns trigger as
 $$
 begin
 	if(select 1 from departamento d where d.cod_dept = new.cod_dept and d.tipo = 'compra') then
-		raise notice 'Um departamento de compras não pode produzir carros!';
+		raise exception 'Um departamento de compras não pode produzir carros!';
 		return old;
 	end if;
 	return new;
