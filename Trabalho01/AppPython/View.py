@@ -185,7 +185,7 @@ class View():
         self.__fieldBoxes = []
         # Adicionando campos de entradas:
         for i in range(0, 2*quantidade, 2):
-            fieldBoxLabel = Label(self.__fieldBoxFrame, text = f"{campos[int(i/2)]}", height = 2, width = 45, bg = 'purple', font = ("Courier", 11, "bold"))
+            fieldBoxLabel = Label(self.__fieldBoxFrame, text = f"{campos[int(i/2)]}", height = 2, width = 40, bg = 'purple', font = ("Courier", 11, "bold"))
             fieldBoxLabel.pack()
             fieldBoxLabel.place(anchor="n", x=200, y=23*i + 0.1)
 
