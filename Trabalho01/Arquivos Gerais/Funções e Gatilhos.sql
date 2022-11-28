@@ -541,7 +541,11 @@ begin
 			signal := atualizaQuantidadeComponente(new.nome);
 		end if;
 	elsif TG_OP != 'DELETE' then
-		signal := atualizaQuantidadeComponente(new.nome_componente);
+		if new.nome_componente = old.nome_componente then
+			signal := atualizaQuantidadeComponente(new.nome_componente);
+		else
+			signal := atualizaQuantidadeComponente(old.nome_componente);
+		end if;
 	else
 		signal := atualizaQuantidadeComponente(old.nome_componente);
 	end if;
