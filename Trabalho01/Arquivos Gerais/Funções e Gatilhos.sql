@@ -44,7 +44,7 @@ language plpgsql;
 
 -- Gatilho para verificar o CNPJ de fornecedor antes de inserir ou fazer update na tabela:
 
-drop function verificaCNPJ();
+drop function verificaCNPJ() cascade;
 create or replace function verificaCNPJ() returns trigger as
 $$
 begin
@@ -195,7 +195,7 @@ begin
 	if validarNota(new.cod_nota) = true then
 		return new;
 	end if;
-	raise notice 'cod nota (chave da nota fiscal) inválido!';
+	raise exception 'cod nota (chave da nota fiscal) inválido!';
 	return old;
 end;
 $$

@@ -28,11 +28,9 @@ class View():
         self.criarCamposDeInsercao()
         self.setCampoDeExibicao(" ")
         self.ajustarTela()
-        return
 
     def run(self):
         self.__tela.mainloop()
-        return
 
     def getFieldBoxFrame(self):
         return self.__fieldBoxFrame
@@ -71,12 +69,11 @@ class View():
         # Criando lista de botões de aba (comands para uma cascade)
             
         # Botão para opções relacionadas a departamentos:
-        listaDeBotoesDepartamento = Menu(self.__tela, tearoff=0)        #botaoFuncionando("adicionar departamento comum")
+        listaDeBotoesDepartamento = Menu(self.__tela, tearoff=0)
         listaDeBotoesDepartamento.add_command(label = "Adicionar", command = lambda : self.__controller.setInserirDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Ver todos", command = lambda : self.__controller.verDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Remover", command = lambda : self.__controller.setDeletarDepartamento())
         listaDeBotoesDepartamento.add_command(label = "Atualizar", command = lambda : self.__controller.setPrimarioAtualizarDepartamento())
-        # listaDeBotoesDepartamento.add_command(label = "Ver departamentos com classificação", command = lambda : botaoFuncionando("ver todos por classificação"))
         
         # Botão para opções relacionadas a fornecedores:
         listaDeBotoesFornecedor = Menu(self.__tela, tearoff=0)
@@ -159,21 +156,17 @@ class View():
     
     # Abrir campo de inserção:
     def setOnCampoDeInsercao(self, string):
-        
         # Verificando se o frame foi criado:
         if self.fieldBox != None:
             return
-        
         # Criando frame para colocar a fieldBox:
         fieldBoxFrameColor = 'purple'
         fieldBoxFrame = Frame(self.__tela, bd = 2, width=400, height=80, bg = fieldBoxFrameColor, relief=SOLID)
         fieldBoxFrame.pack()
         fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
-
         # Criando label para colocar fieldBox:
         fieldBoxLabel = Label(fieldBoxFrame, text = string, bg = fieldBoxFrameColor, font =("Courier", 12))
         fieldBoxLabel.place(anchor="n", relx=0.5, rely=0.05)
-
         # Criando a fieldBox:
         self.fieldBox = Entry(fieldBoxFrame, width=61, borderwidth=2, bg = 'white', relief=SOLID)
         self.fieldBox.place(anchor="center", relx=0.5, rely=0.5)
@@ -181,19 +174,15 @@ class View():
     def criarCamposDeInsercao(self, campos = []):
         quantidade = len(campos)
         self.setCampoDeExibicao(" ")
-
         if self.__fieldBoxFrame != None: 
             self.__fieldBoxFrame.destroy()
-
         if quantidade == 0:
             return
-        
         # Ajustando o frame onde serão colocadas os campos de entrada:
         self.__fieldBoxFrame = Frame(self.__tela, bd = 2, width=400, height=(46.5)*quantidade + 50, bg = "purple", relief=SOLID)
         self.__fieldBoxFrame.pack()
         self.__fieldBoxFrame.place(anchor="center", relx=0.2, rely=0.50)
         self.__fieldBoxes = []
-
         # Adicionando campos de entradas:
         for i in range(0, 2*quantidade, 2):
             fieldBoxLabel = Label(self.__fieldBoxFrame, text = f"{campos[int(i/2)]}", height = 2, width = 45, bg = 'purple', font = ("Courier", 11, "bold"))
@@ -220,7 +209,6 @@ class View():
         for field in self.__fieldBoxes:
             item = field.get()
             dados.append(item)
-        # print(dados)
         return dados
 
     def deletarCamposDeInsercao(self):
@@ -242,11 +230,9 @@ class View():
         self.__textBox.config(font =("Courier", 10, "bold"))
         label = Label(self.__tela, text = "Resultado", width=50, bg = "grey", borderwidth=2, relief="solid")
         label.config(font = ("Courier", 10, "bold"))
-
         # Packs e places do label:
         label.pack()
         label.place(anchor="center", relx=0.7, rely=0.1)
-
         # Packs e places da textBox:
         self.__textBox.pack()
         self.__textBox.place(anchor="n", relx=0.7, rely=0.14)
