@@ -1,6 +1,4 @@
-﻿	
-
---1)Insira todos os mecânicos e setores de uma única transação.
+﻿--1)Insira todos os mecânicos e setores de uma única transação.
 begin transaction;
 
 INSERT INTO setor VALUES (1, 'Elétrica'),
@@ -55,11 +53,11 @@ rollback;
 
 
 -- 3) Incremente em 1 a idade dos mecânicos e clientes em uma única transação.
-begin transaction;
+begin isolation level read uncommitted;
 
-update mecanico set idade = idade + 1; 
+update mecanico set idade = idade - 1; 
 
-update cliente set idade = idade + 1; 
+update cliente set idade = idade - 1; 
 
 end transaction;
 

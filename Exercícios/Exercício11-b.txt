@@ -1,0 +1,29 @@
+1.a) Growing phase (Crescimento): é a fase em que a transação pode solicitar bloqueios mas não pode liberar bloqueios.
+
+1.b) Shrinking phase (Encolhimento): é a fasem em que a transação pode liberar bloqueios, mas não pode solicitar bloqueios.
+
+2) O que é um deadlock em transações de banco de dados?
+É quando 2 ou mais processos estão aguardando um pelo outro para continuar.
+
+3) Existem 2 protocolos clássicos de timestamp para controle de transação: wait-die e wound-wait.
+
+Wait-die
+
+a)      Transações velhas abortam (esperam/abortam) as transações mais novas.
+
+b)      Quanto mais nova (velha/nova) for a transação, mais ela vai esperar.
+
+Wound-wait
+
+a)      Transações velhas esperam (esperam/abortam) as transações novas.
+
+b)      Quanto mais velha ficar a transação, menor (menor/maior) a chance de espera.
+
+4) Quais as principais características do MVCC que permitem menor índice de locks em transações concorrentes?
+
+Como para todo mudança é criada uma nova instância do BD em outro local não há necessidade do travamente (lock) quando se está escrevendo.
+
+5) Existe deadlock no grafo de espera abaixo? Explique.
+Não, pois o grafo não é cíclico.
+
+
