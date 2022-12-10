@@ -113,38 +113,6 @@
     },
     {
         "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
         "isExtraImport": true,
@@ -411,6 +379,14 @@
         "documentation": {}
     },
     {
+        "label": "*",
+        "importPath": "mongoengine",
+        "description": "mongoengine",
+        "isExtraImport": true,
+        "detail": "mongoengine",
+        "documentation": {}
+    },
+    {
         "label": "Componente",
         "kind": 6,
         "importPath": "AppPython.Data.Componente",
@@ -426,24 +402,6 @@
         "description": "AppPython.Data.Componente",
         "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
         "detail": "AppPython.Data.Componente",
-        "documentation": {}
-    },
-    {
-        "label": "ComponenteNecessario",
-        "kind": 6,
-        "importPath": "AppPython.Data.ComponenteNecessario",
-        "description": "AppPython.Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self",
-        "detail": "AppPython.Data.ComponenteNecessario",
-        "documentation": {}
-    },
-    {
-        "label": "ComponenteNecessarioDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.ComponenteNecessario",
-        "description": "AppPython.Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', '{}', {})\"\n        # self.__sqlDelete = \"delete from componente_necessario\"",
-        "detail": "AppPython.Data.ComponenteNecessario",
         "documentation": {}
     },
     {
@@ -498,24 +456,6 @@
         "description": "AppPython.Data.Despesa",
         "peekOfCode": "class DespesaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Despesa\"\n        self.__sqlSelectData = \"select valor from Despesa where\"\n        self.__sqlSelectMore = \"select * from Despesa where valor >\"",
         "detail": "AppPython.Data.Despesa",
-        "documentation": {}
-    },
-    {
-        "label": "Fornece",
-        "kind": 6,
-        "importPath": "AppPython.Data.Fornece",
-        "description": "AppPython.Data.Fornece",
-        "peekOfCode": "class Fornece():\n    __nome = None\n    __cnpj = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__cnpj = \"\"\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
-        "detail": "AppPython.Data.Fornece",
-        "documentation": {}
-    },
-    {
-        "label": "ForneceDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Fornece",
-        "description": "AppPython.Data.Fornece",
-        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornece\"",
-        "detail": "AppPython.Data.Fornece",
         "documentation": {}
     },
     {
@@ -595,7 +535,7 @@
         "kind": 6,
         "importPath": "AppPython.Data.Padrao",
         "description": "AppPython.Data.Padrao",
-        "peekOfCode": "class PadraoDAO():\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self, sqlDelete, sqlUpdate, campos):\n        self.__sqlDelete = sqlDelete\n        self.__sqlUpdate = sqlUpdate\n        self.__columns = campos\n    def delete(self, dados = None):\n        con = Connection()",
+        "peekOfCode": "class PadraoDAO():\n    __mongoDBInsert = None\n    __mongoDBUpdate = None\n    __mongoDBDelete = None\n    __mongoDBFind = None\n    def __init__(self, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, campos):\n        self.__mongoDBInsert = mongoDBInsert\n        self.__mongoDBUpdate = mongoDBUpdate\n        self.__mongoDBDelete = mongoDBDelete\n        self.__mongoDBFind = mongoDBFind",
         "detail": "AppPython.Data.Padrao",
         "documentation": {}
     },
@@ -681,11 +621,29 @@
         "documentation": {}
     },
     {
+        "label": "Componente",
+        "kind": 6,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "class Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()\n    valor_compra = FloatField()\n    quantidade_min = IntField()\n    quantidade = IntField()\n    cnpj = StringField()\nclass Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "Componente",
+        "kind": 6,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "class Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()\n    valor_compra = FloatField()\n    quantidade_min = IntField()\n    quantidade = IntField()\n    cnpj = StringField()\n# comp = Componente(__nome=\"roda 1004\", tipo='roda', valor_compra=1000, quantidade_min=4, quantidade=4, cnpj=\"11424957007003\")\n# # comp.save()\n# print(comp.__nome)",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
         "label": "connection",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\ndatabase = connection[\"Personalização\"]\nprint(database)",
+        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\ndatabase = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -694,7 +652,43 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "database = connection[\"Personalização\"]\nprint(database)",
+        "peekOfCode": "database = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "departamento",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "departamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "componente",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "componente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "results",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "results = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)\n#     name = StringField(unique=True)",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "results",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "results = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)\n#     name = StringField(unique=True)\n# # dept = Fornecedor(cnpj=\"11424957007003\", name=\"Oscorp Industries\")\n# # dept.save()\nclass Componente(Document):\n    __nome = StringField(unique=True)",
         "detail": "Testes.MongoDB",
         "documentation": {}
     }

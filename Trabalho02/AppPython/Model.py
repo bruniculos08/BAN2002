@@ -27,5 +27,8 @@ class Connection():
             cls.__connection = MongoClient("mongodb://localhost:27017")
         return cls.__instance
 
+    def getCollection(self, database_name, collection_name):
+        return self.connection[database_name][collection_name]
+
     def close(self):
         return self.__connection.close()
