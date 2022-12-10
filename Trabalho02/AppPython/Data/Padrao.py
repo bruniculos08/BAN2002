@@ -5,19 +5,14 @@ from Data.Padrao import *
 class PadraoDAO():
 
     __collectionName = None
-    __mongoDBInsert = None
-    __mongoDBUpdate = None
-    __mongoDBDelete = None
-    __mongoDBFind = None
     __mongoDBFields = None
 
     def __init__(self, collectionName, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, mongoDBFields):
         self.__collectionName = collectionName
-        self.__mongoDBInsert = mongoDBInsert
-        self.__mongoDBUpdate = mongoDBUpdate
-        self.__mongoDBDelete = mongoDBDelete
-        self.__mongoDBFind = mongoDBFind
         self.__mongoDBFields = mongoDBFields
+
+    def insert(self, collection_item):
+        collection_item.save()
 
     def delete(self, dados = None):
         con = Connection()
@@ -36,15 +31,15 @@ class PadraoDAO():
         collection = con.getCollection("Personalização", self.__collectionName)
 
         # Construindo condicionais:
-        stringCond = ""
+        stringCond = {}
         for field, dado in zip(self.__mongoDBFields, dadosCond):
             if dado != "":
-                string += "\'" + field + "\'" + ":" + "\'" + dado + "\'"
+                stringCond[field] = dado
 
         # Montando argumento de alteração:
-        stringSet = ""
+        stringSet = {}
         for field, dado in zip(self.__mongoDBFields, dadosSet):
             if dado != "":
-                string += "\'" + field + "\'" + ":" + "\'" + dado + "\'"
+               stringSet[field] = dado
 
-        collection.update(stringCond, stringSet)
+        collection.update(stringCond, {operator: stringSet})

@@ -1,10 +1,11 @@
 [
     {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
+        "label": "Padrao",
+        "kind": 6,
         "isExtraImport": true,
-        "detail": "Model",
+        "importPath": "Padrao",
+        "description": "Padrao",
+        "detail": "Padrao",
         "documentation": {}
     },
     {
@@ -29,142 +30,6 @@
         "description": "Model",
         "isExtraImport": true,
         "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
-        "isExtraImport": true,
-        "detail": "Model",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Padrao",
-        "description": "Data.Padrao",
-        "isExtraImport": true,
-        "detail": "Data.Padrao",
         "documentation": {}
     },
     {
@@ -387,147 +252,12 @@
         "documentation": {}
     },
     {
-        "label": "Componente",
-        "kind": 6,
-        "importPath": "AppPython.Data.Componente",
-        "description": "AppPython.Data.Componente",
-        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __valorCompra = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"",
-        "detail": "AppPython.Data.Componente",
-        "documentation": {}
-    },
-    {
-        "label": "ComponenteDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Componente",
-        "description": "AppPython.Data.Componente",
-        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
-        "detail": "AppPython.Data.Componente",
-        "documentation": {}
-    },
-    {
-        "label": "Contem",
-        "kind": 6,
-        "importPath": "AppPython.Data.Contem",
-        "description": "AppPython.Data.Contem",
-        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n        self.__quantidade = 0\n    def nome(self, nome):\n        self.__nome = nome",
-        "detail": "AppPython.Data.Contem",
-        "documentation": {}
-    },
-    {
-        "label": "ContemDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Contem",
-        "description": "AppPython.Data.Contem",
-        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {}, {})\"\n        # self.__sqlDelete = \"delete from contem\"",
-        "detail": "AppPython.Data.Contem",
-        "documentation": {}
-    },
-    {
         "label": "Departamento",
         "kind": 6,
         "importPath": "AppPython.Data.Departamento",
         "description": "AppPython.Data.Departamento",
-        "peekOfCode": "class Departamento():\n    __codDept = None\n    __tipo = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__tipo = \"\"\n    def codDept(self ,codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "peekOfCode": "class Departamento(Document):",
         "detail": "AppPython.Data.Departamento",
-        "documentation": {}
-    },
-    {
-        "label": "DepartamentoDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Departamento",
-        "description": "AppPython.Data.Departamento",
-        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
-        "detail": "AppPython.Data.Departamento",
-        "documentation": {}
-    },
-    {
-        "label": "Despesa",
-        "kind": 6,
-        "importPath": "AppPython.Data.Despesa",
-        "description": "AppPython.Data.Despesa",
-        "peekOfCode": "class Despesa():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
-        "detail": "AppPython.Data.Despesa",
-        "documentation": {}
-    },
-    {
-        "label": "DespesaDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Despesa",
-        "description": "AppPython.Data.Despesa",
-        "peekOfCode": "class DespesaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Despesa\"\n        self.__sqlSelectData = \"select valor from Despesa where\"\n        self.__sqlSelectMore = \"select * from Despesa where valor >\"",
-        "detail": "AppPython.Data.Despesa",
-        "documentation": {}
-    },
-    {
-        "label": "Fornecedor",
-        "kind": 6,
-        "importPath": "AppPython.Data.Fornecedor",
-        "description": "AppPython.Data.Fornecedor",
-        "peekOfCode": "class Fornecedor():\n    __cnpj = None\n    __nome = None\n    def __init__(self):\n        self.__cnpj = \"\"\n        self.__nome = \"\"\n    def cnpj(self, cnpj):\n        self.__cnpj = cnpj\n        return self\n    def getCnpj(self):",
-        "detail": "AppPython.Data.Fornecedor",
-        "documentation": {}
-    },
-    {
-        "label": "FornecedorDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Fornecedor",
-        "description": "AppPython.Data.Fornecedor",
-        "peekOfCode": "class FornecedorDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornecedor\"",
-        "detail": "AppPython.Data.Fornecedor",
-        "documentation": {}
-    },
-    {
-        "label": "NotaFiscal",
-        "kind": 6,
-        "importPath": "AppPython.Data.NotaFiscal",
-        "description": "AppPython.Data.NotaFiscal",
-        "peekOfCode": "class NotaFiscal():\n    __codNota = None\n    __idPedido = None\n    def __init__(self):\n        self.__codNota = \"\"\n        self.__idPedido = -1\n    def codNota(self, codNota):\n        self.__codNota = codNota\n        return self\n    def getCodNota(self):",
-        "detail": "AppPython.Data.NotaFiscal",
-        "documentation": {}
-    },
-    {
-        "label": "NotaFiscalDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.NotaFiscal",
-        "description": "AppPython.Data.NotaFiscal",
-        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
-        "detail": "AppPython.Data.NotaFiscal",
-        "documentation": {}
-    },
-    {
-        "label": "NumCarros",
-        "kind": 6,
-        "importPath": "AppPython.Data.NumCarros",
-        "description": "AppPython.Data.NumCarros",
-        "peekOfCode": "class NumCarros():\n    __codDept = None\n    __numOfCarros = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfCarros = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
-        "detail": "AppPython.Data.NumCarros",
-        "documentation": {}
-    },
-    {
-        "label": "NumCarrosDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.NumCarros",
-        "description": "AppPython.Data.NumCarros",
-        "peekOfCode": "class NumCarrosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumCarros\"\n        self.__sqlSelectDept = \"select NumOfCarros from NumCarros where\"\n        self.__sqlSelectMore = \"select * from NumCarros where NumOfCarros >\"",
-        "detail": "AppPython.Data.NumCarros",
-        "documentation": {}
-    },
-    {
-        "label": "NumPedidos",
-        "kind": 6,
-        "importPath": "AppPython.Data.NumPedidos",
-        "description": "AppPython.Data.NumPedidos",
-        "peekOfCode": "class NumPedidos():\n    __codDept = None\n    __numOfPedidos = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfPedidos = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
-        "detail": "AppPython.Data.NumPedidos",
-        "documentation": {}
-    },
-    {
-        "label": "NumPedidosDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.NumPedidos",
-        "description": "AppPython.Data.NumPedidos",
-        "peekOfCode": "class NumPedidosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumPedidos\"\n        self.__sqlSelectDept = \"select NumOfPedidos from NumPedidos where\"\n        self.__sqlSelectMore = \"select * from NumPedidos where NumOfPedidos >\"",
-        "detail": "AppPython.Data.NumPedidos",
         "documentation": {}
     },
     {
@@ -535,62 +265,8 @@
         "kind": 6,
         "importPath": "AppPython.Data.Padrao",
         "description": "AppPython.Data.Padrao",
-        "peekOfCode": "class PadraoDAO():\n    __mongoDBInsert = None\n    __mongoDBUpdate = None\n    __mongoDBDelete = None\n    __mongoDBFind = None\n    def __init__(self, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, campos):\n        self.__mongoDBInsert = mongoDBInsert\n        self.__mongoDBUpdate = mongoDBUpdate\n        self.__mongoDBDelete = mongoDBDelete\n        self.__mongoDBFind = mongoDBFind",
+        "peekOfCode": "class PadraoDAO():\n    __collectionName = None\n    __mongoDBFields = None\n    def __init__(self, collectionName, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, mongoDBFields):\n        self.__collectionName = collectionName\n        self.__mongoDBFields = mongoDBFields\n    def insert(self, collection_item):\n        collection_item.save()\n    def delete(self, dados = None):\n        con = Connection()",
         "detail": "AppPython.Data.Padrao",
-        "documentation": {}
-    },
-    {
-        "label": "Pedido",
-        "kind": 6,
-        "importPath": "AppPython.Data.Pedido",
-        "description": "AppPython.Data.Pedido",
-        "peekOfCode": "class Pedido():\n    __id = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__dataCriacao = ''\n        self.__cnpj = \"\"\n        self.__codDeptCompra = -1",
-        "detail": "AppPython.Data.Pedido",
-        "documentation": {}
-    },
-    {
-        "label": "PedidoDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Pedido",
-        "description": "AppPython.Data.Pedido",
-        "peekOfCode": "class PedidoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewId= None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from pedido\"\n        self.__sqlSelectNewId = \"select nextval('pedido_id')\"",
-        "detail": "AppPython.Data.Pedido",
-        "documentation": {}
-    },
-    {
-        "label": "Receita",
-        "kind": 6,
-        "importPath": "AppPython.Data.Receita",
-        "description": "AppPython.Data.Receita",
-        "peekOfCode": "class Receita():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
-        "detail": "AppPython.Data.Receita",
-        "documentation": {}
-    },
-    {
-        "label": "ReceitaDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Receita",
-        "description": "AppPython.Data.Receita",
-        "peekOfCode": "class ReceitaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Receita\"\n        self.__sqlSelectData = \"select valor from Receita where\"\n        self.__sqlSelectMore = \"select * from Receita where valor >\"",
-        "detail": "AppPython.Data.Receita",
-        "documentation": {}
-    },
-    {
-        "label": "Veiculo",
-        "kind": 6,
-        "importPath": "AppPython.Data.Veiculo",
-        "description": "AppPython.Data.Veiculo",
-        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    __estagio = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__dataProducao = \"0001-01-01\"",
-        "detail": "AppPython.Data.Veiculo",
-        "documentation": {}
-    },
-    {
-        "label": "VeiculoDAO",
-        "kind": 6,
-        "importPath": "AppPython.Data.Veiculo",
-        "description": "AppPython.Data.Veiculo",
-        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {},  '{}', {}, '{}')\"\n        super().__init__(\"delete from veiculo\", \"update veiculo set\", [\"chassi\", \"valor_producao\", \"data_producao\", \"cod_dept\", \"estagio\"])\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
-        "detail": "AppPython.Data.Veiculo",
         "documentation": {}
     },
     {
@@ -643,7 +319,7 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\ndatabase = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:",
+        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\ndatabase = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -652,7 +328,7 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "database = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)",
+        "peekOfCode": "database = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -661,7 +337,7 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "departamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):",
+        "peekOfCode": "departamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -670,7 +346,7 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "componente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)",
+        "peekOfCode": "componente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -679,7 +355,34 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "results = departamento.find({\"tipo\":\"producao\"})\ndepartamento.insert_one({\"tipo\":\"producao\", \"componente\": [{\"nome\":\"roda 1004\", \"quantidade\":4}]})\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)\n#     name = StringField(unique=True)",
+        "peekOfCode": "results = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "string",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "string = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "string[\"tipo\"]",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "string[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):",
+        "detail": "Testes.MongoDB",
+        "documentation": {}
+    },
+    {
+        "label": "string[\"componente\"]",
+        "kind": 5,
+        "importPath": "Testes.MongoDB",
+        "description": "Testes.MongoDB",
+        "peekOfCode": "string[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },

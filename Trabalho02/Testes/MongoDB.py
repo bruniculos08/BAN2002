@@ -9,7 +9,13 @@ componente = connection["Personalização"]["Componente"]
 
 results = departamento.find({"tipo":"producao"})
 
-departamento.insert_one({"tipo":"producao", "componente": [{"nome":"roda 1004", "quantidade":4}]})
+string = {}
+string["tipo"] = "producao"
+string["componente"] = [{"nome":"roda 1007", "quantidade":4}]
+
+departamento.insert_one(string)
+
+pass
 
 for result in results:
     print(result)
