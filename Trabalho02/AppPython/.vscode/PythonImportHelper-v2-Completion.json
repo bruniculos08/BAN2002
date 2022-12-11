@@ -32,6 +32,70 @@
         "documentation": {}
     },
     {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
         "label": "*",
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
@@ -77,6 +141,15 @@
         "description": "Model",
         "isExtraImport": true,
         "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
         "documentation": {}
     },
     {
@@ -113,6 +186,22 @@
     },
     {
         "label": "*",
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "isExtraImport": true,
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "isExtraImport": true,
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "Data.Componente",
         "description": "Data.Componente",
         "isExtraImport": true,
@@ -125,6 +214,22 @@
         "description": "Data.ComponenteNecessario",
         "isExtraImport": true,
         "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "isExtraImport": true,
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "isExtraImport": true,
+        "detail": "Data.Fornece",
         "documentation": {}
     },
     {
@@ -213,6 +318,15 @@
         "documentation": {}
     },
     {
+        "label": "ContemDAO",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome_componente\", \"id_pedido\", \"quantidade\"]\n        super(ContemDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"contem\")",
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
         "label": "DepartamentoDAO",
         "kind": 6,
         "importPath": "Data.Departamento",
@@ -222,12 +336,39 @@
         "documentation": {}
     },
     {
+        "label": "ForneceDAO",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome_componente\", \"cnpj\"]\n        super(ForneceDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"fornece\")",
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "FornecedorDAO",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class FornecedorDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"cnpj\", \"nome\"]\n        super(FornecedorDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"fornecedor\")",
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
         "label": "PadraoDAO",
         "kind": 6,
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
         "peekOfCode": "class PadraoDAO():\n    __collection = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, mongoDBFields, dataBaseName, collectionName):\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)\n    def findAll(self, dataCond = []):\n        # Monta o dicionário que contem os atributos do novo item...",
         "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "PedidoDAO",
+        "kind": 6,
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "peekOfCode": "class PedidoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"data_criacao\", \"cnpj\", \"id_dept\"]\n        super(PedidoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"pedido\")",
+        "detail": "Data.Pedido",
         "documentation": {}
     },
     {

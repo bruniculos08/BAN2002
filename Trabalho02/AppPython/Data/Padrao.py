@@ -41,8 +41,10 @@ class PadraoDAO():
         # ... a ser adicionado na collection:
         dictionarySet = {}
         for field, value in zip(self.__mongoDBFields, dataSet):
-            if value != "":
+            if (value != "" or field == "_id"):
                 dictionarySet[field] = value
+            else:
+                raise Exception()
 
         self.__collection.insert_one(dictionarySet)
 

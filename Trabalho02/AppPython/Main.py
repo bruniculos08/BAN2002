@@ -14,7 +14,12 @@ import mysql.connector
 import psycopg2
 from mysql.connector import Error
 import pandas as pd
+import datetime
 
 if __name__ == "__main__":
     app = View()
     app.run()
+
+    # print(datetime.datetime.today().date())
+    # str = "2022-11-11"
+    # print(datetime.datetime.strptime(str, "%Y-%m-%d"))
