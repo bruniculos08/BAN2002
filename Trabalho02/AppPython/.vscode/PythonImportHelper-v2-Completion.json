@@ -193,7 +193,7 @@
         "kind": 6,
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
-        "peekOfCode": "class PadraoDAO():\n    __collection = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, mongoDBFields, dataBaseName, collectionName):\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)\n    def findAll(self, dataSet = []):\n        # Monta o dicionário que contem os atributos do novo item...",
+        "peekOfCode": "class PadraoDAO():\n    __collection = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, mongoDBFields, dataBaseName, collectionName):\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)\n    def findAll(self, dataCond = []):\n        # Monta o dicionário que contem os atributos do novo item...",
         "detail": "Data.Padrao",
         "documentation": {}
     },

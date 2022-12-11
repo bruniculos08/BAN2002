@@ -12,16 +12,16 @@ class PadraoDAO():
         self.__connection = Connection()
         self.__collection = self.__connection.getCollection(dataBaseName, collectionName)
 
-    def findAll(self, dataSet = []):
+    def findAll(self, dataCond = []):
 
         # Monta o dicionário que contem os atributos do novo item...
         # ... a ser procurado na collection:
-        dictionarySet = {}
-        for field, value in zip(self.__mongoDBFields, dataSet):
+        dictionaryCond = {}
+        for field, value in zip(self.__mongoDBFields, dataCond):
             if value != "":
-                dictionarySet[field] = value
+                dictionaryCond[field] = value
 
-        return self.__collection.find(dictionarySet)
+        return self.__collection.find(dictionaryCond)
 
     def project(self, projectFields):
 
@@ -46,7 +46,7 @@ class PadraoDAO():
 
         self.__collection.insert_one(dictionarySet)
 
-    def delete(self, data = None):
+    def delete(self, data):
 
         # Monta o dicionário cujos campos representão os valores dos respectivos campos...
         # ... dos documentos a serem deletados:
@@ -75,5 +75,5 @@ class PadraoDAO():
                 dictionarySet[field] = value  
 
         dictionarySet = {operator: dictionarySet}
-
+        
         self.__collection.update_one(dictionaryCond, dictionarySet)

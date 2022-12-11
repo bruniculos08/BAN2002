@@ -190,7 +190,7 @@ class Controller():
             self.printError()
 
     def setPrimarioAtualizarComponenteNecessario(self):
-        campos = ["Novo código do departamento:", "Novo nome do componente:", "Nova quantidade:"]
+        campos = ["Novo id do departamento:", "Novo nome do componente:", "Nova quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
         botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponenteNecessario())
         self.__view.criarBotoes(botao)
@@ -217,7 +217,7 @@ class Controller():
     def atualizarComponenteNecessario(self, dadosSet):
         try:
             dadosWhere = self.clearAndGetData()
-            if dadosWhere[0] != '': dadosWhere[0] = ObjectId(dadosSet[0])
+            if dadosWhere[0] != '': dadosWhere[0] = ObjectId(dadosWhere[0])
             if(dadosWhere[2] != ''): dadosWhere[2] = int(dadosWhere[2])
             self.__componenteNecessarioDAO.update(dadosSet, dadosWhere, "$set")
             self.printSucess()
