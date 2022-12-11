@@ -77,7 +77,7 @@ class Controller():
     def deleteRefered(self, refered_database, refered_collection, field, reference):
         pass
 
-    def update(self, refered_database, refered_collection, field, reference):
+    def updateRefered(self, refered_database, refered_collection, field, reference):
         pass
 
     def printQuery(self, query, campos):
