@@ -1,10 +1,57 @@
 [
     {
-        "label": "Padrao",
-        "kind": 6,
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
         "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "mongoengine",
+        "description": "mongoengine",
+        "isExtraImport": true,
+        "detail": "mongoengine",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "mongoengine",
+        "description": "mongoengine",
+        "isExtraImport": true,
+        "detail": "mongoengine",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "mongoengine",
+        "description": "mongoengine",
+        "isExtraImport": true,
+        "detail": "mongoengine",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "Padrao",
         "description": "Padrao",
+        "isExtraImport": true,
         "detail": "Padrao",
         "documentation": {}
     },
@@ -204,22 +251,6 @@
         "documentation": {}
     },
     {
-        "label": "MongoClient",
-        "importPath": "pymongo",
-        "description": "pymongo",
-        "isExtraImport": true,
-        "detail": "pymongo",
-        "documentation": {}
-    },
-    {
-        "label": "MongoClient",
-        "importPath": "pymongo",
-        "description": "pymongo",
-        "isExtraImport": true,
-        "detail": "pymongo",
-        "documentation": {}
-    },
-    {
         "label": "*",
         "importPath": "Controller",
         "description": "Controller",
@@ -244,19 +275,20 @@
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "mongoengine",
-        "description": "mongoengine",
-        "isExtraImport": true,
-        "detail": "mongoengine",
-        "documentation": {}
-    },
-    {
         "label": "Departamento",
         "kind": 6,
         "importPath": "AppPython.Data.Departamento",
         "description": "AppPython.Data.Departamento",
-        "peekOfCode": "class Departamento(Document):",
+        "peekOfCode": "class Departamento(Document):\n    tipo = StringField(unique=False, required=True)\n    componente_necessario = ListField()\nclass DepartamentoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"tipo\", \"componente_necessario\"]\n        super().__init__(type(Departamento), self.__mongoDBFields)",
+        "detail": "AppPython.Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "AppPython.Data.Departamento",
+        "description": "AppPython.Data.Departamento",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"tipo\", \"componente_necessario\"]\n        super().__init__(type(Departamento), self.__mongoDBFields)",
         "detail": "AppPython.Data.Departamento",
         "documentation": {}
     },
@@ -265,7 +297,7 @@
         "kind": 6,
         "importPath": "AppPython.Data.Padrao",
         "description": "AppPython.Data.Padrao",
-        "peekOfCode": "class PadraoDAO():\n    __collectionName = None\n    __mongoDBFields = None\n    def __init__(self, collectionName, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, mongoDBFields):\n        self.__collectionName = collectionName\n        self.__mongoDBFields = mongoDBFields\n    def insert(self, collection_item):\n        collection_item.save()\n    def delete(self, dados = None):\n        con = Connection()",
+        "peekOfCode": "class PadraoDAO():\n    __collectionClass = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, collectionClass, mongoDBFields):\n        self.__collectionClass = collectionClass\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__connection.mongoConnect()\n    def insert(self, dataSet):",
         "detail": "AppPython.Data.Padrao",
         "documentation": {}
     },
@@ -297,20 +329,11 @@
         "documentation": {}
     },
     {
-        "label": "Componente",
+        "label": "Departamento",
         "kind": 6,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "class Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()\n    valor_compra = FloatField()\n    quantidade_min = IntField()\n    quantidade = IntField()\n    cnpj = StringField()\nclass Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()",
-        "detail": "Testes.MongoDB",
-        "documentation": {}
-    },
-    {
-        "label": "Componente",
-        "kind": 6,
-        "importPath": "Testes.MongoDB",
-        "description": "Testes.MongoDB",
-        "peekOfCode": "class Componente(Document):\n    __nome = StringField(unique=True)\n    tipo = StringField()\n    valor_compra = FloatField()\n    quantidade_min = IntField()\n    quantidade = IntField()\n    cnpj = StringField()\n# comp = Componente(__nome=\"roda 1004\", tipo='roda', valor_compra=1000, quantidade_min=4, quantidade=4, cnpj=\"11424957007003\")\n# # comp.save()\n# print(comp.__nome)",
+        "peekOfCode": "class Departamento(Document):\n    tipo = StringField(required=True)\n    componente_necessario = ListField()\ngeneric_dept = type(Departamento())\ndept = generic_dept.objects()\nto_add = {\"nome\":\"roda teste append 1000\", \"quantidade\":0}\ndept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
@@ -319,79 +342,79 @@
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\ndatabase = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass",
+        "peekOfCode": "connection = MongoClient(\"mongodb://localhost:27017\")\nclass Departamento(Document):\n    tipo = StringField(required=True)\n    componente_necessario = ListField()\ngeneric_dept = type(Departamento())\ndept = generic_dept.objects()\nto_add = {\"nome\":\"roda teste append 1000\", \"quantidade\":0}\ndept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "database",
+        "label": "generic_dept",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "database = connection[\"Personalização\"]\ndepartamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:",
+        "peekOfCode": "generic_dept = type(Departamento())\ndept = generic_dept.objects()\nto_add = {\"nome\":\"roda teste append 1000\", \"quantidade\":0}\ndept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "departamento",
+        "label": "dept",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "departamento = connection[\"Personalização\"][\"Departamento\"]\ncomponente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)",
+        "peekOfCode": "dept = generic_dept.objects()\nto_add = {\"nome\":\"roda teste append 1000\", \"quantidade\":0}\ndept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "componente",
+        "label": "to_add",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "componente = connection[\"Personalização\"][\"Componente\"]\nresults = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})",
+        "peekOfCode": "to_add = {\"nome\":\"roda teste append 1000\", \"quantidade\":0}\ndept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "results",
+        "label": "dept.update(componente_necessario",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "results = departamento.find({\"tipo\":\"producao\"})\nstring = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:",
+        "peekOfCode": "dept.update(componente_necessario = [to_add])\nto_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]\n# results = departamento.find({\"tipo\":\"producao\"})",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "string",
+        "label": "to_add_01",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "string = {}\nstring[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)",
+        "peekOfCode": "to_add_01 = {\"nome\":\"roda 1111\", \"quantidade\":0}\nto_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]\n# results = departamento.find({\"tipo\":\"producao\"})\n# string = {}",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "string[\"tipo\"]",
+        "label": "to_add_02",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "string[\"tipo\"] = \"producao\"\nstring[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):",
+        "peekOfCode": "to_add_02 = {\"nome\":\"roda 1112\", \"quantidade\":0}\ninfo = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]\n# results = departamento.find({\"tipo\":\"producao\"})\n# string = {}\n# string[\"tipo\"] = \"producao\"",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "string[\"componente\"]",
+        "label": "info",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "string[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\ndepartamento.insert_one(string)\npass\nfor result in results:\n    print(result)\nresults = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)",
+        "peekOfCode": "info = {\"tipo\":\"producao\", \"componente_necessario\":[to_add_01, to_add_02]}\nitem = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]\n# results = departamento.find({\"tipo\":\"producao\"})\n# string = {}\n# string[\"tipo\"] = \"producao\"\n# string[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]",
         "detail": "Testes.MongoDB",
         "documentation": {}
     },
     {
-        "label": "results",
+        "label": "item",
         "kind": 5,
         "importPath": "Testes.MongoDB",
         "description": "Testes.MongoDB",
-        "peekOfCode": "results = componente.find({})\nfor result in results:\n    print(result)\n# class Fornecedor(Document):\n#     cnpj = StringField(unique=True)\n#     name = StringField(unique=True)\n# # dept = Fornecedor(cnpj=\"11424957007003\", name=\"Oscorp Industries\")\n# # dept.save()\nclass Componente(Document):\n    __nome = StringField(unique=True)",
+        "peekOfCode": "item = generic_dept(**info)\nitem.save()\n# database = connection[\"Personalização\"]\n# departamento = connection[\"Personalização\"][\"Departamento\"]\n# componente = connection[\"Personalização\"][\"Componente\"]\n# results = departamento.find({\"tipo\":\"producao\"})\n# string = {}\n# string[\"tipo\"] = \"producao\"\n# string[\"componente\"] = [{\"nome\":\"roda 1007\", \"quantidade\":4}]\n# departamento.insert_one(string)",
         "detail": "Testes.MongoDB",
         "documentation": {}
     }

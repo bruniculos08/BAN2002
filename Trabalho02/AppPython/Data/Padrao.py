@@ -1,45 +1,79 @@
 from Model import *
-from Data.Padrao import *
 
 # Para herdar métodos delete e update:
 class PadraoDAO():
 
-    __collectionName = None
+    __collection = None
     __mongoDBFields = None
+    __connection = None
 
-    def __init__(self, collectionName, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, mongoDBFields):
-        self.__collectionName = collectionName
+    def __init__(self, mongoDBFields, dataBaseName, collectionName):
         self.__mongoDBFields = mongoDBFields
+        self.__connection = Connection()
+        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)
 
-    def insert(self, collection_item):
-        collection_item.save()
+    def findAll(self, dataSet = []):
 
-    def delete(self, dados = None):
-        con = Connection()
-        collection = con.getCollection("Personalização", self.__collectionName)
+        # Monta o dicionário que contem os atributos do novo item...
+        # ... a ser procurado na collection:
+        dictionarySet = {}
+        for field, value in zip(self.__mongoDBFields, dataSet):
+            if value != "":
+                dictionarySet[field] = value
 
-        # Construindo condicionais:
-        string = "{"
-        for field, dado in zip(self.__mongoDBFields, dados):
-            if dado != "":
-                string += "\'" + field + "\'" + ":" + "\'" + dado + "\'"
-        string += "}"
-        collection.deleteMany({string})
+        return self.__collection.find(dictionarySet)
 
-    def update(self, operator, dadosSet,  dadosCond):
-        con = Connection()
-        collection = con.getCollection("Personalização", self.__collectionName)
+    def project(self, projectFields):
 
-        # Construindo condicionais:
-        stringCond = {}
-        for field, dado in zip(self.__mongoDBFields, dadosCond):
-            if dado != "":
-                stringCond[field] = dado
+        dictionaryFields = {}
+        for field, projectField in zip(self.__mongoDBFields, projectFields):
+            if projectField == 0:
+                dictionaryFields[field] = 0
 
-        # Montando argumento de alteração:
-        stringSet = {}
-        for field, dado in zip(self.__mongoDBFields, dadosSet):
-            if dado != "":
-               stringSet[field] = dado
+        dictionaryFields = {"$project": dictionaryFields}
 
-        collection.update(stringCond, {operator: stringSet})
+        return self.__collection.aggregate([dictionaryFields])
+
+
+    def insert(self, dataSet):
+
+        # Monta o dicionário que contem os atributos do novo item...
+        # ... a ser adicionado na collection:
+        dictionarySet = {}
+        for field, value in zip(self.__mongoDBFields, dataSet):
+            if value != "":
+                dictionarySet[field] = value
+
+        self.__collection.insert_one(dictionarySet)
+
+    def delete(self, data = None):
+
+        # Monta o dicionário cujos campos representão os valores dos respectivos campos...
+        # ... dos documentos a serem deletados:
+        dictionaryCond = {}
+        for field, value in zip(self.__mongoDBFields, data):
+            if value != "":
+                dictionaryCond[field] = value
+
+        # Deleta a lista de documentos:
+        self.__collection.delete_many(dictionaryCond)
+
+    def update(self, dataSet, dataCond, operator):
+
+        # Monta o dicionário cujos campos representão os antigos valores dos respectivos campos...
+        # ... dos documentos a serem atualizados:
+        dictionaryCond = {}
+        for field, value in zip(self.__mongoDBFields, dataCond):
+            if value != "":
+                dictionaryCond[field] = value
+
+        # Monta o dicionário cujos campos representão os novos valores dos respectivos campos...
+        # ... dos documentos a serem atualizados:
+        dictionarySet = {}
+        for field, value in zip(self.__mongoDBFields, dataSet):
+            if value != "":
+                dictionarySet[field] = value  
+
+        dictionarySet = {operator: dictionarySet}
+
+        self.__collection.update_one(dictionaryCond, dictionarySet)

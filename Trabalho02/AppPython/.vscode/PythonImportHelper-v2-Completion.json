@@ -1,26 +1,26 @@
 [
     {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
         "isExtraImport": true,
-        "detail": "Model",
+        "detail": "pymongo",
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
         "isExtraImport": true,
-        "detail": "Model",
+        "detail": "pymongo",
         "documentation": {}
     },
     {
-        "label": "*",
-        "importPath": "Model",
-        "description": "Model",
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
         "isExtraImport": true,
-        "detail": "Model",
+        "detail": "pymongo",
         "documentation": {}
     },
     {
@@ -33,6 +33,38 @@
     },
     {
         "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "tkinter",
         "description": "tkinter",
         "isExtraImport": true,
@@ -45,6 +77,14 @@
         "description": "tkinter",
         "isExtraImport": true,
         "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
         "documentation": {}
     },
     {
@@ -57,98 +97,10 @@
     },
     {
         "label": "*",
-        "importPath": "Data.Veiculo",
-        "description": "Data.Veiculo",
-        "isExtraImport": true,
-        "detail": "Data.Veiculo",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Fornecedor",
-        "description": "Data.Fornecedor",
-        "isExtraImport": true,
-        "detail": "Data.Fornecedor",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Pedido",
-        "description": "Data.Pedido",
-        "isExtraImport": true,
-        "detail": "Data.Pedido",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Componente",
-        "description": "Data.Componente",
-        "isExtraImport": true,
-        "detail": "Data.Componente",
-        "documentation": {}
-    },
-    {
-        "label": "*",
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
         "isExtraImport": true,
         "detail": "Data.ComponenteNecessario",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Contem",
-        "description": "Data.Contem",
-        "isExtraImport": true,
-        "detail": "Data.Contem",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.NotaFiscal",
-        "description": "Data.NotaFiscal",
-        "isExtraImport": true,
-        "detail": "Data.NotaFiscal",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Fornece",
-        "description": "Data.Fornece",
-        "isExtraImport": true,
-        "detail": "Data.Fornece",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.NumPedidos",
-        "description": "Data.NumPedidos",
-        "isExtraImport": true,
-        "detail": "Data.NumPedidos",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.NumCarros",
-        "description": "Data.NumCarros",
-        "isExtraImport": true,
-        "detail": "Data.NumCarros",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Despesa",
-        "description": "Data.Despesa",
-        "isExtraImport": true,
-        "detail": "Data.Despesa",
-        "documentation": {}
-    },
-    {
-        "label": "*",
-        "importPath": "Data.Receita",
-        "description": "Data.Receita",
-        "isExtraImport": true,
-        "detail": "Data.Receita",
         "documentation": {}
     },
     {
@@ -195,14 +147,6 @@
         "documentation": {}
     },
     {
-        "label": "MongoClient",
-        "importPath": "pymongo",
-        "description": "pymongo",
-        "isExtraImport": true,
-        "detail": "pymongo",
-        "documentation": {}
-    },
-    {
         "label": "*",
         "importPath": "Controller",
         "description": "Controller",
@@ -227,11 +171,29 @@
         "documentation": {}
     },
     {
+        "label": "ComponenteNecessarioDAO",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"id_dept\", \"nome\", \"quantidade\"]\n        super(ComponenteNecessarioDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente_necessario\")",
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"tipo\"]\n        super(DepartamentoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"departamento\")",
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
         "label": "PadraoDAO",
         "kind": 6,
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
-        "peekOfCode": "class PadraoDAO():\n    __collectionName = None\n    __mongoDBInsert = None\n    __mongoDBUpdate = None\n    __mongoDBDelete = None\n    __mongoDBFind = None\n    __mongoDBFields = None\n    def __init__(self, collectionName, mongoDBInsert, mongoDBUpdate, mongoDBDelete, mongoDBFind, mongoDBFields):\n        self.__collectionName = collectionName\n        self.__mongoDBInsert = mongoDBInsert",
+        "peekOfCode": "class PadraoDAO():\n    __collection = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, mongoDBFields, dataBaseName, collectionName):\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)\n    def findAll(self, dataSet = []):\n        # Monta o dicionário que contem os atributos do novo item...",
         "detail": "Data.Padrao",
         "documentation": {}
     },
@@ -240,7 +202,7 @@
         "kind": 6,
         "importPath": "Controller",
         "description": "Controller",
-        "peekOfCode": "class Controller():\n    def __init__(self):\n        pass\n    def view(self, view):\n        pass\n    def printSucess(self):\n        pass\n    def printError(self):\n        pass\n    def printQuery(self, query, campos):",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componenteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
         "detail": "Controller",
         "documentation": {}
     },

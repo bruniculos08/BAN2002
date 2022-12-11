@@ -28,7 +28,7 @@ class Connection():
         return cls.__instance
 
     def getCollection(self, database_name, collection_name):
-        return self.connection[database_name][collection_name]
+        return self.__connection[database_name][collection_name]
 
     def close(self):
         return self.__connection.close()
