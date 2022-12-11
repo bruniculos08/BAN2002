@@ -9,7 +9,7 @@ from Data.Departamento import *
 # from Data.Veiculo import *
 # from Data.Fornecedor import *
 # from Data.Pedido import *
-# from Data.Componente import *
+from Data.Componente import *
 from Data.ComponenteNecessario import *
 # from Data.Contem import *
 # from Data.NotaFiscal import *
@@ -42,6 +42,7 @@ class Controller():
         self.__view = None
         self.__departamentoDAO = DepartamentoDAO()
         self.__componenteNecessarioDAO = ComponenteNecessarioDAO()
+        self.__componenteDAO = ComponenteDAO()
 
     def view(self, view):
         self.__view = view
@@ -144,7 +145,7 @@ class Controller():
 
     def setSecundarioAtualizarDepartamento(self):
         try:
-            dadosSet = [''] + self.clearAndGetData() + ['']
+            dadosSet = [""] + self.clearAndGetData()
             campos = ["Id do departamento:", "Antigo tipo do departamento:"]
             self.__view.criarCamposDeInsercao(campos)
             botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarDepartamento(dadosSet))
@@ -162,10 +163,94 @@ class Controller():
         except:
             self.printError()
 
-    # Esta função executa o comando 'select all' sobre a tabela 'departamento':
+    # Esta função executa o comando 'find' sobre a coleção 'departamento':
     def verDepartamento(self):
         campos = ["Id do departamento", "Tipo do departamento"]
         text = self.__departamentoDAO.findAll()
+        self.printQuery(text, campos)
+
+    def setInserirComponente(self):
+            campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "CNPJ Principal:"]
+            self.__view.criarCamposDeInsercao(campos)
+            botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirComponente())
+            self.__view.criarBotoes(botao)
+
+    def inserirComponente(self):
+        try:
+            data = self.clearAndGetData()
+            data = [""] + data[0:4] + [0] + data[4:5]
+            data[3] = float(data[3])
+            data[4] = int(data[4])
+            
+            bool_check_01 = self.checkReference("Personalização", "fornecedor", ["cnpj"], [data[6]])
+            bool_check_02 = not(self.checkReference("Personalização", "componente", ["nome"], data[1]))
+
+            if(bool_check_01 and bool_check_02):
+                self.__componenteDAO.insert(data)
+                self.printSucess()
+            else:
+                self.printText("Referência incorreta ou item já existente!")
+        except:
+            self.printError()    
+
+    def setPrimarioAtualizarComponente(self):
+        campos = ["Novo nome:", "Novo tipo:", "Novo valor de compra:", "Nova quantidade mínima:", "Novo CNPJ principal:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarComponente())
+        self.__view.criarBotoes(botao)
+
+    def setSecundarioAtualizarComponente(self):
+        try:
+            dadosSet = self.clearAndGetData()
+            dadosSet = [""] + dadosSet[0:4] + [""] + dadosSet[4:5]
+            if(dadosSet[3] != ''): dadosSet[3] = int(dadosSet[3])
+            if(dadosSet[4] != ''): dadosSet[4] = int(dadosSet[4])
+
+            bool_check_01 = self.checkReference("Personalização", "fornecedor", ["cnpj"], [dadosSet[6]]) or (dadosSet[6] == "") 
+            bool_check_02 = self.checkReference("Personalização", "componente", ["nome"], [dadosSet[1]]) or (dadosSet[1] == "")
+
+            if(bool_check_01 and bool_check_02):
+                campos = ["Antigo nome:", "Antigo tipo:", "Antigo valor de compra:", "Antigo quantidade mínima:", "Antiga quantidade:", "Antigo CNPJ principal:"]
+                self.__view.criarCamposDeInsercao(campos)
+                botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarComponente(dadosSet))
+                self.__view.criarBotoes(botao)
+            else:
+                self.printText("Referência incorreta ou item já existente!")
+        except:
+            self.printError()
+            
+    def atualizarComponente(self, dadosSet):
+        try:
+            dadosWhere = [""] + self.clearAndGetData()
+            if (dadosWhere[3] != ''): dadosWhere[3] = int(dadosWhere[3])
+            if (dadosWhere[4] != ''): dadosWhere[4] = int(dadosWhere[4])
+            if (dadosWhere[5] != ''): dadosWhere[5] = int(dadosWhere[2])
+            self.__componenteDAO.update(dadosSet, dadosWhere)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def setDeletarComponente(self):
+        campos = ["Nome:", "Tipo:", "Valor de compra:", "Quantidade Mínima:", "Quantidade:", "CNPJ Principal:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponente())
+        self.__view.criarBotoes(botao)  
+
+    def deletarComponente(self):
+        try:
+            data = self.clearAndGetData()
+            if (data[2] != ''): data[2] = int(data[2])
+            if (data[3] != ''): data[3] = int(data[3])
+            if (data[4] != ''): data[4] = int(data[4])
+            data = [""] + data
+            self.__componenteDAO.delete(data)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def verComponente(self):
+        campos = ["Nome", "Tipo", "Valor de compra", "Quantidade Mínima", "Quantidade", "CNPJ Principal"]
+        text = self.__componenteDAO.project([0, 1, 1, 1, 1, 1, 1])
         self.printQuery(text, campos)
 
     def setInserirComponenteNecessario(self):
@@ -179,13 +264,32 @@ class Controller():
             data = self.clearAndGetData()
             data[0] = ObjectId(data[0])
             data[2] = int(data[2])
+            data = [""] + data
+            
             # Aqui é feita a verificação das "chaves estrangeiras":
-            if(self.checkReference("Personalização", "departamento", ["_id", "tipo"], [data[0], "producao"])
-            and self.checkReference("Personalização", "componente", ["nome"], [data[1]])):
+            if(self.checkReference("Personalização", "departamento", ["_id", "tipo"], [data[1], "producao"])
+            and self.checkReference("Personalização", "componente", ["nome"], [data[2]])):
                 self.__componenteNecessarioDAO.insert(data)
                 self.printSucess()
             else:
                 self.printText("Referência incorreta!") 
+        except:
+            self.printError()
+
+    def setDeletarComponenteNecessario(self):
+        campos = ["Id do departamento:", "Nome do componente:", "Quantidade:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarComponenteNecessario())
+        self.__view.criarBotoes(botao)
+    
+    def deletarComponenteNecessario(self):
+        try:
+            dataCond = self.clearAndGetData()
+            if dataCond[0] != '': dataCond[0] = ObjectId(dataCond[0])
+            if(dataCond[2] != ''): dataCond[2] = int(dataCond[2])
+            dataCond = [""] + dataCond
+            self.__componenteNecessarioDAO.delete(dataCond)
+            self.printSucess()
         except:
             self.printError()
 
@@ -200,6 +304,7 @@ class Controller():
             dadosSet = self.clearAndGetData()
             if(dadosSet[0] != ''): dadosSet[0] = ObjectId(dadosSet[0])
             if(dadosSet[2] != ''): dadosSet[2] = int(dadosSet[2])
+            dadosSet = [""] + dadosSet
 
             bool_check_01 = (self.checkReference("Personalização", "departamento", ["_id", "tipo"], [dadosSet[0], "producao"]) or dadosSet[0] == '')
             bool_check_02 = (self.checkReference("Personalização", "componente", ["nome"], [dadosSet[1]] or dadosSet[1] == ''))
@@ -219,6 +324,8 @@ class Controller():
             dadosWhere = self.clearAndGetData()
             if dadosWhere[0] != '': dadosWhere[0] = ObjectId(dadosWhere[0])
             if(dadosWhere[2] != ''): dadosWhere[2] = int(dadosWhere[2])
+            dadosWhere = [""] + dadosWhere
+
             self.__componenteNecessarioDAO.update(dadosSet, dadosWhere, "$set")
             self.printSucess()
         except:

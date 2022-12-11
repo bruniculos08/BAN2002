@@ -24,6 +24,22 @@
         "documentation": {}
     },
     {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
         "label": "*",
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
@@ -93,6 +109,14 @@
         "description": "Data.Departamento",
         "isExtraImport": true,
         "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "isExtraImport": true,
+        "detail": "Data.Componente",
         "documentation": {}
     },
     {
@@ -171,11 +195,20 @@
         "documentation": {}
     },
     {
+        "label": "ComponenteDAO",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome\", \"tipo\", \"valor_compra\", \"quantidade_min\", \"quantidade\", \"cnpj_principal\"]\n        super(ComponenteDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente\")",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
         "label": "ComponenteNecessarioDAO",
         "kind": 6,
         "importPath": "Data.ComponenteNecessario",
         "description": "Data.ComponenteNecessario",
-        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"id_dept\", \"nome\", \"quantidade\"]\n        super(ComponenteNecessarioDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente_necessario\")",
+        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"id_dept\", \"nome\", \"quantidade\"]\n        super(ComponenteNecessarioDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente_necessario\")",
         "detail": "Data.ComponenteNecessario",
         "documentation": {}
     },
