@@ -130,7 +130,7 @@ class Controller():
     # ... atributos são iguais aos colocados nos respectivos campos:
     def deletarDepartamento(self):
         try:
-            dados = [""] + self.clearAndGetData()
+            dados = self.clearAndGetData()
             self.__departamentoDAO.delete(dados)
             self.printSucess()
         except:
