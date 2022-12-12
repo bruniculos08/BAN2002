@@ -64,6 +64,46 @@
         "documentation": {}
     },
     {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
         "label": "*",
         "importPath": "Data.Padrao",
         "description": "Data.Padrao",
@@ -186,6 +226,14 @@
     },
     {
         "label": "*",
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "isExtraImport": true,
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
         "importPath": "Data.Fornecedor",
         "description": "Data.Fornecedor",
         "isExtraImport": true,
@@ -222,6 +270,14 @@
         "description": "Data.Contem",
         "isExtraImport": true,
         "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "isExtraImport": true,
+        "detail": "Data.NotaFiscal",
         "documentation": {}
     },
     {
@@ -354,6 +410,15 @@
         "documentation": {}
     },
     {
+        "label": "NotaFiscalDAO",
+        "kind": 6,
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"cod_nota\", \"id_pedido\"]\n        super(NotaFiscalDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"nota_fiscal\")",
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
         "label": "PadraoDAO",
         "kind": 6,
         "importPath": "Data.Padrao",
@@ -369,6 +434,15 @@
         "description": "Data.Pedido",
         "peekOfCode": "class PedidoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"data_criacao\", \"cnpj\", \"id_dept\"]\n        super(PedidoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"pedido\")",
         "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "VeiculoDAO",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"chassi\", \"valor_producao\", \"data_producao\", \"id_dept\", \"estagio\"]\n        super(VeiculoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"veiculo\")",
+        "detail": "Data.Veiculo",
         "documentation": {}
     },
     {

@@ -6,13 +6,13 @@ from tkinter import *
 from bson import ObjectId
 from Model import *
 from Data.Departamento import *
-# from Data.Veiculo import *
+from Data.Veiculo import *
 from Data.Fornecedor import *
 from Data.Pedido import *
 from Data.Componente import *
 from Data.ComponenteNecessario import *
 from Data.Contem import *
-# from Data.NotaFiscal import *
+from Data.NotaFiscal import *
 from Data.Fornece import *
 # from Data.NumPedidos import *
 # from Data.NumCarros import *
@@ -47,6 +47,8 @@ class Controller():
         self.__contemDAO = ContemDAO()
         self.__forneceDAO = ForneceDAO()
         self.__fornecedorDAO = FornecedorDAO()
+        self.__veiculoDAO = VeiculoDAO()
+        self.__notaFiscalDAO = NotaFiscalDAO()
 
     def view(self, view):
         self.__view = view
@@ -78,9 +80,22 @@ class Controller():
         if result != None:
             return True
         return False 
-        
-    def deleteRefered(self, refered_database, refered_collection, field, reference):
-        pass
+
+    def searchForReferences(self, refered_database, refered_collection, field, field_refered, result):
+        self.__model = Connection()
+        for row in result:
+            value = row[field]
+            if(self.checkReference(refered_database, refered_collection, [field_refered], [value])):
+                return True
+        return False
+
+    def deleteRefered(self, refered_database, refered_collection, field, field_refered, result):
+        self.__model = Connection()
+        collection = self.__model.getCollection(refered_database, refered_collection)
+        for document in list(result):
+            value = document[field]
+            dictionaryCond = {field_refered: value}
+            collection.delete_many(dictionaryCond)
 
     def updateRefered(self, refered_database, refered_collection, field, reference):
         pass
@@ -136,7 +151,7 @@ class Controller():
     def deletarDepartamento(self):
         try:
             dados = self.clearAndGetData()
-            self.__departamentoDAO.delete(dados)
+            result = self.__departamentoDAO.delete(dados)
             self.printSucess()
         except:
             self.printError()
@@ -417,8 +432,6 @@ class Controller():
         text = self.__pedidoDAO.findAll()
         self.printQuery(text, campos)
 
-# Em desenvolvimento:
-
     def setInserirContem(self):
         campos = ["Nome do componente:", "Id do pedido:", "Quantidade:"]
         self.__view.criarCamposDeInsercao(campos)
@@ -577,9 +590,6 @@ class Controller():
         text = self.__forneceDAO.project([0, 1, 1])
         self.printQuery(text, campos)
 
-# __________________________________________________________________________________
-# Em desenvolvimento:
-
     def setInserirFornecedor(self):
         campos = ["CNPJ:", "Nome:"]
         self.__view.criarCamposDeInsercao(campos)
@@ -611,8 +621,17 @@ class Controller():
     def deletarFornecedor(self):
         try:
             dados = [""] + self.clearAndGetData()
-            self.__fornecedorDAO.delete(dados)
-            self.printSucess()
+            result = self.__fornecedorDAO.findAll(dados)
+
+            bool_check_01 = not(self.searchForReferences("Personalização", "componente", "cnpj", "cnpj_principal", result))
+            bool_check_02 = not(self.searchForReferences("Personalização", "pedido", "cnpj", "cnpj", result))
+
+            if(bool_check_01 and bool_check_02):
+                self.deleteRefered("Personalização", "fornece", "cnpj", "cnpj", self.__fornecedorDAO.findAll(dados))
+                self.__fornecedorDAO.delete(dados)
+                self.printSucess()
+            else:
+                self.printText("O documento não pode ser deletado pois é referenciado em outra tabela que não pode ser deletada em cascata!")
         except:
             self.printError() 
 
@@ -650,4 +669,161 @@ class Controller():
     def verFornecedor(self):
         campos = ["CNPJ", "Nome"]
         text = self.__fornecedorDAO.project([0, 1, 1])
+        self.printQuery(text, campos)
+
+    def setInserirVeiculo(self):
+        campos = ["Chassi:", "Valor de produção:", "Id de departamento:"] # quando inserido estágio = "início"
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirVeiculo())
+        self.__view.criarBotoes(botao)
+
+    def inserirVeiculo(self):
+        try:
+            dados = self.clearAndGetData()
+            dados = [""] + [dados[0]] + [dados[1]] + [str(datetime.datetime.today().date())] + [dados[2]] + ["inicio"]
+            dados[2] = float(dados[2])
+            dados[4] = ObjectId(dados[4])
+
+            bool_check_01 = self.checkReference("Personalização", "departamento", ["_id", "tipo"], [dados[4], "producao"])
+            bool_check_02 = not (self.checkReference("Personalização", "veiculo", ["chassi"], [dados[1]]))
+
+            if(bool_check_01 and bool_check_02):
+                self.__veiculoDAO.insert(dados)
+                self.printSucess()
+            else:
+                self.printText("Referência incorreta ou chassi inválido (ou repetido)!")
+        except:
+            self.printError()
+
+    def setDeletarVeiculo(self):
+        campos = ["Chassi:", "Valor de produção:", "Data de produção(YYYY-MM-DD):", "Id de departamento:", "Estágio:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarVeiculo())
+        self.__view.criarBotoes(botao)
+        
+    def deletarVeiculo(self):
+        try:
+            dados = [""] + self.clearAndGetData()
+            if(dados[2] != ""): dados[2] = float(dados[2])
+            if(dados[4] != ""): dados[4] = ObjectId(dados[4])
+            self.__veiculoDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def setPrimarioAtualizarVeiculo(self):
+        campos = ["Novo chassi:", "Novo valor de produção:", "Novo id de departamento:", "Novo Estágio:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarVeiculo())
+        self.__view.criarBotoes(botao)
+
+    def setSecundarioAtualizarVeiculo(self):
+        try:
+            dadosSet = self.clearAndGetData()
+            dadosSet = [""] + [dadosSet[0]] + [dadosSet[1]] + [""] + [dadosSet[2]] + [dadosSet[3]]
+            if(dadosSet[2] != ""): dadosSet[2] = float(dadosSet[2])
+            if(dadosSet[3] != ""): dadosSet[3] = ObjectId(dadosSet[4])
+
+            bool_check_01 = not(self.checkReference("Personalização", "veiculo", ["chassi"], [dadosSet[1]]))
+            bool_check_02 = self.checkReference("Personalização", "departamento", ["_id", "tipo"], [dadosSet[4], "producao"])
+
+            if(bool_check_01 and bool_check_02):
+                campos = ["Id do veículo:", "Antigo chassi:", "Antigo valor de produção:", "Antiga data de produção(YYYY-MM-DD):", "Antigo id de departamento:", "Antigo estágio:"]
+                self.__view.criarCamposDeInsercao(campos)
+                botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarVeiculo(dadosSet))
+                self.__view.criarBotoes(botao)
+            else:
+                self.printText("Referência incorreta ou chassi inválido (ou repetido)!")
+        except:
+            self.printError()
+        
+    def atualizarVeiculo(self, dadosSet):
+        try:
+            dadosWhere = self.clearAndGetData()
+            if(dadosWhere[2] != ""): dadosWhere[2] = float(dadosWhere[2])
+            if(dadosWhere[4] != ""): dadosWhere[4] = ObjectId(dadosWhere[4])
+
+            self.__veiculoDAO.update(dadosSet, dadosWhere, "$set")
+            self.printSucess()
+        except:
+            self.printError()
+
+    def verVeiculo(self):
+        campos = ["Chassi", "Valor de produção", "Data de produção(YYYY-MM-DD)", "Código de departamento", "Estágio"]
+        text = self.__veiculoDAO.project([0, 1, 1, 1, 1, 1])
+        self.printQuery(text, campos)
+
+    def setInserirNotaFiscal(self):
+        campos = ["Código da nota:", "Id do pedido:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.inserirNotaFiscal())
+        self.__view.criarBotoes(botao)
+
+    def inserirNotaFiscal(self):
+        try:
+            dados = [""] + self.clearAndGetData()
+            dados[2] = ObjectId(dados[2])
+
+            bool_check_01 = not(self.checkReference("Personalização", "nota_fiscal", ["cod_nota"], [dados[1]]))
+            bool_check_02 = self.checkReference("Personalização", "pedido", ["_id"], [dados[2]])
+
+            if(bool_check_01 and bool_check_02):
+                self.__notaFiscalDAO.insert(dados)
+                self.printSucess()
+            else:
+                self.printText("Referência incorreta ou código da nota inválido (ou repetido)!")
+        except:
+            self.printError()
+
+    def setDeletarNotaFiscal(self):
+        campos = ["Código da nota:", "Id do pedido:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.deletarNotaFiscal())
+        self.__view.criarBotoes(botao)
+            
+    def deletarNotaFiscal(self):
+        try:
+            dados = [""] + self.clearAndGetData()
+            if(dados[2] != ''): dados[2] = ObjectId(dados[2])
+            self.__notaFiscalDAO.delete(dados)
+            self.printSucess()
+        except:
+            self.printError()
+
+    def setPrimarioAtualizarNotaFiscal(self):
+        campos = ["Novo código da nota:", "Novo id do pedido:"]
+        self.__view.criarCamposDeInsercao(campos)
+        botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.setSecundarioAtualizarNotaFiscal())
+        self.__view.criarBotoes(botao)
+
+    def setSecundarioAtualizarNotaFiscal(self):
+        try:
+            dadosSet = [""] + self.clearAndGetData()
+            if(dadosSet[2] != ''): dadosSet[2] = ObjectId(dadosSet[2])
+
+            bool_check_01 = ((self.checkReference("Personalização", "pedido", ["_id"], [dadosSet[2]])) or (dadosSet[2] == ""))
+            bool_check_02 = (not(self.checkReference("Personalização", "nota_fiscal", ["cod_nota"], [dadosSet[1]]))) or (dadosSet[1] == "")
+
+            if(bool_check_01 and bool_check_02):
+                campos = ["Antigo código da nota:", "Antigo id do pedido:"]
+                self.__view.criarCamposDeInsercao(campos)
+                botao = Button(self.__view.getFieldBoxFrame(), text = "Enviar dados", state = 'normal', command = lambda : self.atualizarNotaFiscal(dadosSet))
+                self.__view.criarBotoes(botao)
+            else:
+                self.printText("Referência incorreta ou código da nota inválido (ou repetido)!")
+        except:
+            self.printError()
+            
+    def atualizarNotaFiscal(self, dadosSet):
+        try:
+            dadosWhere = [""] + self.clearAndGetData()
+            if(dadosWhere[2] != ''): dadosWhere[2] = ObjectId(dadosWhere[2])
+            self.__notaFiscalDAO.update(dadosSet, dadosWhere, "$set")
+            self.printSucess()
+        except:
+            self.printError()
+        
+    def verNotaFiscal(self):
+        campos = ["Código da nota", "Id do pedido"]
+        text = self.__notaFiscalDAO.project([0, 1, 1])
         self.printQuery(text, campos)

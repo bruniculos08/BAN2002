@@ -10,6 +10,7 @@
 # Objeto da camada de persistência -> se comunica com o banco de dados e transforma linhas do banco de dados em objetos.
 
 from View import *
+from Data.Padrao import *
 import mysql.connector
 import psycopg2
 from mysql.connector import Error
@@ -20,6 +21,8 @@ if __name__ == "__main__":
     app = View()
     app.run()
 
-    # print(datetime.datetime.today().date())
-    # str = "2022-11-11"
-    # print(datetime.datetime.strptime(str, "%Y-%m-%d"))
+    # a = PadraoDAO(["_id", "cnpj", "nome"], "Personalização", "fornecedor")
+    # result = a.findAll(["", "11157240989090", ""])
+    # print(list(result))
+    # for doc in result:
+    #     print(doc)

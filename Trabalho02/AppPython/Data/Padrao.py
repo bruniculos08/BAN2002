@@ -41,10 +41,11 @@ class PadraoDAO():
         # ... a ser adicionado na collection:
         dictionarySet = {}
         for field, value in zip(self.__mongoDBFields, dataSet):
-            if (value != "" or field == "_id"):
-                dictionarySet[field] = value
-            else:
+            if(value == "" and field != "_id"):
                 raise Exception()
+            elif(value != ""):
+                dictionarySet[field] = value
+                
 
         self.__collection.insert_one(dictionarySet)
 
@@ -58,7 +59,7 @@ class PadraoDAO():
                 dictionaryCond[field] = value
 
         # Deleta a lista de documentos:
-        self.__collection.delete_many(dictionaryCond)
+        return self.__collection.delete_many(dictionaryCond)
 
     def update(self, dataSet, dataCond, operator):
 
@@ -78,4 +79,4 @@ class PadraoDAO():
 
         dictionarySet = {operator: dictionarySet}
         
-        self.__collection.update_one(dictionaryCond, dictionarySet)
+        return self.__collection.update_many(dictionaryCond, dictionarySet)
