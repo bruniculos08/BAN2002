@@ -1,0 +1,499 @@
+[
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "as_completed",
+        "importPath": "concurrent.futures",
+        "description": "concurrent.futures",
+        "isExtraImport": true,
+        "detail": "concurrent.futures",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "mat",
+        "importPath": "numpy",
+        "description": "numpy",
+        "isExtraImport": true,
+        "detail": "numpy",
+        "documentation": {}
+    },
+    {
+        "label": "myClick",
+        "kind": 2,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "def myClick():\n    myLabel = Label(root, text = \"Look! I clicked a button!\")\n    myLabel.grid()\n# Making some function for a button but using text field:\ndef printTextField():\n    textFieldStuff = box.get()\n    myLabel = Label(root, text = textFieldStuff)\n    myLabel.grid()\n# Every button is a object from the class button:\nisAButton = Button(root, text = \"Click Me!\", state = 'normal', padx = 50, pady = 50, command = myClick, fg = \"green\", bg = \"white\")",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "printTextField",
+        "kind": 2,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "def printTextField():\n    textFieldStuff = box.get()\n    myLabel = Label(root, text = textFieldStuff)\n    myLabel.grid()\n# Every button is a object from the class button:\nisAButton = Button(root, text = \"Click Me!\", state = 'normal', padx = 50, pady = 50, command = myClick, fg = \"green\", bg = \"white\")\nisNotAButton = Button(root, text = \"Do not click Me!\", state = 'disabled')\nprintButton = Button(root, text = \"Print text\", state = 'normal', command = printTextField)\n# (1) The state defines propreties of the button.\n# (2) The padx defines the size in relation to x-axis.",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "root = Tk()\n# Creating input fields (here because we will use it in fuctions):\nbox = Entry(root, width=50, borderwidth = 5)\n# (1) Notice Entry is a class that receives a object of the class Tk (a screen).\n# (2) borderwidth is the border size of the button.\n# Making some function for a button:\ndef myClick():\n    myLabel = Label(root, text = \"Look! I clicked a button!\")\n    myLabel.grid()\n# Making some function for a button but using text field:",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "box",
+        "kind": 5,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "box = Entry(root, width=50, borderwidth = 5)\n# (1) Notice Entry is a class that receives a object of the class Tk (a screen).\n# (2) borderwidth is the border size of the button.\n# Making some function for a button:\ndef myClick():\n    myLabel = Label(root, text = \"Look! I clicked a button!\")\n    myLabel.grid()\n# Making some function for a button but using text field:\ndef printTextField():\n    textFieldStuff = box.get()",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "isAButton",
+        "kind": 5,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "isAButton = Button(root, text = \"Click Me!\", state = 'normal', padx = 50, pady = 50, command = myClick, fg = \"green\", bg = \"white\")\nisNotAButton = Button(root, text = \"Do not click Me!\", state = 'disabled')\nprintButton = Button(root, text = \"Print text\", state = 'normal', command = printTextField)\n# (1) The state defines propreties of the button.\n# (2) The padx defines the size in relation to x-axis.\n# (3) The pady defines the size in relation to y-axis.\n# (4) The fg defines the button text color.\n# (5) The bg defines the button background color.\n# (6) The command defines the fuction that the button will run when clicked.\n# Putting Button in the screen:",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "isNotAButton",
+        "kind": 5,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "isNotAButton = Button(root, text = \"Do not click Me!\", state = 'disabled')\nprintButton = Button(root, text = \"Print text\", state = 'normal', command = printTextField)\n# (1) The state defines propreties of the button.\n# (2) The padx defines the size in relation to x-axis.\n# (3) The pady defines the size in relation to y-axis.\n# (4) The fg defines the button text color.\n# (5) The bg defines the button background color.\n# (6) The command defines the fuction that the button will run when clicked.\n# Putting Button in the screen:\nisAButton.grid(row=1, column=1)",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "printButton",
+        "kind": 5,
+        "importPath": "Buttons",
+        "description": "Buttons",
+        "peekOfCode": "printButton = Button(root, text = \"Print text\", state = 'normal', command = printTextField)\n# (1) The state defines propreties of the button.\n# (2) The padx defines the size in relation to x-axis.\n# (3) The pady defines the size in relation to y-axis.\n# (4) The fg defines the button text color.\n# (5) The bg defines the button background color.\n# (6) The command defines the fuction that the button will run when clicked.\n# Putting Button in the screen:\nisAButton.grid(row=1, column=1)\nisNotAButton.grid(row=2, column=1)",
+        "detail": "Buttons",
+        "documentation": {}
+    },
+    {
+        "label": "tsv_file",
+        "kind": 5,
+        "importPath": "ConvertCSV",
+        "description": "ConvertCSV",
+        "peekOfCode": "tsv_file = 'data.tsv'\n# reading given tsv file\ncsv_table=pd.read_table(tsv_file,sep='\\t')\n# converting tsv file into csv\ncsv_table.to_csv('data.csv',index=False)\n# output\nprint(\"Successfully made csv file\")",
+        "detail": "ConvertCSV",
+        "documentation": {}
+    },
+    {
+        "label": "conn",
+        "kind": 5,
+        "importPath": "DatabaseToCSV",
+        "description": "DatabaseToCSV",
+        "peekOfCode": "conn = psycopg2.connect(database=\"IMDB Titles\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Abrindo e lendo o arquivo csv:\ncsv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:",
+        "detail": "DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "cursor",
+        "kind": 5,
+        "importPath": "DatabaseToCSV",
+        "description": "DatabaseToCSV",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Abrindo e lendo o arquivo csv:\ncsv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:\ndataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), ",
+        "detail": "DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "csv_file",
+        "kind": 5,
+        "importPath": "DatabaseToCSV",
+        "description": "DatabaseToCSV",
+        "peekOfCode": "csv_file = pd.read_table('data.csv', sep=',', low_memory=False)\n# (4) Criando uma dataBase de pandas por meio do arquivo csv:\ndataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), \n                titleType varchar(50), \n                primaryTitle varchar(200), ",
+        "detail": "DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "dataBase",
+        "kind": 5,
+        "importPath": "DatabaseToCSV",
+        "description": "DatabaseToCSV",
+        "peekOfCode": "dataBase = pd.DataFrame(csv_file)\nprint(dataBase)\n# (5) Criando a tabela para colocar os dados no banco de dados:\n#cursor.execute(\"delete from filmes\")\ncursor.execute('''create table filmes \n                (movie_id char(10), \n                titleType varchar(50), \n                primaryTitle varchar(200), \n                originalTitle varchar(200), \n                isAdult integer,",
+        "detail": "DatabaseToCSV",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "Interface",
+        "description": "Interface",
+        "peekOfCode": "root = Tk()\n# Creating a label widget:\nmyLabel1 = Label(root, text=\"Hello, world 1!\")\nmyLabel2 = Label(root, text=\"My name is Torvalds!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\n# Note that mainloop() makes the function that generates the screen keep running:\nroot.mainloop()",
+        "detail": "Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel1",
+        "kind": 5,
+        "importPath": "Interface",
+        "description": "Interface",
+        "peekOfCode": "myLabel1 = Label(root, text=\"Hello, world 1!\")\nmyLabel2 = Label(root, text=\"My name is Torvalds!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\n# Note that mainloop() makes the function that generates the screen keep running:\nroot.mainloop()",
+        "detail": "Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel2",
+        "kind": 5,
+        "importPath": "Interface",
+        "description": "Interface",
+        "peekOfCode": "myLabel2 = Label(root, text=\"My name is Torvalds!\")\n# Obs.: Label é um classe\n# Showing it into the screen:\nmyLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\n# Note that mainloop() makes the function that generates the screen keep running:\nroot.mainloop()",
+        "detail": "Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel1.grid(row",
+        "kind": 5,
+        "importPath": "Interface",
+        "description": "Interface",
+        "peekOfCode": "myLabel1.grid(row = 0, column = 0)\nmyLabel2.grid(row = 1, column = 5)\n# Note that mainloop() makes the function that generates the screen keep running:\nroot.mainloop()",
+        "detail": "Interface",
+        "documentation": {}
+    },
+    {
+        "label": "myLabel2.grid(row",
+        "kind": 5,
+        "importPath": "Interface",
+        "description": "Interface",
+        "peekOfCode": "myLabel2.grid(row = 1, column = 5)\n# Note that mainloop() makes the function that generates the screen keep running:\nroot.mainloop()",
+        "detail": "Interface",
+        "documentation": {}
+    },
+    {
+        "label": "button_click",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_click(number):\n    # Get the text in the field:\n    current = field.get()\n    # Delete the text on the field from index 0 to the last index (END):\n    field.delete(0, END)\n    field.insert(0, str(current) + str(number))\ndef button_clear():\n    field.delete(0, END)\ndef button_add():\n    first_number = field.get()",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_clear",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_clear():\n    field.delete(0, END)\ndef button_add():\n    first_number = field.get()\n    global f_num\n    global math\n    math = \"addition\"\n    f_num = int(first_number)\n    current = field.get()\n    field.delete(0, END)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_add",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_add():\n    first_number = field.get()\n    global f_num\n    global math\n    math = \"addition\"\n    f_num = int(first_number)\n    current = field.get()\n    field.delete(0, END)\n    field.insert(0, str(current) + '+')\ndef button_sub():",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_sub",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_sub():\n    first_number = field.get()\n    global f_num\n    global math\n    math = \"subtration\"\n    f_num = int(first_number)\n    current = field.get()\n    field.delete(0, END)\n    field.insert(0, str(current) + '-')\ndef button_mul():",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_mul",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_mul():\n    first_number = field.get()\n    global f_num\n    global math\n    math = \"multiply\"\n    f_num = int(first_number)\n    current = field.get()\n    field.delete(0, END)\n    field.insert(0, str(current) + '*')\ndef button_div():",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_div",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_div():\n    first_number = field.get()\n    global f_num\n    global math\n    math = \"division\"\n    f_num = int(first_number)\n    current = field.get()\n    field.delete(0, END)\n    field.insert(0, str(current) + '/')\ndef button_equal():",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_equal",
+        "kind": 2,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "def button_equal():\n    second_number = field.get().replace('+', '_').replace('-', '_').replace('*', '_').replace('/', '_').split('_')[-1]\n    field.delete(0, END)\n    if math == \"addition\":\n        field.insert(0, f_num + int(second_number))\n    elif math == \"subtration\":\n        field.insert(0, f_num - int(second_number))\n    elif math == \"multiply\":\n        field.insert(0, f_num * int(second_number))\n    elif math == \"division\":",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "screen",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "screen = Tk()\nscreen.title = \"Simple Calculator\"\n# (1) Defining the fiel where the expression will be shown:\nfield = Entry(screen, width=35, borderwidth=5)\nfield.grid(row=0, column=0, columnspan=3, padx=20, pady=10)\n# Column span is the number of columns used by the object (like we can do for a cel in exceln making...\n# ... the cell to ocupy certain number of normal cells)\n# It's not necessary:\nfield.insert(0, \"\")\n# (2) Define button fuctions:",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "screen.title",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "screen.title = \"Simple Calculator\"\n# (1) Defining the fiel where the expression will be shown:\nfield = Entry(screen, width=35, borderwidth=5)\nfield.grid(row=0, column=0, columnspan=3, padx=20, pady=10)\n# Column span is the number of columns used by the object (like we can do for a cel in exceln making...\n# ... the cell to ocupy certain number of normal cells)\n# It's not necessary:\nfield.insert(0, \"\")\n# (2) Define button fuctions:\ndef button_click(number):",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "field",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "field = Entry(screen, width=35, borderwidth=5)\nfield.grid(row=0, column=0, columnspan=3, padx=20, pady=10)\n# Column span is the number of columns used by the object (like we can do for a cel in exceln making...\n# ... the cell to ocupy certain number of normal cells)\n# It's not necessary:\nfield.insert(0, \"\")\n# (2) Define button fuctions:\ndef button_click(number):\n    # Get the text in the field:\n    current = field.get()",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_1",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_1 = Button(screen, text=\"1\", padx = 40, pady = 20, command=lambda: button_click(1))\nbutton_2 = Button(screen, text=\"2\", padx = 40, pady = 20, command=lambda: button_click(2))\nbutton_3 = Button(screen, text=\"3\", padx = 40, pady = 20, command=lambda: button_click(3))\nbutton_4 = Button(screen, text=\"4\", padx = 40, pady = 20, command=lambda: button_click(4))\nbutton_5 = Button(screen, text=\"5\", padx = 40, pady = 20, command=lambda: button_click(5))\nbutton_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_2",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_2 = Button(screen, text=\"2\", padx = 40, pady = 20, command=lambda: button_click(2))\nbutton_3 = Button(screen, text=\"3\", padx = 40, pady = 20, command=lambda: button_click(3))\nbutton_4 = Button(screen, text=\"4\", padx = 40, pady = 20, command=lambda: button_click(4))\nbutton_5 = Button(screen, text=\"5\", padx = 40, pady = 20, command=lambda: button_click(5))\nbutton_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_3",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_3 = Button(screen, text=\"3\", padx = 40, pady = 20, command=lambda: button_click(3))\nbutton_4 = Button(screen, text=\"4\", padx = 40, pady = 20, command=lambda: button_click(4))\nbutton_5 = Button(screen, text=\"5\", padx = 40, pady = 20, command=lambda: button_click(5))\nbutton_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_4",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_4 = Button(screen, text=\"4\", padx = 40, pady = 20, command=lambda: button_click(4))\nbutton_5 = Button(screen, text=\"5\", padx = 40, pady = 20, command=lambda: button_click(5))\nbutton_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_5",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_5 = Button(screen, text=\"5\", padx = 40, pady = 20, command=lambda: button_click(5))\nbutton_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_6",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_6 = Button(screen, text=\"6\", padx = 40, pady = 20, command=lambda: button_click(6))\nbutton_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_7",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_7 = Button(screen, text=\"7\", padx = 40, pady = 20, command=lambda: button_click(7))\nbutton_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_8",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_8 = Button(screen, text=\"8\", padx = 40, pady = 20, command=lambda: button_click(8))\nbutton_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_9",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_9 = Button(screen, text=\"9\", padx = 40, pady = 20, command=lambda: button_click(9))\nbutton_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "button_0",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "button_0 = Button(screen, text=\"0\", padx = 40, pady = 20, command=lambda: button_click(0))\n# Define operations buttons:\nclear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "clear_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "clear_button = Button(screen, text=\"Clear\", padx = 79, pady = 20, command=button_clear)\nequal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "equal_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "equal_button = Button(screen, text=\"=\", padx = 91, pady = 20, command=button_equal)\nadd_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "add_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "add_button = Button(screen, text=\"+\", padx = 39, pady = 20, command=button_add)\nsub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)\nbutton_5.grid(row=2, column=1)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "sub_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "sub_button = Button(screen, text=\"-\", padx = 41, pady = 20, command=button_sub)\nmul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)\nbutton_5.grid(row=2, column=1)\nbutton_6.grid(row=2, column=2)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "mul_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "mul_button = Button(screen, text=\"*\", padx = 40, pady = 20, command=button_mul)\ndiv_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)\nbutton_5.grid(row=2, column=1)\nbutton_6.grid(row=2, column=2)\nbutton_7.grid(row=3, column=0)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "div_button",
+        "kind": 5,
+        "importPath": "SimpleCalculator",
+        "description": "SimpleCalculator",
+        "peekOfCode": "div_button = Button(screen, text=\"/\", padx = 41, pady = 20, command=button_div)\n# Put buttons in grid:\nbutton_1.grid(row=1, column=0)\nbutton_2.grid(row=1, column=1)\nbutton_3.grid(row=1, column=2)\nbutton_4.grid(row=2, column=0)\nbutton_5.grid(row=2, column=1)\nbutton_6.grid(row=2, column=2)\nbutton_7.grid(row=3, column=0)\nbutton_8.grid(row=3, column=1)",
+        "detail": "SimpleCalculator",
+        "documentation": {}
+    },
+    {
+        "label": "conn",
+        "kind": 5,
+        "importPath": "UseSQL",
+        "description": "UseSQL",
+        "peekOfCode": "conn = psycopg2.connect(database=\"Mecânica de Veículos (para Funções)\",\n                        host=\"localhost\",\n                        user=\"postgres\",\n                        password=\"1234\",\n                        port=\"5433\")\n# (2) Criando um objeto cursor para realizar query's:\ncursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '88787055511' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '88787055511', 'Python', 54, 'Central Park', 'New York', 'desamassa', 3)\")",
+        "detail": "UseSQL",
+        "documentation": {}
+    },
+    {
+        "label": "cursor",
+        "kind": 5,
+        "importPath": "UseSQL",
+        "description": "UseSQL",
+        "peekOfCode": "cursor = conn.cursor()\n# (3) Executando um comando SQL por meio do objeto cursor:\ncursor.execute(\"DELETE FROM mecanico where cpf = '88787055511' \")\ncursor.execute(\"INSERT INTO mecanico VALUES(7, '88787055511', 'Python', 54, 'Central Park', 'New York', 'desamassa', 3)\")\ncursor.execute(\"SELECT * FROM mecanico\")\n# (4) Printando a primeira linha obtida da última query executada:\nprint(cursor.fetchone())\n# (5) Printando todas as linhas obtidas da última query executada:\nfor line in cursor.fetchall():\n    print(line)",
+        "detail": "UseSQL",
+        "documentation": {}
+    }
+]

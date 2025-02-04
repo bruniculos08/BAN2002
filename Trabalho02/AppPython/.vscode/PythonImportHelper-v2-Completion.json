@@ -1,0 +1,475 @@
+[
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "MongoClient",
+        "importPath": "pymongo",
+        "description": "pymongo",
+        "isExtraImport": true,
+        "detail": "pymongo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "datetime",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "datetime",
+        "description": "datetime",
+        "detail": "datetime",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "ObjectId",
+        "importPath": "bson",
+        "description": "bson",
+        "isExtraImport": true,
+        "detail": "bson",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "isExtraImport": true,
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "isExtraImport": true,
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "isExtraImport": true,
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "isExtraImport": true,
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "isExtraImport": true,
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "isExtraImport": true,
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "isExtraImport": true,
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "isExtraImport": true,
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "isExtraImport": true,
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "View",
+        "description": "View",
+        "isExtraImport": true,
+        "detail": "View",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Controller",
+        "description": "Controller",
+        "isExtraImport": true,
+        "detail": "Controller",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteDAO",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome\", \"tipo\", \"valor_compra\", \"quantidade_min\", \"quantidade\", \"cnpj_principal\"]\n        super(ComponenteDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente\")",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteNecessarioDAO",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"id_dept\", \"nome\", \"quantidade\"]\n        super(ComponenteNecessarioDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"componente_necessario\")",
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "ContemDAO",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome_componente\", \"id_pedido\", \"quantidade\"]\n        super(ContemDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"contem\")",
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"tipo\"]\n        super(DepartamentoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"departamento\")",
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "ForneceDAO",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"nome_componente\", \"cnpj\"]\n        super(ForneceDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"fornece\")",
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "FornecedorDAO",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class FornecedorDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"cnpj\", \"nome\"]\n        super(FornecedorDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"fornecedor\")",
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "NotaFiscalDAO",
+        "kind": 6,
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"cod_nota\", \"id_pedido\"]\n        super(NotaFiscalDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"nota_fiscal\")",
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "PadraoDAO",
+        "kind": 6,
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "peekOfCode": "class PadraoDAO():\n    __collection = None\n    __mongoDBFields = None\n    __connection = None\n    def __init__(self, mongoDBFields, dataBaseName, collectionName):\n        self.__mongoDBFields = mongoDBFields\n        self.__connection = Connection()\n        self.__collection = self.__connection.getCollection(dataBaseName, collectionName)\n    def findAll(self, dataCond = []):\n        # Monta o dicionário que contem os atributos do novo item...",
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "PedidoDAO",
+        "kind": 6,
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "peekOfCode": "class PedidoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"data_criacao\", \"cnpj\", \"id_dept\"]\n        super(PedidoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"pedido\")",
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "VeiculoDAO",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __mongoDBFields = None\n    def __init__(self):\n        self.__mongoDBFields = [\"_id\", \"chassi\", \"valor_producao\", \"data_producao\", \"id_dept\", \"estagio\"]\n        super(VeiculoDAO, self).__init__(self.__mongoDBFields, \"Personalização\", \"veiculo\")",
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "Controller",
+        "kind": 6,
+        "importPath": "Controller",
+        "description": "Controller",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componenteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
+        "detail": "Controller",
+        "documentation": {}
+    },
+    {
+        "label": "Connection",
+        "kind": 6,
+        "importPath": "Model",
+        "description": "Model",
+        "peekOfCode": "class Connection():\n    __instance = None\n    __connection = None\n#    About __new__ vs __init__ constructor methods:\n#\n#   - Python __new__() is the constructor method that controls the creation of the new instance.                    \n#   - It is called first and it returns a new class instance.                                   \n#                    \n#   - Python __init__() is the initializer method to set the attributes (i.e., state) of the newly-created instance.\n#   - It is called after creation and returns nothing, i.e., None.              ",
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "kind": 6,
+        "importPath": "View",
+        "description": "View",
+        "peekOfCode": "class View():\n    # Objeto da classe principal do menu:\n    __tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    __fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    __fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    __textBox = None\n    # Controller que fará a comunicação com o banco de dados:",
+        "detail": "View",
+        "documentation": {}
+    }
+]

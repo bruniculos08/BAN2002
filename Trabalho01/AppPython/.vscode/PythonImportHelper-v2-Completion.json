@@ -1,0 +1,667 @@
+[
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Model",
+        "description": "Model",
+        "isExtraImport": true,
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "isExtraImport": true,
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "isExtraImport": true,
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "isExtraImport": true,
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "isExtraImport": true,
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "isExtraImport": true,
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "isExtraImport": true,
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "isExtraImport": true,
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "isExtraImport": true,
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "isExtraImport": true,
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "isExtraImport": true,
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "isExtraImport": true,
+        "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "isExtraImport": true,
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "isExtraImport": true,
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "isExtraImport": true,
+        "detail": "Data.Receita",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "View",
+        "description": "View",
+        "isExtraImport": true,
+        "detail": "View",
+        "documentation": {}
+    },
+    {
+        "label": "mysql.connector",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "Error",
+        "importPath": "mysql.connector",
+        "description": "mysql.connector",
+        "isExtraImport": true,
+        "detail": "mysql.connector",
+        "documentation": {}
+    },
+    {
+        "label": "psycopg2",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "psycopg2",
+        "description": "psycopg2",
+        "detail": "psycopg2",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "*",
+        "importPath": "Controller",
+        "description": "Controller",
+        "isExtraImport": true,
+        "detail": "Controller",
+        "documentation": {}
+    },
+    {
+        "label": "ImageTk",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Image",
+        "importPath": "PIL",
+        "description": "PIL",
+        "isExtraImport": true,
+        "detail": "PIL",
+        "documentation": {}
+    },
+    {
+        "label": "Componente",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class Componente():\n    __nome = None\n    __tipo = None\n    __valorCompra = None\n    __quantidadeMin = None\n    __quantidade = None\n    __cnpjPrincipal = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__tipo = \"\"",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteDAO",
+        "kind": 6,
+        "importPath": "Data.Componente",
+        "description": "Data.Componente",
+        "peekOfCode": "class ComponenteDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente\"\n        self.__sqlInsert = \"insert into componente values('{}', '{}', {}, {}, {}, '{}')\"\n        # self.__sqlDelete = \"delete from componente\"",
+        "detail": "Data.Componente",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteNecessario",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class ComponenteNecessario():\n    __nome = None\n    __codDept = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__codDept = -1\n    def nome(self, nome):\n        self.__nome = nome\n        return self",
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "ComponenteNecessarioDAO",
+        "kind": 6,
+        "importPath": "Data.ComponenteNecessario",
+        "description": "Data.ComponenteNecessario",
+        "peekOfCode": "class ComponenteNecessarioDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from componente_necessario\"\n        self.__sqlInsert = \"insert into componente_necessario values('{}', '{}', {})\"\n        # self.__sqlDelete = \"delete from componente_necessario\"",
+        "detail": "Data.ComponenteNecessario",
+        "documentation": {}
+    },
+    {
+        "label": "Contem",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class Contem():\n    __nome = None\n    __idPedido = None\n    __quantidade = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__idPedido = -1\n        self.__quantidade = 0\n    def nome(self, nome):\n        self.__nome = nome",
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "ContemDAO",
+        "kind": 6,
+        "importPath": "Data.Contem",
+        "description": "Data.Contem",
+        "peekOfCode": "class ContemDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from contem\"\n        self.__sqlInsert = \"insert into contem values('{}', {}, {})\"\n        # self.__sqlDelete = \"delete from contem\"",
+        "detail": "Data.Contem",
+        "documentation": {}
+    },
+    {
+        "label": "Departamento",
+        "kind": 6,
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class Departamento():\n    __codDept = None\n    __tipo = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__tipo = \"\"\n    def codDept(self ,codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "DepartamentoDAO",
+        "kind": 6,
+        "importPath": "Data.Departamento",
+        "description": "Data.Departamento",
+        "peekOfCode": "class DepartamentoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewCodDept = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    __sqlSelectCurrCodDept = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from departamento\"",
+        "detail": "Data.Departamento",
+        "documentation": {}
+    },
+    {
+        "label": "Despesa",
+        "kind": 6,
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "peekOfCode": "class Despesa():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
+        "label": "DespesaDAO",
+        "kind": 6,
+        "importPath": "Data.Despesa",
+        "description": "Data.Despesa",
+        "peekOfCode": "class DespesaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Despesa\"\n        self.__sqlSelectData = \"select valor from Despesa where\"\n        self.__sqlSelectMore = \"select * from Despesa where valor >\"",
+        "detail": "Data.Despesa",
+        "documentation": {}
+    },
+    {
+        "label": "Fornece",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class Fornece():\n    __nome = None\n    __cnpj = None\n    def __init__(self):\n        self.__nome = \"\"\n        self.__cnpj = \"\"\n    def nome(self, nome):\n        self.__nome = nome\n        return self\n    def getNome(self):",
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "ForneceDAO",
+        "kind": 6,
+        "importPath": "Data.Fornece",
+        "description": "Data.Fornece",
+        "peekOfCode": "class ForneceDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornece\"\n        self.__sqlInsert = \"insert into fornece values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornece\"",
+        "detail": "Data.Fornece",
+        "documentation": {}
+    },
+    {
+        "label": "Fornecedor",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class Fornecedor():\n    __cnpj = None\n    __nome = None\n    def __init__(self):\n        self.__cnpj = \"\"\n        self.__nome = \"\"\n    def cnpj(self, cnpj):\n        self.__cnpj = cnpj\n        return self\n    def getCnpj(self):",
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "FornecedorDAO",
+        "kind": 6,
+        "importPath": "Data.Fornecedor",
+        "description": "Data.Fornecedor",
+        "peekOfCode": "class FornecedorDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from fornecedor\"\n        self.__sqlInsert = \"insert into fornecedor values('{}', '{}')\"\n        # self.__sqlDelete = \"delete from fornecedor\"",
+        "detail": "Data.Fornecedor",
+        "documentation": {}
+    },
+    {
+        "label": "NotaFiscal",
+        "kind": 6,
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "peekOfCode": "class NotaFiscal():\n    __codNota = None\n    __idPedido = None\n    def __init__(self):\n        self.__codNota = \"\"\n        self.__idPedido = -1\n    def codNota(self, codNota):\n        self.__codNota = codNota\n        return self\n    def getCodNota(self):",
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "NotaFiscalDAO",
+        "kind": 6,
+        "importPath": "Data.NotaFiscal",
+        "description": "Data.NotaFiscal",
+        "peekOfCode": "class NotaFiscalDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    __sqlSelectNewCodNota= None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from nota_fiscal\"\n        self.__sqlInsert = \"insert into nota_fiscal values('{}', {})\"",
+        "detail": "Data.NotaFiscal",
+        "documentation": {}
+    },
+    {
+        "label": "NumCarros",
+        "kind": 6,
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "peekOfCode": "class NumCarros():\n    __codDept = None\n    __numOfCarros = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfCarros = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "NumCarrosDAO",
+        "kind": 6,
+        "importPath": "Data.NumCarros",
+        "description": "Data.NumCarros",
+        "peekOfCode": "class NumCarrosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumCarros\"\n        self.__sqlSelectDept = \"select NumOfCarros from NumCarros where\"\n        self.__sqlSelectMore = \"select * from NumCarros where NumOfCarros >\"",
+        "detail": "Data.NumCarros",
+        "documentation": {}
+    },
+    {
+        "label": "NumPedidos",
+        "kind": 6,
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "peekOfCode": "class NumPedidos():\n    __codDept = None\n    __numOfPedidos = None\n    def __init__(self):\n        self.__codDept = -1\n        self.__numOfPedidos = -1\n    def codDept(self, codDept):\n        self.__codDept = codDept\n        return self\n    def getCodDept(self):",
+        "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "NumPedidosDAO",
+        "kind": 6,
+        "importPath": "Data.NumPedidos",
+        "description": "Data.NumPedidos",
+        "peekOfCode": "class NumPedidosDAO():\n    __sqlSelectAll = None\n    __sqlSelectDept = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from NumPedidos\"\n        self.__sqlSelectDept = \"select NumOfPedidos from NumPedidos where\"\n        self.__sqlSelectMore = \"select * from NumPedidos where NumOfPedidos >\"",
+        "detail": "Data.NumPedidos",
+        "documentation": {}
+    },
+    {
+        "label": "PadraoDAO",
+        "kind": 6,
+        "importPath": "Data.Padrao",
+        "description": "Data.Padrao",
+        "peekOfCode": "class PadraoDAO():\n    __sqlDelete = None\n    __sqlUpdate = None\n    __columns = None\n    def __init__(self, sqlDelete, sqlUpdate, campos):\n        self.__sqlDelete = sqlDelete\n        self.__sqlUpdate = sqlUpdate\n        self.__columns = campos\n    def delete(self, dados = None):\n        con = Connection()",
+        "detail": "Data.Padrao",
+        "documentation": {}
+    },
+    {
+        "label": "Pedido",
+        "kind": 6,
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "peekOfCode": "class Pedido():\n    __id = None\n    __dataCriacao = None\n    __cnpj = None\n    __codDeptCompra = None\n    def __init__(self):\n        self.__id = -1\n        self.__dataCriacao = ''\n        self.__cnpj = \"\"\n        self.__codDeptCompra = -1",
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "PedidoDAO",
+        "kind": 6,
+        "importPath": "Data.Pedido",
+        "description": "Data.Pedido",
+        "peekOfCode": "class PedidoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlSelectNewId= None\n    __sqlInsert = None\n    # __sqlDelete = None\n    # __sqlUpdate = None\n    # __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from pedido\"\n        self.__sqlSelectNewId = \"select nextval('pedido_id')\"",
+        "detail": "Data.Pedido",
+        "documentation": {}
+    },
+    {
+        "label": "Receita",
+        "kind": 6,
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "peekOfCode": "class Receita():\n    __valor = None\n    __mes = None\n    __ano = None\n    def __init__(self):\n        self.__valor = 0\n        self.__mes = 0\n        self.__ano = -1\n    def valor(self, valor):\n        self.__valor = valor",
+        "detail": "Data.Receita",
+        "documentation": {}
+    },
+    {
+        "label": "ReceitaDAO",
+        "kind": 6,
+        "importPath": "Data.Receita",
+        "description": "Data.Receita",
+        "peekOfCode": "class ReceitaDAO():\n    __sqlSelectAll = None\n    __sqlSelectData = None\n    __sqlSelectMore = None\n    __sqlSelectLess = None\n    __columns = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from Receita\"\n        self.__sqlSelectData = \"select valor from Receita where\"\n        self.__sqlSelectMore = \"select * from Receita where valor >\"",
+        "detail": "Data.Receita",
+        "documentation": {}
+    },
+    {
+        "label": "Veiculo",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class Veiculo():\n    __chassi = None\n    __valorProducao = None\n    __dataProducao = None\n    __codDept = None\n    __estagio = None\n    def __init__(self):\n        self.__chassi = \"\"\n        self.__valorProducao = 0\n        self.__dataProducao = \"0001-01-01\"",
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "VeiculoDAO",
+        "kind": 6,
+        "importPath": "Data.Veiculo",
+        "description": "Data.Veiculo",
+        "peekOfCode": "class VeiculoDAO(PadraoDAO):\n    __sqlSelectAll = None\n    __sqlInsert = None\n    def __init__(self):\n        self.__sqlSelectAll = \"select * from veiculo\"\n        self.__sqlInsert = \"insert into veiculo values('{}', {},  '{}', {}, '{}')\"\n        super().__init__(\"delete from veiculo\", \"update veiculo set\", [\"chassi\", \"valor_producao\", \"data_producao\", \"cod_dept\", \"estagio\"])\n    def selectAll(self) -> list:\n        con = Connection()\n        cursor = con.cursor()",
+        "detail": "Data.Veiculo",
+        "documentation": {}
+    },
+    {
+        "label": "Controller",
+        "kind": 6,
+        "importPath": "Controller",
+        "description": "Controller",
+        "peekOfCode": "class Controller():\n    __view = None\n    __departamentoDAO = None\n    __veiculoDAO = None\n    __fornecedorDAO = None\n    __pedidoDAO = None\n    __componenteDAO = None\n    __componenteNecessarioDAO = None\n    __contemDAO = None\n    __notaFiscalDAO = None",
+        "detail": "Controller",
+        "documentation": {}
+    },
+    {
+        "label": "Connection",
+        "kind": 6,
+        "importPath": "Model",
+        "description": "Model",
+        "peekOfCode": "class Connection():\n    __instance = None\n    __connection = None\n#    About __new__ vs __init__ constructor methods:\n#\n#   - Python __new__() is the constructor method that controls the creation of the new instance.                    \n#   - It is called first and it returns a new class instance.                                   \n#                    \n#   - Python __init__() is the initializer method to set the attributes (i.e., state) of the newly-created instance.\n#   - It is called after creation and returns nothing, i.e., None.              ",
+        "detail": "Model",
+        "documentation": {}
+    },
+    {
+        "label": "View",
+        "kind": 6,
+        "importPath": "View",
+        "description": "View",
+        "peekOfCode": "class View():\n    # Objeto da classe principal do menu:\n    __tela = Tk()\n    # Objeto da classe de frame que será usado para as caixas de entrada:\n    __fieldBoxFrame = None\n    # Como poderá haver mais de uma caixa de entrada devemos ter um vetor para acessá-las:\n    __fieldBoxes = None\n    # Objeto da classe da caixa texto, onde serão exibidos os resultados:\n    __textBox = None\n    # Controller que fará a comunicação com o banco de dados:",
+        "detail": "View",
+        "documentation": {}
+    }
+]
